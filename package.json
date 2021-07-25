@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
+  "bugs": {
+		"url": "https://github.com/mdingena/att-string-transcoder/issues"
+	},
   "scripts": {
     "prepare": "npm run build",
     "prebuild": "rimraf build/",
@@ -36,5 +39,9 @@
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx,json,css,html}": "prettier --write"
-  }
+  },
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/mdingena/att-string-transcoder.git"
+	}
 }
