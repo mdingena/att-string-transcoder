@@ -1,6 +1,6 @@
 # ATT String Transcoder
 
-> Allows you to decode _A Township Tale_'s save strings for analysing, and encode JS objects into ATT save strings for spawning.
+Allows you to decode _A Township Tale_'s save strings for analysing, and encode JS objects into ATT save strings for spawning.
 
 ## ⚡️ Quick Start
 

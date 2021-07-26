@@ -1,7 +1,7 @@
 {
   "name": "att-string-transcoder",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Trancode integer strings for A Township Tale.",
   "main": "build/index.js",
   "scripts": {
     "prepare": "npm run build",
@@ -10,7 +10,21 @@
     "compile": "tsc --noEmit",
     "test": "jest"
   },
-  "author": "",
+  "author": "Marc Dingena",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdingena/att-string-transcoder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mdingena/att-string-transcoder/issues"
+  },
+  "homepage": "https://github.com/mdingena/att-string-transcoder#readme",
+  "keywords": [
+    "virtual-reality",
+    "township-tale",
+    "binary",
+    "transcoder"
+  ],
   "license": "MIT",
   "dependencies": {
     "bitwise": "^2.1.0",
