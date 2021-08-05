@@ -1,22 +1,19 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.PickupDock;
-export const VERSION = 2;
-
-export type Component = {
+export type PickupDock = {
   dockedTypeHash?: number;
   quantity?: number;
   childIndex?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): PickupDock => ({
   dockedTypeHash: reader.uInt(),
   quantity: reader.int(),
   childIndex: reader.int()
 });
 
-export const encode = ({ dockedTypeHash = 0, quantity = 1, childIndex = 0 }: Component): string => {
+export const encode = ({ dockedTypeHash = 0, quantity = 1, childIndex = 0 }: PickupDock): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

@@ -1,24 +1,21 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.HeatSourceBase;
-export const VERSION = 2;
-
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
-export type Component = {
+export type HeatSourceBase = {
   isLit?: boolean;
   progress?: number;
   time?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): HeatSourceBase => ({
   isLit: reader.boolean(),
   progress: reader.float(),
   time: reader.uLong()
 });
 
-export const encode = ({ isLit = true, progress = 0, time = HUNDRED_YEARS_TICKS }: Component): string => {
+export const encode = ({ isLit = true, progress = 0, time = HUNDRED_YEARS_TICKS }: HeatSourceBase): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

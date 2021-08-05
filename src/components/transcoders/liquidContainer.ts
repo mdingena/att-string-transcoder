@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.LiquidContainer;
-export const VERSION = 1;
-
 type Color = {
   r: number;
   g: number;
@@ -26,7 +23,7 @@ type CustomData = {
   foodChunks: FoodChunk[];
 };
 
-export type Component = {
+export type LiquidContainer = {
   canAddTo?: boolean;
   canRemoveFrom?: boolean;
   contentLevel?: number;
@@ -36,8 +33,8 @@ export type Component = {
   customData?: null | CustomData;
 };
 
-export const decode = (reader: BinaryReader): Component => {
-  const result: Component = {
+export const decode = (reader: BinaryReader): LiquidContainer => {
+  const result: LiquidContainer = {
     canAddTo: reader.boolean(),
     canRemoveFrom: reader.boolean(),
     contentLevel: reader.int(),
@@ -105,7 +102,7 @@ export const encode = ({
   isCustom = false,
   presetHash = 0,
   customData = null
-}: Component): string => {
+}: LiquidContainer): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

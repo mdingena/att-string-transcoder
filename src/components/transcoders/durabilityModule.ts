@@ -1,18 +1,15 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.DurabilityModule;
-export const VERSION = 1;
-
-export type Component = {
+export type DurabilityModule = {
   integrity?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): DurabilityModule => ({
   integrity: reader.float()
 });
 
-export const encode = ({ integrity = 1 }: Component): string => {
+export const encode = ({ integrity = 1 }: DurabilityModule): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

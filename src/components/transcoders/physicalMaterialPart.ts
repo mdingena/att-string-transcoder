@@ -2,18 +2,15 @@ import { ComponentHash } from '../../ComponentHash';
 import { PhysicalMaterialPartHash } from '../../PhysicalMaterialPartHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.PhysicalMaterialPart;
-export const VERSION = 1;
-
-export type Component = {
+export type PhysicalMaterialPart = {
   materialHash?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): PhysicalMaterialPart => ({
   materialHash: reader.uInt()
 });
 
-export const encode = ({ materialHash = PhysicalMaterialPartHash.Iron }: Component): string => {
+export const encode = ({ materialHash = PhysicalMaterialPartHash.Iron }: PhysicalMaterialPart): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

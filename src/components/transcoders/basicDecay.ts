@@ -1,22 +1,19 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.BasicDecay;
-export const VERSION = 3;
-
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
-export type Component = {
+export type BasicDecay = {
   isDisabled?: boolean;
   timelineEntry?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): BasicDecay => ({
   isDisabled: reader.boolean(),
   timelineEntry: reader.uLong()
 });
 
-export const encode = ({ isDisabled = true, timelineEntry = HUNDRED_YEARS_TICKS }: Component): string => {
+export const encode = ({ isDisabled = true, timelineEntry = HUNDRED_YEARS_TICKS }: BasicDecay): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

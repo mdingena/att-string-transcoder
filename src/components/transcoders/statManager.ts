@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.StatManager;
-export const VERSION = 2;
-
 type Stat = null | {
   hash: number;
   baseFlat: number;
@@ -29,13 +26,13 @@ type IndirectStatModifier = null | {
   modifiers: IndirectModifierSaveData[];
 };
 
-export type Component = {
+export type StatManager = {
   stats?: Stat[];
   modifiers?: TimedModifier[];
   indirectStatModifiers?: IndirectStatModifier[];
 };
 
-export const decode = (reader: BinaryReader): Component => {
+export const decode = (reader: BinaryReader): StatManager => {
   /* Get stats array. */
   const statsLength = reader.uInt();
   const stats: Stat[] = [];
@@ -108,7 +105,7 @@ export const decode = (reader: BinaryReader): Component => {
   return { stats, modifiers, indirectStatModifiers };
 };
 
-export const encode = ({ stats = [], modifiers = [], indirectStatModifiers = [] }: Component): string => {
+export const encode = ({ stats = [], modifiers = [], indirectStatModifiers = [] }: StatManager): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

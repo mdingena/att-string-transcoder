@@ -1,10 +1,7 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.SpawnArea;
-export const VERSION = 1;
-
-export type Component = {
+export type SpawnArea = {
   size?: number;
   groundLayers?: number;
   avoidLayers?: number;
@@ -12,7 +9,7 @@ export type Component = {
   maxAcceptableAngleDot?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): SpawnArea => ({
   size: reader.float(),
   groundLayers: reader.int(),
   avoidLayers: reader.int(),
@@ -26,7 +23,7 @@ export const encode = ({
   avoidLayers = 8721,
   isAligningNormal = false,
   maxAcceptableAngleDot = -1
-}: Component): string => {
+}: SpawnArea): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */
