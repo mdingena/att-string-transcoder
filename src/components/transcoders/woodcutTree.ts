@@ -3,9 +3,6 @@ import { PresetHash } from '../../PresetHash';
 import { SpeciesHash } from '../../SpeciesHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.WoodcutTree;
-export const VERSION = 3;
-
 export type Component = {
   presetHash?: 0 | PresetHash;
   speciesHash?: SpeciesHash;

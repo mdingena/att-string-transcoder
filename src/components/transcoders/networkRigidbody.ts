@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.NetworkRigidbody;
-export const VERSION = 1;
-
 export type Component = {
   position?: {
     x: number;

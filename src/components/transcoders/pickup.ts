@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.Pickup;
-export const VERSION = 1;
-
 export type Component = {
   lastInteractorPlayerId?: number;
 };

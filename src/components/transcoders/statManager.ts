@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.StatManager;
-export const VERSION = 2;
-
 type Stat = null | {
   hash: number;
   baseFlat: number;

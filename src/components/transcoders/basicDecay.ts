@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.BasicDecay;
-export const VERSION = 3;
-
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
 export type Component = {

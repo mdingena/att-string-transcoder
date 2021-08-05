@@ -2,9 +2,6 @@ import { ComponentHash } from '../../ComponentHash';
 import { PhysicalMaterialPartHash } from '../../PhysicalMaterialPartHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.PhysicalMaterialPart;
-export const VERSION = 1;
-
 export type Component = {
   materialHash?: number;
 };

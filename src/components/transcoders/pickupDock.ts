@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.PickupDock;
-export const VERSION = 2;
-
 export type Component = {
   dockedTypeHash?: number;
   quantity?: number;

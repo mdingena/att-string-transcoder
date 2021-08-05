@@ -1,9 +1,6 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.LiquidContainer;
-export const VERSION = 1;
-
 type Color = {
   r: number;
   g: number;

@@ -2,9 +2,6 @@ import { ComponentHash } from '../../ComponentHash';
 import { PopulationDefinitionHash } from '../../PopulationDefinitionHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export const HASH = ComponentHash.PopulationSpawnArea;
-export const VERSION = 2;
-
 type PopulationSaveDataChild = {
   index: number;
   pointIndex: number;
