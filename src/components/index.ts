@@ -1,25 +1,38 @@
 import * as transcoders from './transcoders';
 
-export { ComponentVersion } from './ComponentVersion';
-
 export type ComponentName = keyof typeof transcoders;
 
+export type BasicDecay = transcoders.BasicDecay.BasicDecay;
+export type DurabilityModule = transcoders.DurabilityModule.DurabilityModule;
+export type HeatSourceBase = transcoders.HeatSourceBase.HeatSourceBase;
+export type LiquidContainer = transcoders.LiquidContainer.LiquidContainer;
+export type NetworkRigidbody = transcoders.NetworkRigidbody.NetworkRigidbody;
+export type PhysicalMaterialPart = transcoders.PhysicalMaterialPart.PhysicalMaterialPart;
+export type Pickup = transcoders.Pickup.Pickup;
+export type PickupDock = transcoders.PickupDock.PickupDock;
+export type PopulationSpawnArea = transcoders.PopulationSpawnArea.PopulationSpawnArea;
+export type SpawnArea = transcoders.SpawnArea.SpawnArea;
+export type StatManager = transcoders.StatManager.StatManager;
+export type WoodcutTree = transcoders.WoodcutTree.WoodcutTree;
+
 export type KnownComponent =
-  | transcoders.BasicDecay.Component
-  | transcoders.DurabilityModule.Component
-  | transcoders.HeatSourceBase.Component
-  | transcoders.LiquidContainer.Component
-  | transcoders.NetworkRigidbody.Component
-  | transcoders.PhysicalMaterialPart.Component
-  | transcoders.Pickup.Component
-  | transcoders.PickupDock.Component
-  | transcoders.PopulationSpawnArea.Component
-  | transcoders.SpawnArea.Component
-  | transcoders.StatManager.Component
-  | transcoders.WoodcutTree.Component;
+  | BasicDecay
+  | DurabilityModule
+  | HeatSourceBase
+  | LiquidContainer
+  | NetworkRigidbody
+  | PhysicalMaterialPart
+  | Pickup
+  | PickupDock
+  | PopulationSpawnArea
+  | SpawnArea
+  | StatManager
+  | WoodcutTree;
 
 export type UnknownComponent = { hash: number; data: string };
 
 export type Component = KnownComponent | UnknownComponent[];
+
+export { ComponentVersion } from './ComponentVersion';
 
 export { transcoders };

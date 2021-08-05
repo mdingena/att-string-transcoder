@@ -3,17 +3,17 @@ import { PresetHash } from '../../PresetHash';
 import { SpeciesHash } from '../../SpeciesHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export type Component = {
+export type WoodcutTree = {
   presetHash?: 0 | PresetHash;
   speciesHash?: SpeciesHash;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): WoodcutTree => ({
   presetHash: reader.uInt(),
   speciesHash: reader.uInt()
 });
 
-export const encode = ({ presetHash = 0, speciesHash = SpeciesHash.Oak }: Component): string => {
+export const encode = ({ presetHash = 0, speciesHash = SpeciesHash.Oak }: WoodcutTree): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

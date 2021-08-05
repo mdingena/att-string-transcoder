@@ -7,7 +7,7 @@ type PopulationSaveDataChild = {
   pointIndex: number;
 };
 
-export type Component = {
+export type PopulationSpawnArea = {
   definition?: number;
   isPopulationStarted?: boolean;
   children?: PopulationSaveDataChild[];
@@ -19,7 +19,7 @@ export type Component = {
   isOneOff?: boolean;
 };
 
-export const decode = (reader: BinaryReader): Component => {
+export const decode = (reader: BinaryReader): PopulationSpawnArea => {
   const definition = reader.uInt();
   const isPopulationStarted = reader.boolean();
 
@@ -63,7 +63,7 @@ export const encode = ({
   numberOfSpawnPoints = 40,
   startingPopulation = 5,
   isOneOff = false
-}: Component): string => {
+}: PopulationSpawnArea): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

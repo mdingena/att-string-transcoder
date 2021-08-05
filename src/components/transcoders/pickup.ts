@@ -1,15 +1,15 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export type Component = {
+export type Pickup = {
   lastInteractorPlayerId?: number;
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): Pickup => ({
   lastInteractorPlayerId: reader.int()
 });
 
-export const encode = ({ lastInteractorPlayerId = 0 }: Component): string => {
+export const encode = ({ lastInteractorPlayerId = 0 }: Pickup): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

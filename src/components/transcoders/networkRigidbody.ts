@@ -1,7 +1,7 @@
 import { ComponentHash } from '../../ComponentHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-export type Component = {
+export type NetworkRigidbody = {
   position?: {
     x: number;
     y: number;
@@ -27,7 +27,7 @@ export type Component = {
   };
 };
 
-export const decode = (reader: BinaryReader): Component => ({
+export const decode = (reader: BinaryReader): NetworkRigidbody => ({
   position: {
     x: reader.float(),
     y: reader.float(),
@@ -60,7 +60,7 @@ export const encode = ({
   isServerSleeping = false,
   velocity = { x: 0, y: 0, z: 0 },
   angularVelocity = { x: 0, y: 0, z: 0 }
-}: Component): string => {
+}: NetworkRigidbody): string => {
   const writer = createBinaryWriter();
 
   /* Component hash. */

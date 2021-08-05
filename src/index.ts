@@ -1,19 +1,20 @@
 /**
  * COMPONENTS
  */
-import * as components from './components/transcoders';
-export type BasicDecay = components.BasicDecay.Component;
-export type DurabilityModule = components.DurabilityModule.Component;
-export type HeatSourceBase = components.HeatSourceBase.Component;
-export type LiquidContainer = components.LiquidContainer.Component;
-export type NetworkRigidbody = components.NetworkRigidbody.Component;
-export type PhysicalMaterialPart = components.PhysicalMaterialPart.Component;
-export type Pickup = components.Pickup.Component;
-export type PickupDock = components.PickupDock.Component;
-export type PopulationSpawnArea = components.PopulationSpawnArea.Component;
-export type SpawnArea = components.SpawnArea.Component;
-export type StatManager = components.StatManager.Component;
-export type WoodcutTree = components.WoodcutTree.Component;
+export type {
+  BasicDecay,
+  DurabilityModule,
+  HeatSourceBase,
+  LiquidContainer,
+  NetworkRigidbody,
+  PhysicalMaterialPart,
+  Pickup,
+  PickupDock,
+  PopulationSpawnArea,
+  SpawnArea,
+  StatManager,
+  WoodcutTree
+} from './components';
 
 /**
  * EMBEDDED ENTITIES
