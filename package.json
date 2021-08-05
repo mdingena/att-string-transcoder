@@ -8,6 +8,7 @@
     "prebuild": "rimraf build/",
     "build": "tsc",
     "compile": "tsc --noEmit",
+    "pretest": "npm run build",
     "test": "jest"
   },
   "author": "Marc Dingena",

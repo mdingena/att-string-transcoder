@@ -57,3 +57,16 @@ export const handle: Prefab = {
     }
   ]
 };
+
+export const litGrassClump: Prefab = {
+  prefabObject: {
+    hash: PrefabHash.Grass_Clump
+  },
+  embeddedEntities: {
+    Fire: {
+      components: {
+        HeatSourceBase: {}
+      }
+    }
+  }
+};
