@@ -11,7 +11,7 @@ export type UnknownEmbeddedEntity = {
 
 export type KnownEmbeddedEntity = Fire;
 
-export type EmbeddedEntities = KnownEmbeddedEntity & {
+export type EmbeddedEntities = {
   Unknown?: UnknownEmbeddedEntity[];
   Fire?: Fire;
 };
