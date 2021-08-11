@@ -5,8 +5,8 @@ import { Fire } from '../embeddedEntities';
 
 export type UnknownEmbeddedEntity = {
   hash: number;
-  isAlive: boolean;
-  components: Components;
+  isAlive?: boolean;
+  components?: Components;
 };
 
 export type KnownEmbeddedEntity = Fire;
