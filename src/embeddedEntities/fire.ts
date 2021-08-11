@@ -6,5 +6,6 @@ export type Fire = {
     Fire?: Component;
     HeatSourceBase?: Component;
     HeatSourcePointCollection?: Component;
+    Unknown?: Component;
   };
 };
