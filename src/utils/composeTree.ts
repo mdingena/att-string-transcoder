@@ -50,6 +50,20 @@ const BRANCHES = [
 
 const STICKS = ['Woodcut_S0_S0', 'Woodcut_S0_S15_S15'];
 
+const TWIGS = [
+  'Woodcut_Twigs_V1__30',
+  'Woodcut_Twigs_V1_0',
+  'Woodcut_Twigs_V1_30',
+  'Woodcut_Twigs_V2__30',
+  // 'Woodcut_Twigs_V2_', // broken
+  // 'Woodcut_Twigs_V2_3', // broken
+  'Woodcut_Twigs_V3__30',
+  'Woodcut_Twigs_V3_0',
+  'Woodcut_Twigs_V3_30',
+  'Woodcut_Twigs_V4_0',
+  'Woodcut_Twigs_V4_30'
+];
+
 const LEAVES = [
   'Woodcut_Leaves_V1_L_F',
   'Woodcut_Leaves_V1_L_S',
@@ -118,9 +132,9 @@ const generateLayer = (
   };
 
   if (isTerminationLayer) {
-    /* Terminate all connections with random leaf nodes. */
+    /* Terminate all connections with random twig nodes. */
     for (const connection of baseSegmentConnections) {
-      const segment = pickRandom(LEAVES);
+      const segment = pickRandom(TWIGS);
       const subtree: Tree = { [segment]: null };
 
       layer[baseSegment]![connection] = subtree;
@@ -153,11 +167,30 @@ export const composeTree = (tree: Tree, parentHash: number = 0): ChildPrefab => 
         hash: PrefabHash[segment as keyof typeof PrefabHash]
       },
       childPrefabs:
-        embeddedEntities === null
-          ? []
+        embeddedEntities === null // we're on one of TWIGS
+          ? attachLeafNode(pickRandom(LEAVES))
           : Object.entries(embeddedEntities!).map(([embeddedEntity, subtree]) =>
               composeTree(subtree, PrefabEmbeddedEntityHash[segment][embeddedEntity])
             )
     }
   };
+};
+
+const attachLeafNode = (leafPrefab: string): ChildPrefab[] => {
+  return [
+    {
+      parentHash: 0,
+      prefab: {
+        prefabObject: {
+          hash: PrefabHash[leafPrefab as keyof typeof PrefabHash],
+          position: {
+            x: 0,
+            y: 0.25,
+            z: 0
+          },
+          scale: 1 + Math.random() * 0.4
+        }
+      }
+    }
+  ];
 };
