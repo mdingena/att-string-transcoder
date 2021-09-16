@@ -42,7 +42,7 @@ Running this code from the command-line will print the string you can use to spa
 You'll include this string in a spawn command that looks like this:
 
 ```css
-spawn string Nagasakii [string]
+spawn string EthynWyrmbane [string]
 ```
 
 But so far, this is just a really complicated way of spawning a handle. The point of strings is that you can spawn intricate contraptions that regular spawn commands can't.
