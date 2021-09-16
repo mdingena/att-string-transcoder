@@ -35,6 +35,7 @@ export type {
   ChildPrefab
 } from './decoders';
 export type { Component, KnownComponent, UnknownComponent } from './components';
+export type { PrefabFactory } from './createPrefab';
 
 /**
  * HASHES
@@ -45,6 +46,7 @@ export { PhysicalMaterialPartHash } from './PhysicalMaterialPartHash';
 export { PopulationDefinitionHash } from './PopulationDefinitionHash';
 export { PrefabEmbeddedEntityHash } from './PrefabEmbeddedEntityHash';
 export { PrefabHash } from './PrefabHash';
+export { PrefabSlot } from './PrefabSlot';
 export { PresetHash } from './PresetHash';
 export { SpeciesHash } from './SpeciesHash';
 
@@ -56,5 +58,6 @@ export * from './utils';
 /**
  * ATT STRING TRANSCODER
  */
+export { createPrefab } from './createPrefab';
 export { createString } from './createString';
 export { decodeString } from './decodeString';
