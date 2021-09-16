@@ -38,7 +38,7 @@ Starting with the very basics, you can create a string for a handle using this c
 createPrefab(PrefabHash.Handle_Short).print();
 ```
 
-Running this code from the command-line will print the string you can use to spawn a handle.
+Running this code will print the string you can use to spawn a weapon handle.
 You'll include this string in a spawn command that looks like this:
 
 ```css
