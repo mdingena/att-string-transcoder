@@ -45,6 +45,7 @@ export { PhysicalMaterialPartHash } from './PhysicalMaterialPartHash';
 export { PopulationDefinitionHash } from './PopulationDefinitionHash';
 export { PrefabEmbeddedEntityHash } from './PrefabEmbeddedEntityHash';
 export { PrefabHash } from './PrefabHash';
+export { PrefabSlot } from './PrefabSlot';
 export { PresetHash } from './PresetHash';
 export { SpeciesHash } from './SpeciesHash';
 
