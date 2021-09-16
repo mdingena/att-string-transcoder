@@ -98,7 +98,7 @@ And like the handle, we can insert prefabs into this guard's slots:
       createPrefab(PrefabHash.Guard)
         .setMaterial(PhysicalMaterialPartHash.CarsiAlloy)
 +       .useSlot(
-+         PrefabSlot.Guard.Insert_SwordType_Craft,
++         PrefabSlot.Guard.Slot_SwordType,
 +         createPrefab(PrefabHash.Metal_Hebios_Wakizashi_Blade)
 +           .setMaterial(PhysicalMaterialPartHash.Mythril)
 +       )
@@ -126,7 +126,7 @@ Let's complete our sword:
       createPrefab(PrefabHash.Guard)
         .setMaterial(PhysicalMaterialPartHash.CarsiAlloy)
         .useSlot(
-          PrefabSlot.Guard.Insert_SwordType_Craft,
+          PrefabSlot.Guard.Slot_SwordType,
           createPrefab(PrefabHash.Metal_Hebios_Wakizashi_Blade)
             .setMaterial(PhysicalMaterialPartHash.Mythril)
 +           .setIntegrity(0.25)
