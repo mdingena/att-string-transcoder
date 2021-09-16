@@ -35,6 +35,7 @@ export type {
   ChildPrefab
 } from './decoders';
 export type { Component, KnownComponent, UnknownComponent } from './components';
+export type { PrefabFactory } from './createPrefab';
 
 /**
  * HASHES
@@ -57,5 +58,6 @@ export * from './utils';
 /**
  * ATT STRING TRANSCODER
  */
+export { createPrefab } from './createPrefab';
 export { createString } from './createString';
 export { decodeString } from './decodeString';
