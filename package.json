@@ -34,23 +34,12 @@
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/node": "^16.9.1",
-    "husky": "^7.0.1",
+    "husky": "^4.3.8",
     "jest": "^27.0.6",
     "lint-staged": "^11.1.1",
     "prettier": "^2.3.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.4",
     "typescript": "^4.2.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": [
-        "lint-staged",
-        "npm run test"
-      ]
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,ts,jsx,tsx,json,css,html}": "prettier --write"
   }
 }
