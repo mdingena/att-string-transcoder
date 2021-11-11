@@ -1,9 +1,9 @@
-import { Prefab } from './decoders';
+import { PrefabData } from './decoders';
 import { binaryToUIntArray } from './utils';
 import { encodePrefab } from './encoders';
 import { getComponentVersions } from './getComponentVersions';
 
-export const createString = (prefab: Prefab): string => {
+export const createString = (prefab: PrefabData): string => {
   const hash = prefab.prefabObject.hash;
 
   /* Encode the prefab. */

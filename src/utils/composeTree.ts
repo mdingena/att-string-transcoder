@@ -1,5 +1,5 @@
 import { ChildPrefab } from '../decoders';
-import { PrefabHash } from '../PrefabHash';
+import { Prefab } from '../Prefab';
 import { PrefabEmbeddedEntityHash } from '../PrefabEmbeddedEntityHash';
 
 type Tree = {
@@ -164,7 +164,7 @@ export const composeTree = (tree: Tree, parentHash: number = 0): ChildPrefab => 
     parentHash,
     prefab: {
       prefabObject: {
-        hash: PrefabHash[segment as keyof typeof PrefabHash]
+        hash: Prefab[segment as keyof typeof Prefab].hash
       },
       childPrefabs:
         embeddedEntities === null // we're on one of TWIGS
@@ -182,7 +182,7 @@ const attachLeafNode = (leafPrefab: string): ChildPrefab[] => {
       parentHash: 0,
       prefab: {
         prefabObject: {
-          hash: PrefabHash[leafPrefab as keyof typeof PrefabHash],
+          hash: Prefab[leafPrefab as keyof typeof Prefab].hash,
           position: {
             x: 0,
             y: 0.25,

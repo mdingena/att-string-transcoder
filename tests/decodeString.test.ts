@@ -1,4 +1,4 @@
-import { decodeString } from '../build';
+import { decodeString } from '../src';
 import { encodedEmptyFlask } from './data/encodedStrings';
 import { decodedEmptyFlask } from './data/decodedStrings';
 

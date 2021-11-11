@@ -1,53 +1,62 @@
+import { Prefab } from './Prefab';
 import { createString } from './createString';
-import { Prefab } from './decoders';
-import { PrefabHash } from './PrefabHash';
-import { PrefabSlot } from './PrefabSlot';
+import { PrefabData } from './decoders';
+import { PhysicalMaterialPartHash } from '.';
 
-export type PrefabFactory = {
-  prefab: Prefab;
-  slots: { [slotName: string]: number };
-  setPosition: (x: number, y: number, z: number) => PrefabFactory;
-  setRotation: (x: number, y: number, z: number, w: number) => PrefabFactory;
-  setKinematic: (isKinematic?: boolean) => PrefabFactory;
-  setServerSleeping: (isServerSleeping?: boolean) => PrefabFactory;
-  setVelocity: (x: number, y: number, z: number) => PrefabFactory;
-  setAngularVelocity: (x: number, y: number, z: number) => PrefabFactory;
-  setMaterial: (materialHash: number) => PrefabFactory;
-  setIntegrity: (integrity: number) => PrefabFactory;
-  setOnFire: (isLit?: boolean) => PrefabFactory;
-  useSlot: (slotHash: number, childPrefab: PrefabFactory) => PrefabFactory;
-  toString: () => string;
-  print: () => void;
-};
+const VALID_MATERIALS = Object.values(PhysicalMaterialPartHash)
+  .filter(key => typeof key === 'string')
+  .sort((a, b) => (a < b ? -1 : 1));
 
-const availableSlots = (prefabObjectHash: number) => {
-  const prefabName = PrefabHash[prefabObjectHash];
-  const slots = PrefabSlot[prefabName as keyof typeof PrefabSlot] ?? {};
+const availableSlots = (prefab: Prefab) => {
+  const slots = prefab.slots ?? {};
   const filteredEntries = Object.entries(slots).filter(([key]) => key.startsWith('Slot_'));
 
   return Object.fromEntries(filteredEntries);
 };
 
-export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
-  prefab: {
-    prefabObject: { hash: prefabObjectHash },
+const getPrefabName = (hash: number) =>
+  Object.entries(Prefab).find(([_, value]) => value.hash === hash)?.[0] ?? '<Unknown prefab hash>';
+
+type PrefabManager<S> = {
+  name: string;
+  data: PrefabData;
+  slots: { [slotName: string]: number };
+  setPosition: (x: number, y: number, z: number) => PrefabManager<S>;
+  setRotation: (x: number, y: number, z: number, w: number) => PrefabManager<S>;
+  setKinematic: (isKinematic?: boolean) => PrefabManager<S>;
+  setServerSleeping: (isServerSleeping?: boolean) => PrefabManager<S>;
+  setVelocity: (x: number, y: number, z: number) => PrefabManager<S>;
+  setAngularVelocity: (x: number, y: number, z: number) => PrefabManager<S>;
+  setMaterial: (material: keyof typeof PhysicalMaterialPartHash) => PrefabManager<S>;
+  setIntegrity: (integrity: number) => PrefabManager<S>;
+  setOnFire: (isLit?: boolean) => PrefabManager<S>;
+  useSlot: <P extends Prefab, C extends keyof P['slots']>(slot: S, childPrefab: PrefabManager<C>) => PrefabManager<S>;
+  toString: () => string;
+  print: () => void;
+};
+
+export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefab: P): PrefabManager<S> => ({
+  name: getPrefabName(prefab.hash),
+
+  data: {
+    prefabObject: { hash: prefab.hash },
     components: {},
     embeddedEntities: {},
     childPrefabs: []
   },
 
-  slots: availableSlots(prefabObjectHash),
+  slots: availableSlots(prefab),
 
   setPosition(x, y, z) {
     if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined') {
-      throw new Error(`setPosition called with invalid arguments.\n\nUsage: .setPosition(x, y, z)`);
+      throw new Error(`setPosition(x, y, z) called with invalid arguments.`);
     }
 
     const position = { x, y, z };
 
-    this.prefab.prefabObject.position = position;
-    this.prefab.components!.NetworkRigidbody = {
-      ...this.prefab.components!.NetworkRigidbody,
+    this.data.prefabObject.position = position;
+    this.data.components!.NetworkRigidbody = {
+      ...this.data.components!.NetworkRigidbody,
       position
     };
 
@@ -56,14 +65,14 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
 
   setRotation(x, y, z, w) {
     if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined' || typeof w === 'undefined') {
-      throw new Error(`setRotation called with invalid arguments.\n\nUsage: .setRotation(x, y, z, w)`);
+      throw new Error(`setRotation(x, y, z, w) called with invalid arguments.`);
     }
 
     const rotation = { x, y, z, w };
 
-    this.prefab.prefabObject.rotation = rotation;
-    this.prefab.components!.NetworkRigidbody = {
-      ...this.prefab.components!.NetworkRigidbody,
+    this.data.prefabObject.rotation = rotation;
+    this.data.components!.NetworkRigidbody = {
+      ...this.data.components!.NetworkRigidbody,
       rotation
     };
 
@@ -71,8 +80,8 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
   },
 
   setKinematic(isKinematic = true) {
-    this.prefab.components!.NetworkRigidbody = {
-      ...this.prefab.components!.NetworkRigidbody,
+    this.data.components!.NetworkRigidbody = {
+      ...this.data.components!.NetworkRigidbody,
       isKinematic
     };
 
@@ -80,8 +89,8 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
   },
 
   setServerSleeping(isServerSleeping = true) {
-    this.prefab.components!.NetworkRigidbody = {
-      ...this.prefab.components!.NetworkRigidbody,
+    this.data.components!.NetworkRigidbody = {
+      ...this.data.components!.NetworkRigidbody,
       isServerSleeping
     };
 
@@ -90,13 +99,13 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
 
   setVelocity(x, y, z) {
     if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined') {
-      throw new Error(`setVelocity called with invalid arguments.\n\nUsage: .setVelocity(x, y, z)`);
+      throw new Error(`setVelocity(x, y, z) called with invalid arguments.`);
     }
 
     const velocity = { x, y, z };
 
-    this.prefab.components!.NetworkRigidbody = {
-      ...this.prefab.components!.NetworkRigidbody,
+    this.data.components!.NetworkRigidbody = {
+      ...this.data.components!.NetworkRigidbody,
       velocity
     };
 
@@ -105,27 +114,35 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
 
   setAngularVelocity(x, y, z) {
     if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined') {
-      throw new Error(`setAngularVelocity called with invalid arguments.\n\nUsage: .setAngularVelocity(x, y, z)`);
+      throw new Error(`setAngularVelocity(x, y, z) called with invalid arguments.`);
     }
 
     const angularVelocity = { x, y, z };
 
-    this.prefab.components!.NetworkRigidbody = {
-      ...this.prefab.components!.NetworkRigidbody,
+    this.data.components!.NetworkRigidbody = {
+      ...this.data.components!.NetworkRigidbody,
       angularVelocity
     };
 
     return this;
   },
 
-  setMaterial(materialHash) {
-    if (typeof materialHash === 'undefined') {
-      throw new Error(`setMaterial called with invalid arguments.\n\nUsage: .setMaterial(materialHash)`);
+  setMaterial(material) {
+    if (typeof material === 'undefined') {
+      throw new Error(`setMaterial(material) called with invalid arguments.`);
     }
 
-    this.prefab.components = {
-      ...this.prefab.components,
-      PhysicalMaterialPart: { materialHash }
+    if (!VALID_MATERIALS.includes(material)) {
+      throw new Error(
+        `'${material}' is not a valid material on '${this.name}'. ${`Valid materials: ${VALID_MATERIALS.join(', ')}`}`
+      );
+    }
+
+    this.data.components = {
+      ...this.data.components,
+      PhysicalMaterialPart: {
+        materialHash: PhysicalMaterialPartHash[material]
+      }
     };
 
     return this;
@@ -133,11 +150,11 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
 
   setIntegrity(integrity) {
     if (typeof integrity === 'undefined') {
-      throw new Error(`setIntegrity called with invalid arguments.\n\nUsage: .setIntegrity(integrity)`);
+      throw new Error(`setIntegrity(integrity) called with invalid arguments.`);
     }
 
-    this.prefab.components = {
-      ...this.prefab.components,
+    this.data.components = {
+      ...this.data.components,
       DurabilityModule: { integrity }
     };
 
@@ -145,13 +162,13 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
   },
 
   setOnFire(isLit = true) {
-    this.prefab.embeddedEntities!.Fire = {
-      ...this.prefab.embeddedEntities!.Fire,
+    this.data.embeddedEntities!.Fire = {
+      ...this.data.embeddedEntities!.Fire,
       isAlive: isLit,
       components: {
-        ...this.prefab.embeddedEntities!.Fire!.components,
+        ...this.data.embeddedEntities!.Fire!.components,
         HeatSourceBase: {
-          ...this.prefab.embeddedEntities!.Fire!.components!.HeatSourceBase,
+          ...this.data.embeddedEntities!.Fire!.components!.HeatSourceBase,
           isLit
         }
       }
@@ -160,28 +177,29 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
     return this;
   },
 
-  useSlot(slotHash, childPrefab) {
-    if (typeof slotHash === 'undefined' || typeof childPrefab === 'undefined') {
-      throw new Error(`useSlot called with invalid arguments.\n\nUsage: .useSlot(slotHash, prefab)`);
+  useSlot(slotName, childPrefab) {
+    if (typeof slotName === 'undefined' || typeof childPrefab === 'undefined') {
+      throw new Error(`useSlot(slot, prefab) called with invalid arguments.`);
     }
 
+    const slotHash = ((this.slots as P['slots'] | undefined)?.[slotName] ?? 0) as number;
     const validHashes = Object.values(this.slots);
 
-    if (!validHashes.includes(slotHash)) {
-      const prefabName = PrefabHash[prefabObjectHash];
-
+    if (slotHash === 0 || !validHashes.includes(slotHash)) {
       throw new Error(
-        `useSlot called with invalid slot hash.\n\n${prefabName} has ${
-          validHashes.length ? `these valid slots: ${JSON.stringify(this.slots, null, 2)}` : 'no available slots.'
+        `'${slotName}' is not a valid slot on '${this.name}'. ${
+          validHashes.length
+            ? `Valid slot(s): ${Object.keys(this.slots).join(', ')}`
+            : 'This prefab has no available slots.'
         }`
       );
     }
 
-    this.prefab.childPrefabs = [
-      ...this.prefab.childPrefabs!.filter(({ parentHash }) => parentHash !== slotHash),
+    this.data.childPrefabs = [
+      ...this.data.childPrefabs!.filter(({ parentHash }) => parentHash !== slotHash),
       {
         parentHash: slotHash,
-        prefab: { ...childPrefab.prefab }
+        prefab: { ...childPrefab.data }
       }
     ];
 
@@ -189,7 +207,7 @@ export const createPrefab = (prefabObjectHash: number): PrefabFactory => ({
   },
 
   toString() {
-    return createString(this.prefab);
+    return createString(this.data);
   },
 
   print() {

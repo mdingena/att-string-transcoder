@@ -1,10 +1,10 @@
 import { uIntToBinary, createBinaryReader } from './utils';
-import { decodePrefab, Prefab } from './decoders';
+import { decodePrefab, PrefabData } from './decoders';
 
 export type DecodedString = {
   hash: number;
   size: number;
-  prefab: Prefab;
+  prefab: PrefabData;
 };
 
 /**

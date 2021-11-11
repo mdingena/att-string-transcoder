@@ -1,4 +1,4 @@
-import { createString } from '../build';
+import { createString } from '../src';
 import { handle, litGrassClump } from './data/unencodedPrefabObjects';
 import { grassClumpOnFire, shortHandleWithLargeGuardAndLargeBlade } from './data/encodedPrefabObjects';
 
