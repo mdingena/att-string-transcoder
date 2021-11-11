@@ -4,14 +4,14 @@ import { decodeComponents, Components } from './decodeComponents';
 import { decodeEmbeddedEntities, EmbeddedEntities } from './decodeEmbeddedEntities';
 import { decodeChildPrefabs, ChildPrefabs } from './decodeChildPrefabs';
 
-export type Prefab = {
+export type PrefabData = {
   prefabObject: PrefabObject;
   components?: Components;
   embeddedEntities?: EmbeddedEntities;
   childPrefabs?: ChildPrefabs;
 };
 
-export const decodePrefab = (reader: BinaryReader): Prefab => {
+export const decodePrefab = (reader: BinaryReader): PrefabData => {
   const prefabObject = decodePrefabObject(reader);
   const components = decodeComponents(reader);
   const embeddedEntities = decodeEmbeddedEntities(reader);

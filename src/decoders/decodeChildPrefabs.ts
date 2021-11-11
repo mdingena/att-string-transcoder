@@ -1,9 +1,9 @@
 import { BinaryReader } from '../utils';
-import { decodePrefab, Prefab } from './decodePrefab';
+import { decodePrefab, PrefabData } from './decodePrefab';
 
 export type ChildPrefab = {
   parentHash: number;
-  prefab: Prefab;
+  prefab: PrefabData;
 };
 
 export type ChildPrefabs = ChildPrefab[];

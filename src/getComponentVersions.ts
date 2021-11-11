@@ -1,4 +1,4 @@
-import { Components, KnownEmbeddedEntity, Prefab, UnknownEmbeddedEntity } from './decoders';
+import { Components, KnownEmbeddedEntity, PrefabData, UnknownEmbeddedEntity } from './decoders';
 import { ComponentName, UnknownComponent, ComponentVersion } from './components';
 import { ComponentHash } from './ComponentHash';
 
@@ -27,7 +27,7 @@ const getComponentVersionPairs = (components: Components = {}) => {
   return versionPairs;
 };
 
-const getPrefabVersionPairs = (prefab: Prefab): VersionPair[] => {
+const getPrefabVersionPairs = (prefab: PrefabData): VersionPair[] => {
   const versionPairs: VersionPair[] = [];
 
   if (prefab.components) {
@@ -61,7 +61,7 @@ const getPrefabVersionPairs = (prefab: Prefab): VersionPair[] => {
   return versionPairs;
 };
 
-export const getComponentVersions = (prefab: Prefab): string => {
+export const getComponentVersions = (prefab: PrefabData): string => {
   const versionPairs = getPrefabVersionPairs(prefab);
   const uniquePairs = versionPairs.filter(
     ([hash], index) => versionPairs.findIndex(pair => pair[0] === hash) === index

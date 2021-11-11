@@ -1,4 +1,4 @@
-import { Prefab, PrefabHash, PhysicalMaterialPartHash } from '../../build';
+import { Prefab, PrefabData, PhysicalMaterialPartHash } from '../../src';
 
 const position = {
   x: -701,
@@ -6,9 +6,9 @@ const position = {
   z: 100
 };
 
-export const blade: Prefab = {
+export const blade: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Large_Longsword_Blade
+    hash: Prefab.Large_Longsword_Blade.hash
   },
   components: {
     PhysicalMaterialPart: {
@@ -20,9 +20,9 @@ export const blade: Prefab = {
   }
 };
 
-export const guard: Prefab = {
+export const guard: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Large_Guard_Rectangle
+    hash: Prefab.Large_Guard_Rectangle.hash
   },
   components: {
     PhysicalMaterialPart: {
@@ -40,9 +40,9 @@ export const guard: Prefab = {
   ]
 };
 
-export const handle: Prefab = {
+export const handle: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Handle_Short,
+    hash: Prefab.Handle_Short.hash,
     position
   },
   components: {
@@ -58,9 +58,9 @@ export const handle: Prefab = {
   ]
 };
 
-export const litGrassClump: Prefab = {
+export const litGrassClump: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Grass_Clump
+    hash: Prefab.Grass_Clump.hash
   },
   embeddedEntities: {
     Fire: {

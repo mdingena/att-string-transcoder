@@ -1,8 +1,8 @@
-import { Prefab } from '../decoders';
+import { PrefabData } from '../decoders';
 import { createBinaryWriter } from '../utils/createBinaryWriter';
 import { encodePrefabObject, encodeComponents, encodeEmbeddedEntities, encodeChildPrefabs } from '.';
 
-export const encodePrefab = (prefab: Prefab): string => {
+export const encodePrefab = (prefab: PrefabData): string => {
   const writer = createBinaryWriter();
 
   /* Create prefab object. */

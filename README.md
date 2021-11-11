@@ -4,140 +4,14 @@
 
 Allows you to decode _A Township Tale_'s save strings for analysing, and encode JS objects into ATT save strings for spawning.
 
-## ⚡️ Quick Start
+⚠️ Use this library primarily when creating bots for ATT, or when building your own ATT save string project. **If you just want to make string weapons, check out my [ATT String Workshop](https://github.com/mdingena/att-string-workshop) project.**
+
+## Installation
 
 Add this library to your project's dependencies:
 
 ```shell
 npm install --save att-string-transcoder
-```
-
-Next, create an `encode.js` file in your project and add the following code:
-
-```js
-const { createPrefab, PrefabHash } = require('att-string-transcoder');
-
-createPrefab(PrefabHash.Handle_Short).print();
-```
-
-⚠️ Don't forget to save the file!
-
-Finally, execute this code by running this command in your terminal (while in your project's directory):
-
-```shell
-node encode.js
-```
-
-The string should appear in the terminal for you to copy and paste.
-
-### User-friendly guide to `createPrefab`
-
-Starting with the very basics, you can create a string for a handle using this code:
-
-```
-createPrefab(PrefabHash.Handle_Short).print();
-```
-
-Running this code will print the string you can use to spawn a weapon handle.
-You'll include this string in a spawn command that looks like this:
-
-```css
-spawn string EthynWyrmbane [string]
-```
-
-But so far, this is just a really complicated way of spawning a handle. The point of strings is that you can spawn intricate contraptions that regular spawn commands can't.
-
-Let's change this handle's material:
-
-```
-createPrefab(PrefabHash.Handle_Short).setMaterial(PhysicalMaterialPartHash.Redwood).print();
-```
-
-That's getting kinda long, so we can write it across multiple lines to keep things readible:
-
-```
-  createPrefab(PrefabHash.Handle_Short)
-    .setMaterial(PhysicalMaterialPartHash.Redwood)
-    .print();
-```
-
-Now let's add a guard to this handle (the green lines show what's new since last example):
-
-```diff
-  createPrefab(PrefabHash.Handle_Short)
-    .setMaterial(PhysicalMaterialPartHash.Redwood)
-+   .useSlot(
-+     PrefabSlot.Handle_Short.Slot_Multi_1,
-+     createPrefab(PrefabHash.Guard)
-+   )
-    .print();
-```
-
-So, what's happening here? We're telling the program to use one of the handle's slots, and we insert another prefab into that. The program needs to know _which_ slot to use, since prefabs like this handle have more than one slot you can use.
-
-The inserted prefab works the same way as the handle prefab we've been making so far. Let's change the guard's material as well:
-
-```diff
-  createPrefab(PrefabHash.Handle_Short)
-    .setMaterial(PhysicalMaterialPartHash.Redwood)
-    .useSlot(
-      PrefabSlot.Handle_Short.Slot_Multi_1,
-      createPrefab(PrefabHash.Guard)
-+       .setMaterial(PhysicalMaterialPartHash.CarsiAlloy)
-    )
-    .print();
-```
-
-And like the handle, we can insert prefabs into this guard's slots:
-
-```diff
-  createPrefab(PrefabHash.Handle_Short)
-    .setMaterial(PhysicalMaterialPartHash.Redwood)
-    .useSlot(
-      PrefabSlot.Handle_Short.Slot_Multi_1,
-      createPrefab(PrefabHash.Guard)
-        .setMaterial(PhysicalMaterialPartHash.CarsiAlloy)
-+       .useSlot(
-+         PrefabSlot.Guard.Slot_SwordType,
-+         createPrefab(PrefabHash.Metal_Hebios_Wakizashi_Blade)
-+           .setMaterial(PhysicalMaterialPartHash.Mythril)
-+       )
-    )
-    .print();
-```
-
-There are also some other interesting things we can do with prefabs:
-
-- Changing the integrity (repairing or damaging it).
-- Giving the prefab a velocity to hurl it through the air (works on non-slotted prefabs only).
-- Changing its position and orientation (works on non-slotted prefabs only).
-- Making it "noclip" (kinematic).
-- Setting it on fire.
-
-In the end, the game server decides what is possible. For example, some prefabs simply don't have a material, such as the iron handles. But it's fun to experiment and trying to figure out all the crazy things you _can_ do.
-
-Let's complete our sword:
-
-```diff
-  createPrefab(PrefabHash.Handle_Short)
-    .setMaterial(PhysicalMaterialPartHash.Redwood)
-    .useSlot(
-      PrefabSlot.Handle_Short.Slot_Multi_1,
-      createPrefab(PrefabHash.Guard)
-        .setMaterial(PhysicalMaterialPartHash.CarsiAlloy)
-        .useSlot(
-          PrefabSlot.Guard.Slot_SwordType,
-          createPrefab(PrefabHash.Metal_Hebios_Wakizashi_Blade)
-            .setMaterial(PhysicalMaterialPartHash.Mythril)
-+           .setIntegrity(0.25)
-        )
-    )
-+   .useSlot(
-+     PrefabSlot.Handle_Short.Slot_PommelType_1,
-+     createPrefab(PrefabHash.Pommel_Diamond)
-+       .setMaterial(PhysicalMaterialPartHash.EvinonSteelAlloy)
-+     )
-    .print();
 ```
 
 ### Decoding a string
@@ -241,17 +115,17 @@ const decodedString = {
 
 </details>
 
-### Encoding a string (the hard way)
+### Encoding a string
 
 <details>
 <summary>First, create a <code>blade</code> prefab object:</summary>
 
 ```ts
-import { Prefab, PrefabHash, PhysicalMaterialPartHash } from 'att-string-transcoder';
+import { Prefab, PrefabData, PhysicalMaterialPartHash } from 'att-string-transcoder';
 
-const blade: Prefab = {
+const blade: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Large_Longsword_Blade
+    hash: Prefab.Large_Longsword_Blade.hash
   },
   components: {
     PhysicalMaterialPart: {
@@ -270,11 +144,11 @@ const blade: Prefab = {
 <summary>Then, create a <code>guard</code> prefab object:</summary>
 
 ```ts
-import { Prefab, PrefabHash, PhysicalMaterialPartHash } from 'att-string-transcoder';
+import { Prefab, PrefabData, PhysicalMaterialPartHash } from 'att-string-transcoder';
 
-export const guard: Prefab = {
+export const guard: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Large_Guard_Rectangle
+    hash: Prefab.Large_Guard_Rectangle.hash
   },
   components: {
     PhysicalMaterialPart: {
@@ -286,7 +160,7 @@ export const guard: Prefab = {
   },
   childPrefabs: [
     {
-      parentHash: 51896,
+      parentHash: Prefab.Large_Guard_Rectangle.slots.Slot_Large_SwordType,
       prefab: blade
     }
   ]
@@ -299,7 +173,7 @@ export const guard: Prefab = {
 <summary>Finally, create a <code>handle</code> prefab object:</summary>
 
 ```ts
-import { Prefab, PrefabHash } from 'att-string-transcoder';
+import { Prefab, PrefabData } from 'att-string-transcoder';
 
 const position = {
   x: -701,
@@ -307,9 +181,9 @@ const position = {
   z: 100
 };
 
-export const handle: Prefab = {
+export const handle: PrefabData = {
   prefabObject: {
-    hash: PrefabHash.Handle_Short,
+    hash: Prefab.Handle_Short.hash,
     position
   },
   components: {
@@ -319,7 +193,7 @@ export const handle: Prefab = {
   },
   childPrefabs: [
     {
-      parentHash: 6136,
+      parentHash: Prefab.Handle_Short.slots.Slot_Large_SwordType_Craft_1,
       prefab: guard
     }
   ]
@@ -350,3 +224,7 @@ const encodedSword = createString(handle);
 ```
 
 </details>
+
+### Encoding a string (alternative method)
+
+You can also use the `createPrefab` helper function of this library. See the [ATT String Workshop](https://github.com/mdingena/att-string-workshop) project for documentation about this.
