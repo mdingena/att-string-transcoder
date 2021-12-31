@@ -30,6 +30,7 @@ type PrefabManager<S> = {
   setAngularVelocity: (x: number, y: number, z: number) => PrefabManager<S>;
   setMaterial: (material: keyof typeof PhysicalMaterialPartHash) => PrefabManager<S>;
   setIntegrity: (integrity: number) => PrefabManager<S>;
+  setServings: (servings: number) => PrefabManager<S>;
   setOnFire: (isLit?: boolean) => PrefabManager<S>;
   useSlot: <P extends Prefab, C extends keyof P['slots']>(slot: S, childPrefab: PrefabManager<C>) => PrefabManager<S>;
   toString: () => string;
@@ -167,6 +168,19 @@ export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefa
     this.data.components = {
       ...this.data.components,
       DurabilityModule: { integrity }
+    };
+
+    return this;
+  },
+
+  setServings(servings) {
+    if (typeof servings === 'undefined') {
+      throw new Error(`setServings(servings) called with invalid arguments.`);
+    }
+
+    this.data.components!.LiquidContainer = {
+      ...this.data.components!.LiquidContainer,
+      contentLevel: Math.ceil(servings)
     };
 
     return this;
