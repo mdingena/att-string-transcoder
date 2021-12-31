@@ -22,6 +22,7 @@ type PrefabManager<S> = {
   data: PrefabData;
   slots: { [slotName: string]: number };
   setPosition: (x: number, y: number, z: number) => PrefabManager<S>;
+  setScale: (scale: number) => PrefabManager<S>;
   setRotation: (x: number, y: number, z: number, w: number) => PrefabManager<S>;
   setKinematic: (isKinematic?: boolean) => PrefabManager<S>;
   setServerSleeping: (isServerSleeping?: boolean) => PrefabManager<S>;
@@ -75,6 +76,16 @@ export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefa
       ...this.data.components!.NetworkRigidbody,
       rotation
     };
+
+    return this;
+  },
+
+  setScale(scale) {
+    if (typeof scale === 'undefined') {
+      throw new Error(`setScale(scale) called with invalid arguments.`);
+    }
+
+    this.data.prefabObject.scale = scale;
 
     return this;
   },
