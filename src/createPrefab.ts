@@ -191,9 +191,9 @@ export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefa
       ...this.data.embeddedEntities!.Fire,
       isAlive: isLit,
       components: {
-        ...this.data.embeddedEntities!.Fire!.components,
+        ...this.data.embeddedEntities!.Fire?.components,
         HeatSourceBase: {
-          ...this.data.embeddedEntities!.Fire!.components!.HeatSourceBase,
+          ...this.data.embeddedEntities!.Fire?.components?.HeatSourceBase,
           isLit
         }
       }

@@ -42,6 +42,25 @@ describe('createPrefab', () => {
     expect((prefabFactory.data.components!.NetworkRigidbody as NetworkRigidbody).rotation).toStrictEqual(rotation);
   });
 
+  it('sets it on fire', () => {
+    const prefabFactory = createPrefab(PREFAB);
+
+    expect(prefabFactory.data.embeddedEntities).toStrictEqual({});
+
+    prefabFactory.setOnFire();
+
+    expect(prefabFactory.data.embeddedEntities).toStrictEqual({
+      Fire: {
+        isAlive: true,
+        components: {
+          HeatSourceBase: {
+            isLit: true
+          }
+        }
+      }
+    });
+  });
+
   it('uses a slot', () => {
     const prefabFactory = createPrefab(PREFAB);
 
