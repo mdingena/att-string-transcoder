@@ -1,7 +1,9 @@
 import { Prefab } from './Prefab';
 import { createString } from './createString';
 import { PrefabData } from './decoders';
-import { PhysicalMaterialPartHash } from '.';
+import { PhysicalMaterialPartHash } from './PhysicalMaterialPartHash';
+import * as components from './components';
+import { reasonableGifts } from './utils';
 
 const VALID_MATERIALS = Object.values(PhysicalMaterialPartHash)
   .filter(key => typeof key === 'string')
@@ -32,6 +34,8 @@ type PrefabManager<S> = {
   setIntegrity: (integrity: number) => PrefabManager<S>;
   setServings: (servings: number) => PrefabManager<S>;
   setOnFire: (isLit?: boolean) => PrefabManager<S>;
+  setGiftBoxLabel: (label: string) => PrefabManager<S>;
+  addGift: <P extends Prefab, C extends keyof P['slots']>(gift: PrefabManager<C>) => PrefabManager<S>;
   useSlot: <P extends Prefab, C extends keyof P['slots']>(slot: S, childPrefab: PrefabManager<C>) => PrefabManager<S>;
   toString: () => string;
   print: () => void;
@@ -196,6 +200,48 @@ export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefa
           ...this.data.embeddedEntities!.Fire?.components?.HeatSourceBase,
           isLit
         }
+      }
+    };
+
+    return this;
+  },
+
+  setGiftBoxLabel(label) {
+    this.data.components = {
+      ...this.data.components,
+      SentGift: {
+        ...this.data.components!.SentGift,
+        senderName: label
+      }
+    };
+
+    return this;
+  },
+
+  addGift(giftPrefab) {
+    if (!reasonableGifts.includes(giftPrefab.data.prefabObject.hash)) {
+      throw new Error('No gifts for naughty people.');
+    }
+
+    const string = createString(giftPrefab.data);
+
+    const [dataString, versionsString] = string.split('|');
+    const [hash, messageSizeInBytes, ...data] = dataString.split(',').map(Number);
+    const [_, ...chunkVersioning] = versionsString.split(',').map(Number);
+
+    this.data.components = {
+      ...this.data.components,
+      SentGift: {
+        ...this.data.components!.SentGift,
+        gifts: [
+          ...((this.data.components!.SentGift as components.SentGift | undefined)?.gifts ?? []),
+          {
+            data,
+            messageSizeInBytes,
+            hash,
+            chunkVersioning
+          }
+        ]
       }
     };
 
