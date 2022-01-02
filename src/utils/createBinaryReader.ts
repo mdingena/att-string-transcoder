@@ -9,9 +9,12 @@ export type BinaryReader = {
   binary: (bits: number) => string;
   boolean: () => boolean;
   uInt: () => number;
+  uShort: () => number;
   uLong: () => number;
   float: () => number;
   int: () => number;
+  char: () => string;
+  string: () => string;
 };
 
 export const createBinaryReader = (binary: string): BinaryReader => {
@@ -39,6 +42,12 @@ export const createBinaryReader = (binary: string): BinaryReader => {
       return binaryToNumber(bits);
     },
 
+    uShort: function () {
+      const bits = this.binary(16);
+
+      return binaryToNumber(bits);
+    },
+
     uLong: function () {
       const bits = this.binary(64);
 
@@ -55,6 +64,55 @@ export const createBinaryReader = (binary: string): BinaryReader => {
       const bits = this.binary(32);
 
       return binaryToInt(bits);
+    },
+
+    char: function () {
+      const bits = this.binary(8);
+      const charCode = binaryToNumber(bits);
+
+      return String.fromCharCode(charCode);
+    },
+
+    string: function () {
+      const length = this.uShort();
+
+      if (length === 0) return '';
+
+      /* Align bits. */
+      const offset = index.current % 8 === 0 ? 0 : 8 - (index.current % 8);
+
+      if (offset > 0) this.binary(offset);
+
+      let currentByte = (index.current % 32) / 8;
+
+      /* Read garbled text from binary. */
+      let textBuffer = '';
+
+      while (textBuffer.length < length) {
+        textBuffer += this.char();
+      }
+
+      /* Untangle garbled text. */
+      let text = '';
+      let bufferIndex = 0;
+
+      while (currentByte < 4 && bufferIndex < length) {
+        text += textBuffer[bufferIndex++];
+        currentByte++;
+      }
+
+      while (bufferIndex + 4 <= length) {
+        const chars = textBuffer.substr(bufferIndex, 4);
+
+        text += chars.split('').reverse().join('');
+        bufferIndex += 4;
+      }
+
+      while (bufferIndex < length) {
+        text += textBuffer[bufferIndex++];
+      }
+
+      return text;
     }
   };
 };
