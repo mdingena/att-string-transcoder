@@ -13,6 +13,7 @@ export type PhysicalMaterialPart = transcoders.PhysicalMaterialPart.PhysicalMate
 export type Pickup = transcoders.Pickup.Pickup;
 export type PickupDock = transcoders.PickupDock.PickupDock;
 export type PopulationSpawnArea = transcoders.PopulationSpawnArea.PopulationSpawnArea;
+export type SentGift = transcoders.SentGift.SentGift;
 export type SpawnArea = transcoders.SpawnArea.SpawnArea;
 export type StatManager = transcoders.StatManager.StatManager;
 export type WoodcutTree = transcoders.WoodcutTree.WoodcutTree;
@@ -29,6 +30,7 @@ export type KnownComponent =
   | Pickup
   | PickupDock
   | PopulationSpawnArea
+  | SentGift
   | SpawnArea
   | StatManager
   | WoodcutTree;
