@@ -10,4 +10,5 @@ export { intToBinary } from './intToBinary';
 export { numberToBinary } from './numberToBinary';
 export { uIntToBinary } from './uIntToBinary';
 export { uLongToBinary } from './uLongToBinary';
+export { uShortToBinary } from './uShortToBinary';
 export { unpackFloat } from './unpackFloat';
