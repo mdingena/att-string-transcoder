@@ -5,6 +5,7 @@ export type ComponentName = keyof typeof transcoders;
 export type BasicDecay = transcoders.BasicDecay.BasicDecay;
 export type DurabilityModule = transcoders.DurabilityModule.DurabilityModule;
 export type Fire = transcoders.Fire.Fire;
+export type Fuse = transcoders.Fuse.Fuse;
 export type HeatSourceBase = transcoders.HeatSourceBase.HeatSourceBase;
 export type LiquidContainer = transcoders.LiquidContainer.LiquidContainer;
 export type NetworkRigidbody = transcoders.NetworkRigidbody.NetworkRigidbody;
@@ -20,6 +21,7 @@ export type KnownComponent =
   | BasicDecay
   | DurabilityModule
   | Fire
+  | Fuse
   | HeatSourceBase
   | LiquidContainer
   | NetworkRigidbody

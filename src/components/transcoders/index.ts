@@ -1,6 +1,7 @@
 export * as BasicDecay from './basicDecay';
 export * as DurabilityModule from './durabilityModule';
 export * as Fire from './fire';
+export * as Fuse from './fuse';
 export * as HeatSourceBase from './heatSourceBase';
 export * as LiquidContainer from './liquidContainer';
 export * as NetworkRigidbody from './networkRigidbody';
