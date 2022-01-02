@@ -2,7 +2,7 @@ import { ComponentHash } from '../../ComponentHash';
 import { PopulationDefinitionHash } from '../../PopulationDefinitionHash';
 import { BinaryReader, createBinaryWriter } from '../../utils';
 
-type PopulationSaveDataChild = {
+type PopulationSaveDataChild = null | {
   index: number;
   pointIndex: number;
 };
@@ -27,6 +27,13 @@ export const decode = (reader: BinaryReader): PopulationSpawnArea => {
   const childrenLength = reader.uInt();
   const children: PopulationSaveDataChild[] = [];
   for (let index = 0; index < childrenLength; ++index) {
+    /* Skip child if is null. */
+    const isNull = reader.boolean();
+    if (isNull) {
+      children.push(null);
+      continue;
+    }
+
     children.push({
       index: reader.int(),
       pointIndex: reader.int()
