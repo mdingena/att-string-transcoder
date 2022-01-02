@@ -8,6 +8,7 @@ export { createBinaryWriter, BinaryWriter } from './createBinaryWriter';
 export { floatToBinary } from './floatToBinary';
 export { intToBinary } from './intToBinary';
 export { numberToBinary } from './numberToBinary';
+export { reasonableGifts } from './reasonableGifts';
 export { uIntToBinary } from './uIntToBinary';
 export { uLongToBinary } from './uLongToBinary';
 export { uShortToBinary } from './uShortToBinary';
