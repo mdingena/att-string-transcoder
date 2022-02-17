@@ -7,11 +7,17 @@ export type PickupDock = {
   childIndex?: number;
 };
 
-export const decode = (reader: BinaryReader): PickupDock => ({
-  dockedTypeHash: reader.uInt(),
-  quantity: reader.int(),
-  childIndex: reader.int()
-});
+export const decode = (reader: BinaryReader, version: number): PickupDock => {
+  const component: PickupDock = {};
+
+  if (version >= 2) component.dockedTypeHash = reader.uInt();
+
+  if (version >= 2) component.quantity = reader.int();
+
+  if (version >= 2) component.childIndex = reader.int();
+
+  return component;
+};
 
 export const encode = ({ dockedTypeHash = 0, quantity = 1, childIndex = 0 }: PickupDock): string => {
   const writer = createBinaryWriter();

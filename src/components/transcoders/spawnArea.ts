@@ -9,13 +9,21 @@ export type SpawnArea = {
   maxAcceptableAngleDot?: number;
 };
 
-export const decode = (reader: BinaryReader): SpawnArea => ({
-  size: reader.float(),
-  groundLayers: reader.int(),
-  avoidLayers: reader.int(),
-  isAligningNormal: reader.boolean(),
-  maxAcceptableAngleDot: reader.float()
-});
+export const decode = (reader: BinaryReader, version: number): SpawnArea => {
+  const component: SpawnArea = {};
+
+  if (version >= 1) component.size = reader.float();
+
+  if (version >= 1) component.groundLayers = reader.int();
+
+  if (version >= 1) component.avoidLayers = reader.int();
+
+  if (version >= 1) component.isAligningNormal = reader.boolean();
+
+  if (version >= 1) component.maxAcceptableAngleDot = reader.float();
+
+  return component;
+};
 
 export const encode = ({
   size = 5,

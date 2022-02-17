@@ -8,10 +8,15 @@ export type WoodcutTree = {
   speciesHash?: SpeciesHash;
 };
 
-export const decode = (reader: BinaryReader): WoodcutTree => ({
-  presetHash: reader.uInt(),
-  speciesHash: reader.uInt()
-});
+export const decode = (reader: BinaryReader, version: number): WoodcutTree => {
+  const component: WoodcutTree = {};
+
+  if (version >= 3) component.presetHash = reader.uInt();
+
+  if (version >= 3) component.speciesHash = reader.uInt();
+
+  return component;
+};
 
 export const encode = ({ presetHash = 0, speciesHash = SpeciesHash.Oak }: WoodcutTree): string => {
   const writer = createBinaryWriter();

@@ -27,31 +27,48 @@ export type NetworkRigidbody = {
   };
 };
 
-export const decode = (reader: BinaryReader): NetworkRigidbody => ({
-  position: {
-    x: reader.float(),
-    y: reader.float(),
-    z: reader.float()
-  },
-  rotation: {
-    x: reader.float(),
-    y: reader.float(),
-    z: reader.float(),
-    w: reader.float()
-  },
-  isKinematic: reader.boolean(),
-  isServerSleeping: reader.boolean(),
-  velocity: {
-    x: reader.float(),
-    y: reader.float(),
-    z: reader.float()
-  },
-  angularVelocity: {
-    x: reader.float(),
-    y: reader.float(),
-    z: reader.float()
+export const decode = (reader: BinaryReader, version: number): NetworkRigidbody => {
+  const component: NetworkRigidbody = {};
+
+  if (version >= 1) {
+    component.position = {
+      x: reader.float(),
+      y: reader.float(),
+      z: reader.float()
+    };
   }
-});
+
+  if (version >= 1) {
+    component.rotation = {
+      x: reader.float(),
+      y: reader.float(),
+      z: reader.float(),
+      w: reader.float()
+    };
+  }
+
+  if (version >= 1) component.isKinematic = reader.boolean();
+
+  if (version >= 1) component.isServerSleeping = reader.boolean();
+
+  if (version >= 1) {
+    component.velocity = {
+      x: reader.float(),
+      y: reader.float(),
+      z: reader.float()
+    };
+  }
+
+  if (version >= 1) {
+    component.angularVelocity = {
+      x: reader.float(),
+      y: reader.float(),
+      z: reader.float()
+    };
+  }
+
+  return component;
+};
 
 export const encode = ({
   position = { x: 0, y: 0, z: 0 },

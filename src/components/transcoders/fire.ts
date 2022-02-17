@@ -5,9 +5,13 @@ export type Fire = {
   fuelConsumptionProgress?: number;
 };
 
-export const decode = (reader: BinaryReader): Fire => ({
-  fuelConsumptionProgress: reader.float()
-});
+export const decode = (reader: BinaryReader, version: number): Fire => {
+  const component: Fire = {};
+
+  if (version >= 2) component.fuelConsumptionProgress = reader.float();
+
+  return component;
+};
 
 export const encode = ({ fuelConsumptionProgress = 0 }: Fire): string => {
   const writer = createBinaryWriter();
