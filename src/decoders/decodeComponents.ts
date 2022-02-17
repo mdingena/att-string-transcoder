@@ -1,12 +1,12 @@
-import { transcoders, Component, ComponentName, UnknownComponent } from '../components';
+import { transcoders, Component, ComponentName, UnknownComponent, ComponentVersion } from '../components';
 import { ComponentHash } from '../ComponentHash';
-import { BinaryReader } from '../utils';
+import { BinaryReader, VersionMap } from '../utils';
 
 export type Components = {
   [key in ComponentName | 'Unknown']?: Component;
 };
 
-export const decodeComponents = (reader: BinaryReader): Components => {
+export const decodeComponents = (reader: BinaryReader, versions: VersionMap): Components => {
   const components: Components = {
     Unknown: []
   };
@@ -27,7 +27,20 @@ export const decodeComponents = (reader: BinaryReader): Components => {
 
     /* Save the component's data. */
     if (componentName && transcoders[componentName]) {
-      components[componentName] = transcoders[componentName].decode(reader);
+      let version = versions[hash];
+
+      if (!version) {
+        if (ComponentVersion.has(hash)) {
+          version = ComponentVersion.get(hash)!;
+          console.warn(
+            `String does not contain version info for the '${componentName}' component. Assuming latest supported version (v${version}).`
+          );
+        } else {
+          throw new Error(`Cannot decode unsupported version of '${componentName}' component.`);
+        }
+      }
+
+      components[componentName] = transcoders[componentName].decode(reader, version);
     } else {
       (components.Unknown as UnknownComponent[]).push({ hash, data: reader.binary(size) });
     }
