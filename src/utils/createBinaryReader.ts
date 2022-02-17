@@ -22,7 +22,7 @@ export const createBinaryReader = (binary: string): BinaryReader => {
   const size = binary.length;
 
   return {
-    binary: function (bits: number): string {
+    binary: function (bits) {
       if (index.current + bits > size) {
         throw Error(`Cannot read ${bits} bits from binary at index ${index.current}. Binary is only ${size} bits.`);
       }
