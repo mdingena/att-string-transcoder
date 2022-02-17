@@ -1,5 +1,5 @@
 import { EmbeddedEntityHash } from '../EmbeddedEntityHash';
-import { BinaryReader } from '../utils';
+import { BinaryReader, VersionMap } from '../utils';
 import { decodeComponents, Components } from './decodeComponents';
 import { Fire } from '../embeddedEntities';
 
@@ -16,7 +16,7 @@ export type EmbeddedEntities = {
   Fire?: Fire;
 };
 
-export const decodeEmbeddedEntities = (reader: BinaryReader): EmbeddedEntities => {
+export const decodeEmbeddedEntities = (reader: BinaryReader, versions: VersionMap): EmbeddedEntities => {
   const embeddedEntities: EmbeddedEntities = {
     Unknown: []
   };
@@ -39,7 +39,7 @@ export const decodeEmbeddedEntities = (reader: BinaryReader): EmbeddedEntities =
     const isAlive = reader.boolean();
 
     /* Get the entity's components. */
-    const components = decodeComponents(reader);
+    const components = decodeComponents(reader, versions);
 
     /* Save entity. */
     if (embeddedEntityName === 'Unknown') {
