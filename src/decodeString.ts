@@ -1,4 +1,4 @@
-import { uIntToBinary, createBinaryReader } from './utils';
+import { parseVersionString, uIntToBinary, createBinaryReader } from './utils';
 import { decodePrefab, PrefabData } from './decoders';
 
 export type DecodedString = {
@@ -15,9 +15,10 @@ export type DecodedString = {
  * - child prefabs.
  */
 export const decodeString = (rawString: string): DecodedString => {
-  /* Get the UInts portion of the raw spawn string. */
-  const uIntString = rawString.split('|')[0];
+  /* Get the UInts and component versions from the raw spawn string. */
+  const [uIntString, versionString] = rawString.split('|');
   const uInts = uIntString.split(',').filter(Boolean);
+  const versions = parseVersionString(versionString);
 
   /* Remove the first two UInts which do not count towards the string's size. */
   const hash = Number(uInts.shift() ?? 0);
@@ -27,9 +28,9 @@ export const decodeString = (rawString: string): DecodedString => {
   const binary = uInts.reduce((bits, uInt) => `${bits}${uIntToBinary(Number(uInt))}`, '');
 
   /* Create binary reader. */
-  const readBinary = createBinaryReader(binary);
+  const reader = createBinaryReader(binary);
 
-  const prefab = decodePrefab(readBinary);
+  const prefab = decodePrefab(reader, versions);
 
   return {
     hash,
