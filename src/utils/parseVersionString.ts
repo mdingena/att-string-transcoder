@@ -1,6 +1,8 @@
 export type VersionMap = { [hash: number]: number };
 
-export const parseVersionString = (versionString: string): VersionMap => {
+export const parseVersionString = (versionString: string | undefined): VersionMap => {
+  if (typeof versionString === 'undefined') return {};
+
   if (versionString.substr(-1) !== ',') {
     throw new Error('String contains invalid versioning. Check string format. Did you copy-paste the whole string?');
   }
