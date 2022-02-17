@@ -20,66 +20,66 @@ export type SentGift = {
   senderTag?: SentGiftTag;
 };
 
-export const decode = (reader: BinaryReader): SentGift => {
-  const receiverName = reader.string();
-  const senderName = reader.string();
+export const decode = (reader: BinaryReader, version: number): SentGift => {
+  const component: SentGift = {};
 
-  /* Get the gifts array. */
-  const giftsLength = reader.uInt();
-  const gifts: Gift[] = [];
+  if (version >= 1) component.receiverName = reader.string();
 
-  for (let g = 0; g < giftsLength; ++g) {
-    /* Skip gift if is null. */
-    const isNull = reader.boolean();
-    if (isNull) {
-      gifts.push(null);
-      continue;
+  if (version >= 1) component.senderName = reader.string();
+
+  if (version >= 1) {
+    /* Get the gifts array. */
+    const giftsLength = reader.uInt();
+    component.gifts = [];
+
+    for (let g = 0; g < giftsLength; ++g) {
+      /* Skip gift if is null. */
+      const isNull = reader.boolean();
+      if (isNull) {
+        component.gifts.push(null);
+        continue;
+      }
+
+      /* Get the data array. */
+      const dataLength = reader.uInt();
+      const data: number[] = [];
+
+      for (let d = 0; d < dataLength; ++d) {
+        data.push(reader.uInt());
+      }
+
+      const messageSizeInBytes = reader.uInt();
+      const hash = reader.uInt();
+
+      /* Get the chunkVersioning array. */
+      const chunkVersioningLength = reader.uInt();
+      const chunkVersioning: number[] = [];
+
+      for (let c = 0; c < chunkVersioningLength; ++c) {
+        chunkVersioning.push(reader.uInt());
+      }
+
+      component.gifts.push({
+        data,
+        messageSizeInBytes,
+        hash,
+        chunkVersioning
+      });
     }
-
-    /* Get the data array. */
-    const dataLength = reader.uInt();
-    const data: number[] = [];
-
-    for (let d = 0; d < dataLength; ++d) {
-      data.push(reader.uInt());
-    }
-
-    const messageSizeInBytes = reader.uInt();
-    const hash = reader.uInt();
-
-    /* Get the chunkVersioning array. */
-    const chunkVersioningLength = reader.uInt();
-    const chunkVersioning: number[] = [];
-
-    for (let c = 0; c < chunkVersioningLength; ++c) {
-      chunkVersioning.push(reader.uInt());
-    }
-
-    gifts.push({
-      data,
-      messageSizeInBytes,
-      hash,
-      chunkVersioning
-    });
   }
 
-  const senderTagIsNull = reader.boolean();
+  if (version >= 1) {
+    const senderTagIsNull = reader.boolean();
 
-  const senderTag: SentGiftTag = senderTagIsNull
-    ? null
-    : {
-        from: reader.int(),
-        to: reader.int()
-      };
+    component.senderTag = senderTagIsNull
+      ? null
+      : {
+          from: reader.int(),
+          to: reader.int()
+        };
+  }
 
-  const result: SentGift = {
-    receiverName,
-    senderName,
-    gifts,
-    senderTag
-  };
-
-  return result;
+  return component;
 };
 
 export const encode = ({ receiverName = '', senderName = '', gifts = [], senderTag = null }: SentGift): string => {

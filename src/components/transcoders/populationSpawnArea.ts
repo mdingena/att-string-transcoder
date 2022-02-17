@@ -19,45 +19,45 @@ export type PopulationSpawnArea = {
   isOneOff?: boolean;
 };
 
-export const decode = (reader: BinaryReader): PopulationSpawnArea => {
-  const definition = reader.uInt();
-  const isPopulationStarted = reader.boolean();
+export const decode = (reader: BinaryReader, version: number): PopulationSpawnArea => {
+  const component: PopulationSpawnArea = {};
 
-  /* Get the children array. */
-  const childrenLength = reader.uInt();
-  const children: PopulationSaveDataChild[] = [];
-  for (let index = 0; index < childrenLength; ++index) {
-    /* Skip child if is null. */
-    const isNull = reader.boolean();
-    if (isNull) {
-      children.push(null);
-      continue;
+  if (version >= 2) component.definition = reader.uInt();
+
+  if (version >= 2) component.isPopulationStarted = reader.boolean();
+
+  if (version >= 2) {
+    /* Get the children array. */
+    const childrenLength = reader.uInt();
+    component.children = [];
+    for (let index = 0; index < childrenLength; ++index) {
+      /* Skip child if is null. */
+      const isNull = reader.boolean();
+      if (isNull) {
+        component.children.push(null);
+        continue;
+      }
+
+      component.children.push({
+        index: reader.int(),
+        pointIndex: reader.int()
+      });
     }
-
-    children.push({
-      index: reader.int(),
-      pointIndex: reader.int()
-    });
   }
 
-  const maxPopulation = reader.int();
-  const currentPopulation = reader.int();
-  const checkPopulationTime = reader.uLong();
-  const numberOfSpawnPoints = reader.int();
-  const startingPopulation = reader.int();
-  const isOneOff = reader.boolean();
+  if (version >= 2) component.maxPopulation = reader.int();
 
-  return {
-    definition,
-    isPopulationStarted,
-    children,
-    maxPopulation,
-    currentPopulation,
-    checkPopulationTime,
-    numberOfSpawnPoints,
-    startingPopulation,
-    isOneOff
-  };
+  if (version >= 2) component.currentPopulation = reader.int();
+
+  if (version >= 2) component.checkPopulationTime = reader.uLong();
+
+  if (version >= 2) component.numberOfSpawnPoints = reader.int();
+
+  if (version >= 2) component.startingPopulation = reader.int();
+
+  if (version >= 2) component.isOneOff = reader.boolean();
+
+  return component;
 };
 
 export const encode = ({

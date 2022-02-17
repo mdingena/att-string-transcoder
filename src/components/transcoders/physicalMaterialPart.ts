@@ -6,9 +6,13 @@ export type PhysicalMaterialPart = {
   materialHash?: number;
 };
 
-export const decode = (reader: BinaryReader): PhysicalMaterialPart => ({
-  materialHash: reader.uInt()
-});
+export const decode = (reader: BinaryReader, version: number): PhysicalMaterialPart => {
+  const component: PhysicalMaterialPart = {};
+
+  if (version >= 1) component.materialHash = reader.uInt();
+
+  return component;
+};
 
 export const encode = ({ materialHash = PhysicalMaterialPartHash.Iron }: PhysicalMaterialPart): string => {
   const writer = createBinaryWriter();

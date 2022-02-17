@@ -9,11 +9,17 @@ export type HeatSourceBase = {
   time?: number;
 };
 
-export const decode = (reader: BinaryReader): HeatSourceBase => ({
-  isLit: reader.boolean(),
-  progress: reader.float(),
-  time: reader.uLong()
-});
+export const decode = (reader: BinaryReader, version: number): HeatSourceBase => {
+  const component: HeatSourceBase = {};
+
+  if (version >= 1) component.isLit = reader.boolean();
+
+  if (version >= 1) component.progress = reader.float();
+
+  if (version >= 1) component.time = reader.uLong();
+
+  return component;
+};
 
 export const encode = ({ isLit = true, progress = 0, time = HUNDRED_YEARS_TICKS }: HeatSourceBase): string => {
   const writer = createBinaryWriter();

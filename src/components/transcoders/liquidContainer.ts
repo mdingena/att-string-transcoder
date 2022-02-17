@@ -33,65 +33,72 @@ export type LiquidContainer = {
   customData?: null | CustomData;
 };
 
-export const decode = (reader: BinaryReader): LiquidContainer => {
-  const result: LiquidContainer = {
-    canAddTo: reader.boolean(),
-    canRemoveFrom: reader.boolean(),
-    contentLevel: reader.int(),
-    hasContent: reader.boolean(),
-    isCustom: reader.boolean(),
-    presetHash: reader.uInt()
-  };
+export const decode = (reader: BinaryReader, version: number): LiquidContainer => {
+  const component: LiquidContainer = {};
 
-  /* Get custom data */
-  const isNull = reader.boolean();
-  if (isNull) {
-    result.customData = null;
-  } else {
-    const customData = {
-      color: {
-        r: reader.float(),
-        g: reader.float(),
-        b: reader.float(),
-        a: reader.float()
-      },
-      isConsumableThroughSkin: reader.boolean(),
-      visualDataHash: reader.uInt()
-    };
+  if (version >= 1) component.canAddTo = reader.boolean();
 
-    /* Get the effects array. */
-    const effectsLength = reader.uInt();
-    const effects: Effect[] = [];
-    for (let index = 0; index < effectsLength; ++index) {
-      /* Skip effect if is null. */
-      const isNull = reader.boolean();
-      if (isNull) {
-        effects.push(null);
-        continue;
+  if (version >= 1) component.canRemoveFrom = reader.boolean();
+
+  if (version >= 1) component.contentLevel = reader.int();
+
+  if (version >= 1) component.hasContent = reader.boolean();
+
+  if (version >= 1) component.isCustom = reader.boolean();
+
+  if (version >= 1) component.presetHash = reader.uInt();
+
+  if (version >= 1) {
+    /* Get custom data */
+    const isNull = reader.boolean();
+    if (isNull) {
+      component.customData = null;
+    } else {
+      const customData = {
+        color: {
+          r: reader.float(),
+          g: reader.float(),
+          b: reader.float(),
+          a: reader.float()
+        },
+        isConsumableThroughSkin: reader.boolean(),
+        visualDataHash: reader.uInt()
+      };
+
+      /* Get the effects array. */
+      const effectsLength = reader.uInt();
+      const effects: Effect[] = [];
+      for (let index = 0; index < effectsLength; ++index) {
+        /* Skip effect if is null. */
+        const isNull = reader.boolean();
+        if (isNull) {
+          effects.push(null);
+          continue;
+        }
+
+        effects.push({
+          hash: reader.uInt(),
+          strengthMultiplier: reader.float()
+        });
       }
 
-      effects.push({
-        hash: reader.uInt(),
-        strengthMultiplier: reader.float()
-      });
-    }
+      /* Get the food chunks array. */
+      const foodChunksLength = reader.uInt();
+      const foodChunks: FoodChunk[] = [];
+      for (let index = 0; index < foodChunksLength; ++index) {
+        foodChunks.push(reader.uInt());
+      }
 
-    /* Get the food chunks array. */
-    const foodChunksLength = reader.uInt();
-    const foodChunks: FoodChunk[] = [];
-    for (let index = 0; index < foodChunksLength; ++index) {
-      foodChunks.push(reader.uInt());
+      /* Append custom data to result. */
+      component.customData = {
+        ...customData,
+        effects,
+        foodChunks
+      };
     }
-
-    /* Append custom data to result. */
-    result.customData = {
-      ...customData,
-      effects,
-      foodChunks
-    };
   }
 
-  return result;
+  return component;
 };
 
 export const encode = ({

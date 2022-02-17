@@ -5,9 +5,13 @@ export type DurabilityModule = {
   integrity?: number;
 };
 
-export const decode = (reader: BinaryReader): DurabilityModule => ({
-  integrity: reader.float()
-});
+export const decode = (reader: BinaryReader, version: number): DurabilityModule => {
+  const component: DurabilityModule = {};
+
+  if (version >= 1) component.integrity = reader.float();
+
+  return component;
+};
 
 export const encode = ({ integrity = 1 }: DurabilityModule): string => {
   const writer = createBinaryWriter();

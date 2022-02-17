@@ -32,77 +32,85 @@ export type StatManager = {
   indirectStatModifiers?: IndirectStatModifier[];
 };
 
-export const decode = (reader: BinaryReader): StatManager => {
-  /* Get stats array. */
-  const statsLength = reader.uInt();
-  const stats: Stat[] = [];
-  for (let index = 0; index < statsLength; ++index) {
-    /* Skip stat if is null. */
-    const isNull = reader.boolean();
-    if (isNull) {
-      stats.push(null);
-      continue;
-    }
+export const decode = (reader: BinaryReader, version: number): StatManager => {
+  const component: StatManager = {};
 
-    stats.push({
-      hash: reader.uInt(),
-      baseFlat: reader.float()
-    });
-  }
+  if (version >= 2) {
+    /* Get stats array. */
+    const statsLength = reader.uInt();
+    component.stats = [];
+    for (let index = 0; index < statsLength; ++index) {
+      /* Skip stat if is null. */
+      const isNull = reader.boolean();
+      if (isNull) {
+        component.stats.push(null);
+        continue;
+      }
 
-  /* Get modifiers array. */
-  const modifiersLength = reader.uInt();
-  const modifiers: TimedModifier[] = [];
-  for (let index = 0; index < modifiersLength; ++index) {
-    /* Skip modifier if is null. */
-    const isNull = reader.boolean();
-    if (isNull) {
-      modifiers.push(null);
-      continue;
-    }
-
-    modifiers.push({
-      hash: reader.uInt(),
-      value: reader.float(),
-      isMultiplier: reader.boolean(),
-      time: reader.uLong()
-    });
-  }
-
-  /* Get indirect stat modifiers array. */
-  const indirectStatModifiersLength = reader.uInt();
-  const indirectStatModifiers: IndirectStatModifier[] = [];
-  for (let index = 0; index < indirectStatModifiersLength; ++index) {
-    /* Skip indirectStatModifier if is null. */
-    const isNull = reader.boolean();
-    if (isNull) {
-      indirectStatModifiers.push(null);
-      continue;
-    }
-
-    const hash = reader.uInt();
-    const time = reader.uLong();
-
-    /* Get indirect modifier save data array. */
-    const indirectModifiersSaveDataLength = reader.uInt();
-    const indirectModifiersSaveData: IndirectModifierSaveData[] = [];
-    for (let index = 0; index < indirectModifiersSaveDataLength; ++index) {
-      indirectModifiersSaveData.push({
-        valueOverDurationHash: reader.uInt(),
-        baseValue: reader.float(),
-        duration: reader.uInt(),
-        tick: reader.uInt()
+      component.stats.push({
+        hash: reader.uInt(),
+        baseFlat: reader.float()
       });
     }
-
-    indirectStatModifiers.push({
-      hash,
-      time,
-      modifiers: indirectModifiersSaveData
-    });
   }
 
-  return { stats, modifiers, indirectStatModifiers };
+  if (version >= 2) {
+    /* Get modifiers array. */
+    const modifiersLength = reader.uInt();
+    component.modifiers = [];
+    for (let index = 0; index < modifiersLength; ++index) {
+      /* Skip modifier if is null. */
+      const isNull = reader.boolean();
+      if (isNull) {
+        component.modifiers.push(null);
+        continue;
+      }
+
+      component.modifiers.push({
+        hash: reader.uInt(),
+        value: reader.float(),
+        isMultiplier: reader.boolean(),
+        time: reader.uLong()
+      });
+    }
+  }
+
+  if (version >= 2) {
+    /* Get indirect stat modifiers array. */
+    const indirectStatModifiersLength = reader.uInt();
+    component.indirectStatModifiers = [];
+    for (let index = 0; index < indirectStatModifiersLength; ++index) {
+      /* Skip indirectStatModifier if is null. */
+      const isNull = reader.boolean();
+      if (isNull) {
+        component.indirectStatModifiers.push(null);
+        continue;
+      }
+
+      const hash = reader.uInt();
+      const time = reader.uLong();
+
+      /* Get indirect modifier save data array. */
+      const indirectModifiersSaveDataLength = reader.uInt();
+      const indirectModifiersSaveData: IndirectModifierSaveData[] = [];
+      for (let index = 0; index < indirectModifiersSaveDataLength; ++index) {
+        indirectModifiersSaveData.push({
+          valueOverDurationHash: reader.uInt(),
+          baseValue: reader.float(),
+          duration: reader.uInt(),
+          tick: reader.uInt()
+        });
+      }
+
+      component.indirectStatModifiers.push({
+        hash,
+        time,
+        modifiers: indirectModifiersSaveData
+      });
+    }
+  }
+
+  return component;
 };
 
 export const encode = ({ stats = [], modifiers = [], indirectStatModifiers = [] }: StatManager): string => {

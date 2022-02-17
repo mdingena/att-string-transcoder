@@ -8,10 +8,15 @@ export type BasicDecay = {
   timelineEntry?: number;
 };
 
-export const decode = (reader: BinaryReader): BasicDecay => ({
-  isDisabled: reader.boolean(),
-  timelineEntry: reader.uLong()
-});
+export const decode = (reader: BinaryReader, version: number): BasicDecay => {
+  const component: BasicDecay = {};
+
+  if (version >= 3) component.isDisabled = reader.boolean();
+
+  if (version >= 3) component.timelineEntry = reader.uLong();
+
+  return component;
+};
 
 export const encode = ({ isDisabled = true, timelineEntry = HUNDRED_YEARS_TICKS }: BasicDecay): string => {
   const writer = createBinaryWriter();
