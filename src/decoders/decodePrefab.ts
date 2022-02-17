@@ -1,4 +1,4 @@
-import { BinaryReader } from '../utils';
+import { BinaryReader, VersionMap } from '../utils';
 import { decodePrefabObject, PrefabObject } from './decodePrefabObject';
 import { decodeComponents, Components } from './decodeComponents';
 import { decodeEmbeddedEntities, EmbeddedEntities } from './decodeEmbeddedEntities';
@@ -11,11 +11,11 @@ export type PrefabData = {
   childPrefabs?: ChildPrefabs;
 };
 
-export const decodePrefab = (reader: BinaryReader): PrefabData => {
+export const decodePrefab = (reader: BinaryReader, versions: VersionMap): PrefabData => {
   const prefabObject = decodePrefabObject(reader);
-  const components = decodeComponents(reader);
-  const embeddedEntities = decodeEmbeddedEntities(reader);
-  const childPrefabs = decodeChildPrefabs(reader);
+  const components = decodeComponents(reader, versions);
+  const embeddedEntities = decodeEmbeddedEntities(reader, versions);
+  const childPrefabs = decodeChildPrefabs(reader, versions);
 
   return {
     prefabObject,
