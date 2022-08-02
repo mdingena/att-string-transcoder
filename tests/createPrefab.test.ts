@@ -1,4 +1,4 @@
-import { createPrefab, Prefab, NetworkRigidbody, PhysicalMaterialPartHash } from '../src';
+import { createPrefab, Prefab, NetworkRigidbody } from '../src';
 
 const PREFAB = Prefab.Handle_Short;
 
@@ -67,11 +67,11 @@ describe('createPrefab', () => {
     expect(prefabFactory.data.childPrefabs).toStrictEqual([]);
 
     const guardFactory = createPrefab(Prefab.Guard);
-    prefabFactory.useSlot('Slot_PommelType_1', guardFactory);
+    prefabFactory.useSlot('Slot_PommelType_30776', guardFactory);
 
     expect(prefabFactory.data.childPrefabs).toStrictEqual([
       {
-        parentHash: Prefab.Handle_Short.slots.Slot_PommelType_1,
+        parentHash: Prefab.Handle_Short.embedded.Slot_PommelType_30776.hash,
         prefab: guardFactory.data
       }
     ]);

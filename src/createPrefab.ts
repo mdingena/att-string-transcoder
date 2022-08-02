@@ -9,39 +9,47 @@ const VALID_MATERIALS = Object.values(PhysicalMaterialPartHash)
   .filter(key => typeof key === 'string')
   .sort((a, b) => (a < b ? -1 : 1));
 
-const availableSlots = (prefab: Prefab) => {
-  const slots = prefab.slots ?? {};
-  const filteredEntries = Object.entries(slots).filter(([key]) => key.startsWith('Slot_'));
+const availableSlots = <TPrefab extends Prefab>(prefab: TPrefab) => {
+  const slots = Object.entries(prefab.embedded)
+    .filter(([key]) => key.startsWith('Slot_'))
+    .map(([key, entity]) => [key, entity.hash]) as [keyof TPrefab['embedded'], number][];
 
-  return Object.fromEntries(filteredEntries);
+  return Object.fromEntries(slots) as Record<keyof TPrefab['embedded'], number>;
 };
 
 const getPrefabName = (hash: number) =>
   Object.entries(Prefab).find(([_, value]) => value.hash === hash)?.[0] ?? '<Unknown prefab hash>';
 
-type PrefabManager<S> = {
+type PrefabManager<TPrefab extends Prefab, TEmbeddedEntity extends keyof TPrefab['embedded']> = {
   name: string;
   data: PrefabData;
-  slots: { [slotName: string]: number };
-  setPosition: (x: number, y: number, z: number) => PrefabManager<S>;
-  setScale: (scale: number) => PrefabManager<S>;
-  setRotation: (x: number, y: number, z: number, w: number) => PrefabManager<S>;
-  setKinematic: (isKinematic?: boolean) => PrefabManager<S>;
-  setServerSleeping: (isServerSleeping?: boolean) => PrefabManager<S>;
-  setVelocity: (x: number, y: number, z: number) => PrefabManager<S>;
-  setAngularVelocity: (x: number, y: number, z: number) => PrefabManager<S>;
-  setMaterial: (material: keyof typeof PhysicalMaterialPartHash) => PrefabManager<S>;
-  setIntegrity: (integrity: number) => PrefabManager<S>;
-  setServings: (servings: number) => PrefabManager<S>;
-  setOnFire: (isLit?: boolean) => PrefabManager<S>;
-  setGiftBoxLabel: (label: string) => PrefabManager<S>;
-  addGift: <P extends Prefab, C extends keyof P['slots']>(gift: PrefabManager<C>) => PrefabManager<S>;
-  useSlot: <P extends Prefab, C extends keyof P['slots']>(slot: S, childPrefab: PrefabManager<C>) => PrefabManager<S>;
+  slots: Record<keyof TPrefab['embedded'], number>;
+  setPosition: (x: number, y: number, z: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setScale: (scale: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setRotation: (x: number, y: number, z: number, w: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setKinematic: (isKinematic?: boolean) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setServerSleeping: (isServerSleeping?: boolean) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setVelocity: (x: number, y: number, z: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setAngularVelocity: (x: number, y: number, z: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setMaterial: (material: keyof typeof PhysicalMaterialPartHash) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setIntegrity: (integrity: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setServings: (servings: number) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setOnFire: (isLit?: boolean) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  setGiftBoxLabel: (label: string) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  addGift: <TChildEmbeddedEntity extends keyof TPrefab['embedded']>(
+    gift: PrefabManager<TPrefab, TChildEmbeddedEntity>
+  ) => PrefabManager<TPrefab, TEmbeddedEntity>;
+  useSlot: <TChildPrefab extends Prefab, TChildEmbeddedEntity extends keyof TChildPrefab['embedded']>(
+    slotName: TEmbeddedEntity,
+    childPrefab: PrefabManager<TChildPrefab, TChildEmbeddedEntity>
+  ) => PrefabManager<TPrefab, TEmbeddedEntity>;
   toString: () => string;
   print: () => void;
 };
 
-export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefab: P): PrefabManager<S> => ({
+export const createPrefab = <TPrefab extends Prefab, TEmbeddedEntity extends keyof TPrefab['embedded']>(
+  prefab: TPrefab
+): PrefabManager<TPrefab, TEmbeddedEntity> => ({
   name: getPrefabName(prefab.hash),
 
   data: {
@@ -253,12 +261,12 @@ export const createPrefab = <P extends Prefab, S extends keyof P['slots']>(prefa
       throw new Error(`useSlot(slot, prefab) called with invalid arguments.`);
     }
 
-    const slotHash = ((this.slots as P['slots'] | undefined)?.[slotName] ?? 0) as number;
+    const slotHash = (this.slots?.[slotName] ?? 0) as number;
     const validHashes = Object.values(this.slots);
 
     if (slotHash === 0 || !validHashes.includes(slotHash)) {
       throw new Error(
-        `'${slotName}' is not a valid slot on '${this.name}'. ${
+        `'${String(slotName)}' is not a valid slot on '${this.name}'. ${
           validHashes.length
             ? `Valid slot(s): ${Object.keys(this.slots).join(', ')}`
             : 'This prefab has no available slots.'
