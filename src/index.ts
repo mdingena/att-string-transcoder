@@ -48,7 +48,6 @@ export { ComponentHash } from './ComponentHash';
 export { EmbeddedEntityHash } from './EmbeddedEntityHash';
 export { PhysicalMaterialPartHash } from './PhysicalMaterialPartHash';
 export { PopulationDefinitionHash } from './PopulationDefinitionHash';
-export { PrefabEmbeddedEntityHash } from './PrefabEmbeddedEntityHash';
 export { PresetHash } from './PresetHash';
 export { SpeciesHash } from './SpeciesHash';
 
