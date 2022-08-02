@@ -160,7 +160,7 @@ export const guard: PrefabData = {
   },
   childPrefabs: [
     {
-      parentHash: Prefab.Large_Guard_Rectangle.slots.Slot_Large_SwordType,
+      parentHash: Prefab.Large_Guard_Rectangle.embedded.Slot_Large_SwordType_51896,
       prefab: blade
     }
   ]
@@ -193,7 +193,7 @@ export const handle: PrefabData = {
   },
   childPrefabs: [
     {
-      parentHash: Prefab.Handle_Short.slots.Slot_Large_SwordType_Craft_1,
+      parentHash: Prefab.Handle_Short.embedded.Slot_Large_SwordType_Craft_6134,
       prefab: guard
     }
   ]
