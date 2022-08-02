@@ -10,7 +10,8 @@
     "skipLibCheck": true,
     "strict": true,
     "lib": ["es2017"],
-    "target": "es6"
+    "target": "es6",
+    "resolveJsonModule": true
   },
-  "include": ["./src/**/*", "./decodeString.js"]
+  "include": ["./src/**/*", "./scripts/**/*", "./decodeString.js"]
 }
