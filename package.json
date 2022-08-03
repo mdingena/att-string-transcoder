@@ -1,6 +1,6 @@
 {
   "name": "att-string-transcoder",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Trancode integer strings for A Township Tale.",
   "main": "dist/index.js",
   "scripts": {
