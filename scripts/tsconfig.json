@@ -6,11 +6,12 @@
     "declaration": true,
     "declarationMap": false,
     "sourceMap": false,
-    "outDir": "./dist",
+    "outDir": "./build",
     "skipLibCheck": true,
     "strict": true,
     "lib": ["es2017"],
-    "target": "es6"
+    "target": "es6",
+    "resolveJsonModule": true
   },
-  "include": ["./src/**/*", "./decodeString.js"]
+  "include": ["./**/*"]
 }
