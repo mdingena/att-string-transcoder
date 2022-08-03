@@ -194,6 +194,15 @@ const LEAVES = {
   [SpeciesHash.Walnut]: WALNUT_LEAVES
 };
 
+const LEAF_SCALE = {
+  [SpeciesHash.Ash]: 4,
+  [SpeciesHash.Birch]: 4,
+  [SpeciesHash.Oak]: 4,
+  [SpeciesHash.Redwood]: 0.5,
+  [SpeciesHash.Standard]: 4,
+  [SpeciesHash.Walnut]: 4
+};
+
 const compositionMap: CompositionMap = {
   Woodcut_B0_B0: { Top_8056: BRANCHES },
   Woodcut_B0_B0_S15: { Top_53706: BRANCHES, Stick_53710: STICKS },
@@ -297,17 +306,18 @@ const populateSegment = (
 const createChildPrefab = (speciesHash: SpeciesHash, segment: Segment, parentHash: number = 0): ChildPrefab => {
   const [segmentName, connectionMap] = Object.entries(segment)[0] as [SegmentName, Connections];
   const connections = Object.entries(connectionMap);
+  const rotation = randomRotation();
 
   return {
     parentHash,
     prefab: {
       prefabObject: {
         hash: Prefab[segmentName].hash,
-        rotation: randomRotation()
+        rotation
       },
       childPrefabs:
         connections.length === 0
-          ? attachLeafNode(speciesHash)
+          ? attachLeafNode(speciesHash, rotation)
           : connections.map(([embeddedEntity, childSegment]) =>
               // After several hours I can't figure out the proper way to access this object and I cbf anymore.
               createChildPrefab(
@@ -320,7 +330,10 @@ const createChildPrefab = (speciesHash: SpeciesHash, segment: Segment, parentHas
   };
 };
 
-const attachLeafNode = (speciesHash: SpeciesHash): ChildPrefab[] => {
+const attachLeafNode = (
+  speciesHash: SpeciesHash,
+  rotation: { x: number; y: number; z: number; w: number }
+): ChildPrefab[] => {
   const prefab = pickRandom(LEAVES[speciesHash]);
 
   return [
@@ -329,12 +342,13 @@ const attachLeafNode = (speciesHash: SpeciesHash): ChildPrefab[] => {
       prefab: {
         prefabObject: {
           hash: Prefab[prefab].hash,
-          position: {
-            x: 0,
-            y: 0.25,
-            z: 0
+          rotation: {
+            x: -rotation.x,
+            y: -rotation.y,
+            z: -rotation.z,
+            w: -rotation.w
           },
-          scale: 1 + Math.random() * 0.4
+          scale: LEAF_SCALE[speciesHash] + Math.random() * 0.4
         }
       }
     }
