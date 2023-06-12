@@ -11,25 +11,25 @@ const parsedPrefabs = Object.fromEntries(
     infodump.reduce(
       (prefabs, data) => ({
         ...prefabs,
-        [snakeCase(data.Name)]: {
-          hash: data.Hash,
-          name: data.Name,
+        [snakeCase(data.name)]: {
+          hash: data.hash,
+          name: data.name,
           embedded: Object.fromEntries(
             Object.entries(
-              data.Embedded.reduce(
+              data.embedded.reduce(
                 (entities, entity) => ({
                   ...entities,
-                  [`${snakeCase(entity.Name)}_${entity.Hash}`]: {
-                    hash: entity.Hash,
-                    name: entity.Name,
+                  [`${snakeCase(entity.name)}_${entity.hash}`]: {
+                    hash: entity.hash,
+                    name: entity.name,
                     savables: Object.fromEntries(
                       Object.entries(
-                        entity.Savables.reduce(
+                        entity.savables.reduce(
                           (savables, savable) => ({
                             ...savables,
-                            [snakeCase(savable.Name)]: {
-                              hash: savable.Hash,
-                              name: savable.Name
+                            [snakeCase(savable.name)]: {
+                              hash: savable.hash,
+                              name: savable.name
                             }
                           }),
                           {}
@@ -71,5 +71,5 @@ const totalPrefabs = Object.entries({
 
 fs.writeFileSync(
   './src/Prefab.ts',
-  `export const Prefab = ${JSON.stringify(totalPrefabs, null, 2).replace(/"/g, "'")}\n`
+  `export const Prefab = ${JSON.stringify(totalPrefabs, null, 2).replace(/"/g, "'")};\n`
 );

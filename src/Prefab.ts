@@ -16,6 +16,114 @@ export type Prefab = {
 };
 
 export const Prefab = {
+  '(Child_Node)_Climbing_Tower_Teleporter_Node': {
+    'hash': 5078,
+    'name': '(Child Node) Climbing Tower Teleporter Node',
+    'embedded': {
+      '(Child_Node)_Climbing_Tower_Teleporter_Node_56704': {
+        'hash': 56704,
+        'name': '(Child Node) Climbing Tower Teleporter Node',
+        'savables': {
+          'AdditionalStaticContent': {
+            'hash': 1908922854,
+            'name': 'AdditionalStaticContent'
+          },
+          'ClimbingTowerTeleporterNode': {
+            'hash': 392234266,
+            'name': 'ClimbingTowerTeleporterNode'
+          },
+          'LogicBoolSender': {
+            'hash': 1257282635,
+            'name': 'LogicBoolSender'
+          }
+        }
+      },
+      'Visualizer_56774': {
+        'hash': 56774,
+        'name': 'Visualizer',
+        'savables': {
+          'ClimbingTowerProgressionVisualizer': {
+            'hash': 623957243,
+            'name': 'ClimbingTowerProgressionVisualizer'
+          }
+        }
+      }
+    }
+  },
+  '(OriginalRoot_Node)_Climbing_Tower_Teleporter_Node': {
+    'hash': 55446,
+    'name': '(OriginalRoot Node) Climbing Tower Teleporter Node',
+    'embedded': {
+      '(OriginalRoot_Node)_Climbing_Tower_Teleporter_Node_55438': {
+        'hash': 55438,
+        'name': '(OriginalRoot Node) Climbing Tower Teleporter Node',
+        'savables': {
+          'ClimbingTowerTeleporterNode': {
+            'hash': 392234266,
+            'name': 'ClimbingTowerTeleporterNode'
+          },
+          'LogicBoolSender': {
+            'hash': 1257282635,
+            'name': 'LogicBoolSender'
+          }
+        }
+      }
+    }
+  },
+  '(Original_Child_Node)_Climbing_Tower_Teleporter_Node': {
+    'hash': 26916,
+    'name': '(Original Child Node) Climbing Tower Teleporter Node',
+    'embedded': {
+      '(Original_Child_Node)_Climbing_Tower_Teleporter_Node_26908': {
+        'hash': 26908,
+        'name': '(Original Child Node) Climbing Tower Teleporter Node',
+        'savables': {
+          'ClimbingTowerTeleporterNode': {
+            'hash': 392234266,
+            'name': 'ClimbingTowerTeleporterNode'
+          },
+          'LogicBoolSender': {
+            'hash': 1257282635,
+            'name': 'LogicBoolSender'
+          }
+        }
+      }
+    }
+  },
+  '(Root_Node)_Climbing_Tower_Teleporter_Node': {
+    'hash': 7668,
+    'name': '(Root Node) Climbing Tower Teleporter Node',
+    'embedded': {
+      '(Root_Node)_Climbing_Tower_Teleporter_Node_56148': {
+        'hash': 56148,
+        'name': '(Root Node) Climbing Tower Teleporter Node',
+        'savables': {
+          'AdditionalStaticContent': {
+            'hash': 1908922854,
+            'name': 'AdditionalStaticContent'
+          },
+          'ClimbingTowerTeleporterNode': {
+            'hash': 392234266,
+            'name': 'ClimbingTowerTeleporterNode'
+          },
+          'LogicBoolSender': {
+            'hash': 1257282635,
+            'name': 'LogicBoolSender'
+          }
+        }
+      },
+      'Visualizer_56330': {
+        'hash': 56330,
+        'name': 'Visualizer',
+        'savables': {
+          'ClimbingTowerProgressionVisualizer': {
+            'hash': 623957243,
+            'name': 'ClimbingTowerProgressionVisualizer'
+          }
+        }
+      }
+    }
+  },
   'ATM_Coin_Bank': {
     'hash': 9780,
     'name': 'ATM Coin Bank',
@@ -3278,10 +3386,16 @@ export const Prefab = {
         'hash': 59546,
         'name': 'Bramble Obstacle',
         'savables': {}
-      },
-      'Hurting_Bit_59546': {
-        'hash': 59546,
-        'name': 'Hurting Bit',
+      }
+    }
+  },
+  'Bramble_Obstacle_No_Bush': {
+    'hash': 24434,
+    'name': 'Bramble Obstacle No Bush',
+    'embedded': {
+      'Bramble_Obstacle_No_Bush_24428': {
+        'hash': 24428,
+        'name': 'Bramble Obstacle No Bush',
         'savables': {}
       }
     }
@@ -3349,6 +3463,70 @@ export const Prefab = {
         'hash': 40226,
         'name': 'Spawn Content',
         'savables': {}
+      }
+    }
+  },
+  'Breakable_Root_2.5m_Bendy': {
+    'hash': 35896,
+    'name': 'Breakable Root 2.5m Bendy',
+    'embedded': {
+      'Breakable_Root_2.5m_Bendy_35892': {
+        'hash': 35892,
+        'name': 'Breakable Root 2.5m Bendy',
+        'savables': {
+          'StatManager': {
+            'hash': 2563567105,
+            'name': 'StatManager'
+          }
+        }
+      }
+    }
+  },
+  'Breakable_Root_2.5m_Curved': {
+    'hash': 35738,
+    'name': 'Breakable Root 2.5m Curved',
+    'embedded': {
+      'Breakable_Root_2.5m_Curved_35734': {
+        'hash': 35734,
+        'name': 'Breakable Root 2.5m Curved',
+        'savables': {
+          'StatManager': {
+            'hash': 2563567105,
+            'name': 'StatManager'
+          }
+        }
+      }
+    }
+  },
+  'Breakable_Root_2.5m_Straight': {
+    'hash': 34564,
+    'name': 'Breakable Root 2.5m Straight',
+    'embedded': {
+      'Breakable_Root_2.5m_Straight_34560': {
+        'hash': 34560,
+        'name': 'Breakable Root 2.5m Straight',
+        'savables': {
+          'StatManager': {
+            'hash': 2563567105,
+            'name': 'StatManager'
+          }
+        }
+      }
+    }
+  },
+  'Breakable_Root_2.5m_Wavy': {
+    'hash': 36054,
+    'name': 'Breakable Root 2.5m Wavy',
+    'embedded': {
+      'Breakable_Root_2.5m_Wavy_36050': {
+        'hash': 36050,
+        'name': 'Breakable Root 2.5m Wavy',
+        'savables': {
+          'StatManager': {
+            'hash': 2563567105,
+            'name': 'StatManager'
+          }
+        }
       }
     }
   },
@@ -4137,6 +4315,32 @@ export const Prefab = {
       'Buried_Pullup_Bramble_64192': {
         'hash': 64192,
         'name': 'Buried Pullup Bramble',
+        'savables': {
+          'SpawnBuried': {
+            'hash': 654225716,
+            'name': 'SpawnBuried'
+          }
+        }
+      },
+      'PullPickup_51602': {
+        'hash': 51602,
+        'name': 'PullPickup',
+        'savables': {
+          'Pickup': {
+            'hash': 1454441398,
+            'name': 'Pickup'
+          }
+        }
+      }
+    }
+  },
+  'Buried_Pullup_Carrot': {
+    'hash': 59026,
+    'name': 'Buried Pullup Carrot',
+    'embedded': {
+      'Buried_Pullup_Carrot_59022': {
+        'hash': 59022,
+        'name': 'Buried Pullup Carrot',
         'savables': {
           'SpawnBuried': {
             'hash': 654225716,
@@ -6813,6 +7017,32 @@ export const Prefab = {
     'name': 'CircleSpawner_ExplosiveSpike',
     'embedded': {}
   },
+  'Climbing_Tower_Progression_Visualizer': {
+    'hash': 44244,
+    'name': 'Climbing Tower Progression Visualizer',
+    'embedded': {
+      'Climbing_Tower_Progression_Visualizer_43852': {
+        'hash': 43852,
+        'name': 'Climbing Tower Progression Visualizer',
+        'savables': {
+          'ClimbingTowerProgressionVisualizer': {
+            'hash': 623957243,
+            'name': 'ClimbingTowerProgressionVisualizer'
+          }
+        }
+      },
+      'Ruins_Hand_Touch_Activator_20982': {
+        'hash': 20982,
+        'name': 'Ruins Hand Touch Activator',
+        'savables': {
+          'LogicBoolSender': {
+            'hash': 1257282635,
+            'name': 'LogicBoolSender'
+          }
+        }
+      }
+    }
+  },
   'Climbing_Unlock_Orb_Pedestal': {
     'hash': 51594,
     'name': 'Climbing Unlock Orb Pedestal',
@@ -6820,12 +7050,29 @@ export const Prefab = {
       'Climbing_Unlock_Orb_Pedestal_51198': {
         'hash': 51198,
         'name': 'Climbing Unlock Orb Pedestal',
-        'savables': {}
-      },
-      'Hand_Touch_(1)_46540': {
-        'hash': 46540,
-        'name': 'Hand Touch (1)',
         'savables': {
+          'AdditionalStaticContent': {
+            'hash': 1908922854,
+            'name': 'AdditionalStaticContent'
+          }
+        }
+      },
+      'Hand_Touch_46540': {
+        'hash': 46540,
+        'name': 'Hand Touch',
+        'savables': {
+          'AddUnlockToPlayer': {
+            'hash': 1756836969,
+            'name': 'AddUnlockToPlayer'
+          },
+          'ClimbingTowerTeleporterNode': {
+            'hash': 392234266,
+            'name': 'ClimbingTowerTeleporterNode'
+          },
+          'OrbBasinVfxController': {
+            'hash': 715394364,
+            'name': 'OrbBasinVfxController'
+          },
           'PlayerUnlockStation': {
             'hash': 2912807649,
             'name': 'PlayerUnlockStation'
@@ -7163,6 +7410,17 @@ export const Prefab = {
             'name': 'NetworkRigidbody'
           }
         }
+      }
+    }
+  },
+  'Copper_Cluster': {
+    'hash': 20646,
+    'name': 'Copper Cluster',
+    'embedded': {
+      'Copper_Cluster_20644': {
+        'hash': 20644,
+        'name': 'Copper Cluster',
+        'savables': {}
       }
     }
   },
@@ -8076,6 +8334,17 @@ export const Prefab = {
       'scythe_r_jnt_542': {
         'hash': 542,
         'name': 'scythe_r_jnt',
+        'savables': {}
+      }
+    }
+  },
+  'Cube': {
+    'hash': 5262,
+    'name': 'Cube',
+    'embedded': {
+      'Cube_5268': {
+        'hash': 5268,
+        'name': 'Cube',
         'savables': {}
       }
     }
@@ -10632,6 +10901,26 @@ export const Prefab = {
       'Explosion_Boulder_13178': {
         'hash': 13178,
         'name': 'Explosion Boulder',
+        'savables': {
+          'ModifiableAdditionalStaticContent': {
+            'hash': 159391088,
+            'name': 'ModifiableAdditionalStaticContent'
+          },
+          'StatManager': {
+            'hash': 2563567105,
+            'name': 'StatManager'
+          }
+        }
+      }
+    }
+  },
+  'Explosion_Boulder_Large': {
+    'hash': 30854,
+    'name': 'Explosion Boulder Large',
+    'embedded': {
+      'Explosion_Boulder_Large_30852': {
+        'hash': 30852,
+        'name': 'Explosion Boulder Large',
         'savables': {
           'ModifiableAdditionalStaticContent': {
             'hash': 159391088,
@@ -13914,6 +14203,84 @@ export const Prefab = {
       }
     }
   },
+  'Gymnasium_Prefab_Spawner': {
+    'hash': 25312,
+    'name': 'Gymnasium Prefab Spawner',
+    'embedded': {
+      'Gymnasium_Prefab_Spawner_25334': {
+        'hash': 25334,
+        'name': 'Gymnasium Prefab Spawner',
+        'savables': {
+          'GymnasiumOnDemandPrefabSpawner': {
+            'hash': 701033518,
+            'name': 'GymnasiumOnDemandPrefabSpawner'
+          }
+        }
+      },
+      'Spawn_Area_4162': {
+        'hash': 4162,
+        'name': 'Spawn Area',
+        'savables': {
+          'SpawnArea': {
+            'hash': 2617495528,
+            'name': 'SpawnArea'
+          }
+        }
+      }
+    }
+  },
+  'Gymnasium_Teleport_Tablet': {
+    'hash': 2718,
+    'name': 'Gymnasium Teleport Tablet',
+    'embedded': {
+      'Collision_27112': {
+        'hash': 27112,
+        'name': 'Collision',
+        'savables': {}
+      },
+      'Gymnasium_Teleport_Tablet_2062': {
+        'hash': 2062,
+        'name': 'Gymnasium Teleport Tablet',
+        'savables': {}
+      }
+    }
+  },
+  'Gymnasium_Xp_Display_View': {
+    'hash': 57304,
+    'name': 'Gymnasium Xp Display View',
+    'embedded': {
+      'Back_Button_17050': {
+        'hash': 17050,
+        'name': 'Back Button',
+        'savables': {}
+      },
+      'Forward_Button_17050': {
+        'hash': 17050,
+        'name': 'Forward Button',
+        'savables': {}
+      },
+      'Gymnasium_Xp_Display_View_57232': {
+        'hash': 57232,
+        'name': 'Gymnasium Xp Display View',
+        'savables': {}
+      },
+      'Increase_Button_17050': {
+        'hash': 17050,
+        'name': 'Increase Button',
+        'savables': {}
+      },
+      'Increase_Max_Button_17050': {
+        'hash': 17050,
+        'name': 'Increase Max Button',
+        'savables': {}
+      },
+      'Reset_Button_17050': {
+        'hash': 17050,
+        'name': 'Reset Button',
+        'savables': {}
+      }
+    }
+  },
   'Hammer': {
     'hash': 61660,
     'name': 'Hammer',
@@ -16525,6 +16892,182 @@ export const Prefab = {
       }
     }
   },
+  'Hebios_Storage_Chest_Climbing': {
+    'hash': 35078,
+    'name': 'Hebios Storage Chest Climbing',
+    'embedded': {
+      'Bottom_Dock_1_2780': {
+        'hash': 2780,
+        'name': 'Bottom Dock 1',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Bottom_Dock_2_2778': {
+        'hash': 2778,
+        'name': 'Bottom Dock 2',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Bottom_Dock_3_2776': {
+        'hash': 2776,
+        'name': 'Bottom Dock 3',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Bottom_Dock_4_2770': {
+        'hash': 2770,
+        'name': 'Bottom Dock 4',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Bottom_Dock_5_2772': {
+        'hash': 2772,
+        'name': 'Bottom Dock 5',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Bottom_Dock_6_2774': {
+        'hash': 2774,
+        'name': 'Bottom Dock 6',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Handle_Left_23970': {
+        'hash': 23970,
+        'name': 'Handle Left',
+        'savables': {
+          'Pickup': {
+            'hash': 1454441398,
+            'name': 'Pickup'
+          }
+        }
+      },
+      'Handle_Right_23964': {
+        'hash': 23964,
+        'name': 'Handle Right',
+        'savables': {
+          'Pickup': {
+            'hash': 1454441398,
+            'name': 'Pickup'
+          }
+        }
+      },
+      'Hebios_Storage_Chest_Climbing_35076': {
+        'hash': 35076,
+        'name': 'Hebios Storage Chest Climbing',
+        'savables': {
+          'Chest': {
+            'hash': 3598052397,
+            'name': 'Chest'
+          }
+        }
+      },
+      'Lid_2768': {
+        'hash': 2768,
+        'name': 'Lid',
+        'savables': {
+          'NetworkRigidbody': {
+            'hash': 2290978823,
+            'name': 'NetworkRigidbody'
+          }
+        }
+      },
+      'Loot_Module_27674': {
+        'hash': 27674,
+        'name': 'Loot Module',
+        'savables': {
+          'LootModule': {
+            'hash': 634164392,
+            'name': 'LootModule'
+          }
+        }
+      },
+      'Top_Dock_1_2766': {
+        'hash': 2766,
+        'name': 'Top Dock 1',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Top_Dock_2_2764': {
+        'hash': 2764,
+        'name': 'Top Dock 2',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Top_Dock_3_2762': {
+        'hash': 2762,
+        'name': 'Top Dock 3',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Top_Dock_4_2756': {
+        'hash': 2756,
+        'name': 'Top Dock 4',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Top_Dock_5_2758': {
+        'hash': 2758,
+        'name': 'Top Dock 5',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Top_Dock_6_2760': {
+        'hash': 2760,
+        'name': 'Top Dock 6',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      }
+    }
+  },
   'Hebios_Storage_Chest_Gcore': {
     'hash': 31618,
     'name': 'Hebios Storage Chest Gcore',
@@ -17423,6 +17966,17 @@ export const Prefab = {
       }
     }
   },
+  'HolidayRewardDisplay': {
+    'hash': 32158,
+    'name': 'HolidayRewardDisplay',
+    'embedded': {
+      'HolidayRewardDisplay_32140': {
+        'hash': 32140,
+        'name': 'HolidayRewardDisplay',
+        'savables': {}
+      }
+    }
+  },
   'Hot_Coalbed': {
     'hash': 41234,
     'name': 'Hot Coalbed',
@@ -17455,6 +18009,37 @@ export const Prefab = {
       }
     }
   },
+  'Infinite_Fire': {
+    'hash': 5172,
+    'name': 'Infinite Fire',
+    'embedded': {
+      'Fire_8488': {
+        'hash': 8488,
+        'name': 'Fire',
+        'savables': {
+          'Fire': {
+            'hash': 3457519710,
+            'name': 'Fire'
+          }
+        }
+      },
+      'Infinite_Fire_24372': {
+        'hash': 24372,
+        'name': 'Infinite Fire',
+        'savables': {
+          'BasicDecay': {
+            'hash': 3801256786,
+            'name': 'BasicDecay'
+          }
+        }
+      },
+      'Spawner_49628': {
+        'hash': 49628,
+        'name': 'Spawner',
+        'savables': {}
+      }
+    }
+  },
   'Info_Board': {
     'hash': 51114,
     'name': 'Info Board',
@@ -17466,6 +18051,127 @@ export const Prefab = {
           'InfoBoard': {
             'hash': 3431876266,
             'name': 'InfoBoard'
+          }
+        }
+      }
+    }
+  },
+  'Ingredient_Generator_Shelf': {
+    'hash': 51096,
+    'name': 'Ingredient Generator Shelf',
+    'embedded': {
+      'Dock_2780': {
+        'hash': 2780,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58082': {
+        'hash': 58082,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58084': {
+        'hash': 58084,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58086': {
+        'hash': 58086,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58088': {
+        'hash': 58088,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58090': {
+        'hash': 58090,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58092': {
+        'hash': 58092,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58094': {
+        'hash': 58094,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58096': {
+        'hash': 58096,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Dock_58098': {
+        'hash': 58098,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Ingredient_Generator_Shelf_51098': {
+        'hash': 51098,
+        'name': 'Ingredient Generator Shelf',
+        'savables': {}
+      },
+      'Recipe_Dock_60388': {
+        'hash': 60388,
+        'name': 'Recipe Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
           }
         }
       }
@@ -17600,6 +18306,17 @@ export const Prefab = {
       'Spawn_Origin_48914': {
         'hash': 48914,
         'name': 'Spawn Origin',
+        'savables': {}
+      }
+    }
+  },
+  'Iron_Cluster': {
+    'hash': 28272,
+    'name': 'Iron Cluster',
+    'embedded': {
+      'Iron_Cluster_18314': {
+        'hash': 18314,
+        'name': 'Iron Cluster',
         'savables': {}
       }
     }
@@ -19959,7 +20676,7 @@ export const Prefab = {
     }
   },
   'MRK_gate_01': {
-    'hash': 45658,
+    'hash': 3094,
     'name': 'MRK_gate_01',
     'embedded': {
       'MRK_gate_01_42408': {
@@ -25840,6 +26557,17 @@ export const Prefab = {
       }
     }
   },
+  'Quest_Board': {
+    'hash': 57298,
+    'name': 'Quest Board',
+    'embedded': {
+      'Quest_Board_57352': {
+        'hash': 57352,
+        'name': 'Quest Board',
+        'savables': {}
+      }
+    }
+  },
   'Quiver': {
     'hash': 64640,
     'name': 'Quiver',
@@ -26469,6 +27197,20 @@ export const Prefab = {
           }
         }
       },
+      'Quest_Marker_-_Repair_Box_51948': {
+        'hash': 51948,
+        'name': 'Quest Marker - Repair Box',
+        'savables': {
+          'ManualCondition': {
+            'hash': 1268269765,
+            'name': 'ManualCondition'
+          },
+          'RepairableObjectComparisonCondition': {
+            'hash': 1558189723,
+            'name': 'RepairableObjectComparisonCondition'
+          }
+        }
+      },
       'RepairBox_15188': {
         'hash': 15188,
         'name': 'RepairBox',
@@ -26564,6 +27306,20 @@ export const Prefab = {
           }
         }
       },
+      'Quest_Marker_-_Repair_Box_51948': {
+        'hash': 51948,
+        'name': 'Quest Marker - Repair Box',
+        'savables': {
+          'ManualCondition': {
+            'hash': 1268269765,
+            'name': 'ManualCondition'
+          },
+          'RepairableObjectComparisonCondition': {
+            'hash': 1558189723,
+            'name': 'RepairableObjectComparisonCondition'
+          }
+        }
+      },
       'RepairBox_15188': {
         'hash': 15188,
         'name': 'RepairBox',
@@ -26656,6 +27412,20 @@ export const Prefab = {
           'LandmarkDiscoverZone': {
             'hash': 4095875831,
             'name': 'LandmarkDiscoverZone'
+          }
+        }
+      },
+      'Quest_Marker_-_Repair_Box_51948': {
+        'hash': 51948,
+        'name': 'Quest Marker - Repair Box',
+        'savables': {
+          'ManualCondition': {
+            'hash': 1268269765,
+            'name': 'ManualCondition'
+          },
+          'RepairableObjectComparisonCondition': {
+            'hash': 1558189723,
+            'name': 'RepairableObjectComparisonCondition'
           }
         }
       },
@@ -29545,6 +30315,159 @@ export const Prefab = {
       'Smelter_gem_3_item_pedestal_27194': {
         'hash': 27194,
         'name': 'Smelter gem 3 item pedestal',
+        'savables': {}
+      }
+    }
+  },
+  'SnowballMoundSpawner': {
+    'hash': 30542,
+    'name': 'SnowballMoundSpawner',
+    'embedded': {
+      'SnowballMoundSpawner_24412': {
+        'hash': 24412,
+        'name': 'SnowballMoundSpawner',
+        'savables': {
+          'PopulationSpawnArea': {
+            'hash': 3070493599,
+            'name': 'PopulationSpawnArea'
+          },
+          'StatManager': {
+            'hash': 2563567105,
+            'name': 'StatManager'
+          }
+        }
+      }
+    }
+  },
+  'SnowballSpawner': {
+    'hash': 22418,
+    'name': 'SnowballSpawner',
+    'embedded': {
+      'SnowballSpawner_52610': {
+        'hash': 52610,
+        'name': 'SnowballSpawner',
+        'savables': {}
+      },
+      'Spawner_528': {
+        'hash': 528,
+        'name': 'Spawner',
+        'savables': {
+          'LogicBoolReceiver': {
+            'hash': 3751351177,
+            'name': 'LogicBoolReceiver'
+          },
+          'SpawnInCircle': {
+            'hash': 1714180166,
+            'name': 'SpawnInCircle'
+          }
+        }
+      }
+    }
+  },
+  'Snowball_network_Prefab': {
+    'hash': 52090,
+    'name': 'Snowball network Prefab',
+    'embedded': {
+      'Snowball_network_Prefab_36924': {
+        'hash': 36924,
+        'name': 'Snowball network Prefab',
+        'savables': {
+          'NetworkRigidbody': {
+            'hash': 2290978823,
+            'name': 'NetworkRigidbody'
+          },
+          'Pickup': {
+            'hash': 1454441398,
+            'name': 'Pickup'
+          },
+          'PickupDecay': {
+            'hash': 2807522140,
+            'name': 'PickupDecay'
+          }
+        }
+      }
+    }
+  },
+  'Snowman_Network_Prefab_1': {
+    'hash': 57830,
+    'name': 'Snowman Network Prefab 1',
+    'embedded': {
+      'Dock_2780': {
+        'hash': 2780,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Snowman_Network_Prefab_1_25600': {
+        'hash': 25600,
+        'name': 'Snowman Network Prefab 1',
+        'savables': {}
+      }
+    }
+  },
+  'Snowman_Network_Prefab_2': {
+    'hash': 16878,
+    'name': 'Snowman Network Prefab 2',
+    'embedded': {
+      'Dock_2780': {
+        'hash': 2780,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Snowman_Network_Prefab_2_25600': {
+        'hash': 25600,
+        'name': 'Snowman Network Prefab 2',
+        'savables': {}
+      }
+    }
+  },
+  'Snowman_Network_Prefab_3': {
+    'hash': 17612,
+    'name': 'Snowman Network Prefab 3',
+    'embedded': {
+      'Dock_2780': {
+        'hash': 2780,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Snowman_Network_Prefab_3_25600': {
+        'hash': 25600,
+        'name': 'Snowman Network Prefab 3',
+        'savables': {}
+      }
+    }
+  },
+  'Snowman_Network_Prefab_test': {
+    'hash': 25690,
+    'name': 'Snowman Network Prefab test',
+    'embedded': {
+      'Dock_2780': {
+        'hash': 2780,
+        'name': 'Dock',
+        'savables': {
+          'PickupDock': {
+            'hash': 2592242915,
+            'name': 'PickupDock'
+          }
+        }
+      },
+      'Snowman_Network_Prefab_test_25600': {
+        'hash': 25600,
+        'name': 'Snowman Network Prefab test',
         'savables': {}
       }
     }
@@ -40257,10 +41180,18 @@ export const Prefab = {
     'hash': 27482,
     'name': 'ruins_orbBasin_01',
     'embedded': {
-      'Hand_Touch_(1)_46540': {
+      'Hand_Touch_46540': {
         'hash': 46540,
-        'name': 'Hand Touch (1)',
+        'name': 'Hand Touch',
         'savables': {
+          'AddUnlockToPlayer': {
+            'hash': 1756836969,
+            'name': 'AddUnlockToPlayer'
+          },
+          'OrbBasinVfxController': {
+            'hash': 715394364,
+            'name': 'OrbBasinVfxController'
+          },
           'PlayerUnlockStation': {
             'hash': 2912807649,
             'name': 'PlayerUnlockStation'
@@ -40270,7 +41201,80 @@ export const Prefab = {
       'ruins_orbBasin_01_24754': {
         'hash': 24754,
         'name': 'ruins_orbBasin_01',
-        'savables': {}
+        'savables': {
+          'AdditionalStaticContent': {
+            'hash': 1908922854,
+            'name': 'AdditionalStaticContent'
+          }
+        }
+      }
+    }
+  },
+  'ruins_orbBasin_01TEST': {
+    'hash': 58180,
+    'name': 'ruins_orbBasin_01TEST',
+    'embedded': {
+      'Hand_Touch_46540': {
+        'hash': 46540,
+        'name': 'Hand Touch',
+        'savables': {
+          'AddUnlockToPlayer': {
+            'hash': 1756836969,
+            'name': 'AddUnlockToPlayer'
+          },
+          'OrbBasinVfxController': {
+            'hash': 715394364,
+            'name': 'OrbBasinVfxController'
+          },
+          'PlayerUnlockStation': {
+            'hash': 2912807649,
+            'name': 'PlayerUnlockStation'
+          }
+        }
+      },
+      'ruins_orbBasin_01TEST_58178': {
+        'hash': 58178,
+        'name': 'ruins_orbBasin_01TEST',
+        'savables': {
+          'AdditionalStaticContent': {
+            'hash': 1908922854,
+            'name': 'AdditionalStaticContent'
+          }
+        }
+      }
+    }
+  },
+  'ruins_orbBasin_01_Variant': {
+    'hash': 13294,
+    'name': 'ruins_orbBasin_01 Variant',
+    'embedded': {
+      'Hand_Touch_46540': {
+        'hash': 46540,
+        'name': 'Hand Touch',
+        'savables': {
+          'AddUnlockToPlayer': {
+            'hash': 1756836969,
+            'name': 'AddUnlockToPlayer'
+          },
+          'OrbBasinVfxController': {
+            'hash': 715394364,
+            'name': 'OrbBasinVfxController'
+          },
+          'PlayerUnlockStation': {
+            'hash': 2912807649,
+            'name': 'PlayerUnlockStation'
+          }
+        }
+      },
+      'ruins_orbBasin_01_Variant_24754': {
+        'hash': 24754,
+        'name': 'ruins_orbBasin_01 Variant',
+        'savables': {
+          'AdditionalStaticContent': {
+            'hash': 1908922854,
+            'name': 'AdditionalStaticContent'
+          }
+        }
       }
     }
   },
