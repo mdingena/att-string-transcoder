@@ -1,16 +1,25 @@
 {
   "compilerOptions": {
+    "allowJs": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "esModuleInterop": true,
+    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "declaration": true,
-    "declarationMap": false,
-    "sourceMap": false,
-    "outDir": "./dist",
+    "lib": ["ES2022", "DOM"],
+    "module": "ES2022",
+    "moduleResolution": "NodeNext",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "skipLibCheck": true,
+    "sourceMap": false,
     "strict": true,
-    "lib": ["es2017"],
-    "target": "es6"
+    "target": "ES2022"
   },
-  "include": ["./src/**/*", "./decodeString.js"]
+  "include": ["scripts/**/*", "src/**/*"]
 }
