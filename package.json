@@ -30,8 +30,7 @@
     "build:cjs": "tsc -p tsconfig-cjs.json",
     "build:esm": "tsc -p tsconfig-esm.json",
     "postbuild:cjs": "node --loader ts-node/esm ./scripts/postbuild-cjs.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --loader ts-node/esm src/index.ts"
+    "test": "vitest run"
   },
   "engines": {
     "node": ">=14.17.0"
@@ -60,6 +59,7 @@
     "@types/node": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
+    "@vitest/coverage-v8": "^0.32.0",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.3.0",
@@ -70,6 +70,7 @@
     "prettier": "^2.7.1",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vitest": "^0.32.0"
   }
 }
