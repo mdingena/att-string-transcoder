@@ -45,9 +45,8 @@ export class BinaryReader {
    */
   readChar(): string {
     const bits = this.readBits(8);
-    const charCode = new BinaryData(bits).asNumber();
 
-    return String.fromCharCode(charCode);
+    return new BinaryData(bits).asChar();
   }
 
   /**

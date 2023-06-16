@@ -45,6 +45,12 @@ export class BinaryData {
     return Boolean(Number(this.binary));
   }
 
+  asChar(): string {
+    if (this.binary.length !== 8) throw new Error('Char binary string must be 8 bits.');
+
+    return String.fromCharCode(this.asNumber());
+  }
+
   /**
    * Returns the numeric represenation of the binary data.
    */
@@ -105,10 +111,17 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given boolean.
    */
-  static fromBoolean(boolean: boolean) {
+  static fromBoolean(boolean: boolean, options?: BinaryDataOptions): BinaryData {
     const data = Number(boolean).toString();
 
-    return new BinaryData(data);
+    return new BinaryData(data, options);
+  }
+
+  static fromChar(char: string, options?: BinaryDataOptions): BinaryData {
+    const charCode = char.charCodeAt(0);
+    const data = BinaryData.fromNumber(charCode).toString().padStart(8, '0');
+
+    return new BinaryData(data, options);
   }
 
   /**

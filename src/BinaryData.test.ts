@@ -199,6 +199,25 @@ describe('new BinaryData()', () => {
     });
   });
 
+  describe('new BinaryData().asChar()', () => {
+    it('expresses binary as a char', () => {
+      const expectedChar = 'A';
+      const binary = '01000001'; // => expectedChar as a binary boolean
+      const data = new BinaryData(binary);
+
+      expect(data.asChar()).toStrictEqual(expectedChar);
+    });
+
+    describe('when binary data is not exactly eight bits', () => {
+      it('throws an error', () => {
+        const expectedToThrow = () => new BinaryData('01').asChar();
+        const expectedError = new Error('Char binary string must be 8 bits.');
+
+        expect(expectedToThrow).toThrowError(expectedError);
+      });
+    });
+  });
+
   describe('new BinaryData().asFloat()', () => {
     describe('when the binary string is of incorrect length', () => {
       it('throws an error', () => {
