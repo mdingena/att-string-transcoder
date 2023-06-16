@@ -37,6 +37,15 @@ export class BinaryData {
   }
 
   /**
+   * Returns the boolean represenation of the binary data.
+   */
+  asBoolean(): boolean {
+    if (this.binary.length !== 1) throw new Error('Boolean binary string must be 1 bit.');
+
+    return Boolean(Number(this.binary));
+  }
+
+  /**
    * Returns the numeric represenation of the binary data.
    */
   asFloat(): number {
@@ -91,6 +100,15 @@ export class BinaryData {
     if (this.binary.length !== 16) throw new Error('Unsigned short integer binary string must be 16 bits.');
 
     return this.asNumber();
+  }
+
+  /**
+   * Creates a BinaryData instance from the given boolean.
+   */
+  static fromBoolean(boolean: boolean) {
+    const data = Number(boolean).toString();
+
+    return new BinaryData(data);
   }
 
   /**

@@ -7,6 +7,17 @@ const IS_LITTLE_ENDIAN = true;
 const MANTISSA_LENGTH = 23;
 const SIGNED_INTEGER_OFFSET = 2147483648;
 
+describe('BinaryData.fromBoolean()', () => {
+  it('creates a BinaryData instance from a boolean', () => {
+    const expectedBoolean = true;
+    const expectedBinary = '1' as BinaryString; // => expectedBoolean as a binary boolean
+    const data = BinaryData.fromBoolean(expectedBoolean);
+
+    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.asBoolean()).toStrictEqual(expectedBoolean);
+  });
+});
+
 describe('BinaryData.fromFloat()', () => {
   it('creates a BinaryData instance from a floating point number', () => {
     const expectedNumber = 1337.42069;
@@ -166,6 +177,25 @@ describe('new BinaryData()', () => {
       const expectedError = new Error('Binary data string contains invalid characters. Only "0" and "1" are allowed.');
 
       expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('new BinaryData().asBoolean()', () => {
+    it('expresses binary as a boolean', () => {
+      const expectedBoolean = true;
+      const binary = '1'; // => expectedBoolean as a binary boolean
+      const data = new BinaryData(binary);
+
+      expect(data.asBoolean()).toStrictEqual(expectedBoolean);
+    });
+
+    describe('when binary data is not exactly one bit', () => {
+      it('throws an error', () => {
+        const expectedToThrow = () => new BinaryData('01').asBoolean();
+        const expectedError = new Error('Boolean binary string must be 1 bit.');
+
+        expect(expectedToThrow).toThrowError(expectedError);
+      });
     });
   });
 
