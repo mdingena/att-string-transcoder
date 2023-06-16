@@ -37,7 +37,7 @@ export class BinaryReader {
   readBoolean(): boolean {
     const bit = this.readBits(1);
 
-    return Boolean(Number(bit));
+    return new BinaryData(bit).asBoolean();
   }
 
   /**
