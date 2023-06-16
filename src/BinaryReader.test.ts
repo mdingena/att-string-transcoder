@@ -1,6 +1,5 @@
 import type { BinaryString } from './types/BinaryString.js';
 import { BinaryReader } from './BinaryReader.js';
-import { createBinaryWriter } from '../src_v2/utils/createBinaryWriter.js';
 
 describe('new BinaryReader()', () => {
   describe('when given non-binary data', () => {
