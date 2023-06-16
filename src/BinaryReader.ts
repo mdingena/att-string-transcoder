@@ -10,8 +10,9 @@ export class BinaryReader {
    * Creates a reader to extract information from `data` using various read methods.
    */
   constructor(data: string) {
-    if (!BinaryData.isBinary(data))
+    if (!BinaryData.isBinary(data)) {
       throw new Error('Binary data string contains invalid characters. Only "0" and "1" are allowed.');
+    }
 
     this.data = data;
     this.length = data.length;
