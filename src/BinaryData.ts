@@ -1,7 +1,7 @@
 import type { Bit } from 'bitwise/types.js';
 import type { BinaryString } from './types/BinaryString.js';
-import bitwise from 'bitwise';
-import ieee754 from 'ieee754';
+import { integer as bitwiseInteger } from 'bitwise';
+import { read as ieee754Read, write as ieee754Write } from 'ieee754';
 
 export type BinaryDataOptions = {
   signedIntegerOffset?: number;
@@ -203,14 +203,14 @@ export class BinaryData {
     const buffer = Buffer.from(new Uint8Array(4));
     let bits = 0;
 
-    ieee754.write(buffer, number, 0, true, 23, 4);
+    ieee754Write(buffer, number, 0, true, 23, 4);
 
     const integer = buffer.readUInt32LE(0);
 
     for (let i = 0; i < 32; i++) {
-      const bit: Bit = bitwise.integer.getBit(integer, 31 - i);
+      const bit: Bit = bitwiseInteger.getBit(integer, 31 - i);
 
-      bits = bitwise.integer.setBit(bits, 31 - i, bit);
+      bits = bitwiseInteger.setBit(bits, 31 - i, bit);
     }
 
     return bits >>> 0;
@@ -236,6 +236,6 @@ export class BinaryData {
 
     buffer.writeUInt32LE(unsignedInteger);
 
-    return ieee754.read(buffer, bufferOffset, isLittleEndian, mantissaLength, byteLength);
+    return ieee754Read(buffer, bufferOffset, isLittleEndian, mantissaLength, byteLength);
   }
 }
