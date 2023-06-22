@@ -33,28 +33,28 @@ export class BinaryWriter {
    * Writes a boolean into BinaryWriter's internal memory.
    */
   writeBoolean(boolean: boolean): void {
-    this.data += BinaryData.fromBoolean(boolean).toString();
+    this.data += BinaryData.fromBoolean(boolean).toBinaryString();
   }
 
   /**
    * Writes a character into BinaryWriter's internal memory.
    */
   writeChar(char: string): void {
-    this.data += BinaryData.fromChar(char).toString();
+    this.data += BinaryData.fromChar(char).toBinaryString();
   }
 
   /**
    * Writes a floating point number into BinaryWriter's internal memory.
    */
   writeFloat(float: number): void {
-    this.data += BinaryData.fromFloat(float).toString();
+    this.data += BinaryData.fromFloat(float).toBinaryString();
   }
 
   /**
    * Writes a signed integer into BinaryWriter's internal memory.
    */
   writeSignedInteger(signedInteger: number): void {
-    this.data += BinaryData.fromSignedInteger(signedInteger).toString();
+    this.data += BinaryData.fromSignedInteger(signedInteger).toBinaryString();
   }
 
   /**
@@ -105,20 +105,20 @@ export class BinaryWriter {
    * Writes an unsigned integer into BinaryWriter's internal memory.
    */
   writeUnsignedInteger(unsignedInteger: number): void {
-    this.data += BinaryData.fromUnsignedInteger(unsignedInteger).toString();
+    this.data += BinaryData.fromUnsignedInteger(unsignedInteger).toBinaryString();
   }
 
   /**
    * Writes an unsigned long integer into BinaryWriter's internal memory.
    */
   writeUnsignedLong(unsignedLong: number): void {
-    this.data += BinaryData.fromUnsignedLong(unsignedLong).toString();
+    this.data += BinaryData.fromUnsignedLong(unsignedLong).toBinaryString();
   }
 
   /**
    * Writes an unsigned short integer into BinaryWriter's internal memory.
    */
   writeUnsignedShort(unsignedShort: number): void {
-    this.data += BinaryData.fromUnsignedShort(unsignedShort).toString();
+    this.data += BinaryData.fromUnsignedShort(unsignedShort).toBinaryString();
   }
 }

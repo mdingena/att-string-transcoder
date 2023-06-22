@@ -1,5 +1,5 @@
 import type { BinaryString } from './types/BinaryString.js';
-import { BinaryData } from './BinaryData.js';
+import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 
 export class BinaryReader {
   private data: BinaryString;
@@ -34,37 +34,37 @@ export class BinaryReader {
   /**
    * Reads the next bit from the binary string and returns `true` for `"1"` and `false` for `"0"`.
    */
-  readBoolean(): boolean {
+  readBoolean(options?: BinaryDataOptions): boolean {
     const bit = this.readBits(1);
 
-    return new BinaryData(bit).asBoolean();
+    return new BinaryData(bit, options).toBoolean();
   }
 
   /**
    * Reads the next 8 bits from the binary string and returns the reconstructed string character.
    */
-  readChar(): string {
+  readChar(options?: BinaryDataOptions): string {
     const bits = this.readBits(8);
 
-    return new BinaryData(bits).asChar();
+    return new BinaryData(bits, options).toChar();
   }
 
   /**
    * Reads the next 32 bits from the binary string and returns the reconstructed floating point number.
    */
-  readFloat(): number {
+  readFloat(options?: BinaryDataOptions): number {
     const bits = this.readBits(32);
 
-    return new BinaryData(bits).asFloat();
+    return new BinaryData(bits, options).toFloat();
   }
 
   /**
    * Reads the next 32 bits from the binary string and returns the reconstructed signed integer.
    */
-  readSignedInteger(): number {
+  readSignedInteger(options?: BinaryDataOptions): number {
     const bits = this.readBits(32);
 
-    return new BinaryData(bits).asSignedInteger();
+    return new BinaryData(bits, options).toSignedInteger();
   }
 
   /**
@@ -116,27 +116,27 @@ export class BinaryReader {
   /**
    * Reads the next 32 bits from the binary string and returns the reconstructed unsigned integer.
    */
-  readUnsignedInteger(): number {
+  readUnsignedInteger(options?: BinaryDataOptions): number {
     const bits = this.readBits(32);
 
-    return new BinaryData(bits).asUnsignedInteger();
+    return new BinaryData(bits, options).toUnsignedInteger();
   }
 
   /**
    * Reads the next 64 bits from the binary string and returns the reconstructed unsigned long integer.
    */
-  readUnsignedLong(): number {
+  readUnsignedLong(options?: BinaryDataOptions): number {
     const bits = this.readBits(64);
 
-    return new BinaryData(bits).asUnsignedLong();
+    return new BinaryData(bits, options).toUnsignedLong();
   }
 
   /**
    * Reads the next 16 bits from the binary string and returns the reconstructed unsigned short integer.
    */
-  readUnsignedShort(): number {
+  readUnsignedShort(options?: BinaryDataOptions): number {
     const bits = this.readBits(16);
 
-    return new BinaryData(bits).asUnsignedShort();
+    return new BinaryData(bits, options).toUnsignedShort();
   }
 }

@@ -1,5 +1,6 @@
 import type { Bit } from 'bitwise/types.js';
 import type { BinaryString } from './types/BinaryString.js';
+import type { SaveString } from './types/SaveString.js';
 import { integer as bitwiseInteger } from 'bitwise';
 import { read as ieee754Read, write as ieee754Write } from 'ieee754';
 
@@ -37,78 +38,6 @@ export class BinaryData {
   }
 
   /**
-   * Returns the boolean represenation of the binary data.
-   */
-  asBoolean(): boolean {
-    if (this.binary.length !== 1) throw new Error('Boolean binary string must be 1 bit.');
-
-    return Boolean(Number(this.binary));
-  }
-
-  asChar(): string {
-    if (this.binary.length !== 8) throw new Error('Char binary string must be 8 bits.');
-
-    return String.fromCharCode(this.asNumber());
-  }
-
-  /**
-   * Returns the numeric represenation of the binary data.
-   */
-  asFloat(): number {
-    if (this.binary.length !== 32) throw new Error('Floating point number binary string must be 32 bits.');
-
-    const unsignedInteger = this.asUnsignedInteger();
-
-    return BinaryData.unpackFloat(unsignedInteger);
-  }
-
-  /**
-   * Returns the numeric represenation of the binary data.
-   */
-  asNumber(): number {
-    return Number(`0b${this.binary}`);
-  }
-
-  /**
-   * Returns the signed integer representation of the binary data.
-   */
-  asSignedInteger(): number {
-    if (this.binary.length !== 32) throw new Error('Signed integer binary string must be 32 bits.');
-
-    const isPositive = Boolean(Number(this.binary.slice(0, 1)));
-    const integer = Number(`0b0${this.binary.slice(1)}`);
-
-    return isPositive ? integer : integer - this.signedIntegerOffset;
-  }
-
-  /**
-   * Returns the unsigned integer representation of the binary data.
-   */
-  asUnsignedInteger(): number {
-    if (this.binary.length !== 32) throw new Error('Unsigned integer binary string must be 32 bits.');
-
-    return this.asNumber();
-  }
-
-  /**
-   * Returns the unsigned long integer representation of the binary data.
-   */
-  asUnsignedLong(): number {
-    if (this.binary.length !== 64) throw new Error('Unsigned long integer binary string must be 64 bits.');
-
-    return Number(`0b${this.binary.slice(32)}${this.binary.slice(0, 32)}`);
-  }
-
-  /**
-   * Returns the unsigned short integer representation of the binary data.
-   */
-  asUnsignedShort(): number {
-    if (this.binary.length !== 16) throw new Error('Unsigned short integer binary string must be 16 bits.');
-
-    return this.asNumber();
-  }
-
-  /**
    * Creates a BinaryData instance from the given boolean.
    */
   static fromBoolean(boolean: boolean, options?: BinaryDataOptions): BinaryData {
@@ -117,9 +46,12 @@ export class BinaryData {
     return new BinaryData(data, options);
   }
 
+  /**
+   * Creates a BinaryData instance from the given character.
+   */
   static fromChar(char: string, options?: BinaryDataOptions): BinaryData {
     const charCode = char.charCodeAt(0);
-    const data = BinaryData.fromNumber(charCode).toString().padStart(8, '0');
+    const data = BinaryData.fromNumber(charCode).toBinaryString().padStart(8, '0');
 
     return new BinaryData(data, options);
   }
@@ -152,7 +84,7 @@ export class BinaryData {
       : signedInteger + (options?.signedIntegerOffset ?? SIGNED_INTEGER_OFFSET);
 
     const isPositiveBit = Number(isPositive).toString();
-    const integerBits = BinaryData.fromNumber(integer).toString().padStart(32, '0');
+    const integerBits = BinaryData.fromNumber(integer).toBinaryString().padStart(32, '0');
 
     const data = `${isPositiveBit}${integerBits.slice(1)}`;
 
@@ -163,7 +95,18 @@ export class BinaryData {
    * Creates a BinaryData instance from the given unsigned integer.
    */
   static fromUnsignedInteger(unsignedInteger: number, options?: BinaryDataOptions): BinaryData {
-    const binary = BinaryData.fromNumber(unsignedInteger).toString().padStart(32, '0');
+    const binary = BinaryData.fromNumber(unsignedInteger).toBinaryString().padStart(32, '0');
+
+    return new BinaryData(binary, options);
+  }
+
+  /**
+   * Creates a BinaryData instance from the given comma-separated array of unsigned integers.
+   */
+  static fromUnsignedIntegerArray(unsignedIntegerArray: number[], options?: BinaryDataOptions): BinaryData {
+    const binary = unsignedIntegerArray
+      .map(unsignedInteger => BinaryData.fromUnsignedInteger(unsignedInteger, options).toBinaryString())
+      .join('');
 
     return new BinaryData(binary, options);
   }
@@ -172,7 +115,7 @@ export class BinaryData {
    * Creates a BinaryData instance from the given unsigned long integer.
    */
   static fromUnsignedLong(unsignedLong: number, options?: BinaryDataOptions): BinaryData {
-    const binary = BinaryData.fromNumber(unsignedLong).toString().padStart(64, '0');
+    const binary = BinaryData.fromNumber(unsignedLong).toBinaryString().padStart(64, '0');
     const reorderedBinary = `${binary.slice(32)}${binary.slice(0, 32)}`;
 
     return new BinaryData(reorderedBinary, options);
@@ -182,7 +125,7 @@ export class BinaryData {
    * Creates a BinaryData instance from the given unsigned short integer.
    */
   static fromUnsignedShort(unsignedShort: number, options?: BinaryDataOptions): BinaryData {
-    const binary = BinaryData.fromNumber(unsignedShort).toString().padStart(16, '0');
+    const binary = BinaryData.fromNumber(unsignedShort).toBinaryString().padStart(16, '0');
 
     return new BinaryData(binary, options);
   }
@@ -217,10 +160,96 @@ export class BinaryData {
   }
 
   /**
-   * Returns the binary data as a string.
+   * Returns the binary data as a `BinaryString`.
    */
-  toString(): BinaryString {
+  toBinaryString(): BinaryString {
     return this.binary;
+  }
+
+  /**
+   * Returns the boolean represenation of the binary data.
+   */
+  toBoolean(): boolean {
+    if (this.binary.length !== 1) throw new Error('Boolean binary string must be 1 bit.');
+
+    return Boolean(Number(this.binary));
+  }
+
+  /**
+   * Returns the character represenation of the binary data.
+   */
+  toChar(): string {
+    if (this.binary.length !== 8) throw new Error('Char binary string must be 8 bits.');
+
+    return String.fromCharCode(this.toNumber());
+  }
+
+  /**
+   * Returns the numeric represenation of the binary data.
+   */
+  toFloat(): number {
+    if (this.binary.length !== 32) throw new Error('Floating point number binary string must be 32 bits.');
+
+    const unsignedInteger = this.toUnsignedInteger();
+
+    return BinaryData.unpackFloat(unsignedInteger);
+  }
+
+  /**
+   * Returns the numeric represenation of the binary data.
+   */
+  toNumber(): number {
+    return Number(`0b${this.binary}`);
+  }
+
+  /**
+   * Returns the signed integer representation of the binary data.
+   */
+  toSignedInteger(): number {
+    if (this.binary.length !== 32) throw new Error('Signed integer binary string must be 32 bits.');
+
+    const isPositive = Boolean(Number(this.binary.slice(0, 1)));
+    const integer = Number(`0b0${this.binary.slice(1)}`);
+
+    return isPositive ? integer : integer - this.signedIntegerOffset;
+  }
+
+  /**
+   * Returns the unsigned integer representation of the binary data.
+   */
+  toUnsignedInteger(): number {
+    if (this.binary.length !== 32) throw new Error('Unsigned integer binary string must be 32 bits.');
+
+    return this.toNumber();
+  }
+
+  /**
+   * Returns the binary data as a comma-separated array of unsigned integers.
+   */
+  toUnsignedIntegerArray(): number[] {
+    if (this.binary.length % 32 !== 0) throw Error('Bit count must be divisible by 32.');
+
+    const chunks = this.binary.match(/.{32}/g) as RegExpMatchArray;
+
+    return chunks.map(bits => new BinaryData(bits).toUnsignedInteger());
+  }
+
+  /**
+   * Returns the unsigned long integer representation of the binary data.
+   */
+  toUnsignedLong(): number {
+    if (this.binary.length !== 64) throw new Error('Unsigned long integer binary string must be 64 bits.');
+
+    return Number(`0b${this.binary.slice(32)}${this.binary.slice(0, 32)}`);
+  }
+
+  /**
+   * Returns the unsigned short integer representation of the binary data.
+   */
+  toUnsignedShort(): number {
+    if (this.binary.length !== 16) throw new Error('Unsigned short integer binary string must be 16 bits.');
+
+    return this.toNumber();
   }
 
   /**

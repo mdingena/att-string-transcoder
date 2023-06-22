@@ -6,7 +6,7 @@ beforeEach(() => {
   writer = new BinaryWriter();
 });
 
-describe('new BinaryWriter().flush()', () => {
+describe('BinaryWriter.flush()', () => {
   it('returns the accumulated data inside BinaryWriter', () => {
     const flush1 = writer.flush();
     writer.writeBits('0001');
@@ -21,7 +21,7 @@ describe('new BinaryWriter().flush()', () => {
   });
 });
 
-describe('new BinaryWriter().writeBits()', () => {
+describe('BinaryWriter.writeBits()', () => {
   it('stores the bits verbatim as a binary string', () => {
     const bits = '0001001101111111';
     const expectedBinary = bits;
@@ -40,7 +40,7 @@ describe('new BinaryWriter().writeBits()', () => {
   });
 });
 
-describe('new BinaryWriter().writeBoolean()', () => {
+describe('BinaryWriter.writeBoolean()', () => {
   it('stores the boolean as a binary string', () => {
     const boolean = true;
     const expectedBinary = '1';
@@ -50,7 +50,7 @@ describe('new BinaryWriter().writeBoolean()', () => {
   });
 });
 
-describe('new BinaryWriter().writeChar()', () => {
+describe('BinaryWriter.writeChar()', () => {
   it('stores the character as a binary string', () => {
     const char = 'A';
     const expectedBinary = '01000001';
@@ -60,7 +60,7 @@ describe('new BinaryWriter().writeChar()', () => {
   });
 });
 
-describe('new BinaryWriter().writeFloat()', () => {
+describe('BinaryWriter.writeFloat()', () => {
   it('stores the floating point number as a binary string', () => {
     const float = 1337.42069;
     const expectedBinary = '01000100101001110010110101110110';
@@ -70,7 +70,7 @@ describe('new BinaryWriter().writeFloat()', () => {
   });
 });
 
-describe('new BinaryWriter().writeSignedInteger()', () => {
+describe('BinaryWriter.writeSignedInteger()', () => {
   it('stores the signed integer as a binary string', () => {
     const signedInteger = -694201337;
     const expectedBinary = '01010110100111110101010000000111';
@@ -80,7 +80,7 @@ describe('new BinaryWriter().writeSignedInteger()', () => {
   });
 });
 
-describe('new BinaryWriter().writeString()', () => {
+describe('BinaryWriter.writeString()', () => {
   it('stores the string as a binary string', () => {
     const string = 'Hello, world!';
     const expectedBinary =
@@ -115,7 +115,7 @@ describe('new BinaryWriter().writeString()', () => {
   });
 });
 
-describe('new BinaryWriter().writeUnsignedInteger()', () => {
+describe('BinaryWriter.writeUnsignedInteger()', () => {
   it('stores the floating point number as a binary string', () => {
     const unsignedInteger = 133742069;
     const expectedBinary = '00000111111110001011110111110101';
@@ -125,7 +125,7 @@ describe('new BinaryWriter().writeUnsignedInteger()', () => {
   });
 });
 
-describe('new BinaryWriter().writeUnsignedLong()', () => {
+describe('BinaryWriter.writeUnsignedLong()', () => {
   it('stores the floating point number as a binary string', () => {
     const unsignedLong = 133742069;
     const expectedBinary = '0000011111111000101111011111010100000000000000000000000000000000';
@@ -135,7 +135,7 @@ describe('new BinaryWriter().writeUnsignedLong()', () => {
   });
 });
 
-describe('new BinaryWriter().writeUnsignedShort()', () => {
+describe('BinaryWriter.writeUnsignedShort()', () => {
   it('stores the floating point number as a binary string', () => {
     const unsignedShort = 1337;
     const expectedBinary = '0000010100111001';

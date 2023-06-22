@@ -7,14 +7,25 @@ const IS_LITTLE_ENDIAN = true;
 const MANTISSA_LENGTH = 23;
 const SIGNED_INTEGER_OFFSET = 2147483648;
 
+describe('new BinaryData()', () => {
+  describe('when given non-binary data', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('topkek');
+      const expectedError = new Error('Binary data string contains invalid characters. Only "0" and "1" are allowed.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+});
+
 describe('BinaryData.fromBoolean()', () => {
   it('creates a BinaryData instance from a boolean', () => {
     const expectedBoolean = true;
     const expectedBinary = '1' as BinaryString; // => expectedBoolean as a binary boolean
     const data = BinaryData.fromBoolean(expectedBoolean);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asBoolean()).toStrictEqual(expectedBoolean);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toBoolean()).toStrictEqual(expectedBoolean);
   });
 });
 
@@ -24,8 +35,8 @@ describe('BinaryData.fromFloat()', () => {
     const expectedBinary = '01000100101001110010110101110110' as BinaryString; // => expectedNumber as a binary floating point number
     const data = BinaryData.fromFloat(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asFloat()).toBeCloseTo(expectedNumber, 4);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toFloat()).toBeCloseTo(expectedNumber, 4);
   });
 });
 
@@ -35,8 +46,8 @@ describe('BinaryData.fromNumber()', () => {
     const expectedBinary = '10100111001' as BinaryString; // => expectedNumber as a binary number
     const data = BinaryData.fromNumber(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asNumber()).toStrictEqual<number>(expectedNumber);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toNumber()).toStrictEqual<number>(expectedNumber);
   });
 });
 
@@ -46,8 +57,8 @@ describe('BinaryData.fromSignedInteger()', () => {
     const expectedBinary = '10000111111110001011110111110101' as BinaryString; // => expectedNumber as a binary signed integer
     const data = BinaryData.fromSignedInteger(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
   });
 
   it('creates a BinaryData instance from a negative signed integer', () => {
@@ -55,8 +66,8 @@ describe('BinaryData.fromSignedInteger()', () => {
     const expectedBinary = '01010110100111110101010000000111' as BinaryString; // => expectedNumber as a binary signed integer
     const data = BinaryData.fromSignedInteger(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
   });
 
   describe('when an options argument is passed', () => {
@@ -71,8 +82,8 @@ describe('BinaryData.fromSignedInteger()', () => {
       const expectedBinary = '10000111111110001011110111110101' as BinaryString; // => expectedNumber as a binary signed integer
       const data = BinaryData.fromSignedInteger(expectedNumber, options);
 
-      expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-      expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
+      expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+      expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
     });
 
     it('creates a BinaryData instance from a negative signed integer', () => {
@@ -80,8 +91,8 @@ describe('BinaryData.fromSignedInteger()', () => {
       const expectedBinary = '01010110100111110101010000000111' as BinaryString; // => expectedNumber as a binary signed integer
       const data = BinaryData.fromSignedInteger(expectedNumber, options);
 
-      expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-      expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
+      expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+      expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
     });
   });
 });
@@ -92,8 +103,20 @@ describe('BinaryData.fromUnsignedInteger()', () => {
     const expectedBinary = '00000111111110001011110111110101' as BinaryString; // => expectedNumber as a binary unsigned integer
     const data = BinaryData.fromUnsignedInteger(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asUnsignedInteger()).toStrictEqual<number>(expectedNumber);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toUnsignedInteger()).toStrictEqual<number>(expectedNumber);
+  });
+});
+
+describe('BinaryData.fromUnsignedIntegerArray()', () => {
+  it('creates a BinaryData instance from an array of unsigned integers', () => {
+    const expectedNumbers = [1337, 420, 69];
+    const expectedBinary =
+      '000000000000000000000101001110010000000000000000000000011010010000000000000000000000000001000101' as BinaryString; // => expectedNumbers as binary data
+    const data = BinaryData.fromUnsignedIntegerArray(expectedNumbers);
+
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toUnsignedIntegerArray()).toStrictEqual<number[]>(expectedNumbers);
   });
 });
 
@@ -103,8 +126,8 @@ describe('BinaryData.fromUnsignedLong()', () => {
     const expectedBinary = '0000011111111000101111011111010100000000000000000000000000000000' as BinaryString; // => expectedNumber as a binary unsigned long integer
     const data = BinaryData.fromUnsignedLong(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asUnsignedLong()).toStrictEqual<number>(expectedNumber);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toUnsignedLong()).toStrictEqual<number>(expectedNumber);
   });
 });
 
@@ -114,8 +137,8 @@ describe('BinaryData.fromUnsignedShort()', () => {
     const expectedBinary = '0000010100111001' as BinaryString; // => expectedNumber as a binary unsigned short integer
     const data = BinaryData.fromUnsignedShort(expectedNumber);
 
-    expect(data.toString()).toStrictEqual<BinaryString>(expectedBinary);
-    expect(data.asUnsignedShort()).toStrictEqual<number>(expectedNumber);
+    expect(data.toBinaryString()).toStrictEqual<BinaryString>(expectedBinary);
+    expect(data.toUnsignedShort()).toStrictEqual<number>(expectedNumber);
   });
 });
 
@@ -145,6 +168,209 @@ describe('BinaryData.packFloat()', () => {
   });
 });
 
+describe('BinaryData.toBoolean()', () => {
+  it('expresses binary as a boolean', () => {
+    const expectedBoolean = true;
+    const binary = '1'; // => expectedBoolean as a binary boolean
+    const data = new BinaryData(binary);
+
+    expect(data.toBoolean()).toStrictEqual(expectedBoolean);
+  });
+
+  describe('when binary data is not exactly one bit', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('01').toBoolean();
+      const expectedError = new Error('Boolean binary string must be 1 bit.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+});
+
+describe('BinaryData.toChar()', () => {
+  it('expresses binary as a char', () => {
+    const expectedChar = 'A';
+    const binary = '01000001'; // => expectedChar as a binary boolean
+    const data = new BinaryData(binary);
+
+    expect(data.toChar()).toStrictEqual(expectedChar);
+  });
+
+  describe('when binary data is not exactly eight bits', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('01').toChar();
+      const expectedError = new Error('Char binary string must be 8 bits.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+});
+
+describe('BinaryData.toFloat()', () => {
+  describe('when the binary string is of incorrect length', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('0').toFloat();
+      const expectedError = new Error('Floating point number binary string must be 32 bits.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  it('expresses binary as a number', () => {
+    const expectedNumber = 1337.42069;
+    const binary = '01000100101001110010110101110110'; // => expectedNumber as a binary number
+    const data = new BinaryData(binary);
+
+    expect(data.toFloat()).toBeCloseTo(expectedNumber, 4);
+  });
+});
+
+describe('BinaryData.toNumber()', () => {
+  it('expresses binary as a number', () => {
+    const expectedNumber = 1337;
+    const binary = '10100111001'; // => expectedNumber as a binary number
+    const data = new BinaryData(binary);
+
+    expect(data.toNumber()).toStrictEqual<number>(expectedNumber);
+  });
+});
+
+describe('BinaryData.toSignedInteger()', () => {
+  describe('when the binary string is of incorrect length', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('0').toSignedInteger();
+      const expectedError = new Error('Signed integer binary string must be 32 bits.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  it('expresses binary as a positive signed integer', () => {
+    const expectedNumber = 133742069;
+    const binary = '10000111111110001011110111110101'; // => expectedNumber as a binary signed integer
+    const data = new BinaryData(binary);
+
+    expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
+  });
+
+  it('expresses binary as a negative signed integer', () => {
+    const expectedNumber = -694201337;
+    const binary = '01010110100111110101010000000111'; // => expectedNumber as a binary signed integer
+    const data = new BinaryData(binary);
+
+    expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
+  });
+
+  describe('when the constructor options are configured', () => {
+    const options: BinaryDataOptions = {};
+
+    beforeEach(() => {
+      options.signedIntegerOffset = SIGNED_INTEGER_OFFSET;
+    });
+
+    it('expresses binary as a positive signed integer', () => {
+      const expectedNumber = 133742069;
+      const binary = '10000111111110001011110111110101'; // => expectedNumber as a binary signed integer
+      const data = new BinaryData(binary, options);
+
+      expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
+    });
+
+    it('expresses binary as a negative signed integer', () => {
+      const expectedNumber = -694201337;
+      const binary = '01010110100111110101010000000111'; // => expectedNumber as a binary signed integer
+      const data = new BinaryData(binary, options);
+
+      expect(data.toSignedInteger()).toStrictEqual<number>(expectedNumber);
+    });
+  });
+});
+
+describe('BinaryData.toUnsignedInteger()', () => {
+  describe('when the binary string is of incorrect length', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('0').toUnsignedInteger();
+      const expectedError = new Error('Unsigned integer binary string must be 32 bits.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  it('expresses binary as an unsigned integer', () => {
+    const expectedNumber = 133742069;
+    const binary = '00000111111110001011110111110101'; // => expectedNumber as an unsigned integer
+    const data = new BinaryData(binary);
+
+    expect(data.toUnsignedInteger()).toStrictEqual<number>(expectedNumber);
+  });
+});
+
+describe('BinaryData.toUnsignedIntegerArray()', () => {
+  describe('when the binary string is of incorrect length', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('0').toUnsignedIntegerArray();
+      const expectedError = new Error('Bit count must be divisible by 32.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when the binary string is empty', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('').toUnsignedIntegerArray();
+      const expectedError = new Error('Bit count must be divisible by 32.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  it('expresses binary as an unsigned integer', () => {
+    const expectedNumbers = [1337, 420, 69];
+    const binary = '000000000000000000000101001110010000000000000000000000011010010000000000000000000000000001000101'; // => expectedNumbers as binary data
+    const data = new BinaryData(binary);
+
+    expect(data.toUnsignedIntegerArray()).toStrictEqual<number[]>(expectedNumbers);
+  });
+});
+
+describe('BinaryData.toUnsignedLong()', () => {
+  describe('when the binary string is of incorrect length', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('0').toUnsignedLong();
+      const expectedError = new Error('Unsigned long integer binary string must be 64 bits.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  it('expresses binary as an unsigned long integer', () => {
+    const expectedNumber = 133742069;
+    const binary = '0000011111111000101111011111010100000000000000000000000000000000'; // => expectedNumber as an unsigned long integer
+    const data = new BinaryData(binary);
+
+    expect(data.toUnsignedLong()).toStrictEqual<number>(expectedNumber);
+  });
+});
+
+describe('BinaryData.toUnsignedShort()', () => {
+  describe('when the binary string is of incorrect length', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new BinaryData('0').toUnsignedShort();
+      const expectedError = new Error('Unsigned short integer binary string must be 16 bits.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  it('expresses binary as an unsigned short integer', () => {
+    const expectedNumber = 1337;
+    const binary = '0000010100111001'; // => expectedNumber as an unsigned short integer
+    const data = new BinaryData(binary);
+
+    expect(data.toUnsignedShort()).toStrictEqual<number>(expectedNumber);
+  });
+});
+
 describe('BinaryData.unpackFloat()', () => {
   it('converts an IEEE754 integer into a JavaScript number', () => {
     const unpackedFloat = BinaryData.unpackFloat(1151806838);
@@ -166,192 +392,6 @@ describe('BinaryData.unpackFloat()', () => {
       const unpackedFloat = BinaryData.unpackFloat(1151806838, options);
 
       expect(unpackedFloat).toBeCloseTo(1337.42069, 4);
-    });
-  });
-});
-
-describe('new BinaryData()', () => {
-  describe('when given non-binary data', () => {
-    it('throws an error', () => {
-      const expectedToThrow = () => new BinaryData('topkek');
-      const expectedError = new Error('Binary data string contains invalid characters. Only "0" and "1" are allowed.');
-
-      expect(expectedToThrow).toThrowError(expectedError);
-    });
-  });
-
-  describe('new BinaryData().asBoolean()', () => {
-    it('expresses binary as a boolean', () => {
-      const expectedBoolean = true;
-      const binary = '1'; // => expectedBoolean as a binary boolean
-      const data = new BinaryData(binary);
-
-      expect(data.asBoolean()).toStrictEqual(expectedBoolean);
-    });
-
-    describe('when binary data is not exactly one bit', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('01').asBoolean();
-        const expectedError = new Error('Boolean binary string must be 1 bit.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-  });
-
-  describe('new BinaryData().asChar()', () => {
-    it('expresses binary as a char', () => {
-      const expectedChar = 'A';
-      const binary = '01000001'; // => expectedChar as a binary boolean
-      const data = new BinaryData(binary);
-
-      expect(data.asChar()).toStrictEqual(expectedChar);
-    });
-
-    describe('when binary data is not exactly eight bits', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('01').asChar();
-        const expectedError = new Error('Char binary string must be 8 bits.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-  });
-
-  describe('new BinaryData().asFloat()', () => {
-    describe('when the binary string is of incorrect length', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('0').asFloat();
-        const expectedError = new Error('Floating point number binary string must be 32 bits.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-
-    it('expresses binary as a number', () => {
-      const expectedNumber = 1337.42069;
-      const binary = '01000100101001110010110101110110'; // => expectedNumber as a binary number
-      const data = new BinaryData(binary);
-
-      expect(data.asFloat()).toBeCloseTo(expectedNumber, 4);
-    });
-  });
-
-  describe('new BinaryData().asNumber()', () => {
-    it('expresses binary as a number', () => {
-      const expectedNumber = 1337;
-      const binary = '10100111001'; // => expectedNumber as a binary number
-      const data = new BinaryData(binary);
-
-      expect(data.asNumber()).toStrictEqual<number>(expectedNumber);
-    });
-  });
-
-  describe('new BinaryData().asSignedInteger()', () => {
-    describe('when the binary string is of incorrect length', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('0').asSignedInteger();
-        const expectedError = new Error('Signed integer binary string must be 32 bits.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-
-    it('expresses binary as a positive signed integer', () => {
-      const expectedNumber = 133742069;
-      const binary = '10000111111110001011110111110101'; // => expectedNumber as a binary signed integer
-      const data = new BinaryData(binary);
-
-      expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
-    });
-
-    it('expresses binary as a negative signed integer', () => {
-      const expectedNumber = -694201337;
-      const binary = '01010110100111110101010000000111'; // => expectedNumber as a binary signed integer
-      const data = new BinaryData(binary);
-
-      expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
-    });
-
-    describe('when the constructor options are configured', () => {
-      const options: BinaryDataOptions = {};
-
-      beforeEach(() => {
-        options.signedIntegerOffset = SIGNED_INTEGER_OFFSET;
-      });
-
-      it('expresses binary as a positive signed integer', () => {
-        const expectedNumber = 133742069;
-        const binary = '10000111111110001011110111110101'; // => expectedNumber as a binary signed integer
-        const data = new BinaryData(binary, options);
-
-        expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
-      });
-
-      it('expresses binary as a negative signed integer', () => {
-        const expectedNumber = -694201337;
-        const binary = '01010110100111110101010000000111'; // => expectedNumber as a binary signed integer
-        const data = new BinaryData(binary, options);
-
-        expect(data.asSignedInteger()).toStrictEqual<number>(expectedNumber);
-      });
-    });
-  });
-
-  describe('new BinaryData().asUnsignedInteger()', () => {
-    describe('when the binary string is of incorrect length', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('0').asUnsignedInteger();
-        const expectedError = new Error('Unsigned integer binary string must be 32 bits.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-
-    it('expresses binary as an unsigned integer', () => {
-      const expectedNumber = 133742069;
-      const binary = '00000111111110001011110111110101'; // => expectedNumber as an unsigned integer
-      const data = new BinaryData(binary);
-
-      expect(data.asUnsignedInteger()).toStrictEqual<number>(expectedNumber);
-    });
-  });
-
-  describe('new BinaryData().asUnsignedLong()', () => {
-    describe('when the binary string is of incorrect length', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('0').asUnsignedLong();
-        const expectedError = new Error('Unsigned long integer binary string must be 64 bits.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-
-    it('expresses binary as an unsigned long integer', () => {
-      const expectedNumber = 133742069;
-      const binary = '0000011111111000101111011111010100000000000000000000000000000000'; // => expectedNumber as an unsigned long integer
-      const data = new BinaryData(binary);
-
-      expect(data.asUnsignedLong()).toStrictEqual<number>(expectedNumber);
-    });
-  });
-
-  describe('new BinaryData().asUnsignedShort()', () => {
-    describe('when the binary string is of incorrect length', () => {
-      it('throws an error', () => {
-        const expectedToThrow = () => new BinaryData('0').asUnsignedShort();
-        const expectedError = new Error('Unsigned short integer binary string must be 16 bits.');
-
-        expect(expectedToThrow).toThrowError(expectedError);
-      });
-    });
-
-    it('expresses binary as an unsigned short integer', () => {
-      const expectedNumber = 1337;
-      const binary = '0000010100111001'; // => expectedNumber as an unsigned short integer
-      const data = new BinaryData(binary);
-
-      expect(data.asUnsignedShort()).toStrictEqual<number>(expectedNumber);
     });
   });
 });

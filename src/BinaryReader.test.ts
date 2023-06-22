@@ -13,7 +13,7 @@ describe('new BinaryReader()', () => {
   });
 });
 
-describe('new BinaryReader().readBits()', () => {
+describe('BinaryReader.readBits()', () => {
   it('returns the amount of given bits', () => {
     const data = '0001001101111111' as BinaryString;
     const reader = new BinaryReader(data);
@@ -48,7 +48,7 @@ describe('new BinaryReader().readBits()', () => {
   });
 });
 
-describe('new BinaryReader().readBoolean()', () => {
+describe('BinaryReader.readBoolean()', () => {
   it('returns a Boolean', () => {
     const data = '10' as BinaryString;
     const reader = new BinaryReader(data);
@@ -58,7 +58,7 @@ describe('new BinaryReader().readBoolean()', () => {
   });
 });
 
-describe('new BinaryReader().readChar()', () => {
+describe('BinaryReader.readChar()', () => {
   it('returns a single character string', () => {
     const data = '01000001011000100110001101000100' as BinaryString; // "AbcD"
     const reader = new BinaryReader(data);
@@ -70,7 +70,7 @@ describe('new BinaryReader().readChar()', () => {
   });
 });
 
-describe('new BinaryReader().readFloat()', () => {
+describe('BinaryReader.readFloat()', () => {
   it('returns a floating point number', () => {
     const expectedNumber = 1337.42069;
     const data = '01000100101001110010110101110110' as BinaryString; // ~1337.42069
@@ -80,7 +80,7 @@ describe('new BinaryReader().readFloat()', () => {
   });
 });
 
-describe('new BinaryReader().readSignedInteger()', () => {
+describe('BinaryReader.readSignedInteger()', () => {
   it('returns a signed integer', () => {
     const expectedNumber = -694201337;
     const data = '01010110100111110101010000000111' as BinaryString; // -694201337
@@ -90,7 +90,7 @@ describe('new BinaryReader().readSignedInteger()', () => {
   });
 });
 
-describe('new BinaryReader().readString()', () => {
+describe('BinaryReader.readString()', () => {
   it('returns a string', () => {
     const expectedString = 'Hello, world!';
     const data =
@@ -123,7 +123,7 @@ describe('new BinaryReader().readString()', () => {
   });
 });
 
-describe('new BinaryReader().readUnsignedInteger()', () => {
+describe('BinaryReader.readUnsignedInteger()', () => {
   it('returns an unsigned integer', () => {
     const expectedNumber = 133742069;
     const data = '00000111111110001011110111110101' as BinaryString;
@@ -133,7 +133,7 @@ describe('new BinaryReader().readUnsignedInteger()', () => {
   });
 });
 
-describe('new BinaryReader().readUnsignedLong()', () => {
+describe('BinaryReader.readUnsignedLong()', () => {
   it('returns an unsigned integer', () => {
     const expectedNumber = 133742069;
     const data = '0000011111111000101111011111010100000000000000000000000000000000' as BinaryString;
@@ -143,7 +143,7 @@ describe('new BinaryReader().readUnsignedLong()', () => {
   });
 });
 
-describe('new BinaryReader().readUnsignedShort()', () => {
+describe('BinaryReader.readUnsignedShort()', () => {
   it('returns an unsigned integer', () => {
     const expectedNumber = 1337;
     const data = '0000010100111001' as BinaryString;
