@@ -22,7 +22,11 @@ export function readComponents(reader: BinaryReader, versions?: Map<number, numb
     const name = ComponentHash[hash] ?? 'Unknown';
     const version = versions?.get(hash) ?? latestSupportedComponentVersions.get(hash);
 
-    if (typeof version === 'undefined') throw new Error();
+    if (typeof version === 'undefined') {
+      throw new Error(
+        `Could not determine version of "${name}" (${hash}) component. A SaveString with chunk versioning pairs is required to read this data.`
+      );
+    }
 
     const component = readComponent(reader, hash, name, version);
 
