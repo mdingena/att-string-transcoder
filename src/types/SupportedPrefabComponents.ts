@@ -1,0 +1,33 @@
+import type { BasicDecayComponent } from '../components/BasicDecayComponent.js';
+import type { DurabilityModuleComponent } from '../components/DurabilityModuleComponent.js';
+import type { FireComponent } from '../components/FireComponent.js';
+import type { FuseComponent } from '../components/FuseComponent.js';
+import type { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.js';
+import type { LiquidContainerComponent } from '../components/LiquidContainerComponent.js';
+import type { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
+import type { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
+import type { PickupComponent } from '../components/PickupComponent.js';
+import type { PickupDockComponent } from '../components/PickupDockComponent.js';
+import type { PopulationSpawnAreaComponent } from '../components/PopulationSpawnAreaComponent.js';
+import type { SentGiftComponent } from '../components/SentGiftComponent.js';
+import type { SpawnAreaComponent } from '../components/SpawnAreaComponent.js';
+import type { StatManagerComponent } from '../components/StatManagerComponent.js';
+import type { WoodcutTreeComponent } from '../components/WoodcutTreeComponent.js';
+
+export type SupportedPrefabComponents = {
+  BasicDecay?: BasicDecayComponent;
+  DurabilityModule?: DurabilityModuleComponent;
+  Fire?: FireComponent;
+  Fuse?: FuseComponent;
+  HeatSourceBase?: HeatSourceBaseComponent;
+  LiquidContainer?: LiquidContainerComponent;
+  NetworkRigidbody?: NetworkRigidbodyComponent;
+  PhysicalMaterialPart?: PhysicalMaterialPartComponent;
+  Pickup?: PickupComponent;
+  PickupDock?: PickupDockComponent;
+  PopulationSpawnArea?: PopulationSpawnAreaComponent;
+  SentGift?: SentGiftComponent;
+  SpawnArea?: SpawnAreaComponent;
+  StatManager?: StatManagerComponent;
+  WoodcutTree?: WoodcutTreeComponent;
+};
