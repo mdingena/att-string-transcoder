@@ -47,7 +47,7 @@ export type PrefabProps = {
   rotation?: Rotation;
   scale?: number;
   components?: Partial<PrefabComponents>;
-  entities?: PrefabEntities;
+  entities?: Partial<PrefabEntities>;
   children?: PrefabChild[];
 };
 
@@ -144,7 +144,10 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
       ...(components ?? DEFAULTS.components),
       Unknown: [...((components ?? DEFAULTS.components).Unknown ?? [])]
     };
-    this.entities = entities ?? DEFAULTS.entities;
+    this.entities = {
+      ...(entities ?? DEFAULTS.entities),
+      Unknown: [...((entities ?? DEFAULTS.entities).Unknown ?? [])]
+    };
     this.children = children ?? DEFAULTS.children;
   }
 
