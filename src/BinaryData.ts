@@ -140,6 +140,18 @@ export class BinaryData {
   }
 
   /**
+   * Confirms whether `data` is a string of unsigned integers and chunk versioning pairs.
+   */
+  static isSaveString(data: string): data is SaveString {
+    const saveStringPattern = /^[0-9,|]+$/;
+
+    const isValidCharacters = saveStringPattern.test(data);
+    const isValidLastCharacter = data.slice(-1) === ',';
+
+    return isValidCharacters && isValidLastCharacter;
+  }
+
+  /**
    * Converts a JavaScript floating point number into an IEEE754 integer.
    */
   static packFloat(number: number): number {

@@ -160,6 +160,24 @@ describe('BinaryData.isBinaryString()', () => {
   });
 });
 
+describe('BinaryData.isSaveString()', () => {
+  it('asserts that a string with valid binary is a SaveString', () => {
+    const data = '1111,2222,3333,|4,5555,1,6666,2,7777,3,8888,4,';
+    const result = BinaryData.isSaveString(data);
+
+    expect(result).toBe(true);
+    expect(data).toStrictEqual<BinaryString>('1111,2222,3333,|4,5555,1,6666,2,7777,3,8888,4,' as BinaryString);
+  });
+
+  it('asserts that a string with invalid binary is not a SaveString', () => {
+    const data = '1111,2222,3333,|4,5555,1,6666,2,7777,3,8888,4'; // missing trailing comma
+    const result = BinaryData.isBinaryString(data);
+
+    expect(result).toBe(false);
+    expect(data).toStrictEqual<string>('1111,2222,3333,|4,5555,1,6666,2,7777,3,8888,4');
+  });
+});
+
 describe('BinaryData.packFloat()', () => {
   it('converts a JavaScript number into an IEEE754 integer', () => {
     const packedFloat = BinaryData.packFloat(1337.42069);
