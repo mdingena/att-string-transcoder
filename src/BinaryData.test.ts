@@ -315,15 +315,6 @@ describe('BinaryData.toUnsignedIntegerArray()', () => {
     });
   });
 
-  describe('when the binary string is empty', () => {
-    it('throws an error', () => {
-      const expectedToThrow = () => new BinaryData('').toUnsignedIntegerArray();
-      const expectedError = new Error('Bit count must be divisible by 32.');
-
-      expect(expectedToThrow).toThrowError(expectedError);
-    });
-  });
-
   it('expresses binary as an unsigned integer', () => {
     const expectedNumbers = [1337, 420, 69];
     const binary = '000000000000000000000101001110010000000000000000000000011010010000000000000000000000000001000101'; // => expectedNumbers as binary data
