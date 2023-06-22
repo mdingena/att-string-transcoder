@@ -13,7 +13,7 @@ describe('isATTPrefabHash()', () => {
   });
 
   describe('when given an invalid prefab hash', () => {
-    it('returns true', () => {
+    it('returns false', () => {
       const invalidHash = 0;
 
       const result = isATTPrefabHash(invalidHash);

@@ -13,7 +13,7 @@ describe('isATTPrefabName()', () => {
   });
 
   describe('when given an invalid prefab name', () => {
-    it('returns true', () => {
+    it('returns false', () => {
       const invalidName = 'topkek';
 
       const result = isATTPrefabName(invalidName);
