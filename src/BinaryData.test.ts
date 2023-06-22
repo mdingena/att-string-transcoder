@@ -142,10 +142,10 @@ describe('BinaryData.fromUnsignedShort()', () => {
   });
 });
 
-describe('BinaryData.isBinary()', () => {
+describe('BinaryData.isBinaryString()', () => {
   it('asserts that a string with valid binary is a BinaryString', () => {
     const data = '01110110100110101';
-    const result = BinaryData.isBinary(data);
+    const result = BinaryData.isBinaryString(data);
 
     expect(result).toBe(true);
     expect(data).toStrictEqual<BinaryString>('01110110100110101' as BinaryString);
@@ -153,7 +153,7 @@ describe('BinaryData.isBinary()', () => {
 
   it('asserts that a string with invalid binary is not a BinaryString', () => {
     const data = '011abc10110100110101';
-    const result = BinaryData.isBinary(data);
+    const result = BinaryData.isBinaryString(data);
 
     expect(result).toBe(false);
     expect(data).toStrictEqual<string>('011abc10110100110101');

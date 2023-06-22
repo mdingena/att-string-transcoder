@@ -22,7 +22,7 @@ export class BinaryWriter {
    * Writes raw binary data into BinaryWriter's internal memory.
    */
   writeBits(data: string): void {
-    if (!BinaryData.isBinary(data)) {
+    if (!BinaryData.isBinaryString(data)) {
       throw new Error('Binary data string contains invalid characters. Only "0" and "1" are allowed.');
     }
 

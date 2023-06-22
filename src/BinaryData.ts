@@ -29,7 +29,7 @@ export class BinaryData {
    * Creates a data structure from the given binary `data` and lets you express it as other data types.
    */
   constructor(binary: string, options?: BinaryDataOptions) {
-    if (!BinaryData.isBinary(binary)) {
+    if (!BinaryData.isBinaryString(binary)) {
       throw new Error('Binary data string contains invalid characters. Only "0" and "1" are allowed.');
     }
 
@@ -133,7 +133,7 @@ export class BinaryData {
   /**
    * Confirms whether `data` is a string of binary data, i.e. a string of zeroes and ones.
    */
-  static isBinary(data: string): data is BinaryString {
+  static isBinaryString(data: string): data is BinaryString {
     const binaryStringPattern = /^[01]+$/;
 
     return binaryStringPattern.test(data);

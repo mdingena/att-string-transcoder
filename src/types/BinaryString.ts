@@ -1,1 +1,1 @@
-export type BinaryString = string & { 'asserted with isBinaryString utility function': null };
+export type BinaryString = string & { 'asserted with BinaryData.isBinaryString()': null };
