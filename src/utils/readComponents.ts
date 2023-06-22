@@ -9,7 +9,7 @@ import { ComponentHash } from '../types/ComponentHash.js';
 
 type KnownPrefabComponents = Record<string, Component>;
 
-export function readComponents(reader: BinaryReader, versions: Map<number, number>): PrefabComponents {
+export function readComponents(reader: BinaryReader, versions?: Map<number, number>): PrefabComponents {
   const components = Object.assign({} as KnownPrefabComponents, { Unknown: [] } as UnknownPrefabComponents);
 
   const isLooping = true;
@@ -20,7 +20,7 @@ export function readComponents(reader: BinaryReader, versions: Map<number, numbe
     if (hash === terminatorHash) break;
 
     const name = ComponentHash[hash] ?? 'Unknown';
-    const version = versions.get(hash) ?? latestSupportedComponentVersions.get(hash);
+    const version = versions?.get(hash) ?? latestSupportedComponentVersions.get(hash);
 
     if (typeof version === 'undefined') throw new Error();
 
