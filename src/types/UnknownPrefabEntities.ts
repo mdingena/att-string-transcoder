@@ -1,3 +1,3 @@
-import type { Entity } from '../entities/Entity.js';
+import type { UnsupportedEntity } from '../entities/UnsupportedEntity.js';
 
-export type UnknownPrefabEntities = { Unknown: Entity[] };
+export type UnknownPrefabEntities = { Unknown: UnsupportedEntity[] };
