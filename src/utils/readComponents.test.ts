@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import { readComponents } from './readComponents.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
@@ -12,24 +11,7 @@ import { latestSupportedComponentVersions } from '../constants.js';
 const mockedUnknownComponentHash = 1337;
 const mockedUnknownComponentVersion = 42;
 
-vi.mock('../constants.js', async originalImport => {
-  const module = await originalImport();
-
-  return {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    ...module,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    latestSupportedComponentVersions: module.latestSupportedComponentVersions.set(1337, 42) // Mocks are hoisted, can't use top-level variables here.
-  };
-});
-
 describe('readComponents()', () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   describe('when reading components', () => {
     let fastForwardedReader: BinaryReader;
     const firstComponentHash = ComponentHash.NetworkRigidbody;
@@ -66,6 +48,8 @@ describe('readComponents()', () => {
     });
 
     beforeEach(() => {
+      latestSupportedComponentVersions.set(mockedUnknownComponentHash, mockedUnknownComponentVersion);
+
       const saveString = prefab.toSaveString();
       const [dataString] = saveString.split('|');
 
@@ -91,6 +75,10 @@ describe('readComponents()', () => {
       reader.readFloat(); // Parent scale.
 
       fastForwardedReader = reader;
+    });
+
+    afterEach(() => {
+      latestSupportedComponentVersions.delete(mockedUnknownComponentHash);
     });
 
     it('returns PrefabComponents', () => {
@@ -123,6 +111,10 @@ describe('readComponents()', () => {
           mockedUnknownComponentHash,
           undefined
         );
+      });
+
+      afterEach(() => {
+        latestSupportedComponentVersions.delete(mockedUnknownComponentHash);
       });
 
       it('throws an error', () => {
