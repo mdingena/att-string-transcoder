@@ -1,5 +1,5 @@
-import { SupportedPrefabComponents } from './SupportedPrefabComponents.js';
-import { UnknownPrefabComponents } from './UnknownPrefabComponents.js';
-import { UnsupportedPrefabComponents } from './UnsupportedPrefabComponents.js';
+import type { SupportedPrefabComponents } from './SupportedPrefabComponents.js';
+import type { UnknownPrefabComponents } from './UnknownPrefabComponents.js';
+import type { UnsupportedPrefabComponents } from './UnsupportedPrefabComponents.js';
 
 export type PrefabComponents = SupportedPrefabComponents & UnsupportedPrefabComponents & UnknownPrefabComponents;

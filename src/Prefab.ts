@@ -12,7 +12,7 @@ import type { PrefabComponents } from './types/PrefabComponents.js';
 import type { Rotation } from './types/Rotation.js';
 import type { SaveString } from './types/SaveString.js';
 import type { Velocity } from './types/Velocity.js';
-import { BinaryData, BinaryDataOptions } from './BinaryData.js';
+import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 import { BinaryReader } from './BinaryReader.js';
 import { BinaryWriter } from './BinaryWriter.js';
 import * as constants from './constants.js';

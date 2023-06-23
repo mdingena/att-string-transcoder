@@ -19,7 +19,8 @@
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "verbatimModuleSyntax": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "vitest.config.ts"]
 }

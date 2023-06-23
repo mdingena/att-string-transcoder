@@ -1,3 +1,4 @@
+import type { BinaryString } from '../types/BinaryString.js';
 import { readComponent } from './readComponent.js';
 import { Component } from '../components/Component.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
@@ -5,7 +6,6 @@ import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { Prefab } from '../Prefab.js';
-import { BinaryString } from '../types/BinaryString.js';
 import { ComponentHash } from '../types/ComponentHash.js';
 
 describe('readComponent()', () => {
