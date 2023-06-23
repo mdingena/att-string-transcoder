@@ -16,7 +16,7 @@ type BaseEntityProps = {
 };
 
 export type BaseEntityFromBinaryProps = BaseEntityProps & {
-  componentVersions: Map<number, number> | undefined;
+  componentVersions?: Map<number, number> | undefined;
 };
 
 export type EntityProps<T extends EntityComponents> = {
