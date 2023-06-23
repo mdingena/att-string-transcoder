@@ -102,7 +102,7 @@ export class Entity<T extends EntityComponents = EntityComponents> {
   }
 }
 
-function isFromBinaryProps(
+export function isFromBinaryProps(
   props: Map<number, number> | BaseEntityFromBinaryProps | undefined
 ): props is BaseEntityFromBinaryProps {
   return typeof props !== 'undefined' && 'hash' in props;
