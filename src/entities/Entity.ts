@@ -45,7 +45,7 @@ export class Entity<T extends EntityComponents = EntityComponents> {
 
   static fromBinary(reader: BinaryReader, arg?: Map<number, number> | BaseEntityFromBinaryProps): Entity {
     if (!isFromBinaryProps(arg)) {
-      throw new Error('Missing arguments to create base Entity. Did you mean to create a derived Entity instead?');
+      throw new Error('Invalid arguments to create base Entity. Did you mean to create a derived Entity instead?');
     }
 
     const isAlive = reader.readBoolean();
