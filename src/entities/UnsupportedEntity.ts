@@ -1,5 +1,7 @@
 import type { BinaryReader } from '../BinaryReader.js';
-import type { PrefabComponents } from '../types/PrefabComponents.js';
+import type { SupportedPrefabComponents } from '../types/SupportedPrefabComponents.js';
+import type { UnknownPrefabComponents } from '../types/UnknownPrefabComponents.js';
+import type { UnsupportedPrefabComponents } from '../types/UnsupportedPrefabComponents.js';
 import { Entity, type EntityProps, type BaseEntityFromBinaryProps } from './Entity.js';
 
 type UnsupportedEntityProps = {
@@ -8,7 +10,13 @@ type UnsupportedEntityProps = {
 };
 
 export class UnsupportedEntity extends Entity {
-  constructor({ hash, name, isAlive, components }: EntityProps<PrefabComponents> & UnsupportedEntityProps) {
+  constructor({
+    hash,
+    name,
+    isAlive,
+    components
+  }: EntityProps<SupportedPrefabComponents & UnsupportedPrefabComponents & Partial<UnknownPrefabComponents>> &
+    UnsupportedEntityProps) {
     super({ hash, name, isAlive, components: { ...components } });
   }
 
