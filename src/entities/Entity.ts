@@ -15,6 +15,10 @@ type BaseEntityProps = {
   name: string;
 };
 
+export type BaseEntityFromBinaryProps = BaseEntityProps & {
+  componentVersions: Map<number, number> | undefined;
+};
+
 export type EntityProps<T extends EntityComponents> = {
   isAlive: boolean;
   components?: T & Partial<UnknownPrefabComponents>;
@@ -39,11 +43,20 @@ export class Entity<T extends EntityComponents = EntityComponents> {
     };
   }
 
-  static fromBinary(reader: BinaryReader, componentVersions: Map<number, number>, props: BaseEntityProps): Entity {
-    const isAlive = reader.readBoolean();
-    const components = readComponents(reader, componentVersions);
+  static fromBinary(reader: BinaryReader, arg?: Map<number, number> | BaseEntityFromBinaryProps): Entity {
+    if (!isFromBinaryProps(arg)) {
+      throw new Error('Missing arguments to create base Entity. Did you mean to create a derived Entity instead?');
+    }
 
-    return new Entity({ ...props, isAlive, components });
+    const isAlive = reader.readBoolean();
+    const components = readComponents(reader, arg.componentVersions);
+
+    return new Entity({
+      hash: arg.hash,
+      name: arg.name,
+      isAlive,
+      components
+    });
   }
 
   /**
@@ -87,4 +100,10 @@ export class Entity<T extends EntityComponents = EntityComponents> {
      */
     writer.writeBits(data);
   }
+}
+
+function isFromBinaryProps(
+  props: Map<number, number> | BaseEntityFromBinaryProps | undefined
+): props is BaseEntityFromBinaryProps {
+  return typeof props !== 'undefined' && 'hash' in props;
 }
