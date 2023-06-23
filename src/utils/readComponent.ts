@@ -1,7 +1,7 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { Component } from '../components/Component.js';
 import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
-import { supportedComponents } from '../constants.js';
+import { supportedComponents } from '../supportedComponents.js';
 
 export function readComponent(reader: BinaryReader, hash: number, name: string, version: number): Component {
   /* Get the component's data length. */

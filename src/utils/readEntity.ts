@@ -1,7 +1,7 @@
 import type { BinaryReader } from '../BinaryReader.js';
-import { supportedEntities } from '../constants.js';
 import { Entity } from '../entities/Entity.js';
 import { UnsupportedEntity } from '../entities/UnsupportedEntity.js';
+import { supportedEntities } from '../supportedEntities.js';
 
 export function readEntity(
   reader: BinaryReader,

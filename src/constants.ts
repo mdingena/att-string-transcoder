@@ -1,23 +1,5 @@
 import type { ATTPrefabHash } from './types/ATTPrefabHash.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
-import type { SupportedComponent } from './types/SupportedComponent.js';
-import type { SupportedEntity } from './types/SupportedEntity.js';
-import { BasicDecayComponent } from './components/BasicDecayComponent.js';
-import { DurabilityModuleComponent } from './components/DurabilityModuleComponent.js';
-import { FireComponent } from './components/FireComponent.js';
-import { FuseComponent } from './components/FuseComponent.js';
-import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
-import { LiquidContainerComponent } from './components/LiquidContainerComponent.js';
-import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
-import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
-import { PickupComponent } from './components/PickupComponent.js';
-import { PickupDockComponent } from './components/PickupDockComponent.js';
-import { PopulationSpawnAreaComponent } from './components/PopulationSpawnAreaComponent.js';
-import { SentGiftComponent } from './components/SentGiftComponent.js';
-import { SpawnAreaComponent } from './components/SpawnAreaComponent.js';
-import { StatManagerComponent } from './components/StatManagerComponent.js';
-import { WoodcutTreeComponent } from './components/WoodcutTreeComponent.js';
-import { FireEntity } from './entities/FireEntity.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 
 export const attPrefabHashes = Object.values(ATTPrefabs).map(({ hash }) => hash as number);
@@ -197,27 +179,5 @@ export const latestSupportedComponentVersions = new Map([
   [4179293747, 1],
   [4282337604, 1]
 ]);
-
-export const supportedComponents: Record<string, SupportedComponent> = {
-  BasicDecay: BasicDecayComponent,
-  DurabilityModule: DurabilityModuleComponent,
-  Fire: FireComponent,
-  Fuse: FuseComponent,
-  HeatSourceBase: HeatSourceBaseComponent,
-  LiquidContainer: LiquidContainerComponent,
-  NetworkRigidbody: NetworkRigidbodyComponent,
-  PhysicalMaterialPart: PhysicalMaterialPartComponent,
-  Pickup: PickupComponent,
-  PickupDock: PickupDockComponent,
-  PopulationSpawnArea: PopulationSpawnAreaComponent,
-  SentGift: SentGiftComponent,
-  SpawnArea: SpawnAreaComponent,
-  StatManager: StatManagerComponent,
-  WoodcutTree: WoodcutTreeComponent
-};
-
-export const supportedEntities: Record<string, SupportedEntity> = {
-  Fire: FireEntity
-};
 
 export const terminatorHash = 0;
