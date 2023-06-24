@@ -16,6 +16,7 @@ export type { SpawnAreaComponentProps } from './components/SpawnAreaComponent.js
 export type { StatManagerComponentProps } from './components/StatManagerComponent.js';
 export type { UnsupportedComponentProps } from './components/UnsupportedComponent.js';
 export type { WoodcutTreeComponentProps } from './components/WoodcutTreeComponent.js';
+export type { FireEntityComponents } from './entities/FireEntity.js';
 export type { AngularVelocity } from './types/AngularVelocity.js';
 export type { ATTEntityName } from './types/ATTEntityName.js';
 export type { ATTPrefabHash } from './types/ATTPrefabHash.js';
