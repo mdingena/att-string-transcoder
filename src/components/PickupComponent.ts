@@ -88,9 +88,9 @@ export class PickupComponent extends Component {
            * @since v2
            */
           lastPosition: {
-            x: reader.readUnsignedInteger(),
-            y: reader.readUnsignedInteger(),
-            z: reader.readUnsignedInteger()
+            x: reader.readFloat(),
+            y: reader.readFloat(),
+            z: reader.readFloat()
           },
 
           /**
@@ -98,10 +98,10 @@ export class PickupComponent extends Component {
            * @since v2
            */
           lastRotation: {
-            x: reader.readUnsignedInteger(),
-            y: reader.readUnsignedInteger(),
-            z: reader.readUnsignedInteger(),
-            w: reader.readUnsignedInteger()
+            x: reader.readFloat(),
+            y: reader.readFloat(),
+            z: reader.readFloat(),
+            w: reader.readFloat()
           }
         });
       }
@@ -154,18 +154,18 @@ export class PickupComponent extends Component {
            * @property {Position} lastPosition
            * @since v2
            */
-          writer.writeUnsignedInteger(grabPointParameters.lastPosition.x);
-          writer.writeUnsignedInteger(grabPointParameters.lastPosition.y);
-          writer.writeUnsignedInteger(grabPointParameters.lastPosition.z);
+          writer.writeFloat(grabPointParameters.lastPosition.x);
+          writer.writeFloat(grabPointParameters.lastPosition.y);
+          writer.writeFloat(grabPointParameters.lastPosition.z);
 
           /**
            * @property {Rotation} lastRotation
            * @since v2
            */
-          writer.writeUnsignedInteger(grabPointParameters.lastRotation.x);
-          writer.writeUnsignedInteger(grabPointParameters.lastRotation.y);
-          writer.writeUnsignedInteger(grabPointParameters.lastRotation.z);
-          writer.writeUnsignedInteger(grabPointParameters.lastRotation.w);
+          writer.writeFloat(grabPointParameters.lastRotation.x);
+          writer.writeFloat(grabPointParameters.lastRotation.y);
+          writer.writeFloat(grabPointParameters.lastRotation.z);
+          writer.writeFloat(grabPointParameters.lastRotation.w);
         }
       }
     }
