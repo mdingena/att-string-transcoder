@@ -133,7 +133,7 @@ export class LiquidContainerComponent extends Component {
        */
       const isNull = reader.readBoolean();
 
-      if (isNull === null) {
+      if (isNull) {
         props.customData = null;
       } else {
         props.customData = {} as CustomData;
