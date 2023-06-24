@@ -10,7 +10,7 @@ type HeatSourceBaseComponentPropsV1 = {
   time?: number;
 };
 
-type HeatSourceBaseComponentProps = HeatSourceBaseComponentPropsV1;
+export type HeatSourceBaseComponentProps = HeatSourceBaseComponentPropsV1;
 
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 

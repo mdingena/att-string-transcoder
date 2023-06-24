@@ -11,7 +11,7 @@ type WoodcutTreeComponentPropsV3 = {
   speciesHash?: SpeciesHash;
 };
 
-type WoodcutTreeComponentProps = WoodcutTreeComponentPropsV3;
+export type WoodcutTreeComponentProps = WoodcutTreeComponentPropsV3;
 
 export class WoodcutTreeComponent extends Component {
   presetHash: 0 | PresetHash;

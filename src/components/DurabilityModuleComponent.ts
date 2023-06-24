@@ -8,7 +8,7 @@ type DurabilityModuleComponentPropsV1 = {
   integrity?: number;
 };
 
-type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;
+export type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;
 
 export class DurabilityModuleComponent extends Component {
   integrity: number;

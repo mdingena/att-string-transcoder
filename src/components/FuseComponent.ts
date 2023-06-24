@@ -10,7 +10,7 @@ type FuseComponentPropsV1 = {
   currentFuseAmount?: number;
 };
 
-type FuseComponentProps = FuseComponentPropsV1;
+export type FuseComponentProps = FuseComponentPropsV1;
 
 export class FuseComponent extends Component {
   isFinished: boolean;

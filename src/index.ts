@@ -1,4 +1,21 @@
 /* Types */
+export type { BasicDecayComponentProps } from './components/BasicDecayComponent.js';
+export type { ComponentProps } from './components/Component.js';
+export type { DurabilityModuleComponentProps } from './components/DurabilityModuleComponent.js';
+export type { FireComponentProps } from './components/FireComponent.js';
+export type { FuseComponentProps } from './components/FuseComponent.js';
+export type { HeatSourceBaseComponentProps } from './components/HeatSourceBaseComponent.js';
+export type { LiquidContainerComponentProps } from './components/LiquidContainerComponent.js';
+export type { NetworkRigidbodyComponentProps } from './components/NetworkRigidbodyComponent.js';
+export type { PhysicalMaterialPartComponentProps } from './components/PhysicalMaterialPartComponent.js';
+export type { PickupComponentProps } from './components/PickupComponent.js';
+export type { PickupDockComponentProps } from './components/PickupDockComponent.js';
+export type { PopulationSpawnAreaComponentProps } from './components/PopulationSpawnAreaComponent.js';
+export type { SentGiftComponentProps } from './components/SentGiftComponent.js';
+export type { SpawnAreaComponentProps } from './components/SpawnAreaComponent.js';
+export type { StatManagerComponentProps } from './components/StatManagerComponent.js';
+export type { UnsupportedComponentProps } from './components/UnsupportedComponent.js';
+export type { WoodcutTreeComponentProps } from './components/WoodcutTreeComponent.js';
 export type { AngularVelocity } from './types/AngularVelocity.js';
 export type { ATTEntityName } from './types/ATTEntityName.js';
 export type { ATTPrefabHash } from './types/ATTPrefabHash.js';

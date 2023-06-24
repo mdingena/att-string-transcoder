@@ -9,7 +9,7 @@ type PhysicalMaterialPartComponentPropsV1 = {
   materialHash?: number;
 };
 
-type PhysicalMaterialPartComponentProps = PhysicalMaterialPartComponentPropsV1;
+export type PhysicalMaterialPartComponentProps = PhysicalMaterialPartComponentPropsV1;
 
 export class PhysicalMaterialPartComponent extends Component {
   materialHash: number;

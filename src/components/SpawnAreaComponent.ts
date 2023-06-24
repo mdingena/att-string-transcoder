@@ -12,7 +12,7 @@ type SpawnAreaComponentPropsV1 = {
   maxAcceptableAngleDot?: number;
 };
 
-type SpawnAreaComponentProps = SpawnAreaComponentPropsV1;
+export type SpawnAreaComponentProps = SpawnAreaComponentPropsV1;
 
 export class SpawnAreaComponent extends Component {
   size: number;

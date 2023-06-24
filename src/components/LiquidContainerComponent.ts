@@ -36,7 +36,7 @@ type LiquidContainerComponentPropsV1 = {
   customData?: null | CustomData;
 };
 
-type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
+export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
 
 export class LiquidContainerComponent extends Component {
   canAddTo: boolean;

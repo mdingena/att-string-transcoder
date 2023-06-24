@@ -35,7 +35,7 @@ type StatManagerComponentPropsV2 = {
   indirectStatModifiers?: IndirectStatModifier[];
 };
 
-type StatManagerComponentProps = StatManagerComponentPropsV2;
+export type StatManagerComponentProps = StatManagerComponentPropsV2;
 
 export class StatManagerComponent extends Component {
   stats: Stat[];

@@ -9,7 +9,7 @@ type BasicDecayComponentPropsV3 = {
   timelineEntry?: number;
 };
 
-type BasicDecayComponentProps = BasicDecayComponentPropsV3;
+export type BasicDecayComponentProps = BasicDecayComponentPropsV3;
 
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 

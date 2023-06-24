@@ -22,7 +22,7 @@ type PopulationSpawnAreaComponentPropsV2 = {
   isOneOff?: boolean;
 };
 
-type PopulationSpawnAreaComponentProps = PopulationSpawnAreaComponentPropsV2;
+export type PopulationSpawnAreaComponentProps = PopulationSpawnAreaComponentPropsV2;
 
 export class PopulationSpawnAreaComponent extends Component {
   definition: number;

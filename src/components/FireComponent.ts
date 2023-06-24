@@ -8,7 +8,7 @@ type FireComponentPropsV1 = {
   fuelConsumptionProgress?: number;
 };
 
-type FireComponentProps = FireComponentPropsV1;
+export type FireComponentProps = FireComponentPropsV1;
 
 export class FireComponent extends Component {
   fuelConsumptionProgress: number;

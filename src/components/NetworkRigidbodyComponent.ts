@@ -17,7 +17,7 @@ type NetworkRigidbodyComponentPropsV1 = {
   angularVelocity?: AngularVelocity;
 };
 
-type NetworkRigidbodyComponentProps = NetworkRigidbodyComponentPropsV1;
+export type NetworkRigidbodyComponentProps = NetworkRigidbodyComponentPropsV1;
 
 export class NetworkRigidbodyComponent extends Component {
   position: Position;

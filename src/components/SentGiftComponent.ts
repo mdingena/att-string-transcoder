@@ -23,7 +23,7 @@ type SentGiftComponentPropsV1 = {
   senderTag?: SentGiftTag;
 };
 
-type SentGiftComponentProps = SentGiftComponentPropsV1;
+export type SentGiftComponentProps = SentGiftComponentPropsV1;
 
 export class SentGiftComponent extends Component {
   receiverName: string;

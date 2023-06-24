@@ -10,7 +10,7 @@ type PickupDockComponentPropsV2 = {
   childIndex?: number;
 };
 
-type PickupDockComponentProps = PickupDockComponentPropsV2;
+export type PickupDockComponentProps = PickupDockComponentPropsV2;
 
 export class PickupDockComponent extends Component {
   dockedTypeHash: number;
