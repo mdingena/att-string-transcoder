@@ -13,14 +13,12 @@ describe('writeEntities()', () => {
 
   beforeEach(() => {
     prefabEntities = {
-      Fire_30100: new Entity<'Torch'>({
+      Fire_30100: new Entity('Fire_30100', {
         hash: 30100,
-        key: 'Fire_30100',
         isAlive: true
       }),
-      Unknown_23002: new Entity({
+      Unknown_23002: new Entity(secondEntityKey, {
         hash: secondEntityHash,
-        key: secondEntityKey,
         isAlive: false
       })
     };

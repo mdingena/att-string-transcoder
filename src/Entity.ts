@@ -11,19 +11,20 @@ import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
 
-type EntityBaseProps<TPrefabName extends ATTPrefabName> = {
+type EntityKey<TPrefabName extends ATTPrefabName> = 'Unknown' | keyof (typeof ATTPrefabs)[TPrefabName]['embedded'];
+
+type EntityBaseProps = {
   hash?: number;
-  key: 'Unknown' | keyof (typeof ATTPrefabs)[TPrefabName]['embedded'];
 };
 
-type EntityConstructorProps<TPrefabName extends ATTPrefabName> = EntityBaseProps<TPrefabName> & {
+type EntityConstructorProps = EntityBaseProps & {
   isAlive?: boolean;
   components?: SupportedPrefabComponents & UnsupportedPrefabComponents & Partial<UnknownPrefabComponents>;
 };
 
 type EntityFromBinaryProps = {
-  hash: number;
   key: string;
+  hash: number;
   componentVersions?: Map<number, number> | undefined;
 };
 
@@ -33,7 +34,7 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   isAlive: boolean;
   components: PrefabComponents;
 
-  constructor({ hash, key, isAlive, components }: EntityConstructorProps<TPrefabName>) {
+  constructor(key: EntityKey<TPrefabName>, { hash, isAlive, components }: EntityConstructorProps = {}) {
     const resolvedName = key === 'Unknown' ? String(key) : String(key).split('_').slice(0, -1).join('_');
     const resolvedHash = resolvedName === 'Unknown' ? hash : Number(String(key).split('_').slice(-1));
 
@@ -55,14 +56,13 @@ export class Entity<TPrefabName extends ATTPrefabName> {
    */
   static fromBinary<TPrefabName extends ATTPrefabName>(
     reader: BinaryReader,
-    { hash, key, componentVersions }: EntityFromBinaryProps
+    { key, hash, componentVersions }: EntityFromBinaryProps
   ): Entity<TPrefabName> {
     const isAlive = reader.readBoolean();
     const components = readComponents(reader, componentVersions);
 
-    return new Entity({
+    return new Entity(key as keyof (typeof ATTPrefabs)[ATTPrefabName]['embedded'], {
       hash,
-      key: key as keyof (typeof ATTPrefabs)[ATTPrefabName]['embedded'],
       isAlive,
       components
     });

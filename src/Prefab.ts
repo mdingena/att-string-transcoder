@@ -657,9 +657,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
       const version = currentFireEntity?.components.HeatSourceBase?.version ?? FALLBACK_HEAT_SOURCE_BASE_VERSION;
       const key = `${validFireEntity.name}_${validFireEntity.hash}`;
 
-      this.entities[key] = new Entity<TPrefabName>({
+      this.entities[key] = new Entity<TPrefabName>(key as keyof (typeof ATTPrefabs)[TPrefabName]['embedded'], {
         hash: validFireEntity.hash,
-        key: key as keyof (typeof ATTPrefabs)[TPrefabName]['embedded'],
         isAlive: true,
         components: {
           ...currentFireEntity?.components,

@@ -13,9 +13,7 @@ describe('new Entity()', () => {
       const entityHash = 30100;
       const entityName = 'Fire';
 
-      const entity = new Entity<typeof prefabName>({
-        key: `${entityName}_${entityHash}`
-      });
+      const entity = new Entity<typeof prefabName>(`${entityName}_${entityHash}`);
 
       expect(entity.hash).toStrictEqual(entityHash);
       expect(entity.name).toStrictEqual(entityName);
@@ -31,9 +29,8 @@ describe('new Entity()', () => {
       const entityName = 'Fire';
       const entityIsAlive = true;
 
-      const entity = new Entity<typeof prefabName>({
+      const entity = new Entity<typeof prefabName>(`${entityName}_${entityHash}`, {
         hash: entityHash,
-        key: `${entityName}_${entityHash}`,
         isAlive: entityIsAlive,
         components: {
           HeatSourceBase: new HeatSourceBaseComponent({
@@ -60,7 +57,7 @@ describe('new Entity()', () => {
 
   describe('when given an "Unknown" key and no additional hash property', () => {
     it('throws an error', () => {
-      const expectedToThrow = () => new Entity({ key: 'Unknown' });
+      const expectedToThrow = () => new Entity('Unknown');
       const expectedError = new Error('You must manually pass an entity hash when instantiating an "Unknown" Entity.');
 
       expect(expectedToThrow).toThrowError(expectedError);
@@ -75,9 +72,8 @@ describe('Entity.fromBinary()', () => {
   const entityName = 'Fire';
   const prefab = new Prefab(prefabName, {
     entities: {
-      Fire: new Entity<typeof prefabName>({
+      Fire: new Entity<typeof prefabName>(`${entityName}_${entityHash}`, {
         hash: entityHash,
-        key: `${entityName}_${entityHash}`,
         isAlive: false,
         components: {
           HeatSourceBase: new HeatSourceBaseComponent({
@@ -123,7 +119,7 @@ describe('Entity.fromBinary()', () => {
 
   describe('when given required EntityFromBinaryProps', () => {
     it('creates an instance of the Entity class using the given BinaryReader', () => {
-      const props = { hash: entityHash, key: `${entityName}_${entityHash}` };
+      const props = { key: `${entityName}_${entityHash}`, hash: entityHash };
       const entity = Entity.fromBinary(fastForwardedReader, props);
 
       expect(entity).toBeInstanceOf(Entity);
@@ -136,7 +132,7 @@ describe('Entity.fromBinary()', () => {
   describe('when given additional EntityFromBinaryProps', () => {
     it('creates an instance of the Entity class using the given BinaryReader', () => {
       const componentVersions = new Map<number, number>([[4109360768, 1]]);
-      const props = { hash: entityHash, key: `${entityName}_${entityHash}`, componentVersions };
+      const props = { key: `${entityName}_${entityHash}`, hash: entityHash, componentVersions };
       const entity = Entity.fromBinary(fastForwardedReader, props);
 
       expect(entity).toBeInstanceOf(Entity);
@@ -164,9 +160,8 @@ describe('Entity.toBinary()', () => {
     const componentHash = ComponentHash.HeatSourceBase;
     const componentVersion = 1;
 
-    const entity = new Entity<typeof prefabName>({
+    const entity = new Entity<typeof prefabName>(`${entityName}_${entityHash}`, {
       hash: entityHash,
-      key: `${entityName}_${entityHash}`,
       isAlive: entityIsAlive,
       components: {
         HeatSourceBase: new HeatSourceBaseComponent({
@@ -193,9 +188,8 @@ describe('Entity.write()', () => {
     const entityName = 'Fire';
     const entityIsAlive = true;
 
-    const entity = new Entity<typeof prefabName>({
+    const entity = new Entity<typeof prefabName>(`${entityName}_${entityHash}`, {
       hash: entityHash,
-      key: `${entityName}_${entityHash}`,
       isAlive: entityIsAlive
     });
 

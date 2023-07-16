@@ -15,14 +15,12 @@ describe('readEntities()', () => {
     const prefabName = 'Handle_Short';
     const prefab = new Prefab(prefabName, {
       entities: {
-        Slot_Multi_6136: new Entity<typeof prefabName>({
+        Slot_Multi_6136: new Entity<typeof prefabName>(`${firstEntityName}_${firstEntityHash}`, {
           hash: firstEntityHash,
-          key: `${firstEntityName}_${firstEntityHash}`,
           isAlive: true
         }),
-        Unknown_23002: new Entity({
+        Unknown_23002: new Entity(secondEntityName, {
           hash: secondEntityHash,
-          key: secondEntityName,
           isAlive: false
         })
       }
