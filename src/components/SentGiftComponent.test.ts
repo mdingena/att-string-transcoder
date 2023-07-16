@@ -1,9 +1,10 @@
-import { SentGiftComponent, type SentGiftComponentProps } from './SentGiftComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { SentGiftComponent, type SentGiftComponentProps } from './SentGiftComponent.js';
 
 const componentHash = ComponentHash.SentGift;
 const componentName = 'SentGift';

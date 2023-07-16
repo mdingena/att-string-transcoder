@@ -1,5 +1,6 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { BinaryString } from '../types/BinaryString.js';
+
 import { Component, type ComponentProps } from './Component.js';
 
 export type UnsupportedComponentProps = {

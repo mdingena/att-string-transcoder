@@ -11,6 +11,7 @@ import type { PrefabEntities } from './types/PrefabEntities.js';
 import type { Rotation } from './types/Rotation.js';
 import type { SaveString } from './types/SaveString.js';
 import type { Velocity } from './types/Velocity.js';
+
 import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 import { BinaryReader } from './BinaryReader.js';
 import { BinaryWriter } from './BinaryWriter.js';

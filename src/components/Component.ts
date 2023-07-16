@@ -1,5 +1,6 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { BinaryString } from '../types/BinaryString.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
 
 type BaseComponentProps = {

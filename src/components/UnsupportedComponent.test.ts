@@ -1,10 +1,12 @@
 import type { BinaryString } from '../types/BinaryString.js';
-import { UnsupportedComponent } from './UnsupportedComponent.js';
+
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { UnsupportedComponent } from './UnsupportedComponent.js';
 
 describe('new UnsupportedComponent()', () => {
   describe('when given the required props', () => {

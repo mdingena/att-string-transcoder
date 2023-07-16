@@ -1,4 +1,5 @@
 import { ATTPrefabs } from '../types/ATTPrefabs.js';
+
 import { isATTPrefabHash } from './isATTPrefabHash.js';
 
 describe('isATTPrefabHash()', () => {

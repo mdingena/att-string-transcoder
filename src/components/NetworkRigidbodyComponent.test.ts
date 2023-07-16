@@ -1,9 +1,10 @@
-import { NetworkRigidbodyComponent } from './NetworkRigidbodyComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { NetworkRigidbodyComponent } from './NetworkRigidbodyComponent.js';
 
 const componentHash = ComponentHash.NetworkRigidbody;
 const componentName = 'NetworkRigidbody';

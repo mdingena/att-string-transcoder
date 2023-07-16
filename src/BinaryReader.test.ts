@@ -1,4 +1,5 @@
 import type { BinaryString } from './types/BinaryString.js';
+
 import { BinaryReader } from './BinaryReader.js';
 
 describe('new BinaryReader()', () => {

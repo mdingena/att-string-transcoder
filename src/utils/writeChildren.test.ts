@@ -1,6 +1,8 @@
 import type { PrefabChild } from '../types/PrefabChild.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
+
 import { writeChildren } from './writeChildren.js';
 
 describe('writeChildren()', () => {

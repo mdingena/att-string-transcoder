@@ -1,10 +1,11 @@
-import { WoodcutTreeComponent } from './WoodcutTreeComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
 import { SpeciesHash } from '../types/SpeciesHash.js';
+
+import { WoodcutTreeComponent } from './WoodcutTreeComponent.js';
 
 const componentHash = ComponentHash.WoodcutTree;
 const componentName = 'WoodcutTree';

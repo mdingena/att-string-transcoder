@@ -1,10 +1,12 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { BinaryString } from '../types/BinaryString.js';
 import type { PresetHash } from '../types/PresetHash.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
-import { Component, type ComponentProps } from './Component.js';
 import { ComponentHash } from '../types/ComponentHash.js';
 import { SpeciesHash } from '../types/SpeciesHash.js';
+
+import { Component, type ComponentProps } from './Component.js';
 
 type WoodcutTreeComponentPropsV3 = {
   presetHash?: 0 | PresetHash;

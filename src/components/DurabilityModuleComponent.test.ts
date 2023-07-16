@@ -1,9 +1,10 @@
-import { DurabilityModuleComponent } from './DurabilityModuleComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { DurabilityModuleComponent } from './DurabilityModuleComponent.js';
 
 const componentHash = ComponentHash.DurabilityModule;
 const componentName = 'DurabilityModule';

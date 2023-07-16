@@ -1,4 +1,5 @@
 import { ATTPrefabs } from '../types/ATTPrefabs.js';
+
 import { isSavableComponent } from './isSavableComponent.js';
 
 describe('isSavableComponent()', () => {

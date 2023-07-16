@@ -2,10 +2,12 @@ import type { BinaryReader } from '../BinaryReader.js';
 import type { Component } from '../components/Component.js';
 import type { PrefabComponents } from '../types/PrefabComponents.js';
 import type { UnknownPrefabComponents } from '../types/UnknownPrefabComponents.js';
-import { readComponent } from './readComponent.js';
-import { isUnknownComponent } from './isUnknownComponent.js';
+
 import { latestSupportedComponentVersions, terminatorHash } from '../constants.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { isUnknownComponent } from './isUnknownComponent.js';
+import { readComponent } from './readComponent.js';
 
 type KnownPrefabComponents = Record<string, Component>;
 

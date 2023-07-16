@@ -1,9 +1,10 @@
-import { StatManagerComponent, type StatManagerComponentProps } from './StatManagerComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { StatManagerComponent, type StatManagerComponentProps } from './StatManagerComponent.js';
 
 const componentHash = ComponentHash.StatManager;
 const componentName = 'StatManager';

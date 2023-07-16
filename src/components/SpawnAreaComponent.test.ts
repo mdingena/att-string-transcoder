@@ -1,9 +1,10 @@
-import { SpawnAreaComponent } from './SpawnAreaComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { SpawnAreaComponent } from './SpawnAreaComponent.js';
 
 const componentHash = ComponentHash.SpawnArea;
 const componentName = 'SpawnArea';

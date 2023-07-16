@@ -1,8 +1,9 @@
-import { Component } from './Component.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
+
+import { Component } from './Component.js';
 
 describe('new Component()', () => {
   describe('when given the required props', () => {

@@ -1,5 +1,6 @@
 import { Component } from '../components/Component.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
+
 import { isUnknownComponent } from './isUnknownComponent.js';
 
 describe('isUnknownComponent()', () => {

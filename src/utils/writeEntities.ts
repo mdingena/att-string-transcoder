@@ -1,6 +1,7 @@
 import type { BinaryWriter } from '../BinaryWriter.js';
 import type { ATTPrefabName } from '../types/ATTPrefabName.js';
 import type { PrefabEntities } from '../types/PrefabEntities.js';
+
 import { terminatorHash } from '../constants.js';
 
 export function writeEntities<TPrefabName extends ATTPrefabName>(

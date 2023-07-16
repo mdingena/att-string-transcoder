@@ -1,7 +1,9 @@
 import type { PrefabChild } from '../types/PrefabChild.js';
+
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { Prefab } from '../Prefab.js';
+
 import { readChildren } from './readChildren.js';
 
 describe('readChildren()', () => {

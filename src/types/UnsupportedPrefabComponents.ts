@@ -1,6 +1,6 @@
 import type { ComponentHash } from './ComponentHash.js';
-import type { UnsupportedComponent } from '../components/UnsupportedComponent.js';
 import type { SupportedPrefabComponents } from './SupportedPrefabComponents.js';
+import type { UnsupportedComponent } from '../components/UnsupportedComponent.js';
 
 type ComponentName = keyof typeof ComponentHash;
 

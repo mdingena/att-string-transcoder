@@ -1,12 +1,13 @@
-import {
-  PopulationSpawnAreaComponent,
-  type PopulationSpawnAreaComponentProps
-} from './PopulationSpawnAreaComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import {
+  PopulationSpawnAreaComponent,
+  type PopulationSpawnAreaComponentProps
+} from './PopulationSpawnAreaComponent.js';
 
 const componentHash = ComponentHash.PopulationSpawnArea;
 const componentName = 'PopulationSpawnArea';

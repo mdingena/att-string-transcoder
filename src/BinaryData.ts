@@ -1,6 +1,7 @@
-import type { Bit } from 'bitwise/types.js';
 import type { BinaryString } from './types/BinaryString.js';
 import type { SaveString } from './types/SaveString.js';
+import type { Bit } from 'bitwise/types.js';
+
 import { integer as bitwiseInteger } from 'bitwise';
 import { read as ieee754Read, write as ieee754Write } from 'ieee754';
 

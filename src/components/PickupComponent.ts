@@ -2,9 +2,11 @@ import type { BinaryReader } from '../BinaryReader.js';
 import type { BinaryString } from '../types/BinaryString.js';
 import type { Position } from '../types/Position.js';
 import type { Rotation } from '../types/Rotation.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
-import { Component, type ComponentProps } from './Component.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { Component, type ComponentProps } from './Component.js';
 
 type GrabPointParameters = null | {
   grabPointIndex: number;

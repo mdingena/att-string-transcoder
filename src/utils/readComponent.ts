@@ -1,5 +1,6 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { Component } from '../components/Component.js';
+
 import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
 import { supportedComponents } from '../supportedComponents.js';
 

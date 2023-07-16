@@ -1,6 +1,8 @@
 import type { PrefabEntities } from '../types/PrefabEntities.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Entity } from '../Entity.js';
+
 import { writeEntities } from './writeEntities.js';
 
 describe('writeEntities()', () => {

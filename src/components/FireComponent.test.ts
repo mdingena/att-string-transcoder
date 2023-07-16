@@ -1,9 +1,10 @@
-import { FireComponent } from './FireComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { FireComponent } from './FireComponent.js';
 
 const componentHash = ComponentHash.Fire;
 const componentName = 'Fire';

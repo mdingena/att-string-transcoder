@@ -1,4 +1,5 @@
 import type { SupportedComponent } from './types/SupportedComponent.js';
+
 import { BasicDecayComponent } from './components/BasicDecayComponent.js';
 import { DurabilityModuleComponent } from './components/DurabilityModuleComponent.js';
 import { FireComponent } from './components/FireComponent.js';

@@ -1,10 +1,11 @@
-import { LiquidContainerComponent, type LiquidContainerComponentProps } from './LiquidContainerComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
 import { PresetHash } from '../types/PresetHash.js';
+
+import { LiquidContainerComponent, type LiquidContainerComponentProps } from './LiquidContainerComponent.js';
 
 const componentHash = ComponentHash.LiquidContainer;
 const componentName = 'LiquidContainer';

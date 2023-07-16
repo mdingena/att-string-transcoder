@@ -5,6 +5,7 @@ import type { PrefabComponents } from './types/PrefabComponents.js';
 import type { SupportedPrefabComponents } from './types/SupportedPrefabComponents.js';
 import type { UnknownPrefabComponents } from './types/UnknownPrefabComponents.js';
 import type { UnsupportedPrefabComponents } from './types/UnsupportedPrefabComponents.js';
+
 import { BinaryWriter } from './BinaryWriter.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { readComponents } from './utils/readComponents.js';

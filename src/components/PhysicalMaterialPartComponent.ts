@@ -1,9 +1,11 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { BinaryString } from '../types/BinaryString.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
-import { Component, type ComponentProps } from './Component.js';
 import { ComponentHash } from '../types/ComponentHash.js';
 import { PhysicalMaterialPartHash } from '../types/PhysicalMaterialPartHash.js';
+
+import { Component, type ComponentProps } from './Component.js';
 
 type PhysicalMaterialPartComponentPropsV1 = {
   materialHash?: number;

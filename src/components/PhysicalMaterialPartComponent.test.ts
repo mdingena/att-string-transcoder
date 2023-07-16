@@ -1,9 +1,10 @@
-import { PhysicalMaterialPartComponent } from './PhysicalMaterialPartComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { PhysicalMaterialPartComponent } from './PhysicalMaterialPartComponent.js';
 
 const componentHash = ComponentHash.PhysicalMaterialPart;
 const componentName = 'PhysicalMaterialPart';

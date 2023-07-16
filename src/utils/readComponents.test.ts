@@ -1,12 +1,14 @@
 import type { BinaryString } from '../types/BinaryString.js';
-import { readComponents } from './readComponents.js';
-import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
-import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
+
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { Prefab } from '../Prefab.js';
-import { ComponentHash } from '../types/ComponentHash.js';
+import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
+import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
 import { latestSupportedComponentVersions } from '../constants.js';
+import { ComponentHash } from '../types/ComponentHash.js';
+
+import { readComponents } from './readComponents.js';
 
 const mockedUnknownComponentHash = 1337;
 const mockedUnknownComponentVersion = 42;

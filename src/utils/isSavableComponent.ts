@@ -1,6 +1,7 @@
 import type { ATTPrefabHash } from '../types/ATTPrefabHash.js';
 import type { ATTPrefabName } from '../types/ATTPrefabName.js';
 import type { SupportedPrefabComponents } from '../types/SupportedPrefabComponents.js';
+
 import { attPrefabNames } from '../constants.js';
 import { ATTPrefabs } from '../types/ATTPrefabs.js';
 

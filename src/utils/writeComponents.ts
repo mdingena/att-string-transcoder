@@ -1,5 +1,6 @@
 import type { BinaryWriter } from '../BinaryWriter.js';
 import type { PrefabComponents } from '../types/PrefabComponents.js';
+
 import { terminatorHash } from '../constants.js';
 
 export function writeComponents(

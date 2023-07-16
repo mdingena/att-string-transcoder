@@ -1,9 +1,10 @@
-import { HeatSourceBaseComponent } from './HeatSourceBaseComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { HeatSourceBaseComponent } from './HeatSourceBaseComponent.js';
 
 const componentHash = ComponentHash.HeatSourceBase;
 const componentName = 'HeatSourceBase';

@@ -1,9 +1,10 @@
-import { BasicDecayComponent } from './BasicDecayComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { BasicDecayComponent } from './BasicDecayComponent.js';
 
 const componentHash = ComponentHash.BasicDecay;
 const componentName = 'BasicDecay';

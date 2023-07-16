@@ -1,9 +1,10 @@
-import { PickupComponent, type PickupComponentProps } from './PickupComponent.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { BinaryWriter } from '../BinaryWriter.js';
 import { Prefab } from '../Prefab.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { PickupComponent, type PickupComponentProps } from './PickupComponent.js';
 
 const componentHash = ComponentHash.Pickup;
 const componentName = 'Pickup';

@@ -1,10 +1,12 @@
 import type { BinaryString } from '../types/BinaryString.js';
 import type { PrefabComponents } from '../types/PrefabComponents.js';
+
 import { BinaryWriter } from '../BinaryWriter.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
-import { writeComponents } from './writeComponents.js';
 import { ComponentHash } from '../types/ComponentHash.js';
+
+import { writeComponents } from './writeComponents.js';
 
 const mockedUnknownComponentHash = 1337;
 const mockedUnknownComponentVersion = 42;

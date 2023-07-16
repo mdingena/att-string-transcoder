@@ -1,4 +1,5 @@
 import type { BinaryString } from './types/BinaryString.js';
+
 import { BinaryData } from './BinaryData.js';
 
 export class BinaryWriter {

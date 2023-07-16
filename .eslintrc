@@ -5,7 +5,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "import"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -28,6 +28,14 @@
     "no-return-await": "off",
     "@typescript-eslint/return-await": ["error", "always"],
     "import/no-unresolved": "error",
-    "import/extensions": ["error", "never", { "js": "always" }]
+    "import/extensions": ["error", "never", { "js": "always" }],
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": false },
+        "groups": ["type", ["builtin", "external", "internal"], "parent", "sibling", "index", "object"],
+        "newlines-between": "always"
+      }
+    ]
   }
 }

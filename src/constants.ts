@@ -1,5 +1,6 @@
 import type { ATTPrefabHash } from './types/ATTPrefabHash.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
+
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 
 export const attPrefabHashes = Object.values(ATTPrefabs).map(({ hash }) => hash as number);

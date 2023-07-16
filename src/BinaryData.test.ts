@@ -1,4 +1,5 @@
 import type { BinaryString } from './types/BinaryString.js';
+
 import { BinaryData, type BinaryDataOptions, type UnpackFloatOptions } from './BinaryData.js';
 
 const BUFFER_OFFSET = 0;

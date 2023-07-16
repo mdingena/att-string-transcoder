@@ -2,6 +2,7 @@ import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
 import { Entity } from '../Entity.js';
 import { Prefab } from '../Prefab.js';
+
 import { readEntities } from './readEntities.js';
 
 describe('readEntities()', () => {
