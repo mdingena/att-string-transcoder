@@ -1,63 +1,45 @@
 import type { Component } from './components/Component.js';
-import type { UnsupportedComponent } from './components/UnsupportedComponent.js';
-import type { AngularVelocity } from './types/AngularVelocity.js';
 import type { ATTPrefabHash } from './types/ATTPrefabHash.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
+import type { AngularVelocity } from './types/AngularVelocity.js';
 import type { BinaryString } from './types/BinaryString.js';
 import type { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 import type { Position } from './types/Position.js';
-import type { PrefabEntities } from './types/PrefabEntities.js';
 import type { PrefabChild } from './types/PrefabChild.js';
 import type { PrefabComponents } from './types/PrefabComponents.js';
+import type { PrefabEntities } from './types/PrefabEntities.js';
 import type { Rotation } from './types/Rotation.js';
 import type { SaveString } from './types/SaveString.js';
 import type { Velocity } from './types/Velocity.js';
 import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 import { BinaryReader } from './BinaryReader.js';
 import { BinaryWriter } from './BinaryWriter.js';
-import * as constants from './constants.js';
+import { Entity } from './Entity.js';
 import { DurabilityModuleComponent } from './components/DurabilityModuleComponent.js';
 import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
-import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 import { LiquidContainerComponent } from './components/LiquidContainerComponent.js';
+import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 import { SentGiftComponent } from './components/SentGiftComponent.js';
-import { Entity } from './entities/Entity.js';
-import { FireEntity } from './entities/FireEntity.js';
-import { isATTEntityName } from './utils/isATTEntityName.js';
+import * as constants from './constants.js';
+import { ATTPrefabs } from './types/ATTPrefabs.js';
+import { ComponentHash } from './types/ComponentHash.js';
 import { isATTPrefabHash } from './utils/isATTPrefabHash.js';
-import { isEmbeddableEntity } from './utils/isEmbeddableEntity.js';
 import { isSavableComponent } from './utils/isSavableComponent.js';
+import { readChildren } from './utils/readChildren.js';
+import { readComponents } from './utils/readComponents.js';
+import { readEntities } from './utils/readEntities.js';
 import { writeChildren } from './utils/writeChildren.js';
 import { writeComponents } from './utils/writeComponents.js';
 import { writeEntities } from './utils/writeEntities.js';
-import { ATTPrefabs } from './types/ATTPrefabs.js';
-import { ComponentHash } from './types/ComponentHash.js';
-import { readComponents } from './utils/readComponents.js';
-import { readEntities } from './utils/readEntities.js';
-import { readChildren } from './utils/readChildren.js';
-import { EntityHash } from './types/EntityHash.js';
 
-type TPrefabs = typeof ATTPrefabs;
-
-type TPrefab<N extends keyof TPrefabs> = { [K in keyof TPrefabs]: TPrefabs[K] }[N];
-
-export type PrefabProps = {
+export type PrefabProps<TPrefabName extends keyof typeof ATTPrefabs> = {
   position?: Position;
   rotation?: Rotation;
   scale?: number;
   components?: Partial<PrefabComponents>;
-  entities?: Partial<PrefabEntities>;
+  entities?: Partial<PrefabEntities<TPrefabName>>;
   children?: PrefabChild[];
-};
-
-const DEFAULTS: Required<PrefabProps> = {
-  position: { x: 0, y: 0, z: 0 },
-  rotation: { x: 0, y: 0, z: 0, w: 1 },
-  scale: 1,
-  components: { Unknown: [] as UnsupportedComponent[] } as PrefabComponents,
-  entities: { Unknown: [] as Entity[] } as PrefabEntities,
-  children: []
 };
 
 const FALLBACK_DURABILITY_MODULE_VERSION =
@@ -83,14 +65,14 @@ const FALLBACK_NETWORK_RIGIDBODY_VERSION =
 const FALLBACK_SENT_GIFT_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.SentGift) ?? constants.latestSentGiftComponentVersion;
 
-export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPrefab<TName> = TPrefab<TName>> {
-  readonly name: TName;
-  readonly hash: ATTPrefabHash;
+export class Prefab<TPrefabName extends keyof typeof ATTPrefabs = keyof typeof ATTPrefabs> {
+  readonly name: TPrefabName;
+  readonly hash: number;
   position: Position;
   rotation: Rotation;
   scale: number;
   components: PrefabComponents;
-  entities: PrefabEntities;
+  entities: PrefabEntities<TPrefabName>;
   children: PrefabChild[];
 
   /**
@@ -132,23 +114,17 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
    * })
    */
   constructor(
-    prefabName: TName,
-    { position, rotation, scale, components, entities, children }: PrefabProps = DEFAULTS
+    prefabName: TPrefabName,
+    { position, rotation, scale, components, entities, children }: PrefabProps<TPrefabName> = {}
   ) {
     this.hash = ATTPrefabs[prefabName].hash;
     this.name = prefabName;
-    this.position = position ?? DEFAULTS.position;
-    this.rotation = rotation ?? DEFAULTS.rotation;
-    this.scale = scale ?? DEFAULTS.scale;
-    this.components = {
-      ...(components ?? DEFAULTS.components),
-      Unknown: [...((components ?? DEFAULTS.components).Unknown ?? [])]
-    };
-    this.entities = {
-      ...(entities ?? DEFAULTS.entities),
-      Unknown: [...((entities ?? DEFAULTS.entities).Unknown ?? [])]
-    };
-    this.children = children ?? DEFAULTS.children;
+    this.position = position ?? { x: 0, y: 0, z: 0 };
+    this.rotation = rotation ?? { x: 0, y: 0, z: 0, w: 1 };
+    this.scale = scale ?? 1;
+    this.components = { ...components, Unknown: components?.Unknown ?? [] } as PrefabComponents;
+    this.entities = { ...entities } as PrefabEntities<TPrefabName>;
+    this.children = children ?? [];
   }
 
   /**
@@ -157,12 +133,28 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
    * If you do not specify a `parentName`, you may pass `null` to create a "floating" child. It will
    * be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
    */
-  addChildPrefab<TEntityName extends keyof T['embedded']>(parentName: TEntityName | null, childPrefab: Prefab): Prefab {
+  addChildPrefab(parentName: keyof (typeof ATTPrefabs)[TPrefabName]['embedded'] | null, childPrefab: Prefab): Prefab {
     if (typeof parentName === 'undefined' || typeof childPrefab === 'undefined') {
-      throw new Error(`Invalid arguments.`);
+      throw new Error('Invalid arguments.');
     }
 
-    const entityHash = parentName === null ? 0 : isATTEntityName(parentName) ? EntityHash[parentName] : 0;
+    let entityHash: number;
+
+    if (parentName === null) {
+      entityHash = 0;
+    } else {
+      const entities = ATTPrefabs[this.name].embedded as Readonly<
+        Record<string, { hash: number; name: string; savables: Record<string, { hash: number; name: string }> }>
+      >;
+
+      const entity = entities[parentName as string];
+
+      if (typeof entity === 'undefined') {
+        throw new Error(`"${String(parentName)}"is not a valid entity on "${this.name}".`);
+      }
+
+      entityHash = entity.hash;
+    }
 
     this.children = [
       ...this.children,
@@ -247,6 +239,8 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
 
     const name = constants.attPrefabNames[hash];
 
+    if (typeof name === 'undefined') throw new Error(`Cannot find ATT Prefab with hash ${hash}.`);
+
     // const prefab = ATTPrefabs[name];
 
     return new Prefab(name, {
@@ -282,7 +276,7 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
       /**
        * @property {PrefabEntities} entities
        */
-      entities: readEntities(reader, versions),
+      entities: readEntities(reader, name, versions),
 
       /**
        * @property {PrefabChild[]} children
@@ -395,27 +389,13 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
 
     /* Get component versions from prefab entities. */
     for (const entity of Object.values(this.entities)) {
-      if (Array.isArray(entity)) {
-        for (const unknownEntity of entity) {
-          for (const component of Object.values(unknownEntity.components)) {
-            if (Array.isArray(component)) {
-              for (const unknownComponent of component) {
-                setComponentVersion(unknownComponent.hash, unknownComponent.version);
-              }
-            } else {
-              setComponentVersion(component.hash, component.version);
-            }
+      for (const component of Object.values(entity.components)) {
+        if (Array.isArray(component)) {
+          for (const unknownComponent of component) {
+            setComponentVersion(unknownComponent.hash, unknownComponent.version);
           }
-        }
-      } else {
-        for (const component of Object.values(entity.components)) {
-          if (Array.isArray(component)) {
-            for (const unknownComponent of component) {
-              setComponentVersion(unknownComponent.hash, unknownComponent.version);
-            }
-          } else {
-            setComponentVersion(component.hash, component.version);
-          }
+        } else {
+          setComponentVersion(component.hash, component.version);
         }
       }
     }
@@ -456,7 +436,11 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
    * Gets the burning state of the prefab.
    */
   getOnFire(): boolean {
-    return this.entities.Fire?.components.HeatSourceBase?.isLit ?? false;
+    const fireEntity = Object.values<Entity<TPrefabName>>(this.entities).find(
+      entity => !Array.isArray(entity) && entity.name.startsWith('Fire_')
+    );
+
+    return fireEntity?.components.HeatSourceBase?.isLit ?? false;
   }
 
   /**
@@ -656,14 +640,28 @@ export class Prefab<TName extends keyof TPrefabs = keyof TPrefabs, T extends TPr
    * Sets the prefab on fire, if it is capable of catching fire.
    */
   setOnFire(isLit?: boolean): Prefab {
-    if (isEmbeddableEntity('Fire', this.name)) {
-      const version = this.entities.Fire?.components.HeatSourceBase?.version ?? FALLBACK_HEAT_SOURCE_BASE_VERSION;
+    const validFireEntity = Object.values<{
+      hash: number;
+      name: string;
+      savables: Record<string, { hash: number; name: string }>;
+    }>(ATTPrefabs[this.name].embedded).find(entity => {
+      return Object.values(entity.savables).some(savable => ['Fire', 'FireDissolve'].includes(savable.name));
+    });
 
-      this.entities.Fire = new FireEntity({
-        ...this.entities.Fire,
+    if (typeof validFireEntity !== 'undefined') {
+      const currentFireEntity = Object.values<Entity<TPrefabName>>(this.entities).find(
+        entity => !Array.isArray(entity) && entity.name === validFireEntity.name
+      );
+
+      const version = currentFireEntity?.components.HeatSourceBase?.version ?? FALLBACK_HEAT_SOURCE_BASE_VERSION;
+      const key = `${validFireEntity.name}_${validFireEntity.hash}`;
+
+      this.entities[key] = new Entity<TPrefabName>({
+        hash: validFireEntity.hash,
+        key: key as keyof (typeof ATTPrefabs)[TPrefabName]['embedded'],
         isAlive: true,
         components: {
-          ...this.entities.Fire?.components,
+          ...currentFireEntity?.components,
           HeatSourceBase: new HeatSourceBaseComponent({
             version,
             isLit: isLit ?? true

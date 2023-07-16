@@ -1,41 +1,40 @@
-import { BinaryData } from '../BinaryData.js';
-import { BinaryReader } from '../BinaryReader.js';
-import { BinaryWriter } from '../BinaryWriter.js';
-import { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.js';
-import { Entity, type BaseEntityFromBinaryProps, isFromBinaryProps } from './Entity.js';
-import { Prefab } from '../Prefab.js';
-import { ComponentHash } from '../types/ComponentHash.js';
-import { EntityHash } from '../types/EntityHash.js';
+import { BinaryData } from './BinaryData.js';
+import { BinaryReader } from './BinaryReader.js';
+import { BinaryWriter } from './BinaryWriter.js';
+import { Entity } from './Entity.js';
+import { Prefab } from './Prefab.js';
+import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
+import { ComponentHash } from './types/ComponentHash.js';
 
 describe('new Entity()', () => {
   describe('when given the required props', () => {
     it('creates an instance of the Entity class', () => {
-      const entityHash = 1337;
-      const entityName = 'topkek';
-      const entityIsAlive = true;
+      const prefabName = 'Torch';
+      const entityHash = 30100;
+      const entityName = 'Fire';
 
-      const entity = new Entity({
+      const entity = new Entity<typeof prefabName>({
         hash: entityHash,
-        name: entityName,
-        isAlive: entityIsAlive
+        key: `${entityName}_${entityHash}`
       });
 
       expect(entity.hash).toStrictEqual(entityHash);
       expect(entity.name).toStrictEqual(entityName);
-      expect(entity.isAlive).toStrictEqual(entityIsAlive);
+      expect(entity.isAlive).toStrictEqual(true);
       expect(entity.components).toStrictEqual({ Unknown: [] });
     });
   });
 
   describe('when given additional props', () => {
     it('creates an instance of the Entity class', () => {
-      const entityHash = 1337;
-      const entityName = 'topkek';
+      const prefabName = 'Torch';
+      const entityHash = 30100;
+      const entityName = 'Fire';
       const entityIsAlive = true;
 
-      const entity = new Entity({
+      const entity = new Entity<typeof prefabName>({
         hash: entityHash,
-        name: entityName,
+        key: `${entityName}_${entityHash}`,
         isAlive: entityIsAlive,
         components: {
           HeatSourceBase: new HeatSourceBaseComponent({
@@ -63,14 +62,22 @@ describe('new Entity()', () => {
 
 describe('Entity.fromBinary()', () => {
   let fastForwardedReader: BinaryReader;
-  const entityHash = EntityHash.Fire;
+  const prefabName = 'Torch';
+  const entityHash = 30100;
   const entityName = 'Fire';
-  const prefab = new Prefab('Grass_Clump', {
+  const prefab = new Prefab(prefabName, {
     entities: {
-      Fire: new Entity({
+      Fire: new Entity<typeof prefabName>({
         hash: entityHash,
-        name: entityName,
-        isAlive: false
+        key: `${entityName}_${entityHash}`,
+        isAlive: false,
+        components: {
+          HeatSourceBase: new HeatSourceBaseComponent({
+            version: 1,
+            isLit: true,
+            progress: 0.69
+          })
+        }
       })
     }
   });
@@ -106,9 +113,9 @@ describe('Entity.fromBinary()', () => {
     fastForwardedReader = reader;
   });
 
-  describe('when given BaseEntityFromBinaryProps', () => {
+  describe('when given required EntityFromBinaryProps', () => {
     it('creates an instance of the Entity class using the given BinaryReader', () => {
-      const props = { hash: entityHash, name: entityName };
+      const props = { hash: entityHash, key: `${entityName}_${entityHash}` };
       const entity = Entity.fromBinary(fastForwardedReader, props);
 
       expect(entity).toBeInstanceOf(Entity);
@@ -118,31 +125,40 @@ describe('Entity.fromBinary()', () => {
     });
   });
 
-  describe('when given a component versions map', () => {
-    it('throws an error', () => {
-      const versions = new Map<number, number>();
+  describe('when given additional EntityFromBinaryProps', () => {
+    it('creates an instance of the Entity class using the given BinaryReader', () => {
+      const componentVersions = new Map<number, number>([[4109360768, 1]]);
+      const props = { hash: entityHash, key: `${entityName}_${entityHash}`, componentVersions };
+      const entity = Entity.fromBinary(fastForwardedReader, props);
 
-      const expectedToThrow = () => Entity.fromBinary(fastForwardedReader, versions);
-      const expectedError = new Error(
-        'Invalid arguments to create base Entity. Did you mean to create a derived Entity instead?'
-      );
-
-      expect(expectedToThrow).toThrowError(expectedError);
+      expect(entity).toBeInstanceOf(Entity);
+      expect(entity.hash).toStrictEqual(entityHash);
+      expect(entity.name).toStrictEqual(entityName);
+      expect(entity.isAlive).toStrictEqual(false);
+      expect(entity.components).toStrictEqual({
+        HeatSourceBase: new HeatSourceBaseComponent({
+          version: 1,
+          isLit: true,
+          progress: 0.6899999976158142
+        }),
+        Unknown: []
+      });
     });
   });
 });
 
 describe('Entity.toBinary()', () => {
   it('returns a BinaryString representation of the entity', () => {
-    const entityHash = 1337;
-    const entityName = 'topkek';
+    const prefabName = 'Torch';
+    const entityHash = 30100;
+    const entityName = 'Fire';
     const entityIsAlive = true;
     const componentHash = ComponentHash.HeatSourceBase;
     const componentVersion = 1;
 
-    const entity = new Entity({
+    const entity = new Entity<typeof prefabName>({
       hash: entityHash,
-      name: entityName,
+      key: `${entityName}_${entityHash}`,
       isAlive: entityIsAlive,
       components: {
         HeatSourceBase: new HeatSourceBaseComponent({
@@ -164,13 +180,14 @@ describe('Entity.toBinary()', () => {
 
 describe('Entity.write()', () => {
   it('writes a BinaryString representation of the entity to the given BinaryWriter, including entity hash and data length', () => {
-    const entityHash = 1337;
-    const entityName = 'topkek';
+    const prefabName = 'Torch';
+    const entityHash = 30100;
+    const entityName = 'Fire';
     const entityIsAlive = true;
 
-    const entity = new Entity({
+    const entity = new Entity<typeof prefabName>({
       hash: entityHash,
-      name: entityName,
+      key: `${entityName}_${entityHash}`,
       isAlive: entityIsAlive
     });
 
@@ -180,7 +197,7 @@ describe('Entity.write()', () => {
     const data = writer.flush();
 
     const expectedData =
-      '0000000000000000000001010011100100000000000000000000000000100001100000000000000000000000000000000';
+      '0000000000000000011101011001010000000000000000000000000000100001100000000000000000000000000000000';
 
     expect(data).toStrictEqual(expectedData);
 
@@ -192,39 +209,5 @@ describe('Entity.write()', () => {
 
     expect(hash).toStrictEqual(entityHash);
     expect(isAliveBit).toStrictEqual(entityIsAlive);
-  });
-});
-
-describe('isFromBinaryProps()', () => {
-  describe('when given BaseEntityFromBinaryProps', () => {
-    it('returns true', () => {
-      const props: BaseEntityFromBinaryProps = {
-        hash: 1337,
-        name: 'Test',
-        componentVersions: new Map([[420, 69]])
-      };
-
-      const result = isFromBinaryProps(props);
-
-      expect(result).toBe(true);
-    });
-  });
-
-  describe('when given a component version map', () => {
-    it('returns false', () => {
-      const componentVersions = new Map([[420, 69]]);
-
-      const result = isFromBinaryProps(componentVersions);
-
-      expect(result).toBe(false);
-    });
-  });
-
-  describe('when given undefined', () => {
-    it('returns false', () => {
-      const result = isFromBinaryProps(undefined);
-
-      expect(result).toBe(false);
-    });
   });
 });

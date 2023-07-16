@@ -1,39 +1,29 @@
-import { readEntities } from './readEntities.js';
 import { BinaryData } from '../BinaryData.js';
 import { BinaryReader } from '../BinaryReader.js';
-import { FireEntity } from '../entities/FireEntity.js';
-import { UnsupportedEntity } from '../entities/UnsupportedEntity.js';
+import { Entity } from '../Entity.js';
 import { Prefab } from '../Prefab.js';
-import { EntityHash } from '../types/EntityHash.js';
-
-const mockedUnknownEntityHash = 1337;
+import { readEntities } from './readEntities.js';
 
 describe('readEntities()', () => {
   describe('when reading entities', () => {
     let fastForwardedReader: BinaryReader;
-    const firstEntityHash = EntityHash.Fire;
-    const firstEntityName = 'Fire';
-    const secondEntityHash = EntityHash.Woodcutting_Path;
-    const secondEntityName = 'Woodcutting_Path';
-    const thirdEntityHash = mockedUnknownEntityHash;
-    const thirdEntityName = 'Unknown';
-    const prefab = new Prefab('Handle_Short', {
+    const firstEntityHash = 6136;
+    const firstEntityName = 'Slot_Multi';
+    const secondEntityHash = 23002;
+    const secondEntityName = 'Unknown';
+    const prefabName = 'Handle_Short';
+    const prefab = new Prefab(prefabName, {
       entities: {
-        Fire: new FireEntity({
+        Slot_Multi_6136: new Entity<typeof prefabName>({
+          hash: firstEntityHash,
+          key: `${firstEntityName}_${firstEntityHash}`,
           isAlive: true
         }),
-        Woodcutting_Path: new UnsupportedEntity({
+        Unknown_23002: new Entity({
           hash: secondEntityHash,
-          name: secondEntityName,
+          key: secondEntityName,
           isAlive: false
-        }),
-        Unknown: [
-          new UnsupportedEntity({
-            hash: thirdEntityHash,
-            name: thirdEntityName,
-            isAlive: true
-          })
-        ]
+        })
       }
     });
 
@@ -67,22 +57,17 @@ describe('readEntities()', () => {
     });
 
     it('returns PrefabEntities', () => {
-      const entities = readEntities(fastForwardedReader);
+      const entities = readEntities(fastForwardedReader, prefabName);
 
-      expect(entities.Fire).toBeInstanceOf(FireEntity);
-      expect(entities.Fire?.hash).toStrictEqual(firstEntityHash);
-      expect(entities.Fire?.name).toStrictEqual(firstEntityName);
-      expect(entities.Fire?.isAlive).toBe(true);
+      expect(entities['Slot_Multi_6136']).toBeInstanceOf(Entity);
+      expect(entities['Slot_Multi_6136']?.hash).toStrictEqual(firstEntityHash);
+      expect(entities['Slot_Multi_6136']?.name).toStrictEqual(firstEntityName);
+      expect(entities['Slot_Multi_6136']?.isAlive).toBe(true);
 
-      expect(entities.Woodcutting_Path).toBeInstanceOf(UnsupportedEntity);
-      expect(entities.Woodcutting_Path?.hash).toStrictEqual(secondEntityHash);
-      expect(entities.Woodcutting_Path?.name).toStrictEqual(secondEntityName);
-      expect(entities.Woodcutting_Path?.isAlive).toBe(false);
-
-      expect(entities.Unknown[0]).toBeInstanceOf(UnsupportedEntity);
-      expect(entities.Unknown[0]?.hash).toStrictEqual(thirdEntityHash);
-      expect(entities.Unknown[0]?.name).toStrictEqual(thirdEntityName);
-      expect(entities.Unknown[0]?.isAlive).toBe(true);
+      expect(entities['Unknown_23002']).toBeInstanceOf(Entity);
+      expect(entities['Unknown_23002']?.hash).toStrictEqual(secondEntityHash);
+      expect(entities['Unknown_23002']?.name).toStrictEqual(secondEntityName);
+      expect(entities['Unknown_23002']?.isAlive).toBe(false);
     });
   });
 });

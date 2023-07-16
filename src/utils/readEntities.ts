@@ -1,15 +1,15 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { PrefabEntities } from '../types/PrefabEntities.js';
-import type { UnknownPrefabEntities } from '../types/UnknownPrefabEntities.js';
-import { readEntity } from './readEntity.js';
+import { Entity } from '../Entity.js';
 import { terminatorHash } from '../constants.js';
-import { Entity } from '../entities/Entity.js';
-import { EntityHash } from '../types/EntityHash.js';
+import { ATTPrefabs } from '../types/ATTPrefabs.js';
 
-type KnownPrefabEntities = Record<string, Entity>;
-
-export function readEntities(reader: BinaryReader, componentVersions?: Map<number, number>): PrefabEntities {
-  const entities = Object.assign({} as KnownPrefabEntities, { Unknown: [] } as UnknownPrefabEntities);
+export function readEntities(
+  reader: BinaryReader,
+  prefabName: keyof typeof ATTPrefabs,
+  componentVersions?: Map<number, number>
+): PrefabEntities<typeof prefabName> {
+  const entities: Record<string, Entity<typeof prefabName>> = {};
 
   const isLooping = true;
 
@@ -18,15 +18,23 @@ export function readEntities(reader: BinaryReader, componentVersions?: Map<numbe
 
     if (hash === terminatorHash) break;
 
-    const name = EntityHash[hash] ?? 'Unknown';
+    /* Get the entity's data length and ignore it. */
+    reader.readUnsignedInteger();
 
-    const entity = readEntity(reader, hash, name, componentVersions);
+    const entity = Object.values<{
+      hash: number;
+      name: string;
+      savables: Record<string, { hash: number; name: string }>;
+    }>(ATTPrefabs[prefabName].embedded).find(attPrefabEntity => attPrefabEntity.hash === hash);
 
-    if (entity.name === 'Unknown') {
-      entities.Unknown.push(entity);
-    } else {
-      entities[name] = entity;
-    }
+    const name = entity?.name ?? 'Unknown';
+    const key = `${name}_${hash}`;
+
+    entities[key] = Entity.fromBinary<typeof prefabName>(reader, {
+      hash,
+      key: name === 'Unknown' ? name : key,
+      componentVersions
+    });
   }
 
   return entities;

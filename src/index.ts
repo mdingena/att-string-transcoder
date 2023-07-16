@@ -16,9 +16,7 @@ export type { SpawnAreaComponentProps } from './components/SpawnAreaComponent.js
 export type { StatManagerComponentProps } from './components/StatManagerComponent.js';
 export type { UnsupportedComponentProps } from './components/UnsupportedComponent.js';
 export type { WoodcutTreeComponentProps } from './components/WoodcutTreeComponent.js';
-export type { FireEntityComponents } from './entities/FireEntity.js';
 export type { AngularVelocity } from './types/AngularVelocity.js';
-export type { ATTEntityName } from './types/ATTEntityName.js';
 export type { ATTPrefabHash } from './types/ATTPrefabHash.js';
 export type { ATTPrefabName } from './types/ATTPrefabName.js';
 export type { BinaryString } from './types/BinaryString.js';
@@ -30,17 +28,13 @@ export type { Rotation } from './types/Rotation.js';
 export type { SaveString } from './types/SaveString.js';
 export type { SupportedComponent } from './types/SupportedComponent.js';
 export type { SupportedPrefabComponents } from './types/SupportedPrefabComponents.js';
-export type { SupportedPrefabEntities } from './types/SupportedPrefabEntities.js';
 export type { UnknownPrefabComponents } from './types/UnknownPrefabComponents.js';
-export type { UnknownPrefabEntities } from './types/UnknownPrefabEntities.js';
 export type { UnsupportedPrefabComponents } from './types/UnsupportedPrefabComponents.js';
-export type { UnsupportedPrefabEntities } from './types/UnsupportedPrefabEntities.js';
 export type { Velocity } from './types/Velocity.js';
 
 /* Enums and enum-likes */
 export { ATTPrefabs } from './types/ATTPrefabs.js';
 export { ComponentHash } from './types/ComponentHash.js';
-export { EntityHash } from './types/EntityHash.js';
 export { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 export { PopulationDefinitionHash } from './types/PopulationDefinitionHash.js';
 export { PresetHash } from './types/PresetHash.js';
@@ -74,14 +68,11 @@ export { UnsupportedComponent } from './components/UnsupportedComponent.js';
 export { WoodcutTreeComponent } from './components/WoodcutTreeComponent.js';
 
 /* Entities */
-export { Entity } from './entities/Entity.js';
-export { FireEntity } from './entities/FireEntity.js';
+export { Entity } from './Entity.js';
 
 /* Utilities */
-export { isATTEntityName } from './utils/isATTEntityName.js';
 export { isATTPrefabHash } from './utils/isATTPrefabHash.js';
 export { isATTPrefabName } from './utils/isATTPrefabName.js';
-export { isEmbeddableEntity } from './utils/isEmbeddableEntity.js';
 export { isSavableComponent } from './utils/isSavableComponent.js';
 export { isUnknownComponent } from './utils/isUnknownComponent.js';
 export { readChildren } from './utils/readChildren.js';

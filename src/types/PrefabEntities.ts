@@ -1,5 +1,6 @@
-import type { SupportedPrefabEntities } from './SupportedPrefabEntities.js';
-import type { UnknownPrefabEntities } from './UnknownPrefabEntities.js';
-import type { UnsupportedPrefabEntities } from './UnsupportedPrefabEntities.js';
+import type { ATTPrefabs } from './ATTPrefabs.js';
+import type { Entity } from '../Entity.js';
 
-export type PrefabEntities = SupportedPrefabEntities & UnsupportedPrefabEntities & UnknownPrefabEntities;
+export type PrefabEntities<TPrefabName extends keyof typeof ATTPrefabs> = {
+  [EntityName: string]: Entity<TPrefabName>;
+};

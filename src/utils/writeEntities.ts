@@ -1,26 +1,18 @@
 import type { BinaryWriter } from '../BinaryWriter.js';
+import type { ATTPrefabName } from '../types/ATTPrefabName.js';
 import type { PrefabEntities } from '../types/PrefabEntities.js';
 import { terminatorHash } from '../constants.js';
 
-export function writeEntities(
+export function writeEntities<TPrefabName extends ATTPrefabName>(
   writer: BinaryWriter,
-  entities: PrefabEntities,
+  entities: PrefabEntities<TPrefabName>,
   componentVersions: Map<number, number>
 ): void {
   for (const entity of Object.values(entities)) {
-    if (Array.isArray(entity)) {
-      for (const unknownEntity of entity) {
-        /**
-         * @property {Entity} unknownEntity
-         */
-        unknownEntity.write(writer, componentVersions);
-      }
-    } else {
-      /**
-       * @property {Entity} entity
-       */
-      entity.write(writer, componentVersions);
-    }
+    /**
+     * @property {Entity} entity
+     */
+    entity.write(writer, componentVersions);
   }
 
   /**
