@@ -40,13 +40,13 @@ export { PopulationDefinitionHash } from './types/PopulationDefinitionHash.js';
 export { PresetHash } from './types/PresetHash.js';
 export { SpeciesHash } from './types/SpeciesHash.js';
 
-/* Prefabs */
-export { Prefab } from './Prefab.js';
-
 /* Binary classes */
 export { BinaryData } from './BinaryData.js';
 export { BinaryReader } from './BinaryReader.js';
 export { BinaryWriter } from './BinaryWriter.js';
+
+/* Prefabs */
+export { Prefab } from './Prefab.js';
 
 /* Components */
 export { BasicDecayComponent } from './components/BasicDecayComponent.js';
