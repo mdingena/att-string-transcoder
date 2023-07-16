@@ -33,7 +33,7 @@ import { writeChildren } from './utils/writeChildren.js';
 import { writeComponents } from './utils/writeComponents.js';
 import { writeEntities } from './utils/writeEntities.js';
 
-export type PrefabProps<TPrefabName extends keyof typeof ATTPrefabs> = {
+export type PrefabProps<TPrefabName extends ATTPrefabName> = {
   position?: Position;
   rotation?: Rotation;
   scale?: number;
@@ -65,7 +65,7 @@ const FALLBACK_NETWORK_RIGIDBODY_VERSION =
 const FALLBACK_SENT_GIFT_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.SentGift) ?? constants.latestSentGiftComponentVersion;
 
-export class Prefab<TPrefabName extends keyof typeof ATTPrefabs = keyof typeof ATTPrefabs> {
+export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   readonly name: TPrefabName;
   readonly hash: number;
   position: Position;

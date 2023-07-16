@@ -1,4 +1,5 @@
 import type { BinaryReader } from '../BinaryReader.js';
+import type { ATTPrefabName } from '../types/ATTPrefabName.js';
 import type { PrefabEntities } from '../types/PrefabEntities.js';
 import { Entity } from '../Entity.js';
 import { terminatorHash } from '../constants.js';
@@ -6,7 +7,7 @@ import { ATTPrefabs } from '../types/ATTPrefabs.js';
 
 export function readEntities(
   reader: BinaryReader,
-  prefabName: keyof typeof ATTPrefabs,
+  prefabName: ATTPrefabName,
   componentVersions?: Map<number, number>
 ): PrefabEntities<typeof prefabName> {
   const entities: Record<string, Entity<typeof prefabName>> = {};
