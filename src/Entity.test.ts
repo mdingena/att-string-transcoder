@@ -14,7 +14,6 @@ describe('new Entity()', () => {
       const entityName = 'Fire';
 
       const entity = new Entity<typeof prefabName>({
-        hash: entityHash,
         key: `${entityName}_${entityHash}`
       });
 
@@ -56,6 +55,15 @@ describe('new Entity()', () => {
         }),
         Unknown: []
       });
+    });
+  });
+
+  describe('when given an "Unknown" key and no additional hash property', () => {
+    it('throws an error', () => {
+      const expectedToThrow = () => new Entity({ key: 'Unknown' });
+      const expectedError = new Error('You must manually pass an entity hash when instantiating an "Unknown" Entity.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
     });
   });
 });

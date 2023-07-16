@@ -12,7 +12,7 @@ import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
 
 type EntityBaseProps<TPrefabName extends ATTPrefabName> = {
-  hash: number;
+  hash?: number;
   key: 'Unknown' | keyof (typeof ATTPrefabs)[TPrefabName]['embedded'];
 };
 
@@ -35,8 +35,13 @@ export class Entity<TPrefabName extends ATTPrefabName> {
 
   constructor({ hash, key, isAlive, components }: EntityConstructorProps<TPrefabName>) {
     const resolvedName = key === 'Unknown' ? String(key) : String(key).split('_').slice(0, -1).join('_');
+    const resolvedHash = resolvedName === 'Unknown' ? hash : Number(String(key).split('_').slice(-1));
 
-    this.hash = hash;
+    if (typeof resolvedHash === 'undefined') {
+      throw new Error('You must manually pass an entity hash when instantiating an "Unknown" Entity.');
+    }
+
+    this.hash = resolvedHash;
     this.name = resolvedName;
     this.isAlive = isAlive ?? true;
     this.components = {
