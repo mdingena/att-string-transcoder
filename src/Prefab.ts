@@ -81,12 +81,12 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * optionally provide additional properties in the second argument.
    *
    * @example
-   * const simple = new Prefab('Handle_Short');
+   * const simple = new Prefab('Grass_Clump');
    *
-   * const advanced = new Prefab('Handle_Short', {
+   * const advanced = new Prefab('Wooden_Stake', {
    *   position: { x: 133.7, y: 420, z: 69 },
    *   rotation: { x: 0.3, y: 0.4, z: 0.1, w: 0.8 },
-   *   scale: 1,
+   *   scale: 1.5,
    *   components: {
    *     NetworkRigidbody: new NetworkRigidbodyComponent({
    *       version: 1,
@@ -95,24 +95,32 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *       isKinematic: false,
    *       isServerSleeping: false,
    *       velocity: { x: 0, y: 1, z: 0 },
-   *       angularVelocity: { x: 0, y: 1, z: 0 },
+   *       angularVelocity: { x: 0, y: 1, z: 0 }
    *     })
    *   },
    *   entities: {
-   *     Fuse: new FuseEntity({
-   *       isAlive: true,
-   *       isFinished: false,
-   *       isLit: true,
-   *       currentFuseAmount: 0.8
-   *     })
+   *     Slot_Multi_11474: new Entity('Slot_Multi_11474')
    *   },
    *   children: [
    *     {
-   *       parentHash: 1337,
-   *       prefab: new Prefab('Guard')
+   *       parentHash: 11474,
+   *       prefab: new Prefab('Grass_Clump', {
+   *         entities: {
+   *           Fire_30100: new Entity('Fire_30100', {
+   *             components: {
+   *               HeatSourceBase: new HeatSourceBaseComponent({
+   *                 version: 2,
+   *                 isLit: true,
+   *                 progress: 0.8,
+   *                 time: Infinity
+   *               })
+   *             }
+   *           })
+   *         }
+   *       })
    *     }
    *   ]
-   * })
+   * });
    */
   constructor(
     prefabName: TPrefabName,
