@@ -144,7 +144,9 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   addChildPrefab(parentName: keyof (typeof ATTPrefabs)[TPrefabName]['embedded'] | null, childPrefab: Prefab): Prefab {
     if (typeof parentName === 'undefined' || typeof childPrefab === 'undefined') {
-      throw new Error('Invalid arguments.');
+      throw new Error(
+        'You must pass a parent prefab entity hash (or null) and a child prefab to add as a child to this prefab.'
+      );
     }
 
     let entityHash: number;
@@ -159,7 +161,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
       const entity = entities[parentName as string];
 
       if (typeof entity === 'undefined') {
-        throw new Error(`"${String(parentName)}"is not a valid entity on "${this.name}".`);
+        throw new Error(`"${String(parentName)}" is not a valid entity on "${this.name}".`);
       }
 
       entityHash = entity.hash;
@@ -194,7 +196,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   addGift(giftPrefab: Prefab): Prefab {
     if (typeof giftPrefab === 'undefined') {
-      throw new Error(`Invalid arguments.`);
+      throw new Error('You must pass a gift prefab to add to this prefab as a gift.');
     }
 
     if (isSavableComponent('SentGift', this.name)) {
@@ -521,7 +523,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   removeChildPrefab(prefabName: ATTPrefabName): Prefab;
   removeChildPrefab(prefabArg: ATTPrefabHash | ATTPrefabName): Prefab {
     if (typeof prefabArg === 'undefined') {
-      throw new Error(`Invalid argument.`);
+      throw new Error('You must pass a child prefab hash or name to remove from this prefab.');
     }
 
     const key = typeof prefabArg === 'number' ? 'hash' : 'name';
@@ -561,7 +563,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   setGiftBoxLabel(label: string): Prefab {
     if (typeof label === 'undefined') {
-      throw new Error(`Invalid arguments.`);
+      throw new Error('You must pass a string to set as the gift box label.');
     }
 
     if (isSavableComponent('SentGift', this.name)) {
@@ -584,7 +586,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   setIntegrity(integrity: number): Prefab {
     if (typeof integrity === 'undefined') {
-      throw new Error(`Invalid arguments.`);
+      throw new Error('You must pass a number to set as the integrity.');
     }
 
     if (isSavableComponent('DurabilityModule', this.name)) {
@@ -627,7 +629,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   setMaterial(materialHash: PhysicalMaterialPartHash): Prefab {
     if (typeof materialHash === 'undefined') {
-      throw new Error(`Invalid arguments.`);
+      throw new Error('You must pass a PhysicalMaterialPartHash to set as the material.');
     }
 
     if (isSavableComponent('PhysicalMaterialPart', this.name)) {
@@ -759,7 +761,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   setServings(servings: number): Prefab {
     if (typeof servings === 'undefined') {
-      throw new Error(`Invalid arguments.`);
+      throw new Error('You must pass a number to set as the amount of servings.');
     }
 
     if (isSavableComponent('LiquidContainer', this.name)) {
