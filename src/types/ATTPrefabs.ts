@@ -1,6 +1,7 @@
 /**
- * @description Parsed spawn infodump.
+ * Parsed spawn infodump.
  * @since 2023-06-12
+ * @version 3.0.0
  */
 export const ATTPrefabs = {
   '(Child_Node)_Climbing_Tower_Teleporter_Node': {
