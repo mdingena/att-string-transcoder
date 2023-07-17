@@ -11,7 +11,9 @@ import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
 
-type EntityKey<TPrefabName extends ATTPrefabName> = 'Unknown' | keyof (typeof ATTPrefabs)[TPrefabName]['embedded'];
+export type EntityKey<TPrefabName extends ATTPrefabName> =
+  | keyof (typeof ATTPrefabs)[TPrefabName]['embedded']
+  | 'Unknown';
 
 type EntityBaseProps = {
   hash?: number;
