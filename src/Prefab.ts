@@ -445,9 +445,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Gets the burning state of the prefab.
    */
   getOnFire(): boolean {
-    const fireEntity = Object.values<Entity<TPrefabName>>(this.entities).find(
-      entity => !Array.isArray(entity) && entity.name.startsWith('Fire_')
-    );
+    const fireEntity = Object.values(this.entities).find(entity => entity.name === 'Fire');
 
     return fireEntity?.components.HeatSourceBase?.isLit ?? false;
   }
@@ -658,10 +656,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     });
 
     if (typeof validFireEntity !== 'undefined') {
-      const currentFireEntity = Object.values<Entity<TPrefabName>>(this.entities).find(
-        entity => !Array.isArray(entity) && entity.name === validFireEntity.name
-      );
-
+      const currentFireEntity = Object.values(this.entities).find(entity => entity.name === validFireEntity.name);
       const version = currentFireEntity?.components.HeatSourceBase?.version ?? FALLBACK_HEAT_SOURCE_BASE_VERSION;
       const key = `${validFireEntity.name}_${validFireEntity.hash}`;
 
