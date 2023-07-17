@@ -880,11 +880,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     const binaryDataString = [this.hash, bytes, ...unsignedIntegers].join(',');
 
     /* Construct the versions string. */
-    const componentVersionsString = `${componentVersions.size},${Object.entries(componentVersions).map(
-      ([componentHash, componentVersion]) => `${componentHash},${componentVersion}`
-    )}`;
+    let componentVersionsString: string | undefined;
 
-    /* Return spawn string. */
+    if (componentVersions.size > 0) {
+      componentVersionsString = `${componentVersions.size},${Object.entries(componentVersions).map(
+        ([componentHash, componentVersion]) => `${componentHash},${componentVersion}`
+      )}`;
+    }
+
+    /* Return SaveString. */
     const strings = [binaryDataString, componentVersionsString].filter(Boolean);
     return `${strings.join(',|')},` as SaveString;
   }
