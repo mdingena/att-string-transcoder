@@ -25,6 +25,7 @@
     "lint": "eslint --fix \"src/**/*.{ts,js}\"",
     "format": "prettier --write \"+(*.md|src/**/*.{js,ts,json,md})\"",
     "compile": "tsc --noEmit",
+    "parse": "npm run parse --prefix scripts",
     "prebuild": "rimraf dist/",
     "build": "run-p build:*",
     "build:cjs": "tsc -p tsconfig-cjs.json",

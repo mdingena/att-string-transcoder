@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "scripts": {
+    "parse": "node --loader ts-node/esm ./parseSpawnInfodump.ts"
+  }
+}
