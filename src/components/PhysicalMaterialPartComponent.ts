@@ -13,6 +13,12 @@ type PhysicalMaterialPartComponentPropsV1 = {
 
 export type PhysicalMaterialPartComponentProps = PhysicalMaterialPartComponentPropsV1;
 
+/**
+ * Controls physical appearance of the `Prefab` it is attached to.
+ *
+ * @since 3.0.0
+ * @version 1
+ */
 export class PhysicalMaterialPartComponent extends Component {
   materialHash: number;
 

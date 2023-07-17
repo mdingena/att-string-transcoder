@@ -39,6 +39,10 @@ type StatManagerComponentPropsV2 = {
 
 export type StatManagerComponentProps = StatManagerComponentPropsV2;
 
+/**
+ * @since 3.0.0
+ * @version 2
+ */
 export class StatManagerComponent extends Component {
   stats: Stat[];
   modifiers: TimedModifier[];

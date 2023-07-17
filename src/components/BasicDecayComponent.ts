@@ -15,6 +15,10 @@ export type BasicDecayComponentProps = BasicDecayComponentPropsV3;
 
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
+/**
+ * @since 3.0.0
+ * @version 3
+ */
 export class BasicDecayComponent extends Component {
   isDisabled: boolean;
   timelineEntry: number;

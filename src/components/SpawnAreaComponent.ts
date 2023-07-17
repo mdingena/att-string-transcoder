@@ -16,6 +16,10 @@ type SpawnAreaComponentPropsV1 = {
 
 export type SpawnAreaComponentProps = SpawnAreaComponentPropsV1;
 
+/**
+ * @since 3.0.0
+ * @version 1
+ */
 export class SpawnAreaComponent extends Component {
   size: number;
   groundLayers: number;

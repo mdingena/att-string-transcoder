@@ -40,6 +40,10 @@ type LiquidContainerComponentPropsV1 = {
 
 export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
 
+/**
+ * @since 3.0.0
+ * @version 1
+ */
 export class LiquidContainerComponent extends Component {
   canAddTo: boolean;
   canRemoveFrom: boolean;

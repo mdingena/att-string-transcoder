@@ -16,6 +16,10 @@ export type HeatSourceBaseComponentProps = HeatSourceBaseComponentPropsV1;
 
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
+/**
+ * @since 3.0.0
+ * @version 1
+ */
 export class HeatSourceBaseComponent extends Component {
   isLit: boolean;
   progress: number;

@@ -27,6 +27,10 @@ type PickupComponentPropsV2 = {
 
 export type PickupComponentProps = PickupComponentPropsV1 | PickupComponentPropsV2;
 
+/**
+ * @since 3.0.0
+ * @version 2
+ */
 export class PickupComponent extends Component {
   lastInteractorPlayerId: number;
   dockedMemory: GrabPointParameters[];
