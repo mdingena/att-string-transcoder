@@ -378,7 +378,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     function setComponentVersion(hash: number, version: number): ReturnType<Map<number, number>['set']> {
       const storedVersion = versions.get(hash);
 
-      if (typeof storedVersion !== 'undefined' && storedVersion === version) {
+      if (typeof storedVersion !== 'undefined' && storedVersion !== version) {
         throw new Error(
           `Component ${hash} exists with version ${storedVersion} and ${version}. All instances of a component must exist with the same version.`
         );
