@@ -25,7 +25,6 @@ import { SentGiftComponent } from './components/SentGiftComponent.js';
 import * as constants from './constants.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
-import { isATTPrefabHash } from './utils/isATTPrefabHash.js';
 import { isSavableComponent } from './utils/isSavableComponent.js';
 import { readChildren } from './utils/readChildren.js';
 import { readComponents } from './utils/readComponents.js';
@@ -248,9 +247,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
      */
     const hash = reader.readUnsignedInteger();
 
-    if (!isATTPrefabHash(hash)) throw new Error();
-
-    const name = constants.attPrefabNames[hash];
+    const name = constants.attPrefabNames[hash as ATTPrefabHash];
 
     if (typeof name === 'undefined') throw new Error(`Cannot find ATT Prefab with hash ${hash}.`);
 
