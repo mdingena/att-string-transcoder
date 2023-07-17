@@ -951,5 +951,3 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     return `${strings.join(',|')},` as SaveString;
   }
 }
-
-// const x = new Prefab('Guard').removeEntity('Guard_51546');
