@@ -876,7 +876,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     let componentVersionsString: string | undefined;
 
     if (componentVersions.size > 0) {
-      componentVersionsString = `${componentVersions.size},${Object.entries(componentVersions).map(
+      componentVersionsString = `${componentVersions.size},${[...componentVersions.entries()].map(
         ([componentHash, componentVersion]) => `${componentHash},${componentVersion}`
       )}`;
     }
