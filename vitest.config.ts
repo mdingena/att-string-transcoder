@@ -12,8 +12,11 @@ export default defineConfig({
     coverage: {
       enabled: true,
       all: true,
+      reportOnFailure: false,
+      skipFull: true,
+      100: true,
       include: [`src/**/${srcFileGlob}`],
-      exclude: [`**/${testFileGlob}`, '**/*.d.ts', 'src/types/*']
+      exclude: [`**/${testFileGlob}`, '**/*.d.ts', 'src/index.ts', 'src/types/*']
     }
   }
 });
