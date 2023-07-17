@@ -15,7 +15,7 @@ import type { Velocity } from './types/Velocity.js';
 import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 import { BinaryReader } from './BinaryReader.js';
 import { BinaryWriter } from './BinaryWriter.js';
-import { Entity } from './Entity.js';
+import { Entity, type EntityKey } from './Entity.js';
 import { DurabilityModuleComponent } from './components/DurabilityModuleComponent.js';
 import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
 import { LiquidContainerComponent } from './components/LiquidContainerComponent.js';
@@ -516,6 +516,37 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Removes all components on this prefab.
+   */
+  removeAllComponents(): Prefab {
+    this.components = { Unknown: [] };
+
+    return this;
+  }
+
+  /**
+   * Removes all entities on this prefab.
+   */
+  removeAllEntities(): Prefab {
+    this.entities = {};
+
+    return this;
+  }
+
+  /**
+   * Removes all gift `Prefab` from this prefab.
+   */
+  removeAllGifts(): Prefab {
+    const sentGiftComponent = this.components.SentGift;
+
+    if (typeof sentGiftComponent !== 'undefined') {
+      sentGiftComponent.gifts = [];
+    }
+
+    return this;
+  }
+
+  /**
    * Removes the specified child `Prefab` from this prefab.
    */
   removeChildPrefab(prefabHash: ATTPrefabHash): Prefab;
@@ -528,6 +559,49 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     const key = typeof prefabArg === 'number' ? 'hash' : 'name';
 
     this.children = [...this.children.filter(child => child.prefab[key] !== prefabArg)];
+
+    return this;
+  }
+
+  /**
+   * Removes the specified component from this prefab.
+   */
+  removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): Prefab {
+    if (typeof componentName === 'undefined') {
+      throw new Error('You must pass a component name to remove from this prefab.');
+    }
+
+    delete this.components[componentName];
+
+    return this;
+  }
+
+  /**
+   * Removes the specified component from this prefab.
+   */
+  removeEntity(entityKey: Exclude<EntityKey<TPrefabName>, 'Unknown'>): Prefab {
+    if (typeof entityKey === 'undefined') {
+      throw new Error('You must pass an entity name to remove from this prefab.');
+    }
+
+    delete this.entities[entityKey as string];
+
+    return this;
+  }
+
+  /**
+   * Removes the specified gift `Prefab` from this prefab.
+   */
+  removeGift(prefabHash: number): Prefab {
+    if (typeof prefabHash === 'undefined') {
+      throw new Error('You must pass a gift prefab hash to remove from this prefab.');
+    }
+
+    const sentGiftComponent = this.components.SentGift;
+
+    if (typeof sentGiftComponent !== 'undefined') {
+      sentGiftComponent.gifts = [...sentGiftComponent.gifts.filter(gift => gift?.hash !== prefabHash)];
+    }
 
     return this;
   }
@@ -877,3 +951,5 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     return `${strings.join(',|')},` as SaveString;
   }
 }
+
+// const x = new Prefab('Guard').removeEntity('Guard_51546');

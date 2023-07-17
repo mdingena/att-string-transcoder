@@ -794,7 +794,7 @@ describe('Prefab.print()', () => {
 });
 
 describe('Prefab.removeAllChildPrefabs()', () => {
-  it('removes all the children from the Prefab', () => {
+  it('removes all child prefabs from the Prefab', () => {
     const prefab = new Prefab('Handle_Short', {
       children: [
         { parentHash: 0, prefab: new Prefab('Phantom_Guard') },
@@ -806,6 +806,70 @@ describe('Prefab.removeAllChildPrefabs()', () => {
     prefab.removeAllChildPrefabs();
 
     expect(prefab.children).toStrictEqual([]);
+  });
+});
+
+describe('Prefab.removeAllComponents()', () => {
+  it('removes all components from the Prefab', () => {
+    const prefab = new Prefab('Handle_Short', {
+      components: {
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        Pickup: new PickupComponent({ version: 2 }),
+        Unknown: [
+          new UnsupportedComponent({
+            hash: 1337,
+            name: 'Unknown',
+            rawData: '1111011100110001000' as BinaryString,
+            version: 1
+          })
+        ]
+      }
+    });
+
+    prefab.removeAllComponents();
+
+    expect(prefab.components).toStrictEqual({ Unknown: [] });
+  });
+});
+
+describe('Prefab.removeAllEntities()', () => {
+  it('removes all entities from the Prefab', () => {
+    const prefab = new Prefab('Grass_Clump', {
+      entities: {
+        Fire_30100: new Entity('Fire_30100', {
+          components: {
+            Unknown: [
+              new UnsupportedComponent({
+                hash: 1337,
+                name: 'Unknown',
+                rawData: '1111011100110001000' as BinaryString,
+                version: 69
+              })
+            ]
+          }
+        }),
+        Unknown_1337: new Entity('Unknown', { hash: 1337 })
+      }
+    });
+
+    prefab.removeAllEntities();
+
+    expect(prefab.entities).toStrictEqual({});
+  });
+});
+
+describe('Prefab.removeAllGifts()', () => {
+  it('removes all gift `Prefab` from the Prefab', () => {
+    const prefab = new Prefab('Gift_Mail_Box')
+      .addGift(new Prefab('Dynamite'))
+      .addGift(new Prefab('Dynamite'))
+      .addGift(new Prefab('Dynamite'));
+
+    expect(prefab.components.SentGift?.gifts.length).toStrictEqual(3);
+
+    prefab.removeAllGifts();
+
+    expect(prefab.components.SentGift?.gifts.length).toStrictEqual(0);
   });
 });
 
@@ -866,6 +930,109 @@ describe('Prefab.removeChildPrefab()', () => {
         { parentHash: 0, prefab: new Prefab('Guard') },
         { parentHash: 0, prefab: new Prefab('Guard') }
       ]);
+    });
+  });
+});
+
+describe('Prefab.removeComponent()', () => {
+  describe('when given invalid arguments', () => {
+    it('throws an error', () => {
+      const prefab = new Prefab('Handle_Short', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          Pickup: new PickupComponent({ version: 2 })
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      const expectedToThrow = () => prefab.removeComponent();
+      const expectedError = new Error('You must pass a component name to remove from this prefab.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when given a component name', () => {
+    it('removes all matching components from the Prefab', () => {
+      const prefab = new Prefab('Handle_Short', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          Pickup: new PickupComponent({ version: 2 })
+        }
+      });
+
+      prefab.removeComponent('NetworkRigidbody');
+
+      expect(prefab.components).toStrictEqual({
+        Pickup: new PickupComponent({ version: 2 }),
+        Unknown: []
+      });
+    });
+  });
+});
+
+describe('Prefab.removeEntity()', () => {
+  describe('when given invalid arguments', () => {
+    it('throws an error', () => {
+      const prefab = new Prefab('Grass_Clump', {
+        entities: {
+          Fire_30100: new Entity('Fire_30100'),
+          Insert_Grass_7796: new Entity('Insert_Grass_7796')
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      const expectedToThrow = () => prefab.removeEntity();
+      const expectedError = new Error('You must pass an entity name to remove from this prefab.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when given an entity name', () => {
+    it('removes all matching entities from the Prefab', () => {
+      const prefab = new Prefab('Grass_Clump', {
+        entities: {
+          Fire_30100: new Entity('Fire_30100'),
+          Insert_Grass_7796: new Entity('Insert_Grass_7796')
+        }
+      });
+
+      prefab.removeEntity('Insert_Grass_7796');
+
+      expect(prefab.entities).toStrictEqual({
+        Fire_30100: new Entity<'Grass_Clump'>('Fire_30100')
+      });
+    });
+  });
+});
+
+describe('Prefab.removeGift()', () => {
+  describe('when given invalid arguments', () => {
+    it('throws an error', () => {
+      const prefab = new Prefab('Gift_Mail_Box')
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Firework'));
+
+      // @ts-expect-error Passing invalid arguments
+      const expectedToThrow = () => prefab.removeGift();
+      const expectedError = new Error('You must pass a gift prefab hash to remove from this prefab.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when given a gift prefab hash', () => {
+    it('removes all matching gifts from the Prefab', () => {
+      const prefab = new Prefab('Gift_Mail_Box')
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Firework'));
+
+      prefab.removeGift(new Prefab('Dynamite').hash);
+
+      expect(prefab.components.SentGift?.gifts.length).toStrictEqual(1);
     });
   });
 });
