@@ -43,6 +43,7 @@ export type PrefabProps<TPrefabName extends ATTPrefabName> = {
   children?: PrefabChild[];
 };
 
+/* c8 ignore start */
 const FALLBACK_DURABILITY_MODULE_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.DurabilityModule) ??
   constants.latestDurabilityModuleComponentVersion;
@@ -65,6 +66,7 @@ const FALLBACK_NETWORK_RIGIDBODY_VERSION =
 
 const FALLBACK_SENT_GIFT_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.SentGift) ?? constants.latestSentGiftComponentVersion;
+/* c8 ignore stop */
 
 export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   readonly name: TPrefabName;
