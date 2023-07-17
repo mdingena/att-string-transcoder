@@ -703,6 +703,28 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Sets the rotation of the prefab. If the prefab is a child of another
+   * prefab, then this rotation is local to that parent. Otherwise, this
+   * rotation is in world space.
+   */
+  setRotation({ x, y, z, w }: Rotation): Prefab {
+    const rotation: Rotation = { x, y, z, w };
+    this.rotation = rotation;
+
+    if (isSavableComponent('NetworkRigidbody', this.name)) {
+      const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
+
+      this.components.NetworkRigidbody = new NetworkRigidbodyComponent({
+        ...this.components.NetworkRigidbody,
+        version,
+        rotation
+      });
+    }
+
+    return this;
+  }
+
+  /**
    * Sets the scale of the prefab.
    */
   setScale(scale: number): Prefab {
@@ -748,32 +770,6 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
         version,
         contentLevel: Math.max(0, Math.ceil(servings)),
         hasContent: Math.ceil(servings) > 0
-      });
-    }
-
-    return this;
-  }
-
-  /**
-   * Sets the rotation of the prefab. If the prefab is a child of another
-   * prefab, then this rotation is local to that parent. Otherwise, this
-   * rotation is in world space.
-   */
-  setRotation(x: number, y: number, z: number, w: number): Prefab {
-    if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined' || typeof w === 'undefined') {
-      throw new Error(`Invalid arguments.`);
-    }
-
-    const rotation: Rotation = { x, y, z, w };
-    this.rotation = rotation;
-
-    if (isSavableComponent('NetworkRigidbody', this.name)) {
-      const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
-
-      this.components.NetworkRigidbody = new NetworkRigidbodyComponent({
-        ...this.components.NetworkRigidbody,
-        version,
-        rotation
       });
     }
 
