@@ -198,22 +198,22 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     }
 
     if (isSavableComponent('SentGift', this.name)) {
-      const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
-      const componentVersions = this.getComponentVersions();
-      const data = this.toBinary(componentVersions);
+      const version = this.components.SentGift?.version ?? FALLBACK_SENT_GIFT_VERSION;
+      const saveString = giftPrefab.toSaveString();
+      const [dataString, versionsString] = saveString.split('|');
 
-      /* Pad bits with trailing zeroes to make it % 32. */
-      const roundedUpDataLength = data.length + (32 - (data.length % 32 === 0 ? 32 : data.length % 32));
-      const paddedData = data.padEnd(roundedUpDataLength, '0');
+      if (typeof dataString === 'undefined') {
+        throw new Error(`Gift prefab data is corrupted.`);
+      }
 
-      /* Calculate byte size of padded binary. */
-      const bytes = paddedData.length / 8;
+      const unsignedIntegers = dataString.split(',').map(Number);
+      const hash = unsignedIntegers.shift();
+      const bytes = unsignedIntegers.shift();
+      const chunkVersioning = versionsString?.split(',').map(Number) ?? [];
 
-      /* Convert binary to array of unsigned integers. */
-      const unsignedIntegers = new BinaryData(paddedData).toUnsignedIntegerArray();
-
-      /* Flatten component version pairs. */
-      const chunkVersioning = [...componentVersions].flat();
+      if (typeof hash === 'undefined' || typeof bytes === 'undefined') {
+        throw new Error(`Gift prefab data is corrupted.`);
+      }
 
       this.components.SentGift = new SentGiftComponent({
         ...this.components.SentGift,
@@ -223,7 +223,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
           {
             data: unsignedIntegers,
             messageSizeInBytes: bytes,
-            hash: giftPrefab.hash,
+            hash,
             chunkVersioning
           }
         ]
