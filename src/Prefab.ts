@@ -204,7 +204,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
       const saveString = giftPrefab.toSaveString();
       const [dataString, versionsString] = saveString.split('|');
 
-      if (typeof dataString === 'undefined') {
+      if (typeof dataString === 'undefined' || dataString.length === 0) {
         throw new Error(`Gift prefab data is corrupted.`);
       }
 
@@ -213,7 +213,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
       const bytes = unsignedIntegers.shift();
       const chunkVersioning = versionsString?.split(',').map(Number) ?? [];
 
-      if (typeof hash === 'undefined' || typeof bytes === 'undefined') {
+      if (typeof hash === 'undefined' || typeof bytes === 'undefined' || bytes === 0) {
         throw new Error(`Gift prefab data is corrupted.`);
       }
 
@@ -306,14 +306,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
     const [dataString, componentVersionsString] = saveString.split('|');
 
-    if (typeof dataString === 'undefined') throw new Error('SaveString is malformed.');
+    if (typeof dataString === 'undefined' || dataString.length === 0) throw new Error('SaveString is malformed.');
 
     const [hashString, dataLengthString, ...unsignedIntegerStrings] = dataString.split(',').filter(Boolean);
 
     if (
       typeof hashString === 'undefined' ||
       typeof dataLengthString === 'undefined' ||
-      typeof unsignedIntegerStrings === 'undefined'
+      unsignedIntegerStrings.length === 0
     ) {
       throw new Error('SaveString is malformed.');
     }
@@ -722,6 +722,10 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Sets the scale of the prefab.
    */
   setScale(scale: number): Prefab {
+    if (typeof scale === 'undefined') {
+      throw new Error('You must pass a number to set as the scale.');
+    }
+
     this.scale = scale;
 
     return this;
