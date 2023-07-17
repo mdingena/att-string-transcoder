@@ -539,11 +539,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Only works reliably on the parent prefab. Does not work on kinematic
    * prefabs.
    */
-  setAngularVelocity(x: number, y: number, z: number): Prefab {
-    if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined') {
-      throw new Error(`Invalid arguments.`);
-    }
-
+  setAngularVelocity({ x, y, z }: AngularVelocity): Prefab {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
       const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
       const angularVelocity: AngularVelocity = { x, y, z };
@@ -683,11 +679,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * prefab, then this position is local to that parent. Otherwise, this
    * position is in world space.
    */
-  setPosition(x: number, y: number, z: number): Prefab {
-    if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined') {
-      throw new Error(`Invalid arguments.`);
-    }
-
+  setPosition({ x, y, z }: Position): Prefab {
     const position: Position = { x, y, z };
     this.position = position;
 
@@ -784,11 +776,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Only works reliably on the parent prefab. Does not work on kinematic
    * prefabs.
    */
-  setVelocity(x: number, y: number, z: number): Prefab {
-    if (typeof x === 'undefined' || typeof y === 'undefined' || typeof z === 'undefined') {
-      throw new Error(`Invalid arguments.`);
-    }
-
+  setVelocity({ x, y, z }: Velocity): Prefab {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
       const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
       const velocity: Velocity = { x, y, z };
