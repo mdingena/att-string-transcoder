@@ -1,4 +1,4 @@
-![ATT String Transcoder](./att-st.png)
+![ATT String Transcoder](./att-string-transcoder.png)
 
 # ATT String Transcoder
 
