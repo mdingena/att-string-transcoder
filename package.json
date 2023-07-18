@@ -34,7 +34,7 @@
     "test": "vitest run"
   },
   "engines": {
-    "node": ">=14.17.0"
+    "node": ">=18"
   },
   "type": "module",
   "exports": {
