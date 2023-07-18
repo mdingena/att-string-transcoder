@@ -67,6 +67,16 @@ const FALLBACK_SENT_GIFT_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.SentGift) ?? constants.latestSentGiftComponentVersion;
 /* c8 ignore stop */
 
+/**
+ * A JavaScript object representation of an _A Township Tale_ in-game prefab.
+ *
+ * @example
+ * const prefab = new Prefab('Handle_Short');
+ * // or
+ * const prefab = Prefab.fromSaveString<'Handle_Short'>(mySaveString);
+ * // or
+ * const prefab = Prefab.fromBinary<'Handle_Short'>(myBinaryString);
+ */
 export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   readonly name: TPrefabName;
   readonly hash: number;
