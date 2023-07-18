@@ -3,7 +3,6 @@ import type { ATTPrefabHash } from './types/ATTPrefabHash.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
 import type { AngularVelocity } from './types/AngularVelocity.js';
 import type { BinaryString } from './types/BinaryString.js';
-import type { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 import type { Position } from './types/Position.js';
 import type { PrefabChild } from './types/PrefabChild.js';
 import type { PrefabComponents } from './types/PrefabComponents.js';
@@ -25,6 +24,7 @@ import { SentGiftComponent } from './components/SentGiftComponent.js';
 import * as constants from './constants.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
+import { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 import { isSavableComponent } from './utils/isSavableComponent.js';
 import { readChildren } from './utils/readChildren.js';
 import { readComponents } from './utils/readComponents.js';
@@ -702,13 +702,16 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * appearance and other qualities such as durability, damage, heat
    * retention and weight.
    */
-  setMaterial(materialHash: PhysicalMaterialPartHash): Prefab {
-    if (typeof materialHash === 'undefined') {
+  setMaterial(materialHash: PhysicalMaterialPartHash): Prefab;
+  setMaterial(materialName: keyof typeof PhysicalMaterialPartHash): Prefab;
+  setMaterial(materialArg: PhysicalMaterialPartHash | keyof typeof PhysicalMaterialPartHash): Prefab {
+    if (typeof materialArg === 'undefined') {
       throw new Error('You must pass a PhysicalMaterialPartHash to set as the material.');
     }
 
     if (isSavableComponent('PhysicalMaterialPart', this.name)) {
       const version = this.components.PhysicalMaterialPart?.version ?? FALLBACK_PHYSICAL_MATERIAL_PART_VERSION;
+      const materialHash = typeof materialArg === 'number' ? materialArg : PhysicalMaterialPartHash[materialArg];
 
       this.components.PhysicalMaterialPart = new PhysicalMaterialPartComponent({
         ...this.components.PhysicalMaterialPart,

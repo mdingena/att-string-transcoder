@@ -1270,13 +1270,26 @@ describe('Prefab.setMaterial()', () => {
   });
 
   describe('when the prefab can have a PhysicalMaterialPart component', () => {
-    it('sets the given material', () => {
-      const prefab = new Prefab('Short_Sword_Blade');
+    describe('when given a material hash', () => {
+      it('sets the given material', () => {
+        const prefab = new Prefab('Short_Sword_Blade');
 
-      prefab.setMaterial(PhysicalMaterialPartHash.EvinonSteelAlloy);
-      const materialHash = prefab.getMaterial();
+        prefab.setMaterial(PhysicalMaterialPartHash.EvinonSteelAlloy);
+        const materialHash = prefab.getMaterial();
 
-      expect(materialHash).toStrictEqual(31502);
+        expect(materialHash).toStrictEqual(31502);
+      });
+    });
+
+    describe('when given a material name', () => {
+      it('sets the given material', () => {
+        const prefab = new Prefab('Short_Sword_Blade');
+
+        prefab.setMaterial('EvinonSteelAlloy');
+        const materialHash = prefab.getMaterial();
+
+        expect(materialHash).toStrictEqual(31502);
+      });
     });
   });
 
