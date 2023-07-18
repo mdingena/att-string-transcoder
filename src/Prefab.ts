@@ -239,7 +239,10 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Creates a `Prefab` from reading the prefab's binary data stored in a `SaveString`.
    */
-  static fromBinary(reader: BinaryReader, componentVersions?: Map<number, number>): Prefab {
+  static fromBinary<TPrefabName extends ATTPrefabName = ATTPrefabName>(
+    reader: BinaryReader,
+    componentVersions?: Map<number, number>
+  ): Prefab<TPrefabName> {
     const versions = componentVersions ?? constants.latestSupportedComponentVersions;
 
     /**
@@ -253,7 +256,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
     // const prefab = ATTPrefabs[name];
 
-    return new Prefab(name, {
+    return new Prefab<TPrefabName>(name as TPrefabName, {
       /**
        * @property {Position} position
        */
@@ -298,7 +301,10 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Creates a `Prefab` from reading a `SaveString`.
    */
-  static fromSaveString(saveString: string, options?: BinaryDataOptions): Prefab {
+  static fromSaveString<TPrefabName extends ATTPrefabName = ATTPrefabName>(
+    saveString: string,
+    options?: BinaryDataOptions
+  ): Prefab<TPrefabName> {
     if (!BinaryData.isSaveString(saveString)) {
       throw new Error('SaveString is malformed.');
     }
