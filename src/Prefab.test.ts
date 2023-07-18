@@ -100,7 +100,7 @@ describe('Prefab.addChildPrefab()', () => {
     });
   });
 
-  describe('when given a null parentName', () => {
+  describe('when given a null parentKey', () => {
     it('adds a child prefab attached to parentHash 0', () => {
       const child = new Prefab('Guard');
 
@@ -115,7 +115,7 @@ describe('Prefab.addChildPrefab()', () => {
     });
   });
 
-  describe('when given a valid parentName', () => {
+  describe('when given a valid parentKey', () => {
     it('adds a child prefab attached to the corresponding entity', () => {
       const child = new Prefab('Guard');
 
@@ -130,7 +130,7 @@ describe('Prefab.addChildPrefab()', () => {
     });
   });
 
-  describe('when given an invalid parentName', () => {
+  describe('when given an invalid parentKey', () => {
     it('throws an error', () => {
       const child = new Prefab('Guard');
 

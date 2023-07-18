@@ -150,14 +150,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Attaches a `Prefab` to this prefab as a child. It can optionally be attached onto one of this
    * prefab's embedded entities, which is required for most child prefabs under normal circumstances.
-   * If you do not specify a `parentName`, you may pass `null` to create a "floating" child. It will
+   * If you do not specify a `parentKey`, you may pass `null` to create a "floating" child. It will
    * be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
    */
   addChildPrefab(
-    parentName: keyof (typeof ATTPrefabs)[TPrefabName]['embedded'] | null,
+    parentKey: Exclude<EntityKey<TPrefabName>, 'Unknown'> | null,
     childPrefab: Prefab
   ): Prefab<TPrefabName> {
-    if (typeof parentName === 'undefined' || typeof childPrefab === 'undefined') {
+    if (typeof parentKey === 'undefined' || typeof childPrefab === 'undefined') {
       throw new Error(
         'You must pass a parent prefab entity hash (or null) and a child prefab to add as a child to this prefab.'
       );
@@ -165,17 +165,17 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
     let entityHash: number;
 
-    if (parentName === null) {
+    if (parentKey === null) {
       entityHash = 0;
     } else {
       const entities = ATTPrefabs[this.name].embedded as Readonly<
         Record<string, { hash: number; name: string; savables: Record<string, { hash: number; name: string }> }>
       >;
 
-      const entity = entities[parentName as string];
+      const entity = entities[parentKey as string];
 
       if (typeof entity === 'undefined') {
-        throw new Error(`"${String(parentName)}" is not a valid entity on "${this.name}".`);
+        throw new Error(`"${String(parentKey)}" is not a valid entity on "${this.name}".`);
       }
 
       entityHash = entity.hash;
