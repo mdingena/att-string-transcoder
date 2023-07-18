@@ -452,7 +452,17 @@ describe('Prefab.getComponentVersions()', () => {
               ]
             }
           })
-        }
+        },
+        children: [
+          {
+            parentHash: 0,
+            prefab: new Prefab('Guard', {
+              components: {
+                PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 })
+              }
+            })
+          }
+        ]
       });
 
       const componentVersions = prefab.getComponentVersions();
@@ -462,7 +472,8 @@ describe('Prefab.getComponentVersions()', () => {
           [2290978823, 1],
           [1454441398, 2],
           [1337, 1],
-          [4109360768, 1]
+          [4109360768, 1],
+          [272188517, 1]
         ])
       );
     });

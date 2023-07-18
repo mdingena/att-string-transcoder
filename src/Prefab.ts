@@ -429,6 +429,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
       }
     }
 
+    /* Get component versions from child prefabs. */
+    for (const { prefab } of this.children) {
+      const componentVersions = prefab.getComponentVersions();
+
+      for (const [hash, version] of componentVersions.entries()) {
+        setComponentVersion(hash, version);
+      }
+    }
+
     return versions;
   }
 
