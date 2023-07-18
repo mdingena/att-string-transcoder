@@ -143,7 +143,10 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * If you do not specify a `parentName`, you may pass `null` to create a "floating" child. It will
    * be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
    */
-  addChildPrefab(parentName: keyof (typeof ATTPrefabs)[TPrefabName]['embedded'] | null, childPrefab: Prefab): Prefab {
+  addChildPrefab(
+    parentName: keyof (typeof ATTPrefabs)[TPrefabName]['embedded'] | null,
+    childPrefab: Prefab
+  ): Prefab<TPrefabName> {
     if (typeof parentName === 'undefined' || typeof childPrefab === 'undefined') {
       throw new Error(
         'You must pass a parent prefab entity hash (or null) and a child prefab to add as a child to this prefab.'
@@ -182,7 +185,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Adds a `Component` to the prefab. Will override any existing component with that name.
    */
-  addComponent(component: Component): Prefab {
+  addComponent(component: Component): Prefab<TPrefabName> {
     this.components = {
       ...this.components,
       [component.name]: component
@@ -195,7 +198,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Adds a `Prefab` gift to this prefab's `SentGift` component. You may call this method more than
    * once to add additional gifts.
    */
-  addGift(giftPrefab: Prefab): Prefab {
+  addGift(giftPrefab: Prefab): Prefab<TPrefabName> {
     if (typeof giftPrefab === 'undefined') {
       throw new Error('You must pass a gift prefab to add to this prefab as a gift.');
     }
@@ -515,7 +518,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes all child `Prefab` from this prefab.
    */
-  removeAllChildPrefabs(): Prefab {
+  removeAllChildPrefabs(): Prefab<TPrefabName> {
     this.children = [];
 
     return this;
@@ -524,7 +527,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes all components on this prefab.
    */
-  removeAllComponents(): Prefab {
+  removeAllComponents(): Prefab<TPrefabName> {
     this.components = { Unknown: [] };
 
     return this;
@@ -533,7 +536,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes all entities on this prefab.
    */
-  removeAllEntities(): Prefab {
+  removeAllEntities(): Prefab<TPrefabName> {
     this.entities = {};
 
     return this;
@@ -542,7 +545,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes all gift `Prefab` from this prefab.
    */
-  removeAllGifts(): Prefab {
+  removeAllGifts(): Prefab<TPrefabName> {
     const sentGiftComponent = this.components.SentGift;
 
     if (typeof sentGiftComponent !== 'undefined') {
@@ -557,7 +560,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   removeChildPrefab(prefabHash: ATTPrefabHash): Prefab;
   removeChildPrefab(prefabName: ATTPrefabName): Prefab;
-  removeChildPrefab(prefabArg: ATTPrefabHash | ATTPrefabName): Prefab {
+  removeChildPrefab(prefabArg: ATTPrefabHash | ATTPrefabName): Prefab<TPrefabName> {
     if (typeof prefabArg === 'undefined') {
       throw new Error('You must pass a child prefab hash or name to remove from this prefab.');
     }
@@ -572,7 +575,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the specified component from this prefab.
    */
-  removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): Prefab {
+  removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): Prefab<TPrefabName> {
     if (typeof componentName === 'undefined') {
       throw new Error('You must pass a component name to remove from this prefab.');
     }
@@ -585,7 +588,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the specified component from this prefab.
    */
-  removeEntity(entityKey: Exclude<EntityKey<TPrefabName>, 'Unknown'>): Prefab {
+  removeEntity(entityKey: Exclude<EntityKey<TPrefabName>, 'Unknown'>): Prefab<TPrefabName> {
     if (typeof entityKey === 'undefined') {
       throw new Error('You must pass an entity name to remove from this prefab.');
     }
@@ -598,7 +601,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the specified gift `Prefab` from this prefab.
    */
-  removeGift(prefabHash: number): Prefab {
+  removeGift(prefabHash: number): Prefab<TPrefabName> {
     if (typeof prefabHash === 'undefined') {
       throw new Error('You must pass a gift prefab hash to remove from this prefab.');
     }
@@ -618,7 +621,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Only works reliably on the parent prefab. Does not work on kinematic
    * prefabs.
    */
-  setAngularVelocity({ x, y, z }: AngularVelocity): Prefab {
+  setAngularVelocity({ x, y, z }: AngularVelocity): Prefab<TPrefabName> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
       const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
       const angularVelocity: AngularVelocity = { x, y, z };
@@ -636,7 +639,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the gift sender's name, which is labeled on the gift.
    */
-  setGiftBoxLabel(label: string): Prefab {
+  setGiftBoxLabel(label: string): Prefab<TPrefabName> {
     if (typeof label === 'undefined') {
       throw new Error('You must pass a string to set as the gift box label.');
     }
@@ -659,7 +662,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * other qualities such as durability and the amount of materials
    * recovered from recycling.
    */
-  setIntegrity(integrity: number): Prefab {
+  setIntegrity(integrity: number): Prefab<TPrefabName> {
     if (typeof integrity === 'undefined') {
       throw new Error('You must pass a number to set as the integrity.');
     }
@@ -683,7 +686,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * require to be kinematic to work properly. You can optionally pass a
    * boolean, for example `prefab.setKinematic(false)`.
    */
-  setKinematic(isKinematic?: boolean): Prefab {
+  setKinematic(isKinematic?: boolean): Prefab<TPrefabName> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
       const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
 
@@ -702,9 +705,9 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * appearance and other qualities such as durability, damage, heat
    * retention and weight.
    */
-  setMaterial(materialHash: PhysicalMaterialPartHash): Prefab;
-  setMaterial(materialName: keyof typeof PhysicalMaterialPartHash): Prefab;
-  setMaterial(materialArg: PhysicalMaterialPartHash | keyof typeof PhysicalMaterialPartHash): Prefab {
+  setMaterial(materialHash: PhysicalMaterialPartHash): Prefab<TPrefabName>;
+  setMaterial(materialName: keyof typeof PhysicalMaterialPartHash): Prefab<TPrefabName>;
+  setMaterial(materialArg: PhysicalMaterialPartHash | keyof typeof PhysicalMaterialPartHash): Prefab<TPrefabName> {
     if (typeof materialArg === 'undefined') {
       throw new Error('You must pass a PhysicalMaterialPartHash to set as the material.');
     }
@@ -726,7 +729,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the prefab on fire, if it is capable of catching fire.
    */
-  setOnFire(isLit?: boolean): Prefab {
+  setOnFire(isLit?: boolean): Prefab<TPrefabName> {
     const validFireEntity = Object.values<{
       hash: number;
       name: string;
@@ -761,7 +764,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * prefab, then this position is local to that parent. Otherwise, this
    * position is in world space.
    */
-  setPosition({ x, y, z }: Position): Prefab {
+  setPosition({ x, y, z }: Position): Prefab<TPrefabName> {
     const position: Position = { x, y, z };
     this.position = position;
 
@@ -783,7 +786,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * prefab, then this rotation is local to that parent. Otherwise, this
    * rotation is in world space.
    */
-  setRotation({ x, y, z, w }: Rotation): Prefab {
+  setRotation({ x, y, z, w }: Rotation): Prefab<TPrefabName> {
     const rotation: Rotation = { x, y, z, w };
     this.rotation = rotation;
 
@@ -803,7 +806,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the scale of the prefab.
    */
-  setScale(scale: number): Prefab {
+  setScale(scale: number): Prefab<TPrefabName> {
     if (typeof scale === 'undefined') {
       throw new Error('You must pass a number to set as the scale.');
     }
@@ -820,7 +823,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * such as touching it. You can optionally pass a boolean, for example
    * `prefab.setServerSleeping(false)`.
    */
-  setServerSleeping(isServerSleeping?: boolean): Prefab {
+  setServerSleeping(isServerSleeping?: boolean): Prefab<TPrefabName> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
       const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
 
@@ -837,7 +840,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the number of servings on a liquid container prefab.
    */
-  setServings(servings: number): Prefab {
+  setServings(servings: number): Prefab<TPrefabName> {
     if (typeof servings === 'undefined') {
       throw new Error('You must pass a number to set as the amount of servings.');
     }
@@ -862,7 +865,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Only works reliably on the parent prefab. Does not work on kinematic
    * prefabs.
    */
-  setVelocity({ x, y, z }: Velocity): Prefab {
+  setVelocity({ x, y, z }: Velocity): Prefab<TPrefabName> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
       const version = this.components.NetworkRigidbody?.version ?? FALLBACK_NETWORK_RIGIDBODY_VERSION;
       const velocity: Velocity = { x, y, z };
