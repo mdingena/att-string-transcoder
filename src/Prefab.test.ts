@@ -781,6 +781,38 @@ describe('Prefab.getVelocity()', () => {
   });
 });
 
+describe('Prefab.inspect()', () => {
+  it('prints the internal data structure of the prefab to the console', () => {
+    const spy = vi.spyOn(console, 'log');
+    spy.mockImplementationOnce(() => void 0);
+
+    const prefab = new Prefab('Handle_Short');
+    prefab.inspect();
+
+    expect(spy).toHaveBeenCalledWith(`{
+  "name": "Handle_Short",
+  "hash": 42230,
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "w": 1
+  },
+  "scale": 1,
+  "components": {
+    "Unknown": []
+  },
+  "entities": {},
+  "children": []
+}`);
+  });
+});
+
 describe('Prefab.print()', () => {
   it('prints the SaveString of the prefab to the console', () => {
     const spy = vi.spyOn(console, 'log');

@@ -518,6 +518,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Prints this prefab's data structure to your console.
+   */
+  inspect(): void {
+    console.log(JSON.stringify(this, null, 2));
+  }
+
+  /**
    * Prints this prefab's `SaveString` to your console.
    */
   print(): void {
