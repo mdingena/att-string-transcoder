@@ -375,7 +375,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     const data = BinaryData.fromUnsignedIntegerArray(unsignedIntegers, options).toBinaryString();
     const reader = new BinaryReader(data);
 
-    return Prefab.fromBinary(reader, componentVersions);
+    return Prefab.fromBinary<TPrefabName>(reader, componentVersions);
   }
 
   /**
