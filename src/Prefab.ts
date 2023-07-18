@@ -70,6 +70,8 @@ const FALLBACK_SENT_GIFT_VERSION =
 /**
  * A JavaScript object representation of an _A Township Tale_ in-game prefab.
  *
+ * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
+ *
  * @example
  * const prefab = new Prefab('Handle_Short');
  * // or
@@ -90,6 +92,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Creates a new `Prefab` from a list of known _A Township Tale_ prefab names. You may
    * optionally provide additional properties in the second argument.
+   *
+   * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
    *
    * @example
    * const simple = new Prefab('Grass_Clump');
@@ -449,7 +453,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Gets the prefab's physical material.
+   * Gets the prefab's physical integrity.
    */
   getIntegrity(): number {
     return this.components.DurabilityModule?.integrity ?? 1;
@@ -520,21 +524,21 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Gets the direction (vector) on the prefab.
+   * Gets the direction (vector) on the prefab. Units are in metres per second.
    */
   getVelocity(): Velocity {
     return this.components.NetworkRigidbody?.velocity ?? { x: 0, y: 0, z: 0 };
   }
 
   /**
-   * Prints this prefab's data structure to your console.
+   * Prints this prefab's data structure to the console.
    */
   inspect(): void {
     console.log(JSON.stringify(this, null, 2));
   }
 
   /**
-   * Prints this prefab's `SaveString` to your console.
+   * Prints this prefab's `SaveString` to the console.
    */
   print(): void {
     const saveString = this.toSaveString();
@@ -612,7 +616,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Removes the specified component from this prefab.
+   * Removes the specified entity from this prefab.
    */
   removeEntity(entityKey: Exclude<EntityKey<TPrefabName>, 'Unknown'>): Prefab<TPrefabName> {
     if (typeof entityKey === 'undefined') {
@@ -645,7 +649,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Sets a spin (vector) on the prefab, causing the physics engine to
    * apply a force to it when spawning. Units are in metres per second.
    * Only works reliably on the parent prefab. Does not work on kinematic
-   * prefabs.
+   * prefabs. Does not work on static prefabs.
    */
   setAngularVelocity({ x, y, z }: AngularVelocity): Prefab<TPrefabName> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
@@ -889,7 +893,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Sets a direction (vector) on the prefab, causing the physics engine to
    * apply a force to it when spawning. Units are in metres per second.
    * Only works reliably on the parent prefab. Does not work on kinematic
-   * prefabs.
+   * prefabs. Does not work on static prefabs.
    */
   setVelocity({ x, y, z }: Velocity): Prefab<TPrefabName> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
