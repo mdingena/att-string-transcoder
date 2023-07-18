@@ -682,6 +682,16 @@ describe('Prefab.getPosition()', () => {
   });
 });
 
+describe('Prefab.getRotation()', () => {
+  it('returns the Rotation of the Prefab', () => {
+    const prefab = new Prefab('Handle_Short', { rotation: { x: 0.69, y: 0.42, z: -0.1337, w: 0.88 } });
+
+    const rotation = prefab.getRotation();
+
+    expect(rotation).toStrictEqual({ x: 0.69, y: 0.42, z: -0.1337, w: 0.88 });
+  });
+});
+
 describe('Prefab.getScale()', () => {
   it('returns the scale of the Prefab', () => {
     const prefab = new Prefab('Handle_Short', { scale: 0.69 });
@@ -749,16 +759,6 @@ describe('Prefab.getServings()', () => {
 
       expect(servings).toStrictEqual(420);
     });
-  });
-});
-
-describe('Prefab.getRotation()', () => {
-  it('returns the Rotation of the Prefab', () => {
-    const prefab = new Prefab('Handle_Short', { rotation: { x: 0.69, y: 0.42, z: -0.1337, w: 0.88 } });
-
-    const rotation = prefab.getRotation();
-
-    expect(rotation).toStrictEqual({ x: 0.69, y: 0.42, z: -0.1337, w: 0.88 });
   });
 });
 

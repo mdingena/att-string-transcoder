@@ -489,6 +489,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Gets the rotation of the prefab. If the prefab is a child of another
+   * prefab, then this rotation is local to that parent. Otherwise, this
+   * rotation is in world space.
+   */
+  getRotation(): Rotation {
+    return this.rotation;
+  }
+
+  /**
    * Gets the scale of the prefab.
    */
   getScale(): number {
@@ -508,15 +517,6 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   getServings(): number {
     return this.components.LiquidContainer?.contentLevel ?? 0;
-  }
-
-  /**
-   * Gets the rotation of the prefab. If the prefab is a child of another
-   * prefab, then this rotation is local to that parent. Otherwise, this
-   * rotation is in world space.
-   */
-  getRotation(): Rotation {
-    return this.rotation;
   }
 
   /**
