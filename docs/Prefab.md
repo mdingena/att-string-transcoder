@@ -1,51 +1,63 @@
 # Class: `Prefab`
 
-- [`<PrefabProps>`](#prefabprops)
-- [`new Prefab(prefabName, props?)`](#new-prefabprefabname-props)
-- [`Prefab.fromBinary(reader, componentVersions?)`](#prefabfrombinaryreader-componentversions)
-- [`Prefab.fromSaveString(saveString)`](#prefabfromsavestringsavestring)
-- [`prefab.addChildPrefab(parentKey, childPrefab)`](#prefabaddchildprefabparentkey-childprefab)
-- [`prefab.addComponent(component)`](#prefabaddcomponentcomponent)
-- [`prefab.addGift(giftPrefab)`](#prefabaddgiftgiftprefab)
-- [`prefab.getAngularVelocity()`](#prefabgetangularvelocity)
-- [`prefab.getComponentVersions()`](#prefabgetcomponentversions)
-- [`prefab.getGiftBoxLabel()`](#prefabgetgiftboxlabel)
-- [`prefab.getIntegrity()`](#prefabgetintegrity)
-- [`prefab.getKinematic()`](#prefabgetkinematic)
-- [`prefab.getMaterial()`](#prefabgetmaterial)
-- [`prefab.getOnFire()`](#prefabgetonfire)
-- [`prefab.getPosition()`](#prefabgetposition)
-- [`prefab.getScale()`](#prefabgetscale)
-- [`prefab.getServerSleeping()`](#prefabgetserversleeping)
-- [`prefab.getServings()`](#prefabgetservings)
-- [`prefab.getRotation()`](#prefabgetrotation)
-- [`prefab.getVelocity()`](#prefabgetvelocity)
-- [`prefab.inspect()`](#prefabinspect)
-- [`prefab.print()`](#prefabprint)
-- [`prefab.removeAllChildPrefabs()`](#prefabremoveallchildprefabs)
-- [`prefab.removeAllComponents()`](#prefabremoveallcomponents)
-- [`prefab.removeAllEntities()`](#prefabremoveallentities)
-- [`prefab.removeAllGifts()`](#prefabremoveallgifts)
-- [`prefab.removeChildPrefab(prefabArg)`](#prefabremovechildprefabprefabarg)
-- [`prefab.removeComponent(componentName)`](#prefabremovecomponentcomponentname)
-- [`prefab.removeEntity(entityKey)`](#prefabremoveentityentitykey)
-- [`prefab.removeGift(prefabHash)`](#prefabremovegiftprefabhash)
-- [`prefab.setAngularVelocity(angularVelocity)`](#prefabsetangularvelocityangularvelocity)
-- [`prefab.setGiftBoxLabel(label)`](#prefabsetgiftboxlabellabel)
-- [`prefab.setIntegrity(integrity)`](#prefabsetintegrityintegrity)
-- [`prefab.setKinematic(isKinematic?)`](#prefabsetkinematiciskinematic)
-- [`prefab.setMaterial(materialArg)`](#prefabsetmaterialmaterialarg)
-- [`prefab.setOnFire(isLit?)`](#prefabsetonfireislit)
-- [`prefab.setPosition(position)`](#prefabsetpositionposition)
-- [`prefab.setRotation(rotation)`](#prefabsetrotationrotation)
-- [`prefab.setScale(scale)`](#prefabsetscalescale)
-- [`prefab.setServerSleeping(isServerSleeping?)`](#prefabsetserversleepingisserversleeping)
-- [`prefab.setServings(servings)`](#prefabsetservingsservings)
-- [`prefab.setVelocity(velocity)`](#prefabsetvelocityvelocity)
-- [`prefab.toBinary(componentVersions)`](#prefabtobinarycomponentversions)
-- [`prefab.toSaveString()`](#prefabtosavestring)
+- [Types](#types)
+  - [`<PrefabProps>`](#prefabprops)
+- [Constructors](#constructors)
+  - [`new Prefab(prefabName, props?)`](#new-prefabprefabname-props)
+  - [`Prefab.fromBinary(reader, componentVersions?)`](#prefabfrombinaryreader-componentversions)
+  - [`Prefab.fromSaveString(saveString)`](#prefabfromsavestringsavestring)
+- [Properties](#properties)
+  - [`position`](#position)
+  - [`rotation`](#rotation)
+  - [`scale`](#scale)
+  - [`components`](#components)
+  - [`entities`](#entities)
+  - [`children`](#children)
+- [Methods](#methods)
+  - [`addChildPrefab(parentKey, childPrefab)`](#addchildprefabparentkey-childprefab)
+  - [`addComponent(component)`](#addcomponentcomponent)
+  - [`addGift(giftPrefab)`](#addgiftgiftprefab)
+  - [`getAngularVelocity()`](#getangularvelocity)
+  - [`getComponentVersions()`](#getcomponentversions)
+  - [`getGiftBoxLabel()`](#getgiftboxlabel)
+  - [`getIntegrity()`](#getintegrity)
+  - [`getKinematic()`](#getkinematic)
+  - [`getMaterial()`](#getmaterial)
+  - [`getOnFire()`](#getonfire)
+  - [`getPosition()`](#getposition)
+  - [`getScale()`](#getscale)
+  - [`getServerSleeping()`](#getserversleeping)
+  - [`getServings()`](#getservings)
+  - [`getRotation()`](#getrotation)
+  - [`getVelocity()`](#getvelocity)
+  - [`inspect()`](#inspect)
+  - [`print()`](#print)
+  - [`removeAllChildPrefabs()`](#removeallchildprefabs)
+  - [`removeAllComponents()`](#removeallcomponents)
+  - [`removeAllEntities()`](#removeallentities)
+  - [`removeAllGifts()`](#removeallgifts)
+  - [`removeChildPrefab(prefabArg)`](#removechildprefabprefabarg)
+  - [`removeComponent(componentName)`](#removecomponentcomponentname)
+  - [`removeEntity(entityKey)`](#removeentityentitykey)
+  - [`removeGift(prefabHash)`](#removegiftprefabhash)
+  - [`setAngularVelocity(angularVelocity)`](#setangularvelocityangularvelocity)
+  - [`setGiftBoxLabel(label)`](#setgiftboxlabellabel)
+  - [`setIntegrity(integrity)`](#setintegrityintegrity)
+  - [`setKinematic(isKinematic?)`](#setkinematiciskinematic)
+  - [`setMaterial(materialArg)`](#setmaterialmaterialarg)
+  - [`setOnFire(isLit?)`](#setonfireislit)
+  - [`setPosition(position)`](#setpositionposition)
+  - [`setRotation(rotation)`](#setrotationrotation)
+  - [`setScale(scale)`](#setscalescale)
+  - [`setServerSleeping(isServerSleeping?)`](#setserversleepingisserversleeping)
+  - [`setServings(servings)`](#setservingsservings)
+  - [`setVelocity(velocity)`](#setvelocityvelocity)
+  - [`toBinary(componentVersions)`](#tobinarycomponentversions)
+  - [`toSaveString()`](#tosavestring)
 
-## `<PrefabProps>`
+## Types
+
+### `<PrefabProps>`
 
 A configuration object to optionally pass to the `Prefab` constructor. Lets you instantiate a `Prefab` with predefined data. Any properties that you do not pass will be created with a default value.
 
@@ -67,7 +79,9 @@ type PrefabProps<TPrefabName extends ATTPrefabName> = {
 - `entities` (optional) `<Partial<`[`PrefabEntities`](./PrefabComponents.md)`<`[`ATTPrefabName`](./ATTPrefabName.md)`>>>` A mapped object of entities on the prefab.
 - `children` (optional) `<Array<`[`PrefabChild`](./PrefabComponents.md)`>>` An array of objects connecting child prefabs with parent entities.
 
-## `new Prefab(prefabName, props?)`
+## Constructors
+
+### `new Prefab(prefabName, props?)`
 
 - `prefabName` [`<ATTPrefabName>`](./ATTPrefabName.md) The name of the prefab to create.
 - `props` (optional) [`<PrefabProps>`](#prefabprops) Additional configuration of the prefab to create.
@@ -116,7 +130,9 @@ const prefab = new Prefab('Wooden_Stake', {
 });
 ```
 
-## `Prefab.fromBinary(reader, componentVersions?)`
+---
+
+### `Prefab.fromBinary(reader, componentVersions?)`
 
 Creates a `Prefab` from reading the prefab's binary data stored in a [`<SaveString>`](./SaveString.md).
 
@@ -141,7 +157,9 @@ const componentVersions = new Map<number, number>([
 const prefab = Prefab.fromBinary<'Handle_Short'>(reader, componentVersions);
 ```
 
-## `Prefab.fromSaveString(saveString)`
+---
+
+### `Prefab.fromSaveString(saveString)`
 
 Creates a `Prefab` from reading an ATT save string.
 
@@ -156,7 +174,187 @@ const saveString = `43430,230,43430,3290698471,1125743666,1132721897,1050703933,
 const prefab = Prefab.fromSaveString<'SpriggullDrumstick_Full_Ripe'>(saveString);
 ```
 
-## `prefab.addChildPrefab(parentKey, childPrefab)`
+## Properties
+
+Note that the following properties are sorted in order of appearance when decoding an ATT prefab save string.
+
+### `position`
+
+:warning: Note that although you can safely read from this public property, you should not modify this property directly. This is because some prefabs also use a [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md) to control their position. You can safely set the position of a prefab using the [`setPosition(position)`](#setpositionposition) method.
+
+- [`<Position>`](./Position.md) The position of the prefab.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short', {
+  position: { x: 420, y: 69, z: 1337 }
+});
+
+const position = prefab.position;
+// `position` is `{ x: 420, y: 69, z: 1337 }`
+```
+
+---
+
+### `rotation`
+
+:warning: Note that although you can safely read from this public property, you should not modify this property directly. This is because some prefabs also use a [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md) to control their rotation. You can safely set the rotation of a prefab using the [`setRotation(rotation)`](#setrotationrotation) method.
+
+- [`<Rotation>`](./Rotation.md) The rotation of the prefab.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short', {
+  rotation: { x: 0.42, y: -0.69, z: -0.1337, w: 0.88 }
+});
+
+const rotation = prefab.rotation;
+// `rotation` is `{ x: 0.42, y: -0.69, z: -0.1337, w: 0.88 }`
+```
+
+---
+
+### `scale`
+
+Contains the scale of the prefab. You can also set the scale of a prefab using the [`setScale(scale)`](#setscalescale) method.
+
+- `<number>` The scale of the prefab.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short', {
+  scale: 0.69
+});
+
+const scale = prefab.scale;
+// `scale` is approx. `0.69` (within JavaScript floating point precision)
+```
+
+---
+
+### `components`
+
+Provides access to the components stored in this prefab. Components are keyed to their respective names, unless its data contained an unrecognised hash. In that case, the component will be stored in an array under the `Unknown` key.
+
+- [`<PrefabComponents>`](./PrefabComponents.md) A map of the stored components.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short', {
+  components: {
+    NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 })
+  }
+});
+
+const components = prefab.components;
+// `components` is `{
+//   NetworkRigidbody: NetworkRigidbodyComponent {
+//     hash: 2290978823,
+//     name: 'NetworkRigidbody',
+//     position: { x: 0, y: 0, z: 0 },
+//     rotation: { x: 0, y: 0, z: 0, w: 1 },
+//     isKinematic: false,
+//     isServerSleeping: false,
+//     velocity: { x: 0, y: 0, z: 0 },
+//     angularVelocity: { x: 0, y: 0, z: 0 }
+//   },
+//   Unknown: []
+// }`
+```
+
+---
+
+### `entities`
+
+Provides access to the entities stored in this prefab. Entities are keyed to a combination of their respective names and hashes, unless its data contained an unrecognised hash. In that case, the entity will be keyed as `Unknown_` followed by its hash. The reason that entities cannot be keyed without their hashes (like [components](#components)) is because some prefabs have multiple entities with the same name. For example, the `Handle_Fist` prefab has several `Slot_Deco` entities that are only differentiated by their hash. Conversely, it's also possible that an entity exists on different prefabs with the same name but different hashes. For example, the `Fire` entity exists on the `Infinite_Fire` prefab with hash `8488`, but exists on the `Grass_Clump` prefab with hash `30100`. For this reason, `att-string-transcoder` uses spawn infodumps from the game to figure out which entities belong to which prefabs and uses this data to provide you with auto-complete options.
+
+:warning: Unfortunately this means that it's not easy to tell upfront which hash a `Fire` entity has on a prefab that you're building. Please ensure that you assign a key that is identical to the entity key (which is name, underscore, and hash).
+
+- [`<PrefabEntities<TPrefabName>>`](./PrefabEntities.md) A map of the stored entities.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short', {
+  entities: {
+    // Please note the keys include the hash, not just the name.
+    Slot_Multi_6136: new Entity('Slot_Multi_6136'),
+    Slot_Multi_6138: new Entity('Slot_Multi_6138'),
+    Unknown_1337: new Entity('Unknown', { hash: 1337 })
+  }
+});
+
+const entities = prefab.entities;
+// `entities` is `{
+//   Slot_Multi_6136: Entity {
+//     hash: 6136,
+//     name: 'Slot_Multi',
+//     isAlive: true,
+//     components: { Unknown: [] }
+//   },
+//   Slot_Multi_6138: Entity {
+//     hash: 6138,
+//     name: 'Slot_Multi',
+//     isAlive: true,
+//     components: { Unknown: [] }
+//   },
+//   Unknown_1337: Entity {
+//     hash: 1337,
+//     name: 'Unknown',
+//     isAlive: true,
+//     components: { Unknown: [] }
+//   },
+// }`
+```
+
+---
+
+### `children`
+
+Contains an array of objects that map nested prefabs to entities on the current prefab.
+
+:warning: Note that the entity _does not need to exist_ in the prefab in your program! The ATT game server will fill in the blanks. For example, if you create a save string for a `Handle_Short` prefab with several children and no entities on it, and spawn it in-game, it will in fact have all its usual entities to which child prefabs can attach.
+
+- [`<PrefabChild[]>`](./PrefabChild.md) An array of the stored child prefabs.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short', {
+  children: [
+    {
+      // Please note the entity hash below wasn't defined elsewhere in this prefab, yet this will work when spawned in-game.
+      parentHash: 6136 // The hash for `Slot_Multi_6136` on `Handle_Short` prefab.,
+      prefab: new Prefab('Guard')
+    }
+  ]
+});
+
+const children = prefab.children;
+// `children` is `[
+//   {
+//     parentHash: 6136,
+//     prefab: Prefab {
+//       name: 'Guard',
+//       hash: 51672,
+//       position: { x: 0, y: 0, z: 0 },
+//       rotation: { x: 0, y: 0, z: 0, w: 1 }
+//       scale: 1,
+//       components: { Unknown: [] },
+//       entities: {},
+//       children: []
+//     }
+//   }
+// ]`
+```
+
+## Methods
+
+### `addChildPrefab(parentKey, childPrefab)`
 
 Attaches a `Prefab` to this prefab as a child. It can optionally be attached onto one of this prefab's embedded entities, which is required for most child prefabs under normal circumstances. If you do not specify a `parentKey`, you may pass `null` to create a "floating" child. It will be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
 
@@ -173,7 +371,9 @@ const child = new Prefab('Guard');
 parent.addChildPrefab('Slot_Large_SwordType_Craft_54356', child);
 ```
 
-## `prefab.addComponent(component)`
+---
+
+### `addComponent(component)`
 
 Adds a `Component` to the prefab. Will override any existing component with that name.
 
@@ -189,7 +389,9 @@ const component = new NetworkRigidbodyComponent({ version: 1 });
 prefab.addComponent(component);
 ```
 
-## `prefab.addGift(giftPrefab)`
+---
+
+### `addGift(giftPrefab)`
 
 Adds a `Prefab` gift to this prefab's [`SentGift`](./SentGiftComponent.md) component. You may call this method more than once to add additional gifts.
 
@@ -205,7 +407,9 @@ const gift = new Prefab('Dynamite');
 box.addGift(gift);
 ```
 
-## `prefab.getAngularVelocity()`
+---
+
+### `getAngularVelocity()`
 
 Gets the spin (vector) on the prefab.
 
@@ -220,7 +424,9 @@ const angularVelocity = prefab.getAngularVelocity();
 const { x, y, z } = angularVelocity;
 ```
 
-## `prefab.getComponentVersions()`
+---
+
+### `getComponentVersions()`
 
 Gets a map of component hashes and the versions used on this prefab. Will throw an error if the prefab uses mixed versions of a particular component.
 
@@ -234,7 +440,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 const componentVersions = prefab.getComponentVersions();
 ```
 
-## `prefab.getGiftBoxLabel()`
+---
+
+### `getGiftBoxLabel()`
 
 Gets the gift sender's name, which is labeled on the gift.
 
@@ -248,7 +456,9 @@ const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
 const giftBoxLabel = prefab.getGiftBoxLabel();
 ```
 
-## `prefab.getIntegrity()`
+---
+
+### `getIntegrity()`
 
 Gets the prefab's physical integrity.
 
@@ -262,7 +472,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 const integrity = prefab.getIntegrity();
 ```
 
-## `prefab.getKinematic()`
+---
+
+### `getKinematic()`
 
 Gets the [kinematic](https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html) state of the prefab.
 
@@ -276,7 +488,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 const isKinematic = prefab.getKinematic();
 ```
 
-## `prefab.getMaterial()`
+---
+
+### `getMaterial()`
 
 Gets the prefab's physical material.
 
@@ -291,7 +505,9 @@ const materialHash = prefab.getMaterial();
 const materialName = PhysicalMaterialPartHash[materialHash];
 ```
 
-## `prefab.getOnFire()`
+---
+
+### `getOnFire()`
 
 Gets the burning state of the prefab.
 
@@ -305,7 +521,9 @@ const prefab = Prefab<'Grass_Clump'>.fromSaveString('...');
 const isOnFire = prefab.getOnFire();
 ```
 
-## `prefab.getPosition()`
+---
+
+### `getPosition()`
 
 Gets the position of the prefab. If the prefab is a child of another prefab, then this position is local to that parent. Otherwise, this position is in world space.
 
@@ -320,7 +538,9 @@ const position = prefab.getPosition();
 const { x, y, z } = position;
 ```
 
-## `prefab.getScale()`
+---
+
+### `getScale()`
 
 Gets the scale of the prefab.
 
@@ -334,7 +554,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 const scale = prefab.getScale();
 ```
 
-## `prefab.getServerSleeping()`
+---
+
+### `getServerSleeping()`
 
 Gets the [sleeping](https://docs.unity3d.com/Manual/RigidbodiesOverview.html) state of the prefab.
 
@@ -348,7 +570,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 const isServerSleeping = prefab.getServerSleeping();
 ```
 
-## `prefab.getServings()`
+---
+
+### `getServings()`
 
 Gets the number of servings on a liquid container prefab.
 
@@ -362,7 +586,9 @@ const prefab = Prefab<'Potion_Medium'>.fromSaveString('...');
 const servings = prefab.getServings();
 ```
 
-## `prefab.getRotation()`
+---
+
+### `getRotation()`
 
 Gets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation is local to that parent. Otherwise, this rotation is in world space.
 
@@ -377,7 +603,9 @@ const rotation = prefab.getRotation();
 const { x, y, z, w } = rotation;
 ```
 
-## `prefab.getVelocity()`
+---
+
+### `getVelocity()`
 
 Gets the direction (vector) on the prefab. Units are in metres per second.
 
@@ -392,7 +620,9 @@ const velocity = prefab.getVelocity();
 const { x, y, z } = velocity;
 ```
 
-## `prefab.inspect()`
+---
+
+### `inspect()`
 
 Prints this prefab's data structure to the console.
 
@@ -406,7 +636,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.inspect();
 ```
 
-## `prefab.print()`
+---
+
+### `print()`
 
 Prints this prefab's save string to the console.
 
@@ -420,7 +652,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.print();
 ```
 
-## `prefab.removeAllChildPrefabs()`
+---
+
+### `removeAllChildPrefabs()`
 
 Removes all child `Prefab` from this prefab.
 
@@ -434,7 +668,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.removeAllChildPrefabs();
 ```
 
-## `prefab.removeAllComponents()`
+---
+
+### `removeAllComponents()`
 
 Removes all components on this prefab.
 
@@ -448,7 +684,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.removeAllComponents();
 ```
 
-## `prefab.removeAllEntities()`
+---
+
+### `removeAllEntities()`
 
 Removes all entities on this prefab.
 
@@ -462,7 +700,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.removeAllEntities();
 ```
 
-## `prefab.removeAllGifts()`
+---
+
+### `removeAllGifts()`
 
 Removes all gift `Prefab` from this prefab.
 
@@ -476,7 +716,9 @@ const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
 prefab.removeAllGifts();
 ```
 
-## `prefab.removeChildPrefab(prefabArg)`
+---
+
+### `removeChildPrefab(prefabArg)`
 
 Removes the specified child `Prefab` from this prefab.
 
@@ -491,7 +733,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.removeChildPrefab('Guard');
 ```
 
-## `prefab.removeComponent(componentName)`
+---
+
+### `removeComponent(componentName)`
 
 Removes the specified component from this prefab.
 
@@ -506,7 +750,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.removeComponent('NetworkRigidbody');
 ```
 
-## `prefab.removeEntity(entityKey)`
+---
+
+### `removeEntity(entityKey)`
 
 Removes the specified entity from this prefab.
 
@@ -521,7 +767,9 @@ const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 prefab.removeEntity('Slot_Multi_6136');
 ```
 
-## `prefab.removeGift(prefabHash)`
+---
+
+### `removeGift(prefabHash)`
 
 Removes the specified gift `Prefab` from this prefab.
 
@@ -536,7 +784,9 @@ const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
 prefab.removeGift(31326);
 ```
 
-## `prefab.setAngularVelocity(angularVelocity)`
+---
+
+### `setAngularVelocity(angularVelocity)`
 
 Sets a spin (vector) on the prefab, causing the physics engine to apply a force to it when spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work on kinematic prefabs. Does not work on static prefabs.
 
@@ -551,7 +801,9 @@ const prefab = new Prefab('Stone');
 prefab.setAngularVelocity({ x: 420, y: 69, z: 1337 });
 ```
 
-## `prefab.setGiftBoxLabel(label)`
+---
+
+### `setGiftBoxLabel(label)`
 
 Sets the gift sender's name, which is labeled on the gift.
 
@@ -566,7 +818,9 @@ const prefab = new Prefab('Gift_Mail_Box');
 prefab.setGiftBoxLabel('topkek');
 ```
 
-## `prefab.setIntegrity(integrity)`
+---
+
+### `setIntegrity(integrity)`
 
 Sets the prefab's integrity. This can change both its appearance and other qualities such as durability and the amount of materials recovered from recycling.
 
@@ -581,9 +835,11 @@ const prefab = new Prefab('Handle_Short');
 prefab.setIntegrity(0.69);
 ```
 
-## `prefab.setKinematic(isKinematic?)`
+---
 
-Makes the prefab [kinematic](https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html). By default, a `new Prefab()` is not kinematic, but some prefabs require to be kinematic to work properly. You can optionally pass a boolean, for example `prefab.setKinematic(false)`.
+### `setKinematic(isKinematic?)`
+
+Makes the prefab [kinematic](https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html). By default, a `new Prefab()` is not kinematic, but some prefabs require to be kinematic to work properly. You can optionally pass a boolean, for example `setKinematic(false)`.
 
 - `isKinematic` (optional, default `true`) `<boolean>` Whether the prefab must be kinematic or not.
 - Returns: `<this>`
@@ -596,7 +852,9 @@ const prefab = new Prefab('Handle_Short');
 prefab.setKinematic(true);
 ```
 
-## `prefab.setMaterial(materialArg)`
+---
+
+### `setMaterial(materialArg)`
 
 Sets the prefab's physical material. This can change both its appearance and other qualities such as durability, damage, heat retention and weight.
 
@@ -613,7 +871,9 @@ prefab.setMaterial(PhysicalMaterialPartHash.Mythril);
 prefab.setMaterial('Mythril');
 ```
 
-## `prefab.setOnFire(isLit?)`
+---
+
+### `setOnFire(isLit?)`
 
 Sets the prefab on fire, if it is capable of catching fire.
 
@@ -628,7 +888,9 @@ const prefab = new Prefab('Grass_Clump');
 prefab.setOnFire(true);
 ```
 
-## `prefab.setPosition(position)`
+---
+
+### `setPosition(position)`
 
 Sets the position of the prefab. If the prefab is a child of another prefab, then this position is local to that parent. Otherwise, this position is in world space.
 
@@ -643,7 +905,9 @@ const prefab = new Prefab('Stone');
 prefab.setPosition({ x: 420, y: 69, z: 1337 });
 ```
 
-## `prefab.setRotation(rotation)`
+---
+
+### `setRotation(rotation)`
 
 Sets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation is local to that parent. Otherwise, this rotation is in world space.
 
@@ -658,7 +922,9 @@ const prefab = new Prefab('Stone');
 prefab.setRotation({ x: 0.42, y: -0.69, z: 0.1337, w: -0.88 });
 ```
 
-## `prefab.setScale(scale)`
+---
+
+### `setScale(scale)`
 
 Sets the scale of the prefab.
 
@@ -673,9 +939,11 @@ const prefab = new Prefab('Stone');
 prefab.setScale(0.69);
 ```
 
-## `prefab.setServerSleeping(isServerSleeping?)`
+---
 
-Makes the prefab [sleep](https://docs.unity3d.com/Manual/RigidbodiesOverview.html). By default, a `new Prefab()` is not sleeping. A sleeping prefab does not have its physics simulated until it receives a collision or force, such as touching it. You can optionally pass a boolean, for example `prefab.setServerSleeping(false)`.
+### `setServerSleeping(isServerSleeping?)`
+
+Makes the prefab [sleep](https://docs.unity3d.com/Manual/RigidbodiesOverview.html). By default, a `new Prefab()` is not sleeping. A sleeping prefab does not have its physics simulated until it receives a collision or force, such as touching it. You can optionally pass a boolean, for example `setServerSleeping(false)`.
 
 - `isServerSleeping` (optional, default `true`) `<boolean>` Whether the prefab must be sleeping or not.
 - Returns: `<this>`
@@ -688,7 +956,9 @@ const prefab = new Prefab('Handle_Short');
 prefab.setServerSleeping(true);
 ```
 
-## `prefab.setServings(servings)`
+---
+
+### `setServings(servings)`
 
 Sets the number of servings on a liquid container prefab.
 
@@ -703,7 +973,9 @@ const prefab = new Prefab('Potion_Medium');
 prefab.setServings(69);
 ```
 
-## `prefab.setVelocity(velocity)`
+---
+
+### `setVelocity(velocity)`
 
 Sets a direction (vector) on the prefab, causing the physics engine to apply a force to it when spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work on kinematic prefabs. Does not work on static prefabs.
 
@@ -718,7 +990,9 @@ const prefab = new Prefab('Stone');
 prefab.setVelocity({ x: 420, y: 69, z: 1337 });
 ```
 
-## `prefab.toBinary(componentVersions)`
+---
+
+### `toBinary(componentVersions)`
 
 Returns a `BinaryString` representation of the prefab.
 
@@ -742,7 +1016,9 @@ const componentVersions = new Map<number, number>([
 const binaryString = prefab.toBinary(componentVersions);
 ```
 
-## `prefab.toSaveString()`
+---
+
+### `toSaveString()`
 
 Returns the `SaveString` to spawn this prefab in the game.
 
