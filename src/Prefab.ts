@@ -209,6 +209,18 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Adds an `Entity` to the prefab. Will override any existing entity with that key.
+   */
+  addEntity(entity: Entity<TPrefabName>): Prefab<TPrefabName> {
+    this.entities = {
+      ...this.entities,
+      [`${entity.name}_${entity.hash}`]: entity
+    };
+
+    return this;
+  }
+
+  /**
    * Adds a `Prefab` gift to this prefab's `SentGift` component. You may call this method more than
    * once to add additional gifts.
    */

@@ -162,6 +162,24 @@ describe('Prefab.addComponent()', () => {
   });
 });
 
+describe('Prefab.addEntity()', () => {
+  let prefab: Prefab<'Handle_Short'>;
+
+  beforeEach(() => {
+    prefab = new Prefab('Handle_Short');
+  });
+
+  it('adds an entity to the prefab', () => {
+    const entity = new Entity<'Handle_Short'>('Slot_Multi_6136');
+
+    prefab.addEntity(entity);
+
+    expect(prefab.entities).toStrictEqual({
+      Slot_Multi_6136: entity
+    });
+  });
+});
+
 describe('Prefab.addGift()', () => {
   let prefab: Prefab<'Gift_Mail_Box'>;
   let gift: Prefab<'Dynamite'>;

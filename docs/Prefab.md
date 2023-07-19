@@ -16,6 +16,7 @@
 - [Methods](#methods)
   - [`addChildPrefab(parentKey, childPrefab)`](#addchildprefabparentkey-childprefab)
   - [`addComponent(component)`](#addcomponentcomponent)
+  - [`addEntity(entity)`](#addentityentity)
   - [`addGift(giftPrefab)`](#addgiftgiftprefab)
   - [`getAngularVelocity()`](#getangularvelocity)
   - [`getComponentVersions()`](#getcomponentversions)
@@ -393,6 +394,24 @@ const prefab = new Prefab('Handle_Short');
 const component = new NetworkRigidbodyComponent({ version: 1 });
 
 prefab.addComponent(component);
+```
+
+---
+
+### `addEntity(entity)`
+
+Adds an `Entity` to the prefab. Will override any existing entity with that key.
+
+- `entity` [`<Entity>`](./Entity.md) The entity to set on the prefab.
+- Returns: `<this>`
+
+```ts
+import { Entity, Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short');
+const entity = new Entity<'Handle_Short'>('Slot_Multi_6136');
+
+prefab.addEntity(entity);
 ```
 
 ---
