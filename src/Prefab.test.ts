@@ -1171,7 +1171,7 @@ describe('Prefab.removeGift()', () => {
 
       // @ts-expect-error Passing invalid arguments
       const expectedToThrow = () => prefab.removeGift();
-      const expectedError = new Error('You must pass a gift prefab hash to remove from this prefab.');
+      const expectedError = new Error('You must pass a gift prefab hash or name to remove from this prefab.');
 
       expect(expectedToThrow).toThrowError(expectedError);
     });
@@ -1187,6 +1187,33 @@ describe('Prefab.removeGift()', () => {
       prefab.removeGift(new Prefab('Dynamite').hash);
 
       expect(prefab.components.SentGift?.gifts.length).toStrictEqual(1);
+    });
+  });
+
+  describe('when given a gift prefab name', () => {
+    it('removes all matching gifts from the Prefab', () => {
+      const prefab = new Prefab('Gift_Mail_Box')
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Firework'));
+
+      prefab.removeGift(new Prefab('Dynamite').name);
+
+      expect(prefab.components.SentGift?.gifts.length).toStrictEqual(1);
+    });
+  });
+
+  describe('when given an invalid gift prefab name', () => {
+    it('removes all matching gifts from the Prefab', () => {
+      const prefab = new Prefab('Gift_Mail_Box')
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Dynamite'))
+        .addGift(new Prefab('Firework'));
+
+      // @ts-expect-error Passing invalid arguments
+      prefab.removeGift('Invalid_Prefab_Name');
+
+      expect(prefab.components.SentGift?.gifts.length).toStrictEqual(3);
     });
   });
 });

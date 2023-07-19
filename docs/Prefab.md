@@ -794,11 +794,11 @@ prefab.removeEntity('Slot_Multi_6136');
 
 ---
 
-### `removeGift(prefabHash)`
+### `removeGift(prefabArg)`
 
 Removes the specified gift `Prefab` from this prefab.
 
-- `prefabHash` `<number>` The gift prefab's hash to remove from this prefab.
+- `prefabArg` `<`[`ATTPrefabHash`](./ATTPrefabHash.md)`|`[`ATTPrefabName`](./ATTPrefabName.md)>` The gift prefab's hash or name to remove from this prefab.
 - Returns: `<this>`
 
 ```ts
@@ -806,7 +806,7 @@ import { Prefab } from 'att-string-transcoder';
 
 const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
 
-prefab.removeGift(31326);
+prefab.removeGift('Dynamite');
 ```
 
 ---

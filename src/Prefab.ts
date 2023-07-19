@@ -674,15 +674,20 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the specified gift `Prefab` from this prefab.
    */
-  removeGift(prefabHash: number): Prefab<TPrefabName> {
-    if (typeof prefabHash === 'undefined') {
-      throw new Error('You must pass a gift prefab hash to remove from this prefab.');
+  removeGift(prefabHash: ATTPrefabHash): Prefab<PrefabName<TPrefabName>>;
+  removeGift(prefabName: ATTPrefabName): Prefab<PrefabName<TPrefabName>>;
+  removeGift(prefabArg: ATTPrefabHash | ATTPrefabName): Prefab<PrefabName<TPrefabName>> {
+    if (typeof prefabArg === 'undefined') {
+      throw new Error('You must pass a gift prefab hash or name to remove from this prefab.');
     }
+
+    const hash =
+      typeof prefabArg === 'number' ? prefabArg : (ATTPrefabs[prefabArg]?.hash as ATTPrefabHash | undefined) ?? 0;
 
     const sentGiftComponent = this.components.SentGift;
 
     if (typeof sentGiftComponent !== 'undefined') {
-      sentGiftComponent.gifts = [...sentGiftComponent.gifts.filter(gift => gift?.hash !== prefabHash)];
+      sentGiftComponent.gifts = [...sentGiftComponent.gifts.filter(gift => gift?.hash !== hash)];
     }
 
     return this;
