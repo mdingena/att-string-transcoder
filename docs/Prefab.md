@@ -239,6 +239,8 @@ const scale = prefab.scale;
 
 Provides access to the components stored in this prefab. Components are keyed to their respective names, unless its data contained an unrecognised hash. In that case, the component will be stored in an array under the `Unknown` key.
 
+:bulb: It might be easier to add components using the [`addComponent(component)`](#addcomponentcomponent) method.
+
 - [`<PrefabComponents>`](./PrefabComponents.md) A map of the stored components.
 
 ```ts
@@ -273,6 +275,8 @@ const components = prefab.components;
 Provides access to the entities stored in this prefab. Entities are keyed to a combination of their respective names and hashes, unless its data contained an unrecognised hash. In that case, the entity will be keyed as `Unknown_` followed by its hash. The reason that entities cannot be keyed without their hashes (like [components](#components)) is because some prefabs have multiple entities with the same name. For example, the `Handle_Fist` prefab has several `Slot_Deco` entities that are only differentiated by their hash. Conversely, it's also possible that an entity exists on different prefabs with the same name but different hashes. For example, the `Fire` entity exists on the `Infinite_Fire` prefab with hash `8488`, but exists on the `Grass_Clump` prefab with hash `30100`. For this reason, `att-string-transcoder` uses spawn infodumps from the game to figure out which entities belong to which prefabs and uses this data to provide you with auto-complete options.
 
 :warning: Unfortunately this means that it's not easy to tell upfront which hash a `Fire` entity has on a prefab that you're building. Please ensure that you assign a key that is identical to the entity key (which is name, underscore, and hash).
+
+:bulb: It might be easier to add entities using the [`addEntity(entity)`](#addentityentity) method.
 
 - [`<PrefabEntities<TPrefabName>>`](./PrefabEntities.md) A map of the stored entities.
 
@@ -319,6 +323,8 @@ Contains an array of objects that map nested prefabs to entities on the current 
 
 :warning: Note that the entity _does not need to exist_ in the prefab in your program! The ATT game server will fill in the blanks. For example, if you create a save string for a `Handle_Short` prefab with several children and no entities on it, and spawn it in-game, it will in fact have all its usual entities to which child prefabs can attach.
 
+:bulb: It might be easier to add child prefabs using the [`addChildPrefab(parentKey, childPrefab)`](#addchildprefabparentkey-childprefab) method.
+
 - [`<PrefabChild[]>`](./PrefabChild.md) An array of the stored child prefabs.
 
 ```ts
@@ -328,7 +334,7 @@ const prefab = new Prefab('Handle_Short', {
   children: [
     {
       // Please note the entity hash below wasn't defined elsewhere in this prefab, yet this will work when spawned in-game.
-      parentHash: 6136 // The hash for `Slot_Multi_6136` on `Handle_Short` prefab.,
+      parentHash: 6136, // The hash for `Slot_Multi_6136` on `Handle_Short` prefab.
       prefab: new Prefab('Guard')
     }
   ]
