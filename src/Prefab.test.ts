@@ -1007,13 +1007,31 @@ describe('Prefab.removeComponent()', () => {
 
       // @ts-expect-error Passing invalid arguments
       const expectedToThrow = () => prefab.removeComponent();
-      const expectedError = new Error('You must pass a component name to remove from this prefab.');
+      const expectedError = new Error('You must pass a component hash or name to remove from this prefab.');
 
       expect(expectedToThrow).toThrowError(expectedError);
     });
   });
 
-  describe('when given a component name', () => {
+  describe('when given a valid component hash', () => {
+    it('removes all matching components from the Prefab', () => {
+      const prefab = new Prefab('Handle_Short', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          Pickup: new PickupComponent({ version: 2 })
+        }
+      });
+
+      prefab.removeComponent(2290978823);
+
+      expect(prefab.components).toStrictEqual({
+        Pickup: new PickupComponent({ version: 2 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given a valid component name', () => {
     it('removes all matching components from the Prefab', () => {
       const prefab = new Prefab('Handle_Short', {
         components: {
@@ -1025,6 +1043,81 @@ describe('Prefab.removeComponent()', () => {
       prefab.removeComponent('NetworkRigidbody');
 
       expect(prefab.components).toStrictEqual({
+        Pickup: new PickupComponent({ version: 2 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given an invalid component hash', () => {
+    it('removes zero components from the Prefab', () => {
+      const prefab = new Prefab('Handle_Short', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          Pickup: new PickupComponent({ version: 2 })
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      prefab.removeComponent(0);
+
+      expect(prefab.components).toStrictEqual({
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        Pickup: new PickupComponent({ version: 2 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given an unknown component hash', () => {
+    it('removes all matching components from the Prefab', () => {
+      const prefab = new Prefab('Handle_Short', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          Pickup: new PickupComponent({ version: 2 }),
+          // @ts-expect-error Creating unknown component
+          TestComponent: new UnsupportedComponent({
+            hash: 1337,
+            name: 'TestComponent',
+            rawData: '1111011100110001000' as BinaryString,
+            version: 1
+          })
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      prefab.removeComponent(1337);
+
+      expect(prefab.components).toStrictEqual({
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        Pickup: new PickupComponent({ version: 2 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given an unknown component name', () => {
+    it('removes all matching components from the Prefab', () => {
+      const prefab = new Prefab('Handle_Short', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          Pickup: new PickupComponent({ version: 2 }),
+          Unknown: [
+            new UnsupportedComponent({
+              hash: 1337,
+              name: 'TestComponent',
+              rawData: '1111011100110001000' as BinaryString,
+              version: 1
+            })
+          ]
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      prefab.removeComponent('TestComponent');
+
+      expect(prefab.components).toStrictEqual({
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
         Pickup: new PickupComponent({ version: 2 }),
         Unknown: []
       });

@@ -38,7 +38,7 @@
   - [`removeAllEntities()`](#removeallentities)
   - [`removeAllGifts()`](#removeallgifts)
   - [`removeChildPrefab(prefabArg)`](#removechildprefabprefabarg)
-  - [`removeComponent(componentName)`](#removecomponentcomponentname)
+  - [`removeComponent(componentArg)`](#removecomponentcomponentarg)
   - [`removeEntity(entityKey)`](#removeentityentitykey)
   - [`removeGift(prefabHash)`](#removegiftprefabhash)
   - [`setAngularVelocity(angularVelocity)`](#setangularvelocityangularvelocity)
@@ -760,11 +760,11 @@ prefab.removeChildPrefab('Guard');
 
 ---
 
-### `removeComponent(componentName)`
+### `removeComponent(componentArg)`
 
 Removes the specified component from this prefab.
 
-- `componentName` `<keyof Omit<`[`PrefabComponents`](./PrefabComponents.md)`, 'Unknown'>>` The component's name to remove from this prefab.
+- `componentArg` `<`[`ComponentHash`](./ComponentHash.md)` | keyof Omit<`[`PrefabComponents`](./PrefabComponents.md)`, 'Unknown'>>` The component's hash or name to remove from this prefab.
 - Returns: `<this>`
 
 ```ts

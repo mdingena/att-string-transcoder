@@ -617,12 +617,37 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the specified component from this prefab.
    */
-  removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): Prefab<TPrefabName> {
-    if (typeof componentName === 'undefined') {
-      throw new Error('You must pass a component name to remove from this prefab.');
+  removeComponent(componentHash: ComponentHash): Prefab<TPrefabName>;
+  removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): Prefab<TPrefabName>;
+  removeComponent(componentArg: ComponentHash | keyof Omit<PrefabComponents, 'Unknown'>): Prefab<TPrefabName> {
+    if (typeof componentArg === 'undefined') {
+      throw new Error('You must pass a component hash or name to remove from this prefab.');
     }
 
-    delete this.components[componentName];
+    const componentName =
+      typeof componentArg === 'string'
+        ? componentArg
+        : (ComponentHash[componentArg] as keyof typeof ComponentHash | undefined);
+
+    if (typeof componentName === 'undefined') {
+      for (const component of Object.values(this.components)) {
+        if (Array.isArray(component)) {
+          this.components.Unknown = component.filter(unknownComponent => unknownComponent.hash !== componentArg);
+        } else if (component.hash === componentArg) {
+          delete this.components[component.name as keyof Omit<PrefabComponents, 'Unknown'>];
+        }
+      }
+    } else {
+      if (componentName in this.components) {
+        delete this.components[componentName];
+      } else {
+        const unknownComponentIndex = this.components.Unknown.findIndex(component => component.name === componentArg);
+
+        if (unknownComponentIndex > -1) {
+          this.components.Unknown = this.components.Unknown.toSpliced(unknownComponentIndex, 1);
+        }
+      }
+    }
 
     return this;
   }
