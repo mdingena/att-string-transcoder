@@ -7,6 +7,8 @@
   - [`Prefab.fromBinary(reader, componentVersions?)`](#prefabfrombinaryreader-componentversions)
   - [`Prefab.fromSaveString(saveString)`](#prefabfromsavestringsavestring)
 - [Properties](#properties)
+  - [`name`](#name)
+  - [`hash`](#hash)
   - [`position`](#position)
   - [`rotation`](#rotation)
   - [`scale`](#scale)
@@ -178,6 +180,36 @@ const prefab = Prefab.fromSaveString<'SpriggullDrumstick_Full_Ripe'>(saveString)
 ## Properties
 
 Note that the following properties are sorted in order of appearance when decoding an ATT prefab save string.
+
+### `name`
+
+:warning: This property does not occur when decoding an ATT prefab save string but is added by _ATT String Transcoder_ for your convenience when inspecting prefab structures.
+
+- [`<ATTPrefabName>`](./ATTPrefabName.md) The name of the prefab.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short');
+
+const name = prefab.name;
+// `name` is `'Handle_Short'`
+```
+
+### `hash`
+
+The prefab's hash is a unique numeric identifier for the _type_ of prefab. Every `Handle_Short` in the game will have the same prefab ID. This is not to be confused with a "network ID", which is a unique identifier the game server assigns to each individual object in the game.
+
+- [`<ATTPrefabHash>`](./ATTPrefabHash.md) The hash of the prefab.
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short');
+
+const hash = prefab.hash;
+// `hash` is `42230`
+```
 
 ### `position`
 
