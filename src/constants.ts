@@ -13,8 +13,10 @@ export const latestDurabilityModuleComponentVersion = 1;
 export const latestHeatSourceBaseComponentVersion = 1;
 export const latestLiquidContainerComponentVersion = 1;
 export const latestPhysicalMaterialPartComponentVersion = 1;
+export const latestPopulationSpawnAreaComponentVersion = 2;
 export const latestNetworkRigidbodyComponentVersion = 1;
 export const latestSentGiftComponentVersion = 1;
+export const latestSpawnAreaComponentVersion = 1;
 
 export const latestSupportedComponentVersions = new Map([
   [7704646, 1],
