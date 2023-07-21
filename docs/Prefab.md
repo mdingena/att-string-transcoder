@@ -32,6 +32,7 @@
   - [`getScale()`](#getscale)
   - [`getServerSleeping()`](#getserversleeping)
   - [`getServings()`](#getservings)
+  - [`getSpawnAreaPopulationName()`](#getspawnareapopulationname)
   - [`getVelocity()`](#getvelocity)
   - [`inspect()`](#inspect)
   - [`print()`](#print)
@@ -660,6 +661,22 @@ import { Prefab } from 'att-string-transcoder';
 const prefab = Prefab<'Potion_Medium'>.fromSaveString('...');
 
 const servings = prefab.getServings();
+```
+
+---
+
+### `getSpawnAreaPopulationName()`
+
+Gets the name of the spawn area population, if there is one. Returns `undefined` otherwise.
+
+- Returns: `<'Unknown' | `[`PopulationDefinitionName`](./PopulationDefinitionName.md)` | undefined>`
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = Prefab<'Disk_Encounter'>.fromSaveString('...');
+
+const populationName = prefab.getSpawnAreaPopulationName();
 ```
 
 ---

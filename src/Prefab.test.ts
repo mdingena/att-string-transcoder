@@ -783,6 +783,55 @@ describe('Prefab.getServings()', () => {
   });
 });
 
+describe('Prefab.getSpawnAreaPopulationName()', () => {
+  describe('when the prefab has no PopulationSpawnArea component', () => {
+    it('returns undefined', () => {
+      const prefab = new Prefab('Anvil');
+      delete prefab.components.PopulationSpawnArea;
+
+      const populationName = prefab.getSpawnAreaPopulationName();
+
+      expect(populationName).toStrictEqual(undefined);
+    });
+  });
+
+  describe('when the prefab has a PopulationSpawnArea component', () => {
+    describe('when the stored population definition is not recognised', () => {
+      it('returns a population definition name of "Unknown"', () => {
+        const prefab = new Prefab('Disk_Encounter', {
+          components: {
+            PopulationSpawnArea: new PopulationSpawnAreaComponent({
+              version: 2,
+              definition: 1337
+            })
+          }
+        });
+
+        const populationName = prefab.getSpawnAreaPopulationName();
+
+        expect(populationName).toStrictEqual('Unknown');
+      });
+    });
+
+    describe('when the stored population definition is recognised', () => {
+      it('returns the stored population definition name', () => {
+        const prefab = new Prefab('Disk_Encounter', {
+          components: {
+            PopulationSpawnArea: new PopulationSpawnAreaComponent({
+              version: 2,
+              definition: PopulationDefinitionHash.WyrmPopulation
+            })
+          }
+        });
+
+        const populationName = prefab.getSpawnAreaPopulationName();
+
+        expect(populationName).toStrictEqual('WyrmPopulation');
+      });
+    });
+  });
+});
+
 describe('Prefab.getVelocity()', () => {
   describe('when the prefab has no NetworkRigidBody component', () => {
     it('returns a velocity of zero', () => {

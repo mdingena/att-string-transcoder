@@ -903,6 +903,28 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Gets the name of the spawn area population, if there is one. Returns `undefined` otherwise.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Disk_Encounter'>.fromSaveString('...');
+   *
+   * const populationName = prefab.getSpawnAreaPopulationName();
+   */
+  getSpawnAreaPopulationName(): 'Unknown' | PopulationDefinitionName | undefined {
+    const populationDefinitionHash = this.components.PopulationSpawnArea?.definition as
+      | PopulationDefinitionHash
+      | undefined;
+    const populationDefinitionName =
+      typeof populationDefinitionHash === 'undefined'
+        ? undefined
+        : (PopulationDefinitionHash[populationDefinitionHash] as PopulationDefinitionName | undefined) ?? 'Unknown';
+
+    return populationDefinitionName;
+  }
+
+  /**
    * Gets the direction (vector) on the prefab. Units are in metres per second.
    *
    * @example
