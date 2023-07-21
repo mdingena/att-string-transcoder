@@ -7,9 +7,9 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type HeatSourceBaseComponentPropsV1 = {
-  isLit?: boolean;
-  progress?: number;
-  time?: number;
+  isLit?: boolean | undefined;
+  progress?: number | undefined;
+  time?: number | undefined;
 };
 
 export type HeatSourceBaseComponentProps = HeatSourceBaseComponentPropsV1;

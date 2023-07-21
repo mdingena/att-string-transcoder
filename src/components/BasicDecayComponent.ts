@@ -7,8 +7,8 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type BasicDecayComponentPropsV3 = {
-  isDisabled?: boolean;
-  timelineEntry?: number;
+  isDisabled?: boolean | undefined;
+  timelineEntry?: number | undefined;
 };
 
 export type BasicDecayComponentProps = BasicDecayComponentPropsV3;

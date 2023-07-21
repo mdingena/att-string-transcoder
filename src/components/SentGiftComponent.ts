@@ -19,10 +19,10 @@ type SentGiftTag = null | {
 };
 
 type SentGiftComponentPropsV1 = {
-  receiverName?: string;
-  senderName?: string;
-  gifts?: Gift[];
-  senderTag?: SentGiftTag;
+  receiverName?: string | undefined;
+  senderName?: string | undefined;
+  gifts?: Gift[] | undefined;
+  senderTag?: SentGiftTag | undefined;
 };
 
 export type SentGiftComponentProps = SentGiftComponentPropsV1;

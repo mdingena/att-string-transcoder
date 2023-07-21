@@ -7,7 +7,7 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type DurabilityModuleComponentPropsV1 = {
-  integrity?: number;
+  integrity?: number | undefined;
 };
 
 export type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;

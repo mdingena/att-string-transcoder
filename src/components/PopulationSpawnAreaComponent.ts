@@ -13,15 +13,15 @@ type PopulationSaveDataChild = null | {
 };
 
 type PopulationSpawnAreaComponentPropsV2 = {
-  definition?: number;
-  isPopulationStarted?: boolean;
-  children?: PopulationSaveDataChild[];
-  maxPopulation?: number;
-  currentPopulation?: number;
-  checkPopulationTime?: number;
-  numberOfSpawnPoints?: number;
-  startingPopulation?: number;
-  isOneOff?: boolean;
+  definition?: number | undefined;
+  isPopulationStarted?: boolean | undefined;
+  children?: PopulationSaveDataChild[] | undefined;
+  maxPopulation?: number | undefined;
+  currentPopulation?: number | undefined;
+  checkPopulationTime?: number | undefined;
+  numberOfSpawnPoints?: number | undefined;
+  startingPopulation?: number | undefined;
+  isOneOff?: boolean | undefined;
 };
 
 export type PopulationSpawnAreaComponentProps = PopulationSpawnAreaComponentPropsV2;

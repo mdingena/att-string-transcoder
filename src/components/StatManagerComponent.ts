@@ -32,9 +32,9 @@ type IndirectStatModifier = null | {
 };
 
 type StatManagerComponentPropsV2 = {
-  stats?: Stat[];
-  modifiers?: TimedModifier[];
-  indirectStatModifiers?: IndirectStatModifier[];
+  stats?: Stat[] | undefined;
+  modifiers?: TimedModifier[] | undefined;
+  indirectStatModifiers?: IndirectStatModifier[] | undefined;
 };
 
 export type StatManagerComponentProps = StatManagerComponentPropsV2;

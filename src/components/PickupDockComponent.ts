@@ -7,9 +7,9 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type PickupDockComponentPropsV2 = {
-  dockedTypeHash?: number;
-  quantity?: number;
-  childIndex?: number;
+  dockedTypeHash?: number | undefined;
+  quantity?: number | undefined;
+  childIndex?: number | undefined;
 };
 
 export type PickupDockComponentProps = PickupDockComponentPropsV2;

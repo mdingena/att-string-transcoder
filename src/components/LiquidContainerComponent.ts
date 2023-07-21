@@ -29,13 +29,13 @@ type CustomData = {
 };
 
 type LiquidContainerComponentPropsV1 = {
-  canAddTo?: boolean;
-  canRemoveFrom?: boolean;
-  contentLevel?: number;
-  hasContent?: boolean;
-  isCustom?: boolean;
-  presetHash?: number;
-  customData?: null | CustomData;
+  canAddTo?: boolean | undefined;
+  canRemoveFrom?: boolean | undefined;
+  contentLevel?: number | undefined;
+  hasContent?: boolean | undefined;
+  isCustom?: boolean | undefined;
+  presetHash?: number | undefined;
+  customData?: null | CustomData | undefined;
 };
 
 export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;

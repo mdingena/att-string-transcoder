@@ -7,9 +7,9 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type FuseComponentPropsV1 = {
-  isFinished?: boolean;
-  isLit?: boolean;
-  currentFuseAmount?: number;
+  isFinished?: boolean | undefined;
+  isLit?: boolean | undefined;
+  currentFuseAmount?: number | undefined;
 };
 
 export type FuseComponentProps = FuseComponentPropsV1;

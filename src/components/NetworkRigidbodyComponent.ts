@@ -11,12 +11,12 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type NetworkRigidbodyComponentPropsV1 = {
-  position?: Position;
-  rotation?: Rotation;
-  isKinematic?: boolean;
-  isServerSleeping?: boolean;
-  velocity?: Velocity;
-  angularVelocity?: AngularVelocity;
+  position?: Position | undefined;
+  rotation?: Rotation | undefined;
+  isKinematic?: boolean | undefined;
+  isServerSleeping?: boolean | undefined;
+  velocity?: Velocity | undefined;
+  angularVelocity?: AngularVelocity | undefined;
 };
 
 export type NetworkRigidbodyComponentProps = NetworkRigidbodyComponentPropsV1;

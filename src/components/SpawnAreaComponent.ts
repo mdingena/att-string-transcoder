@@ -7,11 +7,11 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type SpawnAreaComponentPropsV1 = {
-  size?: number;
-  groundLayers?: number;
-  avoidLayers?: number;
-  isAligningNormal?: boolean;
-  maxAcceptableAngleDot?: number;
+  size?: number | undefined;
+  groundLayers?: number | undefined;
+  avoidLayers?: number | undefined;
+  isAligningNormal?: boolean | undefined;
+  maxAcceptableAngleDot?: number | undefined;
 };
 
 export type SpawnAreaComponentProps = SpawnAreaComponentPropsV1;

@@ -8,7 +8,7 @@ import { PhysicalMaterialPartHash } from '../types/PhysicalMaterialPartHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type PhysicalMaterialPartComponentPropsV1 = {
-  materialHash?: number;
+  materialHash?: number | undefined;
 };
 
 export type PhysicalMaterialPartComponentProps = PhysicalMaterialPartComponentPropsV1;

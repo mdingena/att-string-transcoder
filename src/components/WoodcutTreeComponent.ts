@@ -9,8 +9,8 @@ import { SpeciesHash } from '../types/SpeciesHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type WoodcutTreeComponentPropsV3 = {
-  presetHash?: 0 | PresetHash;
-  speciesHash?: SpeciesHash;
+  presetHash?: 0 | PresetHash | undefined;
+  speciesHash?: SpeciesHash | undefined;
 };
 
 export type WoodcutTreeComponentProps = WoodcutTreeComponentPropsV3;

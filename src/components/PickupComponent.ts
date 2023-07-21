@@ -16,13 +16,13 @@ type GrabPointParameters = null | {
 };
 
 type PickupComponentPropsV1 = {
-  lastInteractorPlayerId?: number;
+  lastInteractorPlayerId?: number | undefined;
   dockedMemory?: never;
 };
 
 type PickupComponentPropsV2 = {
-  lastInteractorPlayerId?: number;
-  dockedMemory?: GrabPointParameters[];
+  lastInteractorPlayerId?: number | undefined;
+  dockedMemory?: GrabPointParameters[] | undefined;
 };
 
 export type PickupComponentProps = PickupComponentPropsV1 | PickupComponentPropsV2;

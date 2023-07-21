@@ -7,7 +7,7 @@ import { ComponentHash } from '../types/ComponentHash.js';
 import { Component, type ComponentProps } from './Component.js';
 
 type FireComponentPropsV1 = {
-  fuelConsumptionProgress?: number;
+  fuelConsumptionProgress?: number | undefined;
 };
 
 export type FireComponentProps = FireComponentPropsV1;
