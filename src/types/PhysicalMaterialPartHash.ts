@@ -8,6 +8,7 @@ export enum PhysicalMaterialPartHash {
   Copper = 20186,
   DaisLeather = 33384,
   DaisRedLeather = 37850,
+  DarkSteelAlloy = 55232,
   EvinonSteelAlloy = 31502,
   Gold = 56394,
   Iron = 1,
