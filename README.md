@@ -18,7 +18,7 @@ Allows you to decode _A Township Tale_'s save strings for analysing, and encode 
 
 ⚠️ Use this library primarily when creating bots for ATT, or when building your own ATT save string project. **If you just want to make string weapons, check out our [ATT String Workshop](https://github.com/mdingena/att-string-workshop) project.**
 
-## Join the community
+## :speech_balloon: Join the community
 
 Join the ATT string creators community for sharing and troubleshooting strings built with _ATT String Transcoder_.
 
