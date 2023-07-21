@@ -12,7 +12,9 @@ import { LiquidContainerComponent } from './components/LiquidContainerComponent.
 import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 import { PickupComponent } from './components/PickupComponent.js';
+import { PopulationSpawnAreaComponent } from './components/PopulationSpawnAreaComponent.js';
 import { SentGiftComponent } from './components/SentGiftComponent.js';
+import { SpawnAreaComponent } from './components/SpawnAreaComponent.js';
 import { UnsupportedComponent } from './components/UnsupportedComponent.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
@@ -1215,6 +1217,22 @@ describe('Prefab.removeGift()', () => {
 
       expect(prefab.components.SentGift?.gifts.length).toStrictEqual(3);
     });
+  });
+});
+
+describe('Prefab.removeSpawnArea()', () => {
+  it('removes the spawn area components', () => {
+    const prefab = new Prefab('Disk_Encounter', {
+      components: {
+        PopulationSpawnArea: new PopulationSpawnAreaComponent({ version: 1 }),
+        SpawnArea: new SpawnAreaComponent({ version: 1 })
+      }
+    });
+
+    prefab.removeSpawnArea();
+
+    expect(prefab.components.PopulationSpawnArea).toStrictEqual(undefined);
+    expect(prefab.components.SpawnArea).toStrictEqual(undefined);
   });
 });
 

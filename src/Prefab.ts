@@ -1129,6 +1129,23 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Removes the spawn area components from the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Disk_Encounter'>.fromSaveString('...');
+   *
+   * prefab.removeSpawnArea();
+   */
+  removeSpawnArea(): Prefab<PrefabName<TPrefabName>> {
+    delete this.components.PopulationSpawnArea;
+    delete this.components.SpawnArea;
+
+    return this;
+  }
+
+  /**
    * Sets a spin (vector) on the prefab, causing the physics engine to apply a force to it when
    * spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not
    * work on kinematic prefabs. Does not work on static prefabs.

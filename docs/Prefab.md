@@ -43,6 +43,7 @@
   - [`removeComponent(componentArg)`](#removecomponentcomponentarg)
   - [`removeEntity(entityKey)`](#removeentityentitykey)
   - [`removeGift(prefabHash)`](#removegiftprefabhash)
+  - [`removeSpawnArea()`](#removespawnarea)
   - [`setAngularVelocity(angularVelocity)`](#setangularvelocityangularvelocity)
   - [`setGiftBoxLabel(label)`](#setgiftboxlabellabel)
   - [`setIntegrity(integrity)`](#setintegrityintegrity)
@@ -845,6 +846,22 @@ const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
 prefab.removeGift(31326);
 // or
 prefab.removeGift('Dynamite');
+```
+
+---
+
+### `removeSpawnArea()`
+
+Removes the spawn area components from this prefab.
+
+- Returns: `<this>`
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = Prefab<'Disk_Encounter'>.fromSaveString('...');
+
+prefab.removeSpawnArea();
 ```
 
 ---
