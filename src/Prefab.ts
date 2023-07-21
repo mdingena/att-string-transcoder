@@ -949,8 +949,10 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *
    * prefab.inspect();
    */
-  inspect(): void {
+  inspect(): Prefab<PrefabName<TPrefabName>> {
     console.log(JSON.stringify(this, null, 2));
+
+    return this;
   }
 
   /**
@@ -963,9 +965,11 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *
    * prefab.print();
    */
-  print(): void {
+  print(): Prefab<PrefabName<TPrefabName>> {
     const saveString = this.toSaveString();
     console.log(saveString);
+
+    return this;
   }
 
   /**

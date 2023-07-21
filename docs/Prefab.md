@@ -702,7 +702,7 @@ const { x, y, z } = velocity;
 
 Prints this prefab's data structure to the console.
 
-- Returns: `<void>`
+- Returns: `<this>`
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -718,7 +718,7 @@ prefab.inspect();
 
 Prints this prefab's save string to the console.
 
-- Returns: `<void>`
+- Returns: `<this>`
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
