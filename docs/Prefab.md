@@ -28,10 +28,10 @@
   - [`getMaterial()`](#getmaterial)
   - [`getOnFire()`](#getonfire)
   - [`getPosition()`](#getposition)
+  - [`getRotation()`](#getrotation)
   - [`getScale()`](#getscale)
   - [`getServerSleeping()`](#getserversleeping)
   - [`getServings()`](#getservings)
-  - [`getRotation()`](#getrotation)
   - [`getVelocity()`](#getvelocity)
   - [`inspect()`](#inspect)
   - [`print()`](#print)
@@ -597,6 +597,23 @@ const { x, y, z } = position;
 
 ---
 
+### `getRotation()`
+
+Gets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation is local to that parent. Otherwise, this rotation is in world space.
+
+- Returns: [`<Rotation>`](./Rotation.md)
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+
+const rotation = prefab.getRotation();
+const { x, y, z, w } = rotation;
+```
+
+---
+
 ### `getScale()`
 
 Gets the scale of the prefab.
@@ -641,23 +658,6 @@ import { Prefab } from 'att-string-transcoder';
 const prefab = Prefab<'Potion_Medium'>.fromSaveString('...');
 
 const servings = prefab.getServings();
-```
-
----
-
-### `getRotation()`
-
-Gets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation is local to that parent. Otherwise, this rotation is in world space.
-
-- Returns: [`<Rotation>`](./Rotation.md)
-
-```ts
-import { Prefab } from 'att-string-transcoder';
-
-const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
-
-const rotation = prefab.getRotation();
-const { x, y, z, w } = rotation;
 ```
 
 ---
@@ -787,6 +787,8 @@ import { Prefab } from 'att-string-transcoder';
 
 const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 
+prefab.removeChildPrefab(51672);
+// or
 prefab.removeChildPrefab('Guard');
 ```
 
@@ -800,10 +802,12 @@ Removes the specified component from this prefab.
 - Returns: `<this>`
 
 ```ts
-import { Prefab } from 'att-string-transcoder';
+import { ComponentHash, Prefab } from 'att-string-transcoder';
 
 const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
 
+prefab.removeComponent(ComponentHash.NetworkRigidbody);
+// or
 prefab.removeComponent('NetworkRigidbody');
 ```
 
@@ -838,6 +842,8 @@ import { Prefab } from 'att-string-transcoder';
 
 const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
 
+prefab.removeGift(31326);
+// or
 prefab.removeGift('Dynamite');
 ```
 
@@ -1066,7 +1072,7 @@ const componentVersions = prefab.getComponentVersions();
 const componentVersions = new Map<number, number>([
   [ComponentHash.NetworkRigidbody, 1],
   [ComponentHash.PhysicalMaterialPart, 1],
-  [ComponentHash.Pickup, 1]
+  [ComponentHash.Pickup, 2]
   // etc...
 ]);
 

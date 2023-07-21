@@ -84,18 +84,230 @@ const FALLBACK_SENT_GIFT_VERSION =
  * const prefab = Prefab.fromBinary<'Handle_Short'>(myBinaryString);
  */
 export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
+  /**
+   * The name of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * const name = prefab.name;
+   * // `name` is `'Handle_Short'`
+   */
   readonly name: PrefabName<TPrefabName>;
+
+  /**
+   * The hash of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * const hash = prefab.hash;
+   * // `hash` is `42230`
+   */
   readonly hash: PrefabHash<TPrefabName>;
+
+  /**
+   * The position of the prefab.
+   *
+   * ⚠️ Note that although you can safely read from this public property, you should not modify this
+   * property directly. This is because some prefabs also use a `NetworkRigidbodyComponent` to
+   * control their position. You can safely set the position of a prefab using the
+   * `setPosition(position)` method.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short', {
+   *   position: { x: 420, y: 69, z: 1337 }
+   * });
+   *
+   * const position = prefab.position;
+   * // `position` is `{ x: 420, y: 69, z: 1337 }`
+   */
   position: Position;
+
+  /**
+   * The rotation of the prefab.
+   *
+   * Note that although you can safely read from this public property, you should not modify this
+   * property directly. This is because some prefabs also use a `NetworkRigidbodyComponent` to
+   * control their rotation. You can safely set the rotation of a prefab using the
+   * `setRotation(rotation)` method.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short', {
+   *   rotation: { x: 0.42, y: -0.69, z: -0.1337, w: 0.88 }
+   * });
+   *
+   * const rotation = prefab.rotation;
+   * // `rotation` is `{ x: 0.42, y: -0.69, z: -0.1337, w: 0.88 }`
+   */
   rotation: Rotation;
+
+  /**
+   * The scale of the prefab.
+   *
+   * Contains the scale of the prefab. You can also set the scale of a prefab using the
+   * `setScale(scale)` method.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short', {
+   *   scale: 0.69
+   * });
+   *
+   * const scale = prefab.scale;
+   * // `scale` is approx. `0.69` (within JavaScript floating point precision)
+   */
   scale: number;
+
+  /**
+   * A map of the stored components.
+   *
+   * Provides access to the components stored in this prefab. Components are keyed to their
+   * respective names, unless its data contained an unrecognised hash. In that case, the component
+   * will be stored in an array under the `Unknown` key.
+   *
+   * 💡 It might be easier to add components using the `addComponent(component)` method.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short', {
+   *   components: {
+   *     NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 })
+   *   }
+   * });
+   *
+   * const components = prefab.components;
+   * // `components` is `{
+   * //   NetworkRigidbody: NetworkRigidbodyComponent {
+   * //     hash: 2290978823,
+   * //     name: 'NetworkRigidbody',
+   * //     position: { x: 0, y: 0, z: 0 },
+   * //     rotation: { x: 0, y: 0, z: 0, w: 1 },
+   * //     isKinematic: false,
+   * //     isServerSleeping: false,
+   * //     velocity: { x: 0, y: 0, z: 0 },
+   * //     angularVelocity: { x: 0, y: 0, z: 0 }
+   * //   },
+   * //   Unknown: []
+   * // }`
+   */
   components: PrefabComponents;
+
+  /**
+   * A map of the stored entities.
+   *
+   * Provides access to the entities stored in this prefab. Entities are keyed to a combination of
+   * their respective names and hashes, unless its data contained an unrecognised hash. In that
+   * case, the entity will be keyed as `Unknown_` followed by its hash. The reason that entities
+   * cannot be keyed without their hashes (like components) is because some prefabs have multiple
+   * entities with the same name. For example, the `Handle_Fist` prefab has several `Slot_Deco`
+   * entities that are only differentiated by their hash. Conversely, it's also possible that an
+   * entity exists on different prefabs with the same name but different hashes. For example, the
+   * `Fire` entity exists on the `Infinite_Fire` prefab with hash `8488`, but exists on the
+   * `Grass_Clump` prefab with hash `30100`. For this reason, _ATT String Transcoder_ uses spawn
+   * infodumps from the game to figure out which entities belong to which prefabs and uses this data
+   * to provide you with auto-complete options.
+   *
+   * ⚠️ Unfortunately this means that it's not easy to tell upfront which hash a `Fire` entity has on
+   * a prefab that you're building. Please ensure that you assign a key that is identical to the
+   * entity key (which is name, underscore, and hash).
+   *
+   * 💡 It might be easier to add entities using the `addEntity(entity)` method.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short', {
+   *   entities: {
+   *     // Please note the keys include the hash, not just the name.
+   *     Slot_Multi_6136: new Entity('Slot_Multi_6136'),
+   *     Slot_Multi_6138: new Entity('Slot_Multi_6138'),
+   *     Unknown_1337: new Entity('Unknown', { hash: 1337 })
+   *   }
+   * });
+   *
+   * const entities = prefab.entities;
+   * // `entities` is `{
+   * //   Slot_Multi_6136: Entity {
+   * //     hash: 6136,
+   * //     name: 'Slot_Multi',
+   * //     isAlive: true,
+   * //     components: { Unknown: [] }
+   * //   },
+   * //   Slot_Multi_6138: Entity {
+   * //     hash: 6138,
+   * //     name: 'Slot_Multi',
+   * //     isAlive: true,
+   * //     components: { Unknown: [] }
+   * //   },
+   * //   Unknown_1337: Entity {
+   * //     hash: 1337,
+   * //     name: 'Unknown',
+   * //     isAlive: true,
+   * //     components: { Unknown: [] }
+   * //   },
+   * // }`
+   */
   entities: PrefabEntities<PrefabName<TPrefabName>>;
+
+  /**
+   * An array of the stored child prefabs.
+   *
+   * Contains an array of objects that map nested prefabs to entities on the current prefab.
+   *
+   * ⚠️ Note that the entity _does not need to exist_ in the prefab in your program! The ATT game
+   * server will fill in the blanks. For example, if you create a save string for a `Handle_Short`
+   * prefab with several children and no entities on it, and spawn it in-game, it will in fact
+   * have all its usual entities to which child prefabs can attach.
+   *
+   * 💡 It might be easier to add child prefabs using the `addChildPrefab(parentKey, childPrefab)`
+   * method.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short', {
+   *   children: [
+   *     {
+   *       // Please note the entity hash below wasn't defined elsewhere in this prefab, yet this will work when spawned in-game.
+   *       parentHash: 6136, // The hash for `Slot_Multi_6136` on `Handle_Short` prefab.
+   *       prefab: new Prefab('Guard')
+   *     }
+   *   ]
+   * });
+   *
+   * const children = prefab.children;
+   * // `children` is `[
+   * //   {
+   * //     parentHash: 6136,
+   * //     prefab: Prefab {
+   * //       name: 'Guard',
+   * //       hash: 51672,
+   * //       position: { x: 0, y: 0, z: 0 },
+   * //       rotation: { x: 0, y: 0, z: 0, w: 1 }
+   * //       scale: 1,
+   * //       components: { Unknown: [] },
+   * //       entities: {},
+   * //       children: []
+   * //     }
+   * //   }
+   * // ]`
+   */
   children: PrefabChild[];
 
   /**
-   * Creates a new `Prefab` from a list of known _A Township Tale_ prefab names. You may
-   * optionally provide additional properties in the second argument.
+   * Creates a new `Prefab` from a list of known _A Township Tale_ prefab names. You may optionally
+   * provide additional properties in the second argument.
    *
    * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
    *
@@ -130,8 +342,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *               HeatSourceBase: new HeatSourceBaseComponent({
    *                 version: 2,
    *                 isLit: true,
-   *                 progress: 0.8,
-   *                 time: Infinity
+   *                 progress: 0.8
    *               })
    *             }
    *           })
@@ -160,6 +371,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * prefab's embedded entities, which is required for most child prefabs under normal circumstances.
    * If you do not specify a `parentKey`, you may pass `null` to create a "floating" child. It will
    * be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const parent = new Prefab('Handle_Short');
+   * const child = new Prefab('Guard');
+   *
+   * parent.addChildPrefab('Slot_Large_SwordType_Craft_54356', child);
    */
   addChildPrefab(
     parentKey: Exclude<EntityKey<PrefabName<TPrefabName>>, 'Unknown'> | null,
@@ -202,6 +421,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Adds a `Component` to the prefab. Will override any existing component with that name.
+   *
+   * @example
+   * import { NetworkRigidbodyComponent, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   * const component = new NetworkRigidbodyComponent({ version: 1 });
+   *
+   * prefab.addComponent(component);
    */
   addComponent(component: Component): Prefab<PrefabName<TPrefabName>> {
     this.components = {
@@ -214,6 +441,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Adds an `Entity` to the prefab. Will override any existing entity with that key.
+   *
+   * @example
+   * import { Entity, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   * const entity = new Entity<'Handle_Short'>('Slot_Multi_6136');
+   *
+   * prefab.addEntity(entity);
    */
   addEntity(entity: Entity<TPrefabName>): Prefab<PrefabName<TPrefabName>> {
     this.entities = {
@@ -227,6 +462,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Adds a `Prefab` gift to this prefab's `SentGift` component. You may call this method more than
    * once to add additional gifts.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const box = new Prefab('Gift_Mail_Box');
+   * const gift = new Prefab('Dynamite');
+   *
+   * box.addGift(gift);
    */
   addGift(giftPrefab: Prefab): Prefab<PrefabName<TPrefabName>> {
     if (typeof giftPrefab === 'undefined') {
@@ -271,6 +514,22 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Creates a `Prefab` from reading the prefab's binary data stored in a `SaveString`.
+   *
+   * @example
+   * import { BinaryReader, ComponentHash, Prefab, type BinaryString } from 'att-string-transcoder';
+   *
+   * const binaryString = `0000000000000000101001001111011000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111100000000000000000000000001111111000000000000000000000000101011010110001000000111011011000000000000000000000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`;
+   *
+   * const reader = new BinaryReader(binaryString as BinaryString);
+   *
+   * const componentVersions = new Map<number, number>([
+   *   [ComponentHash.NetworkRigidbody, 1],
+   *   [ComponentHash.PhysicalMaterialPart, 1],
+   *   [ComponentHash.Pickup, 1]
+   *   // etc...
+   * ]);
+   *
+   * const prefab = Prefab.fromBinary<'Handle_Short'>(reader, componentVersions);
    */
   static fromBinary<TPrefabName extends ATTPrefabName = ATTPrefabName>(
     reader: BinaryReader,
@@ -333,6 +592,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Creates a `Prefab` from reading a `SaveString`.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const saveString = `43430,230,43430,3290698471,1125743666,1132721897,1050703933,3208373430,1039090831,1058493384,1043542835,2290978823,418,3290698471,1125743666,1132721897,1050703933,3208373430,1039090831,1058493384,3221225472,0,0,0,0,0,363610349,2147483736,3005828291,3221225472,2415919104,0,395228240,397619388,393508864,400941080,2546407302,4157020038,3890602430,1579755829,536870916,374086096,2147483844,1610612736,765,2684354569,338752663,2281701377,0,0,19021736,1744830465,67108864,75722752,0,303,67108864,1124073472,0,0,`;
+   *
+   * const prefab = Prefab.fromSaveString<'SpriggullDrumstick_Full_Ripe'>(saveString);
    */
   static fromSaveString<TPrefabName extends ATTPrefabName = ATTPrefabName>(
     saveString: string,
@@ -400,15 +666,29 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the spin (vector) on the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Stone'>.fromSaveString('...');
+   *
+   * const angularVelocity = prefab.getAngularVelocity();
+   * const { x, y, z } = angularVelocity;
    */
   getAngularVelocity(): Velocity {
     return this.components.NetworkRigidbody?.angularVelocity ?? { x: 0, y: 0, z: 0 };
   }
 
   /**
-   * Gets a map of component hashes and the versions used on this prefab.
-   * Will throw an error if the prefab uses mixed versions of a particular
-   * component.
+   * Gets a map of component hashes and the versions used on this prefab. Will throw an error if the
+   * prefab uses mixed versions of a particular component.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const componentVersions = prefab.getComponentVersions();
    */
   getComponentVersions(): Map<number, number> {
     const versions = new Map<number, number>();
@@ -463,6 +743,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the gift sender's name, which is labeled on the gift.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
+   *
+   * const giftBoxLabel = prefab.getGiftBoxLabel();
    */
   getGiftBoxLabel(): string {
     return this.components.SentGift?.senderName ?? '';
@@ -470,6 +757,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the prefab's physical integrity.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const integrity = prefab.getIntegrity();
    */
   getIntegrity(): number {
     return this.components.DurabilityModule?.integrity ?? 1;
@@ -478,6 +772,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets the {@link https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html kinematic}
    * state of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const isKinematic = prefab.getKinematic();
    */
   getKinematic(): boolean {
     return this.components.NetworkRigidbody?.isKinematic ?? false;
@@ -485,6 +786,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the prefab's physical material.
+   *
+   * @example
+   * import { PhysicalMaterialPartHash, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Guard'>.fromSaveString('...');
+   *
+   * const materialHash = prefab.getMaterial();
+   * const materialName = PhysicalMaterialPartHash[materialHash];
    */
   getMaterial(): PhysicalMaterialPartHash {
     return this.components.PhysicalMaterialPart?.materialHash ?? 0;
@@ -492,6 +801,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the burning state of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Grass_Clump'>.fromSaveString('...');
+   *
+   * const isOnFire = prefab.getOnFire();
    */
   getOnFire(): boolean {
     const fireEntity = Object.values(this.entities).find(entity => entity.name === 'Fire');
@@ -500,18 +816,32 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Gets the position of the prefab. If the prefab is a child of another
-   * prefab, then this position is local to that parent. Otherwise, this
-   * position is in world space.
+   * Gets the position of the prefab. If the prefab is a child of another prefab, then this position
+   * is local to that parent. Otherwise, this position is in world space.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const position = prefab.getPosition();
+   * const { x, y, z } = position;
    */
   getPosition(): Position {
     return this.position;
   }
 
   /**
-   * Gets the rotation of the prefab. If the prefab is a child of another
-   * prefab, then this rotation is local to that parent. Otherwise, this
-   * rotation is in world space.
+   * Gets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation
+   * is local to that parent. Otherwise, this rotation is in world space.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const rotation = prefab.getRotation();
+   * const { x, y, z, w } = rotation;
    */
   getRotation(): Rotation {
     return this.rotation;
@@ -519,6 +849,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the scale of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const scale = prefab.getScale();
    */
   getScale(): number {
     return this.scale;
@@ -527,6 +864,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets the {@link https://docs.unity3d.com/Manual/RigidbodiesOverview.html sleeping}
    * state of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * const isServerSleeping = prefab.getServerSleeping();
    */
   getServerSleeping(): boolean {
     return this.components.NetworkRigidbody?.isServerSleeping ?? false;
@@ -534,6 +878,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the number of servings on a liquid container prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Potion_Medium'>.fromSaveString('...');
+   *
+   * const servings = prefab.getServings();
    */
   getServings(): number {
     return this.components.LiquidContainer?.contentLevel ?? 0;
@@ -541,6 +892,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the direction (vector) on the prefab. Units are in metres per second.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Stone'>.fromSaveString('...');
+   *
+   * const velocity = prefab.getVelocity();
+   * const { x, y, z } = velocity;
    */
   getVelocity(): Velocity {
     return this.components.NetworkRigidbody?.velocity ?? { x: 0, y: 0, z: 0 };
@@ -548,6 +907,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Prints this prefab's data structure to the console.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.inspect();
    */
   inspect(): void {
     console.log(JSON.stringify(this, null, 2));
@@ -555,6 +921,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Prints this prefab's `SaveString` to the console.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.print();
    */
   print(): void {
     const saveString = this.toSaveString();
@@ -563,6 +936,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes all child `Prefab` from this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.removeAllChildPrefabs();
    */
   removeAllChildPrefabs(): Prefab<PrefabName<TPrefabName>> {
     this.children = [];
@@ -572,6 +952,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes all components on this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.removeAllComponents();
    */
   removeAllComponents(): Prefab<PrefabName<TPrefabName>> {
     this.components = { Unknown: [] };
@@ -581,6 +968,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes all entities on this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.removeAllEntities();
    */
   removeAllEntities(): Prefab<PrefabName<TPrefabName>> {
     this.entities = {};
@@ -590,6 +984,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes all gift `Prefab` from this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
+   *
+   * prefab.removeAllGifts();
    */
   removeAllGifts(): Prefab<PrefabName<TPrefabName>> {
     const sentGiftComponent = this.components.SentGift;
@@ -603,6 +1004,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified child `Prefab` from this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.removeChildPrefab(51672);
+   * // or
+   * prefab.removeChildPrefab('Guard');
    */
   removeChildPrefab(prefabHash: ATTPrefabHash): Prefab;
   removeChildPrefab(prefabName: ATTPrefabName): Prefab;
@@ -620,6 +1030,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified component from this prefab.
+   *
+   * @example
+   * import { ComponentHash, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.removeComponent(ComponentHash.NetworkRigidbody);
+   * // or
+   * prefab.removeComponent('NetworkRigidbody');
    */
   removeComponent(componentHash: ComponentHash): Prefab<PrefabName<TPrefabName>>;
   removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): Prefab<PrefabName<TPrefabName>>;
@@ -660,6 +1079,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified entity from this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Handle_Short'>.fromSaveString('...');
+   *
+   * prefab.removeEntity('Slot_Multi_6136');
    */
   removeEntity(entityKey: Exclude<EntityKey<TPrefabName>, 'Unknown'>): Prefab<PrefabName<TPrefabName>> {
     if (typeof entityKey === 'undefined') {
@@ -673,6 +1099,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified gift `Prefab` from this prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = Prefab<'Gift_Mail_Box'>.fromSaveString('...');
+   *
+   * prefab.removeGift(31326);
+   * // or
+   * prefab.removeGift('Dynamite');
    */
   removeGift(prefabHash: ATTPrefabHash): Prefab<PrefabName<TPrefabName>>;
   removeGift(prefabName: ATTPrefabName): Prefab<PrefabName<TPrefabName>>;
@@ -694,10 +1129,16 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Sets a spin (vector) on the prefab, causing the physics engine to
-   * apply a force to it when spawning. Units are in metres per second.
-   * Only works reliably on the parent prefab. Does not work on kinematic
-   * prefabs. Does not work on static prefabs.
+   * Sets a spin (vector) on the prefab, causing the physics engine to apply a force to it when
+   * spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not
+   * work on kinematic prefabs. Does not work on static prefabs.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * prefab.setAngularVelocity({ x: 420, y: 69, z: 1337 });
    */
   setAngularVelocity({ x, y, z }: AngularVelocity): Prefab<PrefabName<TPrefabName>> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
@@ -716,6 +1157,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the gift sender's name, which is labeled on the gift.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Gift_Mail_Box');
+   *
+   * prefab.setGiftBoxLabel('topkek');
    */
   setGiftBoxLabel(label: string): Prefab<PrefabName<TPrefabName>> {
     if (typeof label === 'undefined') {
@@ -736,9 +1184,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Sets the prefab's integrity. This can change both its appearance and
-   * other qualities such as durability and the amount of materials
-   * recovered from recycling.
+   * Sets the prefab's integrity. This can change both its appearance and other qualities such as
+   * durability and the amount of materials recovered from recycling.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * prefab.setIntegrity(0.69);
    */
   setIntegrity(integrity: number): Prefab<PrefabName<TPrefabName>> {
     if (typeof integrity === 'undefined') {
@@ -760,9 +1214,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Makes the prefab {@link https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html kinematic}.
-   * By default, a `new Prefab()` is not kinematic, but some prefabs
-   * require to be kinematic to work properly. You can optionally pass a
-   * boolean, for example `prefab.setKinematic(false)`.
+   * By default, a `new Prefab()` is not kinematic, but some prefabs require to be kinematic to work
+   * properly. You can optionally pass a boolean, for example `prefab.setKinematic(false)`.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * prefab.setKinematic(true);
    */
   setKinematic(isKinematic?: boolean): Prefab<PrefabName<TPrefabName>> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
@@ -779,9 +1239,17 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Sets the prefab's physical material. This can change both its
-   * appearance and other qualities such as durability, damage, heat
-   * retention and weight.
+   * Sets the prefab's physical material. This can change both its appearance and other qualities such
+   * as durability, damage, heat retention and weight.
+   *
+   * @example
+   * import { PhysicalMaterialPartHash, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * prefab.setMaterial(PhysicalMaterialPartHash.Mythril);
+   * // or
+   * prefab.setMaterial('Mythril');
    */
   setMaterial(materialHash: PhysicalMaterialPartHash): Prefab<PrefabName<TPrefabName>>;
   setMaterial(materialName: keyof typeof PhysicalMaterialPartHash): Prefab<PrefabName<TPrefabName>>;
@@ -808,6 +1276,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the prefab on fire, if it is capable of catching fire.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Grass_Clump');
+   *
+   * prefab.setOnFire(true);
    */
   setOnFire(isLit?: boolean): Prefab<PrefabName<TPrefabName>> {
     const validFireEntity = Object.values<{
@@ -840,9 +1315,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Sets the position of the prefab. If the prefab is a child of another
-   * prefab, then this position is local to that parent. Otherwise, this
-   * position is in world space.
+   * Sets the position of the prefab. If the prefab is a child of another prefab, then this position
+   * is local to that parent. Otherwise, this position is in world space.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * prefab.setPosition({ x: 420, y: 69, z: 1337 });
    */
   setPosition({ x, y, z }: Position): Prefab<PrefabName<TPrefabName>> {
     const position: Position = { x, y, z };
@@ -862,9 +1343,15 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Sets the rotation of the prefab. If the prefab is a child of another
-   * prefab, then this rotation is local to that parent. Otherwise, this
-   * rotation is in world space.
+   * Sets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation
+   * is local to that parent. Otherwise, this rotation is in world space.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * prefab.setRotation({ x: 0.42, y: -0.69, z: 0.1337, w: -0.88 });
    */
   setRotation({ x, y, z, w }: Rotation): Prefab<PrefabName<TPrefabName>> {
     const rotation: Rotation = { x, y, z, w };
@@ -885,6 +1372,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the scale of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * prefab.setScale(0.69);
    */
   setScale(scale: number): Prefab<PrefabName<TPrefabName>> {
     if (typeof scale === 'undefined') {
@@ -898,10 +1392,16 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Makes the prefab {@link https://docs.unity3d.com/Manual/RigidbodiesOverview.html sleep}.
-   * By default, a `new Prefab()` is not sleeping. A sleeping prefab does
-   * not have its physics simulated until it receives a collision or force,
-   * such as touching it. You can optionally pass a boolean, for example
-   * `prefab.setServerSleeping(false)`.
+   * By default, a `new Prefab()` is not sleeping. A sleeping prefab does not have its physics
+   * simulated until it receives a collision or force, such as touching it. You can optionally pass
+   * a boolean, for example `prefab.setServerSleeping(false)`.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * prefab.setServerSleeping(true);
    */
   setServerSleeping(isServerSleeping?: boolean): Prefab<PrefabName<TPrefabName>> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
@@ -919,6 +1419,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the number of servings on a liquid container prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Potion_Medium');
+   *
+   * prefab.setServings(69);
    */
   setServings(servings: number): Prefab<PrefabName<TPrefabName>> {
     if (typeof servings === 'undefined') {
@@ -940,10 +1447,16 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Sets a direction (vector) on the prefab, causing the physics engine to
-   * apply a force to it when spawning. Units are in metres per second.
-   * Only works reliably on the parent prefab. Does not work on kinematic
-   * prefabs. Does not work on static prefabs.
+   * Sets a direction (vector) on the prefab, causing the physics engine to apply a force to it when
+   * spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work
+   * on kinematic prefabs. Does not work on static prefabs.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * prefab.setVelocity({ x: 420, y: 69, z: 1337 });
    */
   setVelocity({ x, y, z }: Velocity): Prefab<PrefabName<TPrefabName>> {
     if (isSavableComponent('NetworkRigidbody', this.name)) {
@@ -962,6 +1475,22 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Returns a `BinaryString` representation of the prefab.
+   *
+   * @example
+   * import { ComponentHash, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * const componentVersions = prefab.getComponentVersions();
+   * // or
+   * const componentVersions = new Map<number, number>([
+   *   [ComponentHash.NetworkRigidbody, 1],
+   *   [ComponentHash.PhysicalMaterialPart, 1],
+   *   [ComponentHash.Pickup, 2]
+   *   // etc...
+   * ]);
+   *
+   * const binaryString = prefab.toBinary(componentVersions);
    */
   toBinary(componentVersions: Map<number, number>): BinaryString {
     const writer = new BinaryWriter();
@@ -1011,6 +1540,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Returns the `SaveString` to spawn this prefab in the game.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Stone');
+   *
+   * const saveString = prefab.toSaveString();
    */
   toSaveString(): SaveString {
     const componentVersions = this.getComponentVersions();
