@@ -1055,6 +1055,32 @@ prefab.setServings(69);
 
 ---
 
+### `setSpawnArea(populationArg, props?)`
+
+Sets a spawn area on the prefab with the given population and any additional configuration.
+
+- `populationArg` `<`[`PopulationDefinitionHash`](./PopulationDefinitionHash.md)`|`[`PopulationDefinitionName`](./PopulationDefinitionName.md)`>` The spawn area population hash or name to set on the prefab.
+- `props` (optional, default `{}`) [`<SetSpawnAreaProps>`](./SetSpawnAreaProps.md) Additional properties for configuring the spawn area.
+- Returns: `<this>`
+
+```ts
+import { PopulationDefinitionHash, Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Disk_Encounter');
+
+prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation, {
+  currentPopulation: 5,
+  isOneOff: false,
+  isPopulationStarted: true,
+  maxPopulation: 20,
+  numberOfSpawnPoints: 40,
+  size: 5,
+  startingPopulation: 5
+});
+```
+
+---
+
 ### `setVelocity(velocity)`
 
 Sets a direction (vector) on the prefab, causing the physics engine to apply a force to it when spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work on kinematic prefabs. Does not work on static prefabs.

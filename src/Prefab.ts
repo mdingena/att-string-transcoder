@@ -3,12 +3,14 @@ import type { ATTPrefabHash } from './types/ATTPrefabHash.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
 import type { AngularVelocity } from './types/AngularVelocity.js';
 import type { BinaryString } from './types/BinaryString.js';
+import type { PopulationDefinitionName } from './types/PopulationDefinitionName.js';
 import type { Position } from './types/Position.js';
 import type { PrefabChild } from './types/PrefabChild.js';
 import type { PrefabComponents } from './types/PrefabComponents.js';
 import type { PrefabEntities } from './types/PrefabEntities.js';
 import type { Rotation } from './types/Rotation.js';
 import type { SaveString } from './types/SaveString.js';
+import type { SetSpawnAreaProps } from './types/SetSpawnAreaProps.js';
 import type { Velocity } from './types/Velocity.js';
 
 import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
@@ -20,11 +22,14 @@ import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js
 import { LiquidContainerComponent } from './components/LiquidContainerComponent.js';
 import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
+import { PopulationSpawnAreaComponent } from './components/PopulationSpawnAreaComponent.js';
 import { SentGiftComponent } from './components/SentGiftComponent.js';
+import { SpawnAreaComponent } from './components/SpawnAreaComponent.js';
 import * as constants from './constants.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
 import { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
+import { PopulationDefinitionHash } from './types/PopulationDefinitionHash.js';
 import { isSavableComponent } from './utils/isSavableComponent.js';
 import { readChildren } from './utils/readChildren.js';
 import { readComponents } from './utils/readComponents.js';
@@ -63,12 +68,19 @@ const FALLBACK_PHYSICAL_MATERIAL_PART_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.PhysicalMaterialPart) ??
   constants.latestPhysicalMaterialPartComponentVersion;
 
+const FALLBACK_POPULATION_SPAWN_AREA_VERSION =
+  constants.latestSupportedComponentVersions.get(ComponentHash.PopulationSpawnArea) ??
+  constants.latestPopulationSpawnAreaComponentVersion;
+
 const FALLBACK_NETWORK_RIGIDBODY_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.NetworkRigidbody) ??
   constants.latestNetworkRigidbodyComponentVersion;
 
 const FALLBACK_SENT_GIFT_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.SentGift) ?? constants.latestSentGiftComponentVersion;
+
+const FALLBACK_SPAWN_AREA_VERSION =
+  constants.latestSupportedComponentVersions.get(ComponentHash.SpawnArea) ?? constants.latestSpawnAreaComponentVersion;
 /* c8 ignore stop */
 
 /**
@@ -1457,6 +1469,68 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
         version,
         contentLevel: Math.max(0, Math.ceil(servings)),
         hasContent: Math.ceil(servings) > 0
+      });
+    }
+
+    return this;
+  }
+
+  /**
+   * Sets a spawn area on the prefab with the given population and any additional configuration.
+   *
+   * @example
+   * import { PopulationDefinitionHash, Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Disk_Encounter');
+   *
+   * prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation, {
+   *   currentPopulation: 5,
+   *   isOneOff: false,
+   *   isPopulationStarted: true,
+   *   maxPopulation: 20,
+   *   numberOfSpawnPoints: 40,
+   *   size: 5,
+   *   startingPopulation: 5
+   * });
+   */
+  setSpawnArea(
+    populationDefinitionHash: PopulationDefinitionHash,
+    props?: SetSpawnAreaProps
+  ): Prefab<PrefabName<TPrefabName>>;
+  setSpawnArea(
+    populationDefinitionName: PopulationDefinitionName,
+    props?: SetSpawnAreaProps
+  ): Prefab<PrefabName<TPrefabName>>;
+  setSpawnArea(
+    populationDefinitionArg: PopulationDefinitionHash | PopulationDefinitionName,
+    props: SetSpawnAreaProps = {}
+  ): Prefab<PrefabName<TPrefabName>> {
+    if (typeof populationDefinitionArg === 'undefined') {
+      throw new Error('You must pass a population definition hash or name to set on this spawn area.');
+    }
+
+    if (isSavableComponent('PopulationSpawnArea', this.name) && isSavableComponent('SpawnArea', this.name)) {
+      const populationDefinitionHash =
+        typeof populationDefinitionArg === 'number'
+          ? populationDefinitionArg
+          : PopulationDefinitionHash[populationDefinitionArg];
+
+      this.components.PopulationSpawnArea = new PopulationSpawnAreaComponent({
+        ...this.components.PopulationSpawnArea,
+        version: this.components.PopulationSpawnArea?.version ?? FALLBACK_POPULATION_SPAWN_AREA_VERSION,
+        definition: populationDefinitionHash,
+        isPopulationStarted: props.isPopulationStarted,
+        maxPopulation: props.maxPopulation,
+        currentPopulation: props.currentPopulation,
+        numberOfSpawnPoints: props.numberOfSpawnPoints,
+        startingPopulation: props.startingPopulation,
+        isOneOff: props.isOneOff
+      });
+
+      this.components.SpawnArea = new SpawnAreaComponent({
+        ...this.components.SpawnArea,
+        version: this.components.SpawnArea?.version ?? FALLBACK_SPAWN_AREA_VERSION,
+        size: props.size
       });
     }
 

@@ -19,6 +19,7 @@ import { UnsupportedComponent } from './components/UnsupportedComponent.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
 import { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
+import { PopulationDefinitionHash } from './types/PopulationDefinitionHash.js';
 
 describe('new Prefab()', () => {
   describe('when given only a prefab name', () => {
@@ -1806,6 +1807,115 @@ describe('Prefab.setServings()', () => {
       const servings = prefab.getServings();
 
       expect(servings).toStrictEqual(69);
+    });
+  });
+});
+
+describe('Prefab.setSpawnArea()', () => {
+  describe('when given invalid arguments', () => {
+    it('throws an error', () => {
+      const prefab = new Prefab('Directional_Encounter');
+
+      // @ts-expect-error Passing invalid arguments
+      const expectedToThrow = () => prefab.setSpawnArea();
+      const expectedError = new Error('You must pass a population definition hash or name to set on this spawn area.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when the prefab cannot have PopulationSpawnArea and SpawnArea components', () => {
+    it('sets no spawn area', () => {
+      const prefab = new Prefab('Anvil');
+      delete prefab.components.PopulationSpawnArea;
+      delete prefab.components.SpawnArea;
+
+      prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation);
+
+      expect(prefab.components.PopulationSpawnArea).toStrictEqual(undefined);
+      expect(prefab.components.SpawnArea).toStrictEqual(undefined);
+    });
+  });
+
+  describe('when the prefab can have PopulationSpawnArea and SpawnArea components', () => {
+    describe('when given the required arguments', () => {
+      describe('when given a population definition hash', () => {
+        it('sets the given population on the spawn area with additional default values', () => {
+          const prefab = new Prefab('Directional_Encounter');
+
+          prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation);
+
+          expect(prefab.components.PopulationSpawnArea?.currentPopulation).toStrictEqual(5);
+          expect(prefab.components.PopulationSpawnArea?.isOneOff).toStrictEqual(false);
+          expect(prefab.components.PopulationSpawnArea?.isPopulationStarted).toStrictEqual(true);
+          expect(prefab.components.PopulationSpawnArea?.maxPopulation).toStrictEqual(20);
+          expect(prefab.components.PopulationSpawnArea?.numberOfSpawnPoints).toStrictEqual(40);
+          expect(prefab.components.PopulationSpawnArea?.startingPopulation).toStrictEqual(5);
+          expect(prefab.components.SpawnArea?.size).toStrictEqual(5);
+        });
+      });
+
+      describe('when given a population definition name', () => {
+        it('sets the given population on the spawn area with additional default values', () => {
+          const prefab = new Prefab('Directional_Encounter');
+
+          prefab.setSpawnArea('WyrmPopulation');
+
+          expect(prefab.components.PopulationSpawnArea?.currentPopulation).toStrictEqual(5);
+          expect(prefab.components.PopulationSpawnArea?.isOneOff).toStrictEqual(false);
+          expect(prefab.components.PopulationSpawnArea?.isPopulationStarted).toStrictEqual(true);
+          expect(prefab.components.PopulationSpawnArea?.maxPopulation).toStrictEqual(20);
+          expect(prefab.components.PopulationSpawnArea?.numberOfSpawnPoints).toStrictEqual(40);
+          expect(prefab.components.PopulationSpawnArea?.startingPopulation).toStrictEqual(5);
+          expect(prefab.components.SpawnArea?.size).toStrictEqual(5);
+        });
+      });
+    });
+
+    describe('when given the additional arguments', () => {
+      it('sets the given population on the spawn area with additional given values', () => {
+        const prefab = new Prefab('Directional_Encounter');
+
+        prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation, {
+          currentPopulation: 69,
+          isOneOff: true,
+          isPopulationStarted: false,
+          maxPopulation: 1337,
+          numberOfSpawnPoints: 69,
+          size: 420,
+          startingPopulation: 1337
+        });
+
+        expect(prefab.components.PopulationSpawnArea?.currentPopulation).toStrictEqual(69);
+        expect(prefab.components.PopulationSpawnArea?.isOneOff).toStrictEqual(true);
+        expect(prefab.components.PopulationSpawnArea?.isPopulationStarted).toStrictEqual(false);
+        expect(prefab.components.PopulationSpawnArea?.maxPopulation).toStrictEqual(1337);
+        expect(prefab.components.PopulationSpawnArea?.numberOfSpawnPoints).toStrictEqual(69);
+        expect(prefab.components.PopulationSpawnArea?.startingPopulation).toStrictEqual(1337);
+        expect(prefab.components.SpawnArea?.size).toStrictEqual(420);
+      });
+    });
+  });
+
+  describe('when the prefab already has PopulationSpawnArea and SpawnArea components', () => {
+    it('sets the given spawn area', () => {
+      const prefab = new Prefab('Directional_Encounter', {
+        components: {
+          PopulationSpawnArea: new PopulationSpawnAreaComponent({
+            version: 2,
+            definition: PopulationDefinitionHash.TurabadaOverworldPopulation
+          }),
+          SpawnArea: new SpawnAreaComponent({
+            version: 1,
+            size: 1337
+          })
+        }
+      });
+
+      prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation, { size: 69 });
+
+      expect(prefab.components.PopulationSpawnArea?.definition).toStrictEqual(PopulationDefinitionHash.WyrmPopulation);
+      expect(prefab.components.SpawnArea?.size).toStrictEqual(69);
     });
   });
 });
