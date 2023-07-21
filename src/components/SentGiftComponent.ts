@@ -28,7 +28,7 @@ type SentGiftComponentPropsV1 = {
 export type SentGiftComponentProps = SentGiftComponentPropsV1;
 
 /**
- * @since 3.0.0
+ * @since v3.0.0
  * @version 1
  */
 export class SentGiftComponent extends Component {

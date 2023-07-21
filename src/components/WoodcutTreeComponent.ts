@@ -16,7 +16,7 @@ type WoodcutTreeComponentPropsV3 = {
 export type WoodcutTreeComponentProps = WoodcutTreeComponentPropsV3;
 
 /**
- * @since 3.0.0
+ * @since v3.0.0
  * @version 3
  */
 export class WoodcutTreeComponent extends Component {

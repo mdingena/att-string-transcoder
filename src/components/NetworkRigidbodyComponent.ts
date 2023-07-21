@@ -24,7 +24,7 @@ export type NetworkRigidbodyComponentProps = NetworkRigidbodyComponentPropsV1;
 /**
  * Controls physical behaviour of the `Prefab` it is attached to.
  *
- * @since 3.0.0
+ * @since v3.0.0
  * @version 1
  */
 export class NetworkRigidbodyComponent extends Component {

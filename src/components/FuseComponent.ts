@@ -15,7 +15,7 @@ type FuseComponentPropsV1 = {
 export type FuseComponentProps = FuseComponentPropsV1;
 
 /**
- * @since 3.0.0
+ * @since v3.0.0
  * @version 1
  */
 export class FuseComponent extends Component {

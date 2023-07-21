@@ -13,7 +13,7 @@ type DurabilityModuleComponentPropsV1 = {
 export type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;
 
 /**
- * @since 3.0.0
+ * @since v3.0.0
  * @version 1
  */
 export class DurabilityModuleComponent extends Component {

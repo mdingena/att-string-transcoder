@@ -15,7 +15,7 @@ type PickupDockComponentPropsV2 = {
 export type PickupDockComponentProps = PickupDockComponentPropsV2;
 
 /**
- * @since 3.0.0
+ * @since v3.0.0
  * @version 2
  */
 export class PickupDockComponent extends Component {
