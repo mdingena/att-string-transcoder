@@ -55,6 +55,7 @@
   - [`setScale(scale)`](#setscalescale)
   - [`setServerSleeping(isServerSleeping?)`](#setserversleepingisserversleeping)
   - [`setServings(servings)`](#setservingsservings)
+  - [`setSpawnArea(populationDefinitionArg, props?)`](#setspawnareapopulationarg-props)
   - [`setVelocity(velocity)`](#setvelocityvelocity)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
   - [`toSaveString()`](#tosavestring)
