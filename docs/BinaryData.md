@@ -212,14 +212,20 @@ const data = BinaryData.fromUnsignedShort(420);
 
 Confirms whether `data` is a string of binary data, i.e. a string of zeroes and ones.
 
+:bulb: This is also a type assertion function, so if the passed `<string>` is asserted as a `<BinaryString>`, it will be considered as such after calling this function.
+
 - `data` `<string>` The string data to confirm is a [`<BinaryString>`](./BinaryString.md).
 - Returns: `<boolean>`
 
 ```ts
 import { BinaryData } from 'att-string-transcoder';
 
-const isBinaryString = BinaryData.isBinaryString('010101abcdef');
-// `isBinaryString` is `false`
+const maybeBinaryString = '11110111001100010000';
+// `maybeBinaryString` is of type `string`
+
+if (BinaryData.isBinaryString(maybeBinaryString)) {
+  // `maybeBinaryString` is of type `BinaryString` inside this closure
+}
 ```
 
 ---
@@ -228,13 +234,20 @@ const isBinaryString = BinaryData.isBinaryString('010101abcdef');
 
 Confirms whether `data` is a string of unsigned integers and chunk versioning pairs.
 
+:bulb: This is also a type assertion function, so if the passed `<string>` is asserted as a `<SaveString>`, it will be considered as such after calling this function.
+
 - `data` `<string>` The string data to confirm is a [`<SaveString>`](./SaveString.md).
 - Returns: `<boolean>`
 
 ```ts
 import { BinaryData } from 'att-string-transcoder';
 
-const isSaveString = BinaryData.isSaveString('...');
+const maybeSaveString = '...';
+// `maybeSaveString` is of type `string`
+
+if (BinaryData.isSaveString(maybeSaveString)) {
+  // `maybeSaveString` is of type `SaveString` inside this closure
+}
 ```
 
 ---

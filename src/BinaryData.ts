@@ -220,8 +220,12 @@ export class BinaryData {
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
-   * const isBinaryString = BinaryData.isBinaryString('010101abcdef');
-   * // `isBinaryString` is `false`
+   * const maybeBinaryString = '11110111001100010000';
+   * // `maybeBinaryString` is of type `string`
+   *
+   * if (BinaryData.isBinaryString(maybeBinaryString)) {
+   *   // `maybeBinaryString` is of type `BinaryString` inside this closure
+   * }
    */
   static isBinaryString(data: string): data is BinaryString {
     const binaryStringPattern = /^[01]+$/;
@@ -232,10 +236,18 @@ export class BinaryData {
   /**
    * Confirms whether `data` is a string of unsigned integers and chunk versioning pairs.
    *
+   * This is also a type assertion function, so if the passed `string` is asserted as a
+   * `BinaryString`, it will be considered as such after calling this function.
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
-   * const isSaveString = BinaryData.isSaveString('...');
+   * const maybeSaveString = '...';
+   * // `maybeSaveString` is of type `string`
+   *
+   * if (BinaryData.isSaveString(maybeSaveString)) {
+   *   // `maybeSaveString` is of type `SaveString` inside this closure
+   * }
    */
   static isSaveString(data: string): data is SaveString {
     const saveStringPattern = /^[0-9,|]+$/;
