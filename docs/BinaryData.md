@@ -1,6 +1,6 @@
 # Class: `BinaryData`
 
-- [Types]
+- [Types](#types)
   - [`<BinaryDataOptions>`](#binarydataoptions)
   - [`<UnpackFloatOptions>`](#unpackfloatoptions)
 - [Constructors](#constructors)
