@@ -9681,7 +9681,27 @@ export const ATTPrefabs = {
   'Directional_Encounter': {
     'hash': 23796,
     'name': 'Directional_Encounter',
-    'embedded': {}
+    'embedded': {
+      /** @todo Verify entities and their components. */
+      'Directional_Encounter_43896': {
+        'hash': 43896,
+        'name': 'Directional_Encounter',
+        'savables': {
+          'CylindricalBoundsSurface': {
+            'hash': 34507654,
+            'name': 'CylindricalBoundsSurface'
+          },
+          'PopulationSpawnArea': {
+            'hash': 3070493599,
+            'name': 'PopulationSpawnArea'
+          },
+          'SpawnArea': {
+            'hash': 2617495528,
+            'name': 'SpawnArea'
+          }
+        }
+      }
+    }
   },
   'Discovery_Landmark': {
     'hash': 37940,
@@ -9691,7 +9711,23 @@ export const ATTPrefabs = {
   'Disk_Encounter': {
     'hash': 65062,
     'name': 'Disk_Encounter',
-    'embedded': {}
+    'embedded': {
+      /** @todo Verify entities and their components. */
+      'Disk_Encounter_43896': {
+        'hash': 43896,
+        'name': 'Disk_Encounter',
+        'savables': {
+          'PopulationSpawnArea': {
+            'hash': 3070493599,
+            'name': 'PopulationSpawnArea'
+          },
+          'SpawnArea': {
+            'hash': 2617495528,
+            'name': 'SpawnArea'
+          }
+        }
+      }
+    }
   },
   'Dragonfly': {
     'hash': 54404,
@@ -30656,7 +30692,23 @@ export const ATTPrefabs = {
   'Spherical_Encounter': {
     'hash': 1222,
     'name': 'Spherical_Encounter',
-    'embedded': {}
+    'embedded': {
+      /** @todo Verify entities and their components. */
+      'Spherical_Encounter_43896': {
+        'hash': 43896,
+        'name': 'Spherical_Encounter',
+        'savables': {
+          'PopulationSpawnArea': {
+            'hash': 3070493599,
+            'name': 'PopulationSpawnArea'
+          },
+          'SpawnArea': {
+            'hash': 2617495528,
+            'name': 'SpawnArea'
+          }
+        }
+      }
+    }
   },
   'Spike_Fancy': {
     'hash': 12492,
