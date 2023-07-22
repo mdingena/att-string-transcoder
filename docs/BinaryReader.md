@@ -4,6 +4,14 @@
   - [`new BinaryReader(data)`](#new-binaryreaderdata)
 - [Methods](#methods)
   - [`readBits(bitCount)`](#readbitsbitcount)
+  - [`readBoolean(options?)`](#readbooleanoptions)
+  - [`readChar(options?)`](#readcharoptions)
+  - [`readFloat(options?)`](#readfloatoptions)
+  - [`readSignedInteger(options?)`](#readsignedintegeroptions)
+  - [`readString(options?)`](#readstringoptions)
+  - [`readUnsignedInteger(options?)`](#readunsignedintegeroptions)
+  - [`readUnsignedLong(options?)`](#readunsignedlongoptions)
+  - [`readUnsignedShort(options?)`](#readunsignedshortoptions)
 
 ## Constructors
 
