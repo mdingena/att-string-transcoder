@@ -187,6 +187,15 @@ describe('BinaryData.packFloat()', () => {
   });
 });
 
+describe('BinaryData.toBinaryString()', () => {
+  it('expresses binary verbatim', () => {
+    const binary = '11110111001100010000';
+    const data = new BinaryData(binary);
+
+    expect(data.toBinaryString()).toStrictEqual(binary);
+  });
+});
+
 describe('BinaryData.toBoolean()', () => {
   it('expresses binary as a boolean', () => {
     const expectedBoolean = true;
