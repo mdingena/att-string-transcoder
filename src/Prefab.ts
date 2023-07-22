@@ -89,6 +89,8 @@ const FALLBACK_SPAWN_AREA_VERSION =
  * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
  *
  * @example
+ * import { Prefab } from 'att-string-transcoder';
+ *
  * const prefab = new Prefab('Handle_Short');
  * // or
  * const prefab = Prefab.fromSaveString<'Handle_Short'>(mySaveString);
@@ -324,6 +326,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
    *
    * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
    * const simple = new Prefab('Grass_Clump');
    *
    * const advanced = new Prefab('Wooden_Stake', {
