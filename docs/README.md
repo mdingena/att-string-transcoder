@@ -25,6 +25,7 @@
   - [`Prefab`](./Prefab.md)
   - [`SentGiftComponent`](./SentGiftComponent.md)
   - [`SpawnAreaComponent`](./SpawnAreaComponent.md)
+  - [`StatManagerComponent`](./StatManagerComponent.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)

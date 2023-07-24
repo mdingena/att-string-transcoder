@@ -40,14 +40,70 @@ type StatManagerComponentPropsV2 = {
 export type StatManagerComponentProps = StatManagerComponentPropsV2;
 
 /**
+ * @see [Class: `StatManagerComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/StatManagerComponent.md)
  * @since v3.0.0
  * @version 2
+ *
+ * @example
+ * import { StatManagerComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 2;
+ * const component = new StatManagerComponent({ version: componentVersion });
  */
 export class StatManagerComponent extends Component {
+  /**
+   * @since v2
+   *
+   * @example
+   * import { StatManagerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new StatManagerComponent({ version: componentVersion });
+   *
+   * const stats = component.stats;
+   * // `stats` is `[]`
+   */
   stats: Stat[];
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { StatManagerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new StatManagerComponent({ version: componentVersion });
+   *
+   * const modifiers = component.modifiers;
+   * // `modifiers` is `[]`
+   */
   modifiers: TimedModifier[];
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { StatManagerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new StatManagerComponent({ version: componentVersion });
+   *
+   * const indirectStatModifiers = component.indirectStatModifiers;
+   * // `indirectStatModifiers` is `[]`
+   */
   indirectStatModifiers: IndirectStatModifier[];
 
+  /**
+   * @see [Class: `StatManagerComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/StatManagerComponent.md)
+   * @since v3.0.0
+   * @version 2
+   *
+   * @example
+   * import { StatManagerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new StatManagerComponent({ version: componentVersion });
+   */
   constructor({ version, stats, modifiers, indirectStatModifiers }: ComponentProps & StatManagerComponentProps) {
     const hash = ComponentHash.StatManager;
     const name = 'StatManager';
