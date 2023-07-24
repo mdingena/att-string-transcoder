@@ -46,7 +46,7 @@ type BasicDecayComponentProps = BasicDecayComponentPropsV3;
 
 ### `new BasicDecayComponent(props)`
 
-Creates a versioned component without deserialising its data.
+Creates a versioned `BasicDecay` component.
 
 - `props` [`<ComponentProps & BasicDecayComponentProps>`](#types) Configuration of the component to create.
 - Returns: `<BasicDecayComponent>`

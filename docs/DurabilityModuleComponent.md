@@ -43,7 +43,7 @@ type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;
 
 ### `new DurabilityModuleComponent(props)`
 
-Creates a versioned component without deserialising its data.
+Creates a versioned `DurabilityModule` component.
 
 - `props` [`<ComponentProps & DurabilityModuleComponentProps>`](#types) Configuration of the component to create.
 - Returns: `<DurabilityModuleComponent>`
