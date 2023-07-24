@@ -16,13 +16,58 @@ type WoodcutTreeComponentPropsV3 = {
 export type WoodcutTreeComponentProps = WoodcutTreeComponentPropsV3;
 
 /**
+ * @see [Class: `WoodcutTreeComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/WoodcutTreeComponent.md)
  * @since v3.0.0
  * @version 3
+ *
+ * @example
+ * import { WoodcutTreeComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 3;
+ * const component = new WoodcutTreeComponent({ version: componentVersion });
  */
 export class WoodcutTreeComponent extends Component {
+  /**
+   * @since v3
+   *
+   * @example
+   * import { WoodcutTreeComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 3;
+   * const component = new WoodcutTreeComponent({ version: componentVersion });
+   *
+   * const presetHash = component.presetHash;
+   * // `presetHash` is `0`
+   */
   presetHash: 0 | PresetHash;
+
+  /**
+   * The hash of the species of the tree prefab this component is attached to.
+   *
+   * @since v3
+   *
+   * @example
+   * import { WoodcutTreeComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 3;
+   * const component = new WoodcutTreeComponent({ version: componentVersion });
+   *
+   * const speciesHash = component.speciesHash;
+   * // `speciesHash` is `11232`
+   */
   speciesHash: SpeciesHash;
 
+  /**
+   * @see [Class: `WoodcutTreeComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/WoodcutTreeComponent.md)
+   * @since v3.0.0
+   * @version 3
+   *
+   * @example
+   * import { WoodcutTreeComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 3;
+   * const component = new WoodcutTreeComponent({ version: componentVersion });
+   */
   constructor({ version, presetHash, speciesHash }: ComponentProps & WoodcutTreeComponentProps) {
     const hash = ComponentHash.WoodcutTree;
     const name = 'WoodcutTree';

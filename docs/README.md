@@ -27,6 +27,7 @@
   - [`SpawnAreaComponent`](./SpawnAreaComponent.md)
   - [`StatManagerComponent`](./StatManagerComponent.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
+  - [`WoodcutTreeComponent`](./WoodcutTreeComponent.md)
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)
   - [`isATTPrefabName(name)`](./isATTPrefabName.md)
