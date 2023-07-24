@@ -20,7 +20,7 @@ type Effect = null | {
 
 type FoodChunk = number;
 
-type CustomData = {
+type CustomData = null | {
   color: Color;
   isConsumableThroughSkin: boolean;
   visualDataHash: number;
@@ -35,7 +35,7 @@ type LiquidContainerComponentPropsV1 = {
   hasContent?: boolean | undefined;
   isCustom?: boolean | undefined;
   presetHash?: number | undefined;
-  customData?: null | CustomData | undefined;
+  customData?: CustomData | undefined;
 };
 
 export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
@@ -264,7 +264,7 @@ export class LiquidContainerComponent extends Component {
       if (isNull) {
         props.customData = null;
       } else {
-        props.customData = {} as CustomData;
+        props.customData = {} as Exclude<CustomData, null>;
 
         /**
          * @property {Color} color

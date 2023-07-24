@@ -48,7 +48,7 @@ type Effect = null | {
 
 type FoodChunk = number;
 
-type CustomData = {
+type CustomData = null | {
   color: Color;
   isConsumableThroughSkin: boolean;
   visualDataHash: number;
@@ -63,7 +63,7 @@ type LiquidContainerComponentPropsV1 = {
   hasContent?: boolean | undefined;
   isCustom?: boolean | undefined;
   presetHash?: number | undefined;
-  customData?: null | CustomData | undefined;
+  customData?: CustomData | undefined;
 };
 
 export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
@@ -77,7 +77,7 @@ export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
 - `hasContent` (optional, default `false`) `<boolean>`
 - `isCustom` (optional, default `false`) `<boolean>`
 - `presetHash` (optional, default `0`) [`<PresetHash | 0>`](../src/types/PresetHash.ts)
-- `customData` (optional, default `null`) `<CustomData | null>`
+- `customData` (optional, default `null`) `<CustomData>`
 
 ## Constructors
 
@@ -242,7 +242,7 @@ const presetHash = component.presetHash;
 The data to use as the customised contents of the liquid container.
 
 - Since: `v1`
-- `<CustomData | null>`
+- `<CustomData>`
 
 ```ts
 import { LiquidContainerComponent } from 'att-string-transcoder';
