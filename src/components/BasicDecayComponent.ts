@@ -16,13 +16,56 @@ export type BasicDecayComponentProps = BasicDecayComponentPropsV3;
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
 /**
+ * @see [Class: `BasicDecayComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BasicDecayComponent.md)
  * @since v3.0.0
  * @version 3
+ *
+ * @example
+ * import { BasicDecayComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 3;
+ * const component = new BasicDecayComponent({ version: componentVersion })
  */
 export class BasicDecayComponent extends Component {
+  /**
+   * @since v3
+   *
+   * @example
+   * import { BasicDecayComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 3;
+   * const component = new BasicDecayComponent({ version: componentVersion });
+   *
+   * const isDisabled = component.isDisabled;
+   * // `isDisabled` is `true`
+   */
   isDisabled: boolean;
+
+  /**
+   * @since v3
+   *
+   * @example
+   * import { BasicDecayComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 3;
+   * const component = new BasicDecayComponent({ version: componentVersion });
+   *
+   * const timelineEntry = component.timelineEntry;
+   * // `timelineEntry` is `31557600000000000`
+   */
   timelineEntry: number;
 
+  /**
+   * @see [Class: `BasicDecayComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BasicDecayComponent.md)
+   * @since v3.0.0
+   * @version 3
+   *
+   * @example
+   * import { BasicDecayComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 3;
+   * const component = new BasicDecayComponent({ version: componentVersion })
+   */
   constructor({ version, isDisabled, timelineEntry }: ComponentProps & BasicDecayComponentProps) {
     const hash = ComponentHash.BasicDecay;
     const name = 'BasicDecay';

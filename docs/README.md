@@ -6,6 +6,7 @@
   - [`<BinaryString>`](./BinaryString.md)
   - [`<SaveString>`](./SaveString.md)
 - Classes
+  - [`BasicDecayComponent`](./BasicDecayComponent.md)
   - [`BinaryData`](./BinaryData.md)
   - [`BinaryReader`](./BinaryReader.md)
   - [`BinaryWriter`](./BinaryWriter.md)
