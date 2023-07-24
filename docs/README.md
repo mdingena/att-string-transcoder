@@ -23,6 +23,7 @@
   - [`PickupDockComponent`](./PickupDockComponent.md)
   - [`PopulationSpawnAreaComponent`](./PopulationSpawnAreaComponent.md)
   - [`Prefab`](./Prefab.md)
+  - [`SentGiftComponent`](./SentGiftComponent.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)

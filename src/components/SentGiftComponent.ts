@@ -28,15 +28,90 @@ type SentGiftComponentPropsV1 = {
 export type SentGiftComponentProps = SentGiftComponentPropsV1;
 
 /**
+ * @see [Class: `SentGiftComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/SentGiftComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { SentGiftComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new SentGiftComponent({ version: componentVersion });
  */
 export class SentGiftComponent extends Component {
+  /**
+   * Name of the player intended as the receiver of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { SentGiftComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SentGiftComponent({ version: componentVersion });
+   *
+   * const receiverName = component.receiverName;
+   * // `receiverName` is `''`
+   */
   receiverName: string;
+
+  /**
+   * Name of the player intended as the sender of the prefab this component is attached to. This name will be displayed as a label on a gift box prefab.
+   *
+   * @since v1
+   *
+   * @example
+   * import { SentGiftComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SentGiftComponent({ version: componentVersion });
+   *
+   * const senderName = component.senderName;
+   * // `senderName` is `''`
+   */
   senderName: string;
+
+  /**
+   * Array of gifts, which are prefab save strings.
+   *
+   * @since v1
+   *
+   * @example
+   * import { SentGiftComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SentGiftComponent({ version: componentVersion });
+   *
+   * const gifts = component.gifts;
+   * // `gifts` is `[]`
+   */
   gifts: Gift[];
+
+  /**
+   * @since v1
+   *
+   * @example
+   * import { SentGiftComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SentGiftComponent({ version: componentVersion });
+   *
+   * const senderTag = component.senderTag;
+   * // `senderTag` is `null`
+   */
   senderTag: SentGiftTag;
 
+  /**
+   * @see [Class: `SentGiftComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/SentGiftComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { SentGiftComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SentGiftComponent({ version: componentVersion });
+   */
   constructor({ version, receiverName, senderName, gifts, senderTag }: ComponentProps & SentGiftComponentProps) {
     const hash = ComponentHash.SentGift;
     const name = 'SentGift';
