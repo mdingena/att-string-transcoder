@@ -4,6 +4,14 @@ import type { PrefabEntities } from '../types/PrefabEntities.js';
 
 import { terminatorHash } from '../constants.js';
 
+/**
+ * Writes given entities to the given `BinaryWriter`.
+ *
+ * @example
+ * import { writeEntities } from 'att-string-transcoder';
+ *
+ * writeEntities(writer, entities, componentVersions);
+ */
 export function writeEntities<TPrefabName extends ATTPrefabName>(
   writer: BinaryWriter,
   entities: PrefabEntities<TPrefabName>,
