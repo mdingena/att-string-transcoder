@@ -78,12 +78,12 @@ type PrefabProps<TPrefabName extends ATTPrefabName> = {
 };
 ```
 
-- `position` (optional) [`<Position>`](./Position.md) The world position 3D vector coordinates of the prefab.
-- `rotation` (optional) [`<Rotation>`](./Rotation.md) The world rotation quaternion of the prefab.
+- `position` (optional) [`<Position>`](../src/types/Position.ts) The world position 3D vector coordinates of the prefab.
+- `rotation` (optional) [`<Rotation>`](../src/types/Rotation.ts) The world rotation quaternion of the prefab.
 - `scale` (optional) `<number>` The scale of the prefab.
-- `components` (optional) `<Partial`[`<PrefabComponents>`](./PrefabComponents.md)`>` A mapped object of components on the prefab.
-- `entities` (optional) `<Partial<`[`PrefabEntities`](./PrefabComponents.md)`<`[`ATTPrefabName`](./ATTPrefabName.md)`>>>` A mapped object of entities on the prefab.
-- `children` (optional) `<Array<`[`PrefabChild`](./PrefabComponents.md)`>>` An array of objects connecting child prefabs with parent entities.
+- `components` (optional) `<Partial<`[`PrefabComponents`](../src/types/PrefabComponents.ts)`>>` A mapped object of components on the prefab.
+- `entities` (optional) `<Partial<`[`PrefabEntities`](../src/types/PrefabEntities.ts)`<`[`ATTPrefabName`](./ATTPrefabName.md)`>>>` A mapped object of entities on the prefab.
+- `children` (optional) `<Array<`[`PrefabChild`](../src/types/PrefabChild.ts)`>>` An array of objects connecting child prefabs with parent entities.
 
 ## Constructors
 
@@ -91,6 +91,7 @@ type PrefabProps<TPrefabName extends ATTPrefabName> = {
 
 - `prefabName` [`<ATTPrefabName>`](./ATTPrefabName.md) The name of the prefab to create.
 - `props` (optional) [`<PrefabProps>`](#prefabprops) Additional configuration of the prefab to create.
+- Returns: `<Prefab>`
 
 Creates a new `Prefab` object configured with the passed in configuration.
 
@@ -144,7 +145,7 @@ Creates a `Prefab` from reading the prefab's binary data stored in a [`<SaveStri
 
 - `reader` [`<BinaryReader>`](./BinaryReader.md) The binary reader that contains the data stored inside an ATT save string.
 - `componentVersions` (optional) `<Map<number, number>>` A map of component versions to assume are encoded in the binary data.
-- Returns: `Prefab<ATTPrefabName>`
+- Returns: `<Prefab>`
 
 ```ts
 import { BinaryReader, ComponentHash, Prefab, type BinaryString } from 'att-string-transcoder';
@@ -170,7 +171,7 @@ const prefab = Prefab.fromBinary<'Handle_Short'>(reader, componentVersions);
 Creates a `Prefab` from reading an ATT save string.
 
 - `saveString` `<string>` The ATT save string to decode into a `Prefab`.
-- Returns: `Prefab<ATTPrefabName>`
+- Returns: `<Prefab>`
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -218,7 +219,7 @@ const hash = prefab.hash;
 
 :warning: Note that although you can safely read from this public property, you should not modify this property directly. This is because some prefabs also use a [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md) to control their position. You can safely set the position of a prefab using the [`setPosition(position)`](#setpositionposition) method.
 
-- [`<Position>`](./Position.md) The position of the prefab.
+- [`<Position>`](../src/types/Position.ts) The position of the prefab.
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -237,7 +238,7 @@ const position = prefab.position;
 
 :warning: Note that although you can safely read from this public property, you should not modify this property directly. This is because some prefabs also use a [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md) to control their rotation. You can safely set the rotation of a prefab using the [`setRotation(rotation)`](#setrotationrotation) method.
 
-- [`<Rotation>`](./Rotation.md) The rotation of the prefab.
+- [`<Rotation>`](../src/types/Rotation.ts) The rotation of the prefab.
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -277,7 +278,7 @@ Provides access to the components stored in this prefab. Components are keyed to
 
 :bulb: It might be easier to add components using the [`addComponent(component)`](#addcomponentcomponent) method.
 
-- [`<PrefabComponents>`](./PrefabComponents.md) A map of the stored components.
+- [`<PrefabComponents>`](../src/types/PrefabComponents.ts) A map of the stored components.
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -314,7 +315,7 @@ Provides access to the entities stored in this prefab. Entities are keyed to a c
 
 :bulb: It might be easier to add entities using the [`addEntity(entity)`](#addentityentity) method.
 
-- [`<PrefabEntities<TPrefabName>>`](./PrefabEntities.md) A map of the stored entities.
+- [`<PrefabEntities<TPrefabName>>`](../src/types/PrefabEntities.ts) A map of the stored entities.
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -361,7 +362,7 @@ Contains an array of objects that map nested prefabs to entities on the current 
 
 :bulb: It might be easier to add child prefabs using the [`addChildPrefab(parentKey, childPrefab)`](#addchildprefabparentkey-childprefab) method.
 
-- [`<PrefabChild[]>`](./PrefabChild.md) An array of the stored child prefabs.
+- [`<PrefabChild[]>`](../src/types/PrefabChild.ts) An array of the stored child prefabs.
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -400,7 +401,7 @@ const children = prefab.children;
 
 Attaches a `Prefab` to this prefab as a child. It can optionally be attached onto one of this prefab's embedded entities, which is required for most child prefabs under normal circumstances. If you do not specify a `parentKey`, you may pass `null` to create a "floating" child. It will be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
 
-- `parentKey` `<Exclude<`[`EntityKey<ATTPrefabName>`](./EntityKey.md)`, 'Unknown'> | null>` The key of the prefab's entity to which you want to attach the `childPrefab`.
+- `parentKey` `<Exclude<`[`EntityKey<ATTPrefabName>`](../src/types/EntityKey.ts)`, 'Unknown'> | null>` The key of the prefab's entity to which you want to attach the `childPrefab`.
 - `childPrefab` `<Prefab>` The prefab you want to attach as a child.
 - Returns: `<this>`
 
@@ -473,7 +474,7 @@ box.addGift(gift);
 
 Gets the spin (vector) on the prefab.
 
-- Returns: [`<AngularVelocity>`](./AngularVelocity.md)
+- Returns: [`<AngularVelocity>`](../src/types/AngularVelocity.ts)
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -554,7 +555,7 @@ const isKinematic = prefab.getKinematic();
 
 Gets the prefab's physical material.
 
-- Returns: [`<PhysicalMaterialPartHash>`](./PhysicalMaterialPartHash.md)
+- Returns: [`<PhysicalMaterialPartHash>`](../src/types/PhysicalMaterialPartHash.ts)
 
 ```ts
 import { PhysicalMaterialPartHash, Prefab } from 'att-string-transcoder';
@@ -587,7 +588,7 @@ const isOnFire = prefab.getOnFire();
 
 Gets the position of the prefab. If the prefab is a child of another prefab, then this position is local to that parent. Otherwise, this position is in world space.
 
-- Returns: [`<Position>`](./Position.md)
+- Returns: [`<Position>`](../src/types/Position.ts)
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -604,7 +605,7 @@ const { x, y, z } = position;
 
 Gets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation is local to that parent. Otherwise, this rotation is in world space.
 
-- Returns: [`<Rotation>`](./Rotation.md)
+- Returns: [`<Rotation>`](../src/types/Rotation.ts)
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -669,7 +670,7 @@ const servings = prefab.getServings();
 
 Gets the name of the spawn area population, if there is one. Returns `undefined` otherwise.
 
-- Returns: `<'Unknown' | `[`PopulationDefinitionName`](./PopulationDefinitionName.md)` | undefined>`
+- Returns: `<'Unknown' | `[`PopulationDefinitionName`](../src/types/PopulationDefinitionName.ts)` | undefined>`
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -685,7 +686,7 @@ const populationName = prefab.getSpawnAreaPopulationName();
 
 Gets the direction (vector) on the prefab. Units are in metres per second.
 
-- Returns: [`<Velocity>`](./Velocity.md)
+- Returns: [`<Velocity>`](../src/types/Velocity.ts)
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
@@ -817,7 +818,7 @@ prefab.removeChildPrefab('Guard');
 
 Removes the specified component from this prefab.
 
-- `componentArg` `<`[`ComponentHash`](./ComponentHash.md)` | keyof Omit<`[`PrefabComponents`](./PrefabComponents.md)`, 'Unknown'>>` The component's hash or name to remove from this prefab.
+- `componentArg` `<`[`ComponentHash`](../src/types/ComponentHash.ts)` | keyof Omit<`[`PrefabComponents`](../src/types/PrefabComponents.ts)`, 'Unknown'>>` The component's hash or name to remove from this prefab.
 - Returns: `<this>`
 
 ```ts
@@ -836,7 +837,7 @@ prefab.removeComponent('NetworkRigidbody');
 
 Removes the specified entity from this prefab.
 
-- `entityKey` `<Exclude<`[`EntityKey`](./EntityKey.md)`<`[`ATTPrefabName`](./ATTPrefabName.md)`>>>` The entity's key to remove from this prefab.
+- `entityKey` `<Exclude<`[`EntityKey`](../src/types/EntityKey.ts)`<`[`ATTPrefabName`](./ATTPrefabName.md)`>>>` The entity's key to remove from this prefab.
 - Returns: `<this>`
 
 ```ts
@@ -888,7 +889,7 @@ prefab.removeSpawnArea();
 
 Sets a spin (vector) on the prefab, causing the physics engine to apply a force to it when spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work on kinematic prefabs. Does not work on static prefabs.
 
-- `angularVelocity` [`<AngularVelocity>`](./AngularVelocity.md) The angular velocity to set on this prefab.
+- `angularVelocity` [`<AngularVelocity>`](../src/types/AngularVelocity.ts) The angular velocity to set on this prefab.
 - Returns: `<this>`
 
 ```ts
@@ -956,7 +957,7 @@ prefab.setKinematic(true);
 
 Sets the prefab's physical material. This can change both its appearance and other qualities such as durability, damage, heat retention and weight.
 
-- `materialArg` `<`[`PhysicalMaterialPartHash`](./PhysicalMaterialPartHash.md)` | keyof typeof PhysicalMaterialPartHash>` The physical material's hash or name to set on the prefab.
+- `materialArg` [`<PhysicalMaterialPartHash | keyof typeof PhysicalMaterialPartHash>`](../src/types/PhysicalMaterialPartHash.ts) The physical material's hash or name to set on the prefab.
 - Returns: `<this>`
 
 ```ts
@@ -992,7 +993,7 @@ prefab.setOnFire(true);
 
 Sets the position of the prefab. If the prefab is a child of another prefab, then this position is local to that parent. Otherwise, this position is in world space.
 
-- `position` [`<Position>`](./Position.md) The position to set on the prefab.
+- `position` [`<Position>`](../src/types/Position.ts) The position to set on the prefab.
 - Returns: `<this>`
 
 ```ts
@@ -1009,7 +1010,7 @@ prefab.setPosition({ x: 420, y: 69, z: 1337 });
 
 Sets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation is local to that parent. Otherwise, this rotation is in world space.
 
-- `rotation` [`<Rotation>`](./Rotation.md) The rotation to set on the prefab.
+- `rotation` [`<Rotation>`](../src/types/Rotation.ts) The rotation to set on the prefab.
 - Returns: `<this>`
 
 ```ts
@@ -1077,8 +1078,8 @@ prefab.setServings(69);
 
 Sets a spawn area on the prefab with the given population and any additional configuration.
 
-- `populationArg` `<`[`PopulationDefinitionHash`](./PopulationDefinitionHash.md)`|`[`PopulationDefinitionName`](./PopulationDefinitionName.md)`>` The spawn area population hash or name to set on the prefab.
-- `props` (optional, default `{}`) [`<SetSpawnAreaProps>`](./SetSpawnAreaProps.md) Additional properties for configuring the spawn area.
+- `populationArg` `<`[`PopulationDefinitionHash`](../src/types/PopulationDefinitionHash.ts)`|`[`PopulationDefinitionName`](../src/types/PopulationDefinitionName.ts)`>` The spawn area population hash or name to set on the prefab.
+- `props` (optional, default `{}`) [`<SetSpawnAreaProps>`](../src/types/SetSpawnAreaProps.ts) Additional properties for configuring the spawn area.
 - Returns: `<this>`
 
 ```ts
@@ -1103,7 +1104,7 @@ prefab.setSpawnArea(PopulationDefinitionHash.WyrmPopulation, {
 
 Sets a direction (vector) on the prefab, causing the physics engine to apply a force to it when spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work on kinematic prefabs. Does not work on static prefabs.
 
-- `velocity` [`<Velocity>`](./Velocity.md) The velocity to set on this prefab.
+- `velocity` [`<Velocity>`](../src/types/Velocity.ts) The velocity to set on this prefab.
 - Returns: `<this>`
 
 ```ts
