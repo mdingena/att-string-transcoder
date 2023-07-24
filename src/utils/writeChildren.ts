@@ -1,6 +1,14 @@
 import type { BinaryWriter } from '../BinaryWriter.js';
 import type { PrefabChild } from '../types/PrefabChild.js';
 
+/**
+ * Writes given child prefabs to the given `BinaryWriter`.
+ *
+ * @example
+ * import { writeChildren } from 'att-string-transcoder';
+ *
+ * writeChildren(writer, children, componentVersions);
+ */
 export function writeChildren(
   writer: BinaryWriter,
   children: PrefabChild[],
