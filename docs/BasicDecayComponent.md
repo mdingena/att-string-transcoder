@@ -88,6 +88,7 @@ See [`Component.version`](./Component.md#version)
 
 ### `isDisabled`
 
+- Since: `v3`
 - `<boolean>`
 
 ```ts
@@ -104,6 +105,7 @@ const isDisabled = component.isDisabled;
 
 ### `timelineEntry`
 
+- Since: `v3`
 - `<number>`
 
 ```ts

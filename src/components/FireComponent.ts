@@ -27,6 +27,8 @@ export class FireComponent extends Component {
   /**
    * The progress of the consumption of fuel attached to this component's prefab.
    *
+   * @since v1
+   *
    * @example
    * import { FireComponent } from 'att-string-transcoder';
    *

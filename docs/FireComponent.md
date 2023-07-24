@@ -87,6 +87,7 @@ See [`Component.version`](./Component.md#version)
 
 The progress of the consumption of fuel attached to this component's prefab.
 
+- Since: `v1`
 - `<number>` A number between `0` and `1` (inclusive).
 
 ```ts

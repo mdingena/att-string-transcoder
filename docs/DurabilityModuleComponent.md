@@ -87,6 +87,7 @@ See [`Component.version`](./Component.md#version)
 
 The integrity of the prefab this component is attached to.
 
+- Since: `v1`
 - `<number>` A number between `0` and `1` (inclusive).
 
 ```ts
