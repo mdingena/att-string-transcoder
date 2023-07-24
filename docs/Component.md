@@ -59,7 +59,7 @@ Creates a versioned component. This constructor is used internally. You shouldn'
 
 ### `Component.fromBinary(reader, version)`
 
-Returns a `BinaryString` representation of the component.
+Reads the binary string data and returns an instantiated component.
 
 - `reader` [`BinaryReader`](./BinaryReader.md) The `BinaryReader` instance containing the entity binary data.
 - `version` `<number>` The version of the component for interpreting the binary data.
