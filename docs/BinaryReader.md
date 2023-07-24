@@ -20,6 +20,7 @@
 Creates a reader to extract information from `data` using various read methods.
 
 - `data` `<string>` The binary data to read information from. May only contain `"0"` and `"1"`.
+- Returns: `<BinaryReader>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -34,6 +35,7 @@ const reader = new BinaryReader('11110111001100010000');
 Reads the next `bitCount` bits from the binary string.
 
 - `bitCount` `<number>` The amount of bits to read from the current position of the binary data pointer.
+- Returns: [`<BinaryString>`](./BinaryString.md)
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -51,6 +53,7 @@ const firstByte = reader.readBits(8);
 Reads the next bit from the binary string and returns `true` for `"1"` and `false` for `"0"`.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<boolean>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -70,6 +73,7 @@ const boolean2 = reader.readBoolean();
 Reads the next 8 bits from the binary string and returns the reconstructed string character.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<string>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -93,6 +97,7 @@ const char4 = reader.readChar();
 Reads the next 32 bits from the binary string and returns the reconstructed floating point number.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<number>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -110,6 +115,7 @@ const float = reader.readFloat();
 Reads the next 32 bits from the binary string and returns the reconstructed signed integer.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<number>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -127,6 +133,7 @@ const signedInteger = reader.readSignedInteger();
 Reads the next 16 bits from the binary string, then reads the number of bits as instructed and returns the reconstructed string text.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<number>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -146,6 +153,7 @@ const string = reader.readString();
 Reads the next 32 bits from the binary string and returns the reconstructed unsigned integer.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<number>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -163,6 +171,7 @@ const unsignedInteger = reader.readUnsignedInteger();
 Reads the next 64 bits from the binary string and returns the reconstructed unsigned long integer.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<number>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
@@ -180,6 +189,7 @@ const unsignedLongInteger = reader.readUnsignedLong();
 Reads the next 16 bits from the binary string and returns the reconstructed unsigned short integer.
 
 - `options` (optional) [`<BinaryDataOptions>`](./BinaryData.md#binarydataoptions) Configuration options for `BinaryData`.
+- Returns: `<number>`
 
 ```ts
 import { BinaryReader } from 'att-string-transcoder';
