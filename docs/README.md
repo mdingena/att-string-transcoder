@@ -17,6 +17,7 @@
   - [`FuseComponent`](./FuseComponent.md)
   - [`HeatSourceBaseComponent`](./HeatSourceBaseComponent.md)
   - [`LiquidContainerComponent`](./LiquidContainerComponent.md)
+  - [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions

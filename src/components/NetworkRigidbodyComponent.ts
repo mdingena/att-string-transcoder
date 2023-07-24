@@ -24,17 +24,124 @@ export type NetworkRigidbodyComponentProps = NetworkRigidbodyComponentPropsV1;
 /**
  * Controls physical behaviour of the `Prefab` it is attached to.
  *
+ * @see [Class: `NetworkRigidbodyComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/NetworkRigidbodyComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new NetworkRigidbodyComponent({ version: componentVersion });
  */
 export class NetworkRigidbodyComponent extends Component {
+  /**
+   * Position of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   *
+   * const position = component.position;
+   * // `position` is `{ x: 0, y: 0, z: 0 }`
+   */
   position: Position;
+
+  /**
+   * Rotation of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   *
+   * const rotation = component.rotation;
+   * // `rotation` is `{ x: 0, y: 0, z: 0, w: 1 }`
+   */
   rotation: Rotation;
+
+  /**
+   * Whether the prefab this component is attached to is [kinematic](https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html) or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   *
+   * const isKinematic = component.isKinematic;
+   * // `isKinematic` is `false`
+   */
   isKinematic: boolean;
+
+  /**
+   * Whether the prefab this component is attached to is [sleeping](https://docs.unity3d.com/Manual/RigidbodiesOverview.html) or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   *
+   * const isServerSleeping = component.isServerSleeping;
+   * // `isServerSleeping` is `false`
+   */
   isServerSleeping: boolean;
+
+  /**
+   * Velocity of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   *
+   * const velocity = component.velocity;
+   * // `velocity` is `{ x: 0, y: 0, z: 0 }`
+   */
   velocity: Velocity;
+
+  /**
+   * Angular velocity of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   *
+   * const angularVelocity = component.angularVelocity;
+   * // `angularVelocity` is `{ x: 0, y: 0, z: 0 }`
+   */
   angularVelocity: AngularVelocity;
 
+  /**
+   * @see [Class: `NetworkRigidbodyComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/NetworkRigidbodyComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { NetworkRigidbodyComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new NetworkRigidbodyComponent({ version: componentVersion });
+   */
   constructor({
     version,
     position,
