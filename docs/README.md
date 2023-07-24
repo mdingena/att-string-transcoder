@@ -16,6 +16,7 @@
   - [`FireComponent`](./FireComponent.md)
   - [`FuseComponent`](./FuseComponent.md)
   - [`HeatSourceBaseComponent`](./HeatSourceBaseComponent.md)
+  - [`LiquidContainerComponent`](./LiquidContainerComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions

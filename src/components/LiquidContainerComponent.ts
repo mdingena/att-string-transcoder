@@ -41,18 +41,140 @@ type LiquidContainerComponentPropsV1 = {
 export type LiquidContainerComponentProps = LiquidContainerComponentPropsV1;
 
 /**
+ * @see [Class: `LiquidContainerComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/LiquidContainerComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { LiquidContainerComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new LiquidContainerComponent({ version: componentVersion });
  */
 export class LiquidContainerComponent extends Component {
+  /**
+   * Whether any content can be added to the liquid container or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const canAddTo = component.canAddTo;
+   * // `canAddTo` is `false`
+   */
   canAddTo: boolean;
+
+  /**
+   * Whether any content can be removed from the liquid container or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const canRemoveFrom = component.canRemoveFrom;
+   * // `canRemoveFrom` is `false`
+   */
   canRemoveFrom: boolean;
+
+  /**
+   * The amount of content stored inside the liquid container.
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const contentLevel = component.contentLevel;
+   * // `contentLevel` is `0`
+   */
   contentLevel: number;
+
+  /**
+   * Whether any content is stored in the liquid container or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const hasContent = component.hasContent;
+   * // `hasContent` is `false`
+   */
   hasContent: boolean;
+
+  /**
+   * Whether the content stored in the liquid container is custom or a preset.
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const isCustom = component.isCustom;
+   * // `isCustom` is `false`
+   */
   isCustom: boolean;
+
+  /**
+   * The hash of the preset of the contents stored in the liquid container. Is `0` when no preset is used (uses `CustomData` instead).
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const presetHash = component.presetHash;
+   * // `presetHash` is `0`
+   */
   presetHash: number;
+
+  /**
+   * The data to use as the customised contents of the liquid container.
+   *
+   * @since v1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   *
+   * const customData = component.customData;
+   * // `customData` is `null`
+   */
   customData: null | CustomData;
 
+  /**
+   * @see [Class: `LiquidContainerComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/LiquidContainerComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { LiquidContainerComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new LiquidContainerComponent({ version: componentVersion });
+   */
   constructor({
     version,
     canAddTo,
