@@ -6,6 +6,14 @@ import { Entity } from '../Entity.js';
 import { terminatorHash } from '../constants.js';
 import { ATTPrefabs } from '../types/ATTPrefabs.js';
 
+/**
+ * Reads all entities from the given `BinaryReader` and returns a `PrefabEntities` object.
+ *
+ * @example
+ * import { readEntities } from 'att-string-transcoder';
+ *
+ * const entities = readEntities(reader);
+ */
 export function readEntities(
   reader: BinaryReader,
   prefabName: ATTPrefabName,
