@@ -68,7 +68,7 @@ describe('Component.fromBinary()', () => {
       return Component.fromBinary(fastForwardedReader, componentVersion, componentHash, componentName, 1337);
     };
     const expectedError = new Error(
-      'Cannot instantiate base Component class from binary string data. You must override the fromBinary() method in the extended Component class.'
+      'Cannot instantiate base Component class from binary string data. You must call the fromBinary() method on the derived Component class.'
     );
 
     expect(expectedToThrow).toThrowError(expectedError);
@@ -89,7 +89,7 @@ describe('Component.toBinary()', () => {
 
     const expectedToThrow = () => component.toBinary();
     const expectedError = new Error(
-      'Cannot encode base Component class. You must override the encode() method in the extended Component class.'
+      'Cannot encode base Component class. You must call the toBinary() method on the derived Component class.'
     );
 
     expect(expectedToThrow).toThrowError(expectedError);
@@ -112,7 +112,7 @@ describe('Component.write()', () => {
 
     const expectedToThrow = () => component.write(writer);
     const expectedError = new Error(
-      'Cannot encode base Component class. You must override the encode() method in the extended Component class.'
+      'Cannot encode base Component class. You must call the toBinary() method on the derived Component class.'
     );
 
     expect(expectedToThrow).toThrowError(expectedError);

@@ -31,9 +31,9 @@ export class Component {
    */
   static fromBinary(reader: BinaryReader, version: number, hash: number, name: string, dataLength: number): Component;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  static fromBinary(_: BinaryReader, __: number): Component {
+  static fromBinary(_reader: BinaryReader, _version: number): Component {
     throw new Error(
-      'Cannot instantiate base Component class from binary string data. You must override the fromBinary() method in the extended Component class.'
+      'Cannot instantiate base Component class from binary string data. You must call the fromBinary() method on the derived Component class.'
     );
   }
 
@@ -41,9 +41,9 @@ export class Component {
    * Returns a `BinaryString` representation of the component.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  toBinary(_ = this.version): BinaryString {
+  toBinary(_version = this.version): BinaryString {
     throw new Error(
-      'Cannot encode base Component class. You must override the encode() method in the extended Component class.'
+      'Cannot encode base Component class. You must call the toBinary() method on the derived Component class.'
     );
   }
 
