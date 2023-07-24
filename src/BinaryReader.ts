@@ -3,7 +3,7 @@ import type { BinaryString } from './types/BinaryString.js';
 import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 
 /**
- * Handles the controlled consumption of binary data from save strings.
+ * Handles the controlled consumption of binary data from ATT save strings.
  *
  * @see [Class: `BinaryReader`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryReader.md)
  *
