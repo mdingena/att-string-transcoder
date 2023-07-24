@@ -15,6 +15,7 @@
   - [`Entity`](./Entity.md)
   - [`FireComponent`](./FireComponent.md)
   - [`FuseComponent`](./FuseComponent.md)
+  - [`HeatSourceBaseComponent`](./HeatSourceBaseComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions

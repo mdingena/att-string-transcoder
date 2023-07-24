@@ -17,14 +17,73 @@ export type HeatSourceBaseComponentProps = HeatSourceBaseComponentPropsV1;
 const HUNDRED_YEARS_TICKS = 31557600000000000;
 
 /**
+ * @see [Class: `HeatSourceBaseComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/HeatSourceBaseComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { HeatSourceBaseComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new HeatSourceBaseComponent({ version: componentVersion });
  */
 export class HeatSourceBaseComponent extends Component {
+  /**
+   * Whether this heat source is lit and active or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { HeatSourceBaseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new HeatSourceBaseComponent({ version: componentVersion });
+   *
+   * const isLit = component.isLit;
+   */
   isLit: boolean;
+
+  /**
+   * Progress of the heat source until extinguishing.
+   *
+   * @since v1
+   *
+   * @example
+   * import { HeatSourceBaseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new HeatSourceBaseComponent({ version: componentVersion });
+   *
+   * const progress = component.progress;
+   * // `progress` is `0`
+   */
   progress: number;
+
+  /**
+   * @since v1
+   *
+   * @example
+   * import { HeatSourceBaseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new HeatSourceBaseComponent({ version: componentVersion });
+   *
+   * const time = component.time;
+   * // `time` is `31557600000000000`
+   */
   time: number;
 
+  /**
+   * @see [Class: `HeatSourceBaseComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/HeatSourceBaseComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { HeatSourceBaseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new HeatSourceBaseComponent({ version: componentVersion });
+   */
   constructor({ version, isLit, progress, time }: ComponentProps & HeatSourceBaseComponentProps) {
     const hash = ComponentHash.HeatSourceBase;
     const name = 'HeatSourceBase';
