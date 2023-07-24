@@ -24,7 +24,7 @@ const HUNDRED_YEARS_TICKS = 31557600000000000;
  * import { BasicDecayComponent } from 'att-string-transcoder';
  *
  * const componentVersion = 3;
- * const component = new BasicDecayComponent({ version: componentVersion })
+ * const component = new BasicDecayComponent({ version: componentVersion });
  */
 export class BasicDecayComponent extends Component {
   /**
@@ -64,7 +64,7 @@ export class BasicDecayComponent extends Component {
    * import { BasicDecayComponent } from 'att-string-transcoder';
    *
    * const componentVersion = 3;
-   * const component = new BasicDecayComponent({ version: componentVersion })
+   * const component = new BasicDecayComponent({ version: componentVersion });
    */
   constructor({ version, isDisabled, timelineEntry }: ComponentProps & BasicDecayComponentProps) {
     const hash = ComponentHash.BasicDecay;
