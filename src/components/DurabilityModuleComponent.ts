@@ -25,6 +25,8 @@ export type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;
  */
 export class DurabilityModuleComponent extends Component {
   /**
+   * The integrity of the prefab this component is attached to.
+   *
    * @since v1
    *
    * @example
