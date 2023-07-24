@@ -69,12 +69,12 @@ A configuration object to optionally pass to the `Prefab` constructor. Lets you 
 
 ```ts
 type PrefabProps<TPrefabName extends ATTPrefabName> = {
-  position?: Position;
-  rotation?: Rotation;
-  scale?: number;
-  components?: Partial<PrefabComponents>;
-  entities?: Partial<PrefabEntities<TPrefabName>>;
-  children?: PrefabChild[];
+  position?: Position | undefined;
+  rotation?: Rotation | undefined;
+  scale?: number | undefined;
+  components?: Partial<PrefabComponents> | undefined;
+  entities?: Partial<PrefabEntities<TPrefabName>> | undefined;
+  children?: PrefabChild[] | undefined;
 };
 ```
 
@@ -89,11 +89,11 @@ type PrefabProps<TPrefabName extends ATTPrefabName> = {
 
 ### `new Prefab(prefabName, props?)`
 
+Creates a new `Prefab` object configured with the passed in configuration.
+
 - `prefabName` [`<ATTPrefabName>`](./ATTPrefabName.md) The name of the prefab to create.
 - `props` (optional) [`<PrefabProps>`](#prefabprops) Additional configuration of the prefab to create.
 - Returns: `<Prefab>`
-
-Creates a new `Prefab` object configured with the passed in configuration.
 
 ```ts
 import { Prefab } from 'att-string-transcoder';
