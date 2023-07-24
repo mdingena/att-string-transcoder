@@ -44,12 +44,12 @@ type PrefabHash<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefab
 type PrefabName<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefabName]['name'];
 
 export type PrefabProps<TPrefabName extends ATTPrefabName> = {
-  position?: Position;
-  rotation?: Rotation;
-  scale?: number;
-  components?: Partial<PrefabComponents>;
-  entities?: Partial<PrefabEntities<TPrefabName>>;
-  children?: PrefabChild[];
+  position?: Position | undefined;
+  rotation?: Rotation | undefined;
+  scale?: number | undefined;
+  components?: Partial<PrefabComponents> | undefined;
+  entities?: Partial<PrefabEntities<TPrefabName>> | undefined;
+  children?: PrefabChild[] | undefined;
 };
 
 /* c8 ignore start */

@@ -12,13 +12,10 @@ import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
 
-type EntityBaseProps = {
-  hash?: number;
-};
-
-type EntityConstructorProps = EntityBaseProps & {
-  isAlive?: boolean;
-  components?: SupportedPrefabComponents & UnsupportedPrefabComponents & Partial<UnknownPrefabComponents>;
+export type EntityProps = {
+  hash?: number | undefined;
+  isAlive?: boolean | undefined;
+  components?: (SupportedPrefabComponents & UnsupportedPrefabComponents & Partial<UnknownPrefabComponents>) | undefined;
 };
 
 type EntityFromBinaryProps = {
@@ -33,7 +30,7 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   isAlive: boolean;
   components: PrefabComponents;
 
-  constructor(key: EntityKey<TPrefabName>, { hash, isAlive, components }: EntityConstructorProps = {}) {
+  constructor(key: EntityKey<TPrefabName>, { hash, isAlive, components }: EntityProps = {}) {
     const resolvedName = key === 'Unknown' ? String(key) : String(key).split('_').slice(0, -1).join('_');
     const resolvedHash = resolvedName === 'Unknown' ? hash : Number(String(key).split('_').slice(-1));
 
