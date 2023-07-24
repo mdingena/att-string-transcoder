@@ -12,6 +12,7 @@
   - [`Component`](./Component.md)
   - [`Entity`](./Entity.md)
   - [`Prefab`](./Prefab.md)
+  - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)
   - [`isATTPrefabName(name)`](./isATTPrefabName.md)
