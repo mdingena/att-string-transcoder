@@ -40,3 +40,8 @@
   - [`writeChildren(writer, children, componentVersions)`](./writeChildren.md)
   - [`writeComponents(writer, components, versions)`](./writeComponents.md)
   - [`writeEntities(writer, entities, componentVersions)`](./writeEntities.md)
+- Examples
+  - [Alter a sword's material](./examples/Alter-a-swords-material.md)
+  - [Flask of infinite teleportation](./examples/Flask-of-infinite-teleportation.md)
+  - [Integrate with a bot](./examples/Flask-of-infinite-teleportation.md)
+  - [Launch a wyrm spit](./examples/Flask-of-infinite-teleportation.md)
