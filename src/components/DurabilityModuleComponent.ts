@@ -13,12 +13,42 @@ type DurabilityModuleComponentPropsV1 = {
 export type DurabilityModuleComponentProps = DurabilityModuleComponentPropsV1;
 
 /**
+ * @see [Class: `DurabilityModuleComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/DurabilityModuleComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { DurabilityModuleComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new DurabilityModuleComponent({ version: componentVersion });
  */
 export class DurabilityModuleComponent extends Component {
+  /**
+   * @since v1
+   *
+   * @example
+   * import { DurabilityModuleComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new DurabilityModuleComponent({ version: componentVersion });
+   *
+   * const integrity = component.integrity;
+   * // `integrity` is `1`
+   */
   integrity: number;
 
+  /**
+   * @see [Class: `DurabilityModuleComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/DurabilityModuleComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { DurabilityModuleComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new DurabilityModuleComponent({ version: componentVersion });
+   */
   constructor({ version, integrity }: ComponentProps & DurabilityModuleComponentProps) {
     const hash = ComponentHash.DurabilityModule;
     const name = 'DurabilityModule';

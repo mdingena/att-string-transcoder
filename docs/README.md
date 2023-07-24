@@ -11,6 +11,7 @@
   - [`BinaryReader`](./BinaryReader.md)
   - [`BinaryWriter`](./BinaryWriter.md)
   - [`Component`](./Component.md)
+  - [`DurabilityModuleComponent`](./DurabilityModuleComponent.md)
   - [`Entity`](./Entity.md)
   - [`Prefab`](./Prefab.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
