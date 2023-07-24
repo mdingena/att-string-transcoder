@@ -15,14 +15,70 @@ type PickupDockComponentPropsV2 = {
 export type PickupDockComponentProps = PickupDockComponentPropsV2;
 
 /**
+ * @see [Class: `BasicDecayComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BasicDecayComponent.md)
  * @since v3.0.0
  * @version 2
+ *
+ * @example
+ * import { PickupDockComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 2;
+ * const component = new PickupDockComponent({ version: componentVersion });
  */
 export class PickupDockComponent extends Component {
+  /**
+   * @since v2
+   *
+   * @example
+   * import { PickupDockComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PickupDockComponent({ version: componentVersion });
+   *
+   * const dockedTypeHash = component.dockedTypeHash;
+   * // `dockedTypeHash` is `0`
+   */
   dockedTypeHash: number;
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { PickupDockComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PickupDockComponent({ version: componentVersion });
+   *
+   * const quantity = component.quantity;
+   * // `quantity` is `1`
+   */
   quantity: number;
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { PickupDockComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PickupDockComponent({ version: componentVersion });
+   *
+   * const childIndex = component.childIndex;
+   * // `childIndex` is `0`
+   */
   childIndex: number;
 
+  /**
+   * @see [Class: `BasicDecayComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BasicDecayComponent.md)
+   * @since v3.0.0
+   * @version 2
+   *
+   * @example
+   * import { PickupDockComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PickupDockComponent({ version: componentVersion });
+   */
   constructor({ version, dockedTypeHash, quantity, childIndex }: ComponentProps & PickupDockComponentProps) {
     const hash = ComponentHash.PickupDock;
     const name = 'PickupDock';
