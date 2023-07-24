@@ -9,6 +9,7 @@
   - [`BinaryData`](./BinaryData.md)
   - [`BinaryReader`](./BinaryReader.md)
   - [`BinaryWriter`](./BinaryWriter.md)
+  - [`Component`](./Component.md)
   - [`Entity`](./Entity.md)
   - [`Prefab`](./Prefab.md)
 - Functions

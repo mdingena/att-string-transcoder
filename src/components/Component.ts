@@ -12,13 +12,24 @@ export type ComponentProps = {
   version: number;
 };
 
+/**
+ * Base class for all components. This class should not be used directly. Use any of its derived
+ * classes instead.
+ *
+ * @see [Class: `Component`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Component.md)
+ * @see [API Reference Documentation](https://github.com/mdingena/att-string-transcoder/tree/main/docs/README.md)
+ */
 export class Component {
   hash: number;
   name: string;
   version: number;
 
   /**
-   * Creates a versioned component.
+   * Creates a versioned component. This constructor is used internally. You shouldn't create any
+   * instances of this base class.
+   *
+   * @see [Class: `Component`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Component.md)
+   * @see [API Reference Documentation](https://github.com/mdingena/att-string-transcoder/tree/main/docs/README.md)
    */
   constructor({ hash, name, version }: ComponentProps & BaseComponentProps) {
     this.hash = hash;
@@ -28,6 +39,14 @@ export class Component {
 
   /**
    * Reads the binary string data and returns an instantiated component.
+   *
+   * @example
+   * import { BinaryReader, DerivedComponent } from 'att-string-transcoder';
+   *
+   * const reader = new BinaryReader('...');
+   * const componentVersion = 1;
+   *
+   * const component = DerivedComponent.fromBinary(reader, componentVersion);
    */
   static fromBinary(reader: BinaryReader, version: number, hash: number, name: string, dataLength: number): Component;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -39,6 +58,14 @@ export class Component {
 
   /**
    * Returns a `BinaryString` representation of the component.
+   *
+   * @example
+   * import { DerivedComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new DerivedComponent({ version: componentVersion });
+   *
+   * const binaryString = component.toBinary(componentVersion);
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   toBinary(_version = this.version): BinaryString {
@@ -48,8 +75,18 @@ export class Component {
   }
 
   /**
-   * Writes a `BinaryString` representation of the component to the given `BinaryWriter`,
-   * including the component hash and data length.
+   * Writes a `BinaryString` representation of the component to the given `BinaryWriter`, including
+   * the component hash and data length.
+   *
+   * @example
+   * import { BinaryWriter, DerivedComponent } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   * const componentVersion = 1;
+   *
+   * const component = new DerivedComponent({ version: componentVersion });
+   *
+   * component.write(writer, componentVersion);
    */
   write(writer: BinaryWriter, version = this.version): void {
     const data = this.toBinary(version);
