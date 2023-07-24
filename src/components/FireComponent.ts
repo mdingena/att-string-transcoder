@@ -13,12 +13,42 @@ type FireComponentPropsV1 = {
 export type FireComponentProps = FireComponentPropsV1;
 
 /**
+ * @see [Class: `FireComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/FireComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { FireComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new FireComponent({ version: componentVersion });
  */
 export class FireComponent extends Component {
+  /**
+   * The progress of the consumption of fuel attached to this component's prefab.
+   *
+   * @example
+   * import { FireComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new FireComponent({ version: componentVersion });
+   *
+   * const fuelConsumptionProgress = component.fuelConsumptionProgress;
+   * // `fuelConsumptionProgress` is `1`
+   */
   fuelConsumptionProgress: number;
 
+  /**
+   * @see [Class: `FireComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/FireComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { FireComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new FireComponent({ version: componentVersion });
+   */
   constructor({ version, fuelConsumptionProgress }: ComponentProps & FireComponentProps) {
     const hash = ComponentHash.Fire;
     const name = 'Fire';
