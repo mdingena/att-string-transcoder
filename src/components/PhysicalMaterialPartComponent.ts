@@ -16,12 +16,44 @@ export type PhysicalMaterialPartComponentProps = PhysicalMaterialPartComponentPr
 /**
  * Controls physical appearance of the `Prefab` it is attached to.
  *
+ * @see [Class: `PhysicalMaterialPartComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/PhysicalMaterialPartComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { PhysicalMaterialPartComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new PhysicalMaterialPartComponent({ version: componentVersion });
  */
 export class PhysicalMaterialPartComponent extends Component {
+  /**
+   * The hash of the physical material of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { PhysicalMaterialPartComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new PhysicalMaterialPartComponent({ version: componentVersion });
+   *
+   * const materialHash = component.materialHash;
+   * // `materialHash` is `1`
+   */
   materialHash: number;
 
+  /**
+   * @see [Class: `PhysicalMaterialPartComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/PhysicalMaterialPartComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { PhysicalMaterialPartComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new PhysicalMaterialPartComponent({ version: componentVersion });
+   */
   constructor({ version, materialHash }: ComponentProps & PhysicalMaterialPartComponentProps) {
     const hash = ComponentHash.PhysicalMaterialPart;
     const name = 'PhysicalMaterialPart';
