@@ -2,7 +2,7 @@
 
 - [Types](#types)
   - [`<ComponentProps>`](#componentprops)
-  - [`<BasicDecayComponentProps>`](#unsupportedcomponentprops)
+  - [`<BasicDecayComponentProps>`](#basicdecaycomponentprops)
 - [Constructors](#constructors)
   - [`new BasicDecayComponent(props)`](#new-basicdecaycomponentprops)
   - [`BasicDecayComponent.fromBinary(reader, version)`](#basicdecaycomponentfrombinaryreader-version)
