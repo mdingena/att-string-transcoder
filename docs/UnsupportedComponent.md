@@ -27,6 +27,18 @@ See [`<ComponentProps>`](./Component.md#componentprops)
 
 A portion of the configuration object to pass to the `UnsupportedComponent` constructor.
 
+```ts
+type UnsupportedComponentProps = {
+  hash: number;
+  name: string;
+  rawData: BinaryString;
+};
+```
+
+- `hash` `<number>` The hash of the component.
+- `name` `<string>` The name of the component.
+- `rawData` [`<BinaryString>`](./BinaryString.md) The serialised data of the component.
+
 ## Constructors
 
 ### `new UnsupportedComponent(props)`
