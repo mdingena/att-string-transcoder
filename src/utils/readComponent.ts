@@ -4,6 +4,14 @@ import type { Component } from '../components/Component.js';
 import { UnsupportedComponent } from '../components/UnsupportedComponent.js';
 import { supportedComponents } from '../supportedComponents.js';
 
+/**
+ * Reads next component from the given `BinaryReader` and returns a `Component` instance.
+ *
+ * @example
+ * import { readComponent } from 'att-string-transcoder';
+ *
+ * const component = readComponent(reader, hash, name, version);
+ */
 export function readComponent(reader: BinaryReader, hash: number, name: string, version: number): Component {
   /* Get the component's data length. */
   const dataLength = reader.readUnsignedInteger();
