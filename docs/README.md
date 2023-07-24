@@ -21,6 +21,7 @@
   - [`PhysicalMaterialPartComponent`](./PhysicalMaterialPartComponent.md)
   - [`PickupComponent`](./PickupComponent.md)
   - [`PickupDockComponent`](./PickupDockComponent.md)
+  - [`PopulationSpawnAreaComponent`](./PopulationSpawnAreaComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions

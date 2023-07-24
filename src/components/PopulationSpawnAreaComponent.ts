@@ -27,20 +27,166 @@ type PopulationSpawnAreaComponentPropsV2 = {
 export type PopulationSpawnAreaComponentProps = PopulationSpawnAreaComponentPropsV2;
 
 /**
+ * @see [Class: `PopulationSpawnAreaComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/PopulationSpawnAreaComponent.md)
  * @since v3.0.0
  * @version 2
+ *
+ * @example
+ * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 2;
+ * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
  */
 export class PopulationSpawnAreaComponent extends Component {
+  /**
+   * The hash of the population to spawn in the `SpawnArea` component that is attached to the same prefab this component is attached to.
+   *
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const definition = component.definition;
+   * // `definition` is `30040`
+   */
   definition: number;
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const isPopulationStarted = component.isPopulationStarted;
+   * // `isPopulationStarted` is `true`
+   */
   isPopulationStarted: boolean;
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const children = component.children;
+   * // `children` is `[]`
+   */
   children: PopulationSaveDataChild[];
+
+  /**
+   * The maximum amount of spawned prefabs in this population.
+   *
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const maxPopulation = component.maxPopulation;
+   * // `maxPopulation` is `20`
+   */
   maxPopulation: number;
+
+  /**
+   * The current amount of spawned prefabs in this population.
+   *
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const currentPopulation = component.currentPopulation;
+   * // `currentPopulation` is `5`
+   */
   currentPopulation: number;
+
+  /**
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const checkPopulationTime = component.checkPopulationTime;
+   * // `checkPopulationTime` is `852974979330`
+   */
   checkPopulationTime: number;
+
+  /**
+   * The amount of spawn locations inside the `SpawnArea` component that is attached to the same prefab this component is attached to.
+   *
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const numberOfSpawnPoints = component.numberOfSpawnPoints;
+   * // `numberOfSpawnPoints` is `40`
+   */
   numberOfSpawnPoints: number;
+
+  /**
+   * The amount of spawned prefabs that this population begins with.
+   *
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const startingPopulation = component.startingPopulation;
+   * // `startingPopulation` is `5`
+   */
   startingPopulation: number;
+
+  /**
+   * Whether any removed prefabs from this population shouldn't be replaced after the server's respawn timer has elapsed.
+   *
+   * @since v2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   *
+   * const isOneOff = component.isOneOff;
+   * // `isOneOff` is `false`
+   */
   isOneOff: boolean;
 
+  /**
+   * @see [Class: `PopulationSpawnAreaComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/PopulationSpawnAreaComponent.md)
+   * @since v3.0.0
+   * @version 2
+   *
+   * @example
+   * import { PopulationSpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 2;
+   * const component = new PopulationSpawnAreaComponent({ version: componentVersion });
+   */
   constructor({
     version,
     definition,
