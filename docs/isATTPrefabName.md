@@ -1,4 +1,4 @@
-# `isATTPrefabName`
+# `isATTPrefabName(name)`
 
 Asserts if a `<string>` is an [`<ATTPrefabName>`](./ATTPrefabName.md).
 
@@ -7,7 +7,8 @@ Asserts if a `<string>` is an [`<ATTPrefabName>`](./ATTPrefabName.md).
 ```ts
 import { isATTPrefabName } from 'att-string-transcoder';
 
-const prefabName = 'Anvil';
+let prefabName: string;
+prefabName = 'Anvil';
 // `prefabName` is of type `string`.
 
 if (isATTPrefabName(prefabName)) {
