@@ -24,6 +24,7 @@
   - [`PopulationSpawnAreaComponent`](./PopulationSpawnAreaComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`SentGiftComponent`](./SentGiftComponent.md)
+  - [`SpawnAreaComponent`](./SpawnAreaComponent.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)

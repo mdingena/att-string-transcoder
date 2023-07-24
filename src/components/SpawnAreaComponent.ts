@@ -17,16 +17,100 @@ type SpawnAreaComponentPropsV1 = {
 export type SpawnAreaComponentProps = SpawnAreaComponentPropsV1;
 
 /**
+ * @see [Class: `SpawnAreaComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/SpawnAreaComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { SpawnAreaComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new SpawnAreaComponent({ version: componentVersion });
  */
 export class SpawnAreaComponent extends Component {
+  /**
+   * The size (in metres) of the spawn area of the prefab this component is attached to.
+   *
+   * @since v1
+   *
+   * @example
+   * import { SpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SpawnAreaComponent({ version: componentVersion });
+   *
+   * const size = component.size;
+   * // `size` is `5`
+   */
   size: number;
+
+  /**
+   * @since v1
+   *
+   * @example
+   * import { SpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SpawnAreaComponent({ version: componentVersion });
+   *
+   * const groundLayers = component.groundLayers;
+   * // `groundLayers` is `1280`
+   */
   groundLayers: number;
+
+  /**
+   * @since v1
+   *
+   * @example
+   * import { SpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SpawnAreaComponent({ version: componentVersion });
+   *
+   * const avoidLayers = component.avoidLayers;
+   * // `avoidLayers` is `8721`
+   */
   avoidLayers: number;
+
+  /**
+   * @since v1
+   *
+   * @example
+   * import { SpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SpawnAreaComponent({ version: componentVersion });
+   *
+   * const isAligningNormal = component.isAligningNormal;
+   * // `isAligningNormal` is `false`
+   */
   isAligningNormal: boolean;
+
+  /**
+   * @since v1
+   *
+   * @example
+   * import { SpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SpawnAreaComponent({ version: componentVersion });
+   *
+   * const maxAcceptableAngleDot = component.maxAcceptableAngleDot;
+   * // `maxAcceptableAngleDot` is `-1`
+   */
   maxAcceptableAngleDot: number;
 
+  /**
+   * @see [Class: `SpawnAreaComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/SpawnAreaComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { SpawnAreaComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new SpawnAreaComponent({ version: componentVersion });
+   */
   constructor({
     version,
     size,
