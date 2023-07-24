@@ -3,6 +3,14 @@ import type { PrefabComponents } from '../types/PrefabComponents.js';
 
 import { terminatorHash } from '../constants.js';
 
+/**
+ * Writes given components to the given `BinaryWriter`.
+ *
+ * @example
+ * import { writeComponents } from 'att-string-transcoder';
+ *
+ * writeComponents(writer, components, componentVersions);
+ */
 export function writeComponents(
   writer: BinaryWriter,
   components: PrefabComponents,
