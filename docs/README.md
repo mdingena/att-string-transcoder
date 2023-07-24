@@ -1,5 +1,14 @@
 # API Reference Documentation
 
-- [Class: `BinaryData`](./BinaryData.md)
-- [Class: `BinaryReader`](./BinaryReader.md)
-- [Class: `Prefab`](./Prefab.md)
+- Types
+  - [`<ATTPrefabHash>`](./ATTPrefabHash.md)
+  - [`<ATTPrefabName>`](./ATTPrefabName.md)
+  - [`<BinaryString>`](./BinaryString.md)
+  - [`<SaveString>`](./SaveString.md)
+- Classes
+  - [`BinaryData`](./BinaryData.md)
+  - [`BinaryReader`](./BinaryReader.md)
+  - [`Prefab`](./Prefab.md)
+- Functions
+  - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)
+  - [`isATTPrefabName(name)`](./isATTPrefabName.md)
