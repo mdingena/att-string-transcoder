@@ -8,6 +8,7 @@
 - Classes
   - [`BinaryData`](./BinaryData.md)
   - [`BinaryReader`](./BinaryReader.md)
+  - [`BinaryWriter`](./BinaryWriter.md)
   - [`Prefab`](./Prefab.md)
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)

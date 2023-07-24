@@ -2,15 +2,52 @@ import type { BinaryString } from './types/BinaryString.js';
 
 import { BinaryData } from './BinaryData.js';
 
+/**
+ * Handles the controlled storing of binary data for ATT save strings.
+ *
+ * @see [Class: `BinaryWriter`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryWriter.md)
+ *
+ * @example
+ * import { BinaryWriter } from 'att-string-transcoder';
+ *
+ * const writer = new BinaryWriter();
+ *
+ * writer.writeBoolean(true);
+ *
+ * const output = writer.flush();
+ * // `output` is `'1'`
+ */
 export class BinaryWriter {
   private data: string;
 
+  /**
+   * Creates a writer to store information using various write methods.
+   *
+   * @see [Class: `BinaryWriter`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryWriter.md)
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   */
   constructor() {
     this.data = '' as BinaryString;
   }
 
   /**
    * Returns the stored binary string and resets the BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeBoolean(true); // internal memory is `'1'`
+   * writer.writeBoolean(true); // internal memory is `'11'`
+   * writer.writeBoolean(true); // internal memory is `'111'`
+   *
+   * const output = writer.flush(); // internal memory is `''`
+   * // `output` is `'111'`
    */
   flush(): BinaryString {
     const data = this.data;
@@ -21,6 +58,13 @@ export class BinaryWriter {
 
   /**
    * Writes raw binary data into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeBits('11110111001100010000');
    */
   writeBits(data: string): void {
     if (!BinaryData.isBinaryString(data)) {
@@ -32,6 +76,13 @@ export class BinaryWriter {
 
   /**
    * Writes a boolean into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeBoolean(true);
    */
   writeBoolean(boolean: boolean): void {
     this.data += BinaryData.fromBoolean(boolean).toBinaryString();
@@ -39,6 +90,13 @@ export class BinaryWriter {
 
   /**
    * Writes a character into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeChar('x');
    */
   writeChar(char: string): void {
     this.data += BinaryData.fromChar(char).toBinaryString();
@@ -46,6 +104,13 @@ export class BinaryWriter {
 
   /**
    * Writes a floating point number into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeFloat(0.69);
    */
   writeFloat(float: number): void {
     this.data += BinaryData.fromFloat(float).toBinaryString();
@@ -53,6 +118,13 @@ export class BinaryWriter {
 
   /**
    * Writes a signed integer into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeSignedInteger(-420);
    */
   writeSignedInteger(signedInteger: number): void {
     this.data += BinaryData.fromSignedInteger(signedInteger).toBinaryString();
@@ -60,6 +132,13 @@ export class BinaryWriter {
 
   /**
    * Writes a string into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeString('Hello, world!');
    */
   writeString(string: string): void {
     this.writeUnsignedShort(string.length);
@@ -104,6 +183,13 @@ export class BinaryWriter {
 
   /**
    * Writes an unsigned integer into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeUnsignedInteger(69420);
    */
   writeUnsignedInteger(unsignedInteger: number): void {
     this.data += BinaryData.fromUnsignedInteger(unsignedInteger).toBinaryString();
@@ -111,6 +197,13 @@ export class BinaryWriter {
 
   /**
    * Writes an unsigned long integer into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeUnsignedLong(133742069);
    */
   writeUnsignedLong(unsignedLong: number): void {
     this.data += BinaryData.fromUnsignedLong(unsignedLong).toBinaryString();
@@ -118,6 +211,13 @@ export class BinaryWriter {
 
   /**
    * Writes an unsigned short integer into BinaryWriter's internal memory.
+   *
+   * @example
+   * import { BinaryWriter } from 'att-string-transcoder';
+   *
+   * const writer = new BinaryWriter();
+   *
+   * writer.writeUnsignedShort(1337);
    */
   writeUnsignedShort(unsignedShort: number): void {
     this.data += BinaryData.fromUnsignedShort(unsignedShort).toBinaryString();
