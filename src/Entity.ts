@@ -1,6 +1,7 @@
 import type { BinaryReader } from './BinaryReader.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
 import type { BinaryString } from './types/BinaryString.js';
+import type { EntityKey } from './types/EntityKey.js';
 import type { PrefabComponents } from './types/PrefabComponents.js';
 import type { SupportedPrefabComponents } from './types/SupportedPrefabComponents.js';
 import type { UnknownPrefabComponents } from './types/UnknownPrefabComponents.js';
@@ -10,10 +11,6 @@ import { BinaryWriter } from './BinaryWriter.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
-
-export type EntityKey<TPrefabName extends ATTPrefabName> =
-  | keyof (typeof ATTPrefabs)[TPrefabName]['embedded']
-  | 'Unknown';
 
 type EntityBaseProps = {
   hash?: number;
