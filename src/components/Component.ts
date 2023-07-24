@@ -20,8 +20,45 @@ export type ComponentProps = {
  * @see [API Reference Documentation](https://github.com/mdingena/att-string-transcoder/tree/main/docs/README.md)
  */
 export class Component {
+  /**
+   * The hash of the component.
+   *
+   * @example
+   * import { DerivedComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new DerivedComponent({ version: componentVersion });
+   *
+   * const hash = component.hash;
+   */
   hash: number;
+
+  /**
+   * The name of the component.
+   *
+   * @example
+   * import { DerivedComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new DerivedComponent({ version: componentVersion });
+   *
+   * const name = component.name;
+   */
   name: string;
+
+  /**
+   * The version of the component. This controls the shape of the component data and its
+   * (de)serialisation sequence when reading or writing binary data.
+   *
+   * @example
+   * import { DerivedComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new DerivedComponent({ version: componentVersion });
+   *
+   * const version = component.version;
+   * // `version` is `1`
+   */
   version: number;
 
   /**
