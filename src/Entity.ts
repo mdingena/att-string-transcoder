@@ -24,12 +24,91 @@ type EntityFromBinaryProps = {
   componentVersions?: Map<number, number> | undefined;
 };
 
+/**
+ * An "item" inside a prefab composition. The `Entity` can have its own components to alter its
+ * behaviour. A child prefab of the composition may attach to an `Entity`, forming an hierarchical
+ * structure inside the composition. This is primarily used in _A Township Tale_'s crafting system.
+ *
+ * @see [Class: `Entity`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Entity.md)
+ *
+ * @example
+ * import { Entity } from 'att-string-transcoder';
+ *
+ * const torchFireEntity = new Entity<'Torch'>('Fire_30100');
+ * // or
+ * const torchFireEntity = Entity.fromBinary<'Torch'>(myBinaryString);
+ */
 export class Entity<TPrefabName extends ATTPrefabName> {
+  /**
+   * The hash of the entity.
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Torch'>('Fire_30100');
+   *
+   * const hash = entity.hash;
+   * // `hash` is `30100`
+   */
   hash: number;
+
+  /**
+   * The name of the entity.
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Torch'>('Fire_30100');
+   *
+   * const name = entity.name;
+   * // `name` is `'Fire'`
+   */
   name: string;
+
+  /**
+   * The alive state of the entity.
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Torch'>('Fire_30100');
+   *
+   * const isAlive = entity.isAlive;
+   * // `isAlive` is `true`
+   */
   isAlive: boolean;
+
+  /**
+   * A map of the stored components.
+   *
+   * Provides access to the components stored in this entity. Components are keyed to their
+   * respective names, unless its data contained an unrecognised hash. In that case, the component
+   * will be stored in an array under the `Unknown` key.
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Torch'>('Fire_30100');
+   *
+   * const components = entity.components;
+   * // `components` is `{ Unknown: [] }`
+   */
   components: PrefabComponents;
 
+  /**
+   * Creates a new `Entity` object configured with the passed in configuration.
+   *
+   * @see [Class: `Entity`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Entity.md)
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const torchFireEntity = new Entity<'Torch'>('Fire_30100', {
+   *   hash: 30100,
+   *   isAlive: true,
+   *   components: {}
+   * });
+   */
   constructor(key: EntityKey<TPrefabName>, { hash, isAlive, components }: EntityProps = {}) {
     const resolvedName = key === 'Unknown' ? String(key) : String(key).split('_').slice(0, -1).join('_');
     const resolvedHash = resolvedName === 'Unknown' ? hash : Number(String(key).split('_').slice(-1));
@@ -49,6 +128,11 @@ export class Entity<TPrefabName extends ATTPrefabName> {
 
   /**
    * Reads the binary string data and returns an instantiated entity.
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const torchFireEntity = Entity.fromBinary<'Torch'>(myBinaryString);
    */
   static fromBinary<TPrefabName extends ATTPrefabName>(
     reader: BinaryReader,
@@ -66,6 +150,20 @@ export class Entity<TPrefabName extends ATTPrefabName> {
 
   /**
    * Returns a `BinaryString` representation of the entity.
+   *
+   * @example
+   * import { ComponentHash, Entity } from 'att-string-transcoder';
+   *
+   * const torchFireEntity = new Entity<'Torch'>('Fire_30100');
+   *
+   * const componentVersions = new Map<number, number>([
+   *   [ComponentHash.NetworkRigidbody, 1],
+   *   [ComponentHash.PhysicalMaterialPart, 1],
+   *   [ComponentHash.Pickup, 2]
+   *   // etc...
+   * ]);
+   *
+   * const binaryString = torchFireEntity.toBinary(componentVersions);
    */
   toBinary(componentVersions: Map<number, number>): BinaryString {
     const writer = new BinaryWriter();
@@ -84,8 +182,24 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   }
 
   /**
-   * Writes a `BinaryString` representation of the entity to the given `BinaryWriter`,
-   * including the entity hash and data length.
+   * Writes a `BinaryString` representation of the entity to the given `BinaryWriter`, including the
+   * entity hash and data length.
+   *
+   * @example
+   * import { BinaryWriter, ComponentHash, Entity } from 'att-string-transcoder';
+   *
+   * const torchFireEntity = new Entity<'Torch'>('Fire_30100');
+   *
+   * const componentVersions = new Map<number, number>([
+   *   [ComponentHash.NetworkRigidbody, 1],
+   *   [ComponentHash.PhysicalMaterialPart, 1],
+   *   [ComponentHash.Pickup, 2]
+   *   // etc...
+   * ]);
+   *
+   * const writer = new BinaryWriter();
+   *
+   * torchFireEntity.write(writer, componentVersions);
    */
   write(writer: BinaryWriter, componentVersions: Map<number, number>): void {
     const data = this.toBinary(componentVersions);
