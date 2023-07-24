@@ -5,7 +5,23 @@ import type { PrefabChild } from '../types/PrefabChild.js';
  * Writes given child prefabs to the given `BinaryWriter`.
  *
  * @example
- * import { writeChildren } from 'att-string-transcoder';
+ * import { BinaryWriter, writeChildren } from 'att-string-transcoder';
+ *
+ * const writer = new BinaryWriter();
+ *
+ * const children = [
+ *   {
+ *     parentHash: 0,
+ *     prefab: new Prefab('Guard')
+ *   }
+ * ];
+ *
+ * const componentVersions = new Map<number, number>([
+ *   [ComponentHash.NetworkRigidbody, 1],
+ *   [ComponentHash.PhysicalMaterialPart, 1],
+ *   [ComponentHash.Pickup, 2]
+ *   // etc...
+ * ]);
  *
  * writeChildren(writer, children, componentVersions);
  */

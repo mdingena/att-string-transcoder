@@ -7,9 +7,23 @@ import { terminatorHash } from '../constants.js';
  * Writes given components to the given `BinaryWriter`.
  *
  * @example
- * import { writeComponents } from 'att-string-transcoder';
+ * import { BinaryWriter, writeComponents } from 'att-string-transcoder';
  *
- * writeComponents(writer, components, componentVersions);
+ * const writer = new BinaryWriter();
+ *
+ * const components = {
+ *   NetworkRigidbody: new NetworkRigidbody({ version: 1 }),
+ *   Unknown: []
+ * };
+ *
+ * const versions = new Map<number, number>([
+ *   [ComponentHash.NetworkRigidbody, 1],
+ *   [ComponentHash.PhysicalMaterialPart, 1],
+ *   [ComponentHash.Pickup, 2]
+ *   // etc...
+ * ]);
+ *
+ * writeComponents(writer, components, versions);
  */
 export function writeComponents(
   writer: BinaryWriter,

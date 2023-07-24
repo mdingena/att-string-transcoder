@@ -31,3 +31,12 @@
 - Functions
   - [`isATTPrefabHash(hash)`](./isATTPrefabHash.md)
   - [`isATTPrefabName(name)`](./isATTPrefabName.md)
+  - [`isSavableComponent(componentName, prefabArg)`](./isSavableComponent.md)
+  - [`isUnknownComponent(component)`](./isUnknownComponent.md)
+  - [`readChildren(reader, componentVersions?)`](./readChildren.md)
+  - [`readComponent(reader, hash, name, version)`](./readComponent.md)
+  - [`readComponents(reader, versions?)`](./readComponents.md)
+  - [`readEntities(reader, prefabName, componentVersions?)`](./readEntities.md)
+  - [`writeChildren(writer, children, componentVersions)`](./writeChildren.md)
+  - [`writeComponents(writer, components, versions)`](./writeComponents.md)
+  - [`writeEntities(writer, entities, componentVersions)`](./writeEntities.md)

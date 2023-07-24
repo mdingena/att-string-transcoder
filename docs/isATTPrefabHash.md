@@ -1,8 +1,13 @@
-# `isATTPrefabHash(hash)`
+# Function: `isATTPrefabHash`
 
 Asserts if a `<number>` is an [`<ATTPrefabHash>`](./ATTPrefabHash.md).
 
-## Usage
+## Signatures
+
+### `isATTPrefabHash(hash)`
+
+- `hash` `<number>` The hash of the prefab.
+- Returns: `<boolean>`
 
 ```ts
 import { isATTPrefabHash } from 'att-string-transcoder';

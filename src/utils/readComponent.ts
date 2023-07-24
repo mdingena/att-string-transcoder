@@ -8,7 +8,12 @@ import { supportedComponents } from '../supportedComponents.js';
  * Reads next component from the given `BinaryReader` and returns a `Component` instance.
  *
  * @example
- * import { readComponent } from 'att-string-transcoder';
+ * import { BinaryReader, readChildren } from 'att-string-transcoder';
+ *
+ * const reader = new BinaryReader('...');
+ * const hash = 2290978823;
+ * const name = 'NetworkRigidbody';
+ * const version = 1;
  *
  * const component = readComponent(reader, hash, name, version);
  */

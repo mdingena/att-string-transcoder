@@ -15,9 +15,18 @@ type KnownPrefabComponents = Record<string, Component>;
  * Reads all components from the given `BinaryReader` and returns a `PrefabComponents` object.
  *
  * @example
- * import { readComponents } from 'att-string-transcoder';
+ * import { BinaryReader, readComponents } from 'att-string-transcoder';
  *
- * const components = readComponents(reader);
+ * const reader = new BinaryReader('...');
+ *
+ * const versions = new Map<number, number>([
+ *   [ComponentHash.NetworkRigidbody, 1],
+ *   [ComponentHash.PhysicalMaterialPart, 1],
+ *   [ComponentHash.Pickup, 2]
+ *   // etc...
+ * ]);
+ *
+ * const component = readComponents(reader, versions);
  */
 export function readComponents(reader: BinaryReader, versions?: Map<number, number>): PrefabComponents {
   const components = Object.assign({} as KnownPrefabComponents, { Unknown: [] } as UnknownPrefabComponents);

@@ -1,8 +1,13 @@
-# `isATTPrefabName(name)`
+# Function: `isATTPrefabName`
 
 Asserts if a `<string>` is an [`<ATTPrefabName>`](./ATTPrefabName.md).
 
-## Usage
+## Signatures
+
+### `isATTPrefabName(name)`
+
+- `name` `<string>` The name of the prefab.
+- Returns: `<boolean>`
 
 ```ts
 import { isATTPrefabName } from 'att-string-transcoder';

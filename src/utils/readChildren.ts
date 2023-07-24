@@ -7,9 +7,18 @@ import { Prefab } from '../Prefab.js';
  * Reads all child prefabs from the given `BinaryReader` and returns an array of `PrefabChild`.
  *
  * @example
- * import { readChildren } from 'att-string-transcoder';
+ * import { BinaryReader, readChildren } from 'att-string-transcoder';
  *
- * const children = readChildren(reader);
+ * const reader = new BinaryReader('...');
+ *
+ * const componentVersions = new Map<number, number>([
+ *   [ComponentHash.NetworkRigidbody, 1],
+ *   [ComponentHash.PhysicalMaterialPart, 1],
+ *   [ComponentHash.Pickup, 2]
+ *   // etc...
+ * ]);
+ *
+ * const children = readChildren(reader, componentVersions);
  */
 export function readChildren(reader: BinaryReader, componentVersions?: Map<number, number>): PrefabChild[] {
   const children: PrefabChild[] = [];

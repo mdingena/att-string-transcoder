@@ -10,9 +10,19 @@ import { ATTPrefabs } from '../types/ATTPrefabs.js';
  * Reads all entities from the given `BinaryReader` and returns a `PrefabEntities` object.
  *
  * @example
- * import { readEntities } from 'att-string-transcoder';
+ * import { BinaryReader, readEntities, type ATTPrefabName } from 'att-string-transcoder';
  *
- * const entities = readEntities(reader);
+ * const reader = new BinaryReader('...');
+ * const prefabName = 'Handle_Short' as ATTPrefabName;
+ *
+ * const componentVersions = new Map<number, number>([
+ *   [ComponentHash.NetworkRigidbody, 1],
+ *   [ComponentHash.PhysicalMaterialPart, 1],
+ *   [ComponentHash.Pickup, 2]
+ *   // etc...
+ * ]);
+ *
+ * const component = readEntities(reader, prefabName, componentVersions);
  */
 export function readEntities(
   reader: BinaryReader,

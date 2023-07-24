@@ -8,7 +8,20 @@ import { terminatorHash } from '../constants.js';
  * Writes given entities to the given `BinaryWriter`.
  *
  * @example
- * import { writeEntities } from 'att-string-transcoder';
+ * import { BinaryWriter, Entity, writeEntities } from 'att-string-transcoder';
+ *
+ * const writer = new BinaryWriter();
+ *
+ * const entities = {
+ *   Fire_30100: new Entity<'Torch'>('Fire_30100')
+ * };
+ *
+ * const componentVersions = new Map<number, number>([
+ *   [ComponentHash.NetworkRigidbody, 1],
+ *   [ComponentHash.PhysicalMaterialPart, 1],
+ *   [ComponentHash.Pickup, 2]
+ *   // etc...
+ * ]);
  *
  * writeEntities(writer, entities, componentVersions);
  */
