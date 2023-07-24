@@ -12,6 +12,8 @@
   - [`isAlive`](#isalive)
   - [`components`](#components)
 - [Methods](#methods)
+  - [`toBinary(componentVersions)`](#tobinarycomponentversions)
+  - [`write(writer, componentVersions)`](#writewriter-componentversions)
 
 ## Types
 
