@@ -13,7 +13,8 @@
   - [`Component`](./Component.md)
   - [`DurabilityModuleComponent`](./DurabilityModuleComponent.md)
   - [`Entity`](./Entity.md)
-  - [`FireComponent](./FireComponent.md)
+  - [`FireComponent`](./FireComponent.md)
+  - [`FuseComponent`](./FuseComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)
 - Functions

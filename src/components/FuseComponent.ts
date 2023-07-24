@@ -15,14 +15,76 @@ type FuseComponentPropsV1 = {
 export type FuseComponentProps = FuseComponentPropsV1;
 
 /**
+ * @see [Class: `FuseComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/FuseComponent.md)
  * @since v3.0.0
  * @version 1
+ *
+ * @example
+ * import { FuseComponent } from 'att-string-transcoder';
+ *
+ * const componentVersion = 1;
+ * const component = new FuseComponent({ version: componentVersion });
  */
 export class FuseComponent extends Component {
+  /**
+   * Whether the fuse is finished or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { FuseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new FuseComponent({ version: componentVersion });
+   *
+   * const isFinished = component.isFinished;
+   * // `isFinished` is `false`
+   */
   isFinished: boolean;
+
+  /**
+   * Whether the fuse is lit or not.
+   *
+   * @since v1
+   *
+   * @example
+   * import { FuseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new FuseComponent({ version: componentVersion });
+   *
+   * const isLit = component.isLit;
+   * // `isLit` is `false`
+   */
   isLit: boolean;
+
+  /**
+   * How much of the fuse is left.
+   *
+   * @since v1
+   *
+   * @example
+   * import { FuseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new FuseComponent({ version: componentVersion });
+   *
+   * const currentFuseAmount = component.currentFuseAmount;
+   * // `currentFuseAmount` is `1`
+   */
   currentFuseAmount: number;
 
+  /**
+   * @see [Class: `FuseComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/FuseComponent.md)
+   * @since v3.0.0
+   * @version 1
+   *
+   * @example
+   * import { FuseComponent } from 'att-string-transcoder';
+   *
+   * const componentVersion = 1;
+   * const component = new FuseComponent({ version: componentVersion });
+   */
   constructor({ version, isFinished, isLit, currentFuseAmount }: ComponentProps & FuseComponentProps) {
     const hash = ComponentHash.Fuse;
     const name = 'Fuse';
