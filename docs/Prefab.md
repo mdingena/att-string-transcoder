@@ -21,6 +21,7 @@
   - [`addEntity(entity)`](#addentityentity)
   - [`addGift(giftPrefab)`](#addgiftgiftprefab)
   - [`clone()`](#clone)
+  - [`findChildPrefab(prefabName, parentHash?)`](#clone)
   - [`getAngularVelocity()`](#getangularvelocity)
   - [`getComponentVersions()`](#getcomponentversions)
   - [`getGiftBoxLabel()`](#getgiftboxlabel)
@@ -490,6 +491,30 @@ const originalMaterial = original.getMaterial();
 
 const cloneMaterial = clone.getMaterial();
 // `cloneMaterial` is `56394` (Gold)
+```
+
+---
+
+### `findChildPrefab(prefabName, parentHash?)`
+
+Finds the first child prefab matching the given name. If there are multiple child prefabs with the same name, you can use the second argument to provide a parent hash to match against.
+
+- `prefabName` [`<ATTPrefabName>`](./ATTPrefabName.md) The name of the child prefab to find.
+- `parentHash` (optional) `<number>` The entity hash of the child prefab. Useful when differentiating between multiple children with the same name.
+- Returns: `<Prefab | undefined>`
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const prefab = new Prefab('Handle_Short');
+
+prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
+
+const childGuard = prefab.findChildPrefab('Guard');
+// `childGuard` is an instance of `Prefab<'Guard'>`
+
+const childPommel = prefab.findChildPrefab('Pommel');
+// `childPommel` is `undefined`
 ```
 
 ---
