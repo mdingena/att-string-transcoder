@@ -1108,8 +1108,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * // or
    * prefab.removeChildPrefab('Guard');
    */
-  removeChildPrefab(prefabHash: ATTPrefabHash): Prefab;
-  removeChildPrefab(prefabName: ATTPrefabName): Prefab;
+  removeChildPrefab(prefabHash: ATTPrefabHash): Prefab<PrefabName<TPrefabName>>;
+  removeChildPrefab(prefabName: ATTPrefabName): Prefab<PrefabName<TPrefabName>>;
   removeChildPrefab(prefabArg: ATTPrefabHash | ATTPrefabName): Prefab<PrefabName<TPrefabName>> {
     if (typeof prefabArg === 'undefined') {
       throw new Error('You must pass a child prefab hash or name to remove from this prefab.');
