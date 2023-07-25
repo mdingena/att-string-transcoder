@@ -929,26 +929,15 @@ describe('Prefab.inspect()', () => {
     const prefab = new Prefab('Handle_Short');
     prefab.inspect();
 
-    expect(spy).toHaveBeenCalledWith(`{
-  "name": "Handle_Short",
-  "hash": 42230,
-  "position": {
-    "x": 0,
-    "y": 0,
-    "z": 0
-  },
-  "rotation": {
-    "x": 0,
-    "y": 0,
-    "z": 0,
-    "w": 1
-  },
-  "scale": 1,
-  "components": {
-    "Unknown": []
-  },
-  "entities": {},
-  "children": []
+    expect(spy).toHaveBeenCalledWith(`Prefab {
+  name: 'Handle_Short',
+  hash: 42230,
+  position: { x: 0, y: 0, z: 0 },
+  rotation: { x: 0, y: 0, z: 0, w: 1 },
+  scale: 1,
+  components: { Unknown: [] },
+  entities: {},
+  children: []
 }`);
   });
 });

@@ -14,6 +14,8 @@ import type { SaveString } from './types/SaveString.js';
 import type { SetSpawnAreaProps } from './types/SetSpawnAreaProps.js';
 import type { Velocity } from './types/Velocity.js';
 
+import { inspect } from 'node:util';
+
 import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
 import { BinaryReader } from './BinaryReader.js';
 import { BinaryWriter } from './BinaryWriter.js';
@@ -1006,7 +1008,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * prefab.inspect();
    */
   inspect(): Prefab<PrefabName<TPrefabName>> {
-    console.log(JSON.stringify(this, null, 2));
+    console.log(inspect(this, false, null));
 
     return this;
   }
