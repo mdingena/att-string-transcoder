@@ -274,6 +274,18 @@ describe('Prefab.addGift()', () => {
   });
 });
 
+describe('Prefab.clone()', () => {
+  it('returns a deep clone of the prefab', () => {
+    const original = new Prefab('Guard').setMaterial('Mythril');
+    const clone = original.clone();
+
+    clone.setMaterial('Gold');
+
+    expect(original.getMaterial()).toStrictEqual(PhysicalMaterialPartHash.Mythril);
+    expect(clone.getMaterial()).toStrictEqual(PhysicalMaterialPartHash.Gold);
+  });
+});
+
 describe('Prefab.fromBinary()', () => {
   let reader: BinaryReader;
   const componentVersions = new Map([[1454441398, 2]]);

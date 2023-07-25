@@ -20,6 +20,7 @@
   - [`addComponent(component)`](#addcomponentcomponent)
   - [`addEntity(entity)`](#addentityentity)
   - [`addGift(giftPrefab)`](#addgiftgiftprefab)
+  - [`clone()`](#clone)
   - [`getAngularVelocity()`](#getangularvelocity)
   - [`getComponentVersions()`](#getcomponentversions)
   - [`getGiftBoxLabel()`](#getgiftboxlabel)
@@ -466,6 +467,29 @@ const box = new Prefab('Gift_Mail_Box');
 const gift = new Prefab('Dynamite');
 
 box.addGift(gift);
+```
+
+---
+
+### `clone()`
+
+Returns a deep clone of the prefab.
+
+- Returns: `<Prefab>`
+
+```ts
+import { Prefab } from 'att-string-transcoder';
+
+const original = new Prefab('Guard').setMaterial('Mythril');
+const clone = original.clone();
+
+clone.setMaterial('Gold');
+
+const originalMaterial = original.getMaterial();
+// `originalMaterial` is still `31174` (Mythril)
+
+const cloneMaterial = clone.getMaterial();
+// `cloneMaterial` is `56394` (Gold)
 ```
 
 ---

@@ -530,6 +530,27 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
+   * Returns a deep clone of the prefab.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const original = new Prefab('Guard').setMaterial('Mythril');
+   * const clone = original.clone();
+   *
+   * clone.setMaterial('Gold');
+   *
+   * const originalMaterial = original.getMaterial();
+   * // `originalMaterial` is still `31174` (Mythril)
+   *
+   * const cloneMaterial = clone.getMaterial();
+   * // `cloneMaterial` is `56394` (Gold)
+   */
+  clone(): Prefab<PrefabName<TPrefabName>> {
+    return Prefab.fromSaveString<PrefabName<TPrefabName>>(this.toSaveString());
+  }
+
+  /**
    * Creates a `Prefab` from reading the prefab's binary data stored in a `SaveString`.
    *
    * @example
