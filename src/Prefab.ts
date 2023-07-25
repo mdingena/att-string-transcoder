@@ -553,36 +553,6 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Finds the first child prefab matching the given name. If there are multiple child prefabs with
-   * the same name, you can use the second argument to provide a parent hash to match against.
-   *
-   * @example
-   * import { Prefab } from 'att-string-transcoder';
-   *
-   * const prefab = new Prefab('Handle_Short');
-   *
-   * prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
-   *
-   * const childGuard = prefab.findChildPrefab('Guard');
-   * // `childGuard` is an instance of `Prefab<'Guard'>`
-   *
-   * const childPommel = prefab.findChildPrefab('Pommel');
-   * // `childPommel` is `undefined`
-   */
-  findChildPrefab<TChildPrefabName extends ATTPrefabName>(
-    prefabName: TChildPrefabName,
-    parentHash?: number
-  ): Prefab<typeof prefabName> | undefined {
-    const child = this.children.find(child =>
-      child.prefab.name === prefabName && typeof parentHash === 'undefined' ? true : child.parentHash === parentHash
-    );
-
-    if (typeof child === 'undefined') return undefined;
-
-    return child.prefab as Prefab<typeof prefabName>;
-  }
-
-  /**
    * Creates a `Prefab` from reading the prefab's binary data stored in a `SaveString`.
    *
    * @example
@@ -747,6 +717,36 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   getAngularVelocity(): Velocity {
     return this.components.NetworkRigidbody?.angularVelocity ?? { x: 0, y: 0, z: 0 };
+  }
+
+  /**
+   * Finds the first child prefab matching the given name. If there are multiple child prefabs with
+   * the same name, you can use the second argument to provide a parent hash to match against.
+   *
+   * @example
+   * import { Prefab } from 'att-string-transcoder';
+   *
+   * const prefab = new Prefab('Handle_Short');
+   *
+   * prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
+   *
+   * const childGuard = prefab.getChildPrefab('Guard');
+   * // `childGuard` is an instance of `Prefab<'Guard'>`
+   *
+   * const childPommel = prefab.getChildPrefab('Pommel');
+   * // `childPommel` is `undefined`
+   */
+  getChildPrefab<TChildPrefabName extends ATTPrefabName>(
+    prefabName: TChildPrefabName,
+    parentHash?: number
+  ): Prefab<typeof prefabName> | undefined {
+    const child = this.children.find(child =>
+      child.prefab.name === prefabName && typeof parentHash === 'undefined' ? true : child.parentHash === parentHash
+    );
+
+    if (typeof child === 'undefined') return undefined;
+
+    return child.prefab as Prefab<typeof prefabName>;
   }
 
   /**

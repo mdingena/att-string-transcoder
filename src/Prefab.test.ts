@@ -286,53 +286,6 @@ describe('Prefab.clone()', () => {
   });
 });
 
-describe('Prefab.findChildPrefab()', () => {
-  describe('when providing the name of an existing child prefab', () => {
-    it('returns the first matching child prefab', () => {
-      const prefab = new Prefab('Handle_Short');
-
-      prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
-      prefab.addChildPrefab('Slot_Large_SwordType_Craft_54356', new Prefab('Guard'));
-
-      const child = prefab.findChildPrefab('Guard');
-
-      expect(typeof child).not.toBeUndefined();
-      expect(child?.name).toStrictEqual('Guard');
-    });
-  });
-
-  describe('when providing the name of an existing child prefab and a parent hash', () => {
-    it('returns the first matching child prefab', () => {
-      const prefab = new Prefab('Handle_Short');
-
-      const goldGuard = new Prefab('Guard').setMaterial('Gold');
-      const mythrilGuard = new Prefab('Guard').setMaterial('Mythril');
-
-      prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', goldGuard);
-      prefab.addChildPrefab('Slot_Large_SwordType_Craft_54356', mythrilGuard);
-
-      const child = prefab.findChildPrefab('Guard', 54356);
-
-      expect(child).not.toBeUndefined();
-      expect(child?.name).toStrictEqual('Guard');
-      expect(child?.getMaterial()).toStrictEqual(PhysicalMaterialPartHash.Mythril);
-    });
-  });
-
-  describe('when providing the name of a non-existent child prefab', () => {
-    it('returns undefined', () => {
-      const prefab = new Prefab('Handle_Short');
-
-      prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
-      prefab.addChildPrefab('Slot_Large_SwordType_Craft_54356', new Prefab('Guard'));
-
-      const child = prefab.findChildPrefab('Pommel');
-
-      expect(child).toBeUndefined();
-    });
-  });
-});
-
 describe('Prefab.fromBinary()', () => {
   let reader: BinaryReader;
   const componentVersions = new Map([[1454441398, 2]]);
@@ -498,6 +451,53 @@ describe('Prefab.getAngularVelocity()', () => {
       const angularVelocity = prefab.getAngularVelocity();
 
       expect(angularVelocity).toStrictEqual({ x: 69, y: 420, z: 1337 });
+    });
+  });
+});
+
+describe('Prefab.getChildPrefab()', () => {
+  describe('when providing the name of an existing child prefab', () => {
+    it('returns the first matching child prefab', () => {
+      const prefab = new Prefab('Handle_Short');
+
+      prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
+      prefab.addChildPrefab('Slot_Large_SwordType_Craft_54356', new Prefab('Guard'));
+
+      const child = prefab.getChildPrefab('Guard');
+
+      expect(typeof child).not.toBeUndefined();
+      expect(child?.name).toStrictEqual('Guard');
+    });
+  });
+
+  describe('when providing the name of an existing child prefab and a parent hash', () => {
+    it('returns the first matching child prefab', () => {
+      const prefab = new Prefab('Handle_Short');
+
+      const goldGuard = new Prefab('Guard').setMaterial('Gold');
+      const mythrilGuard = new Prefab('Guard').setMaterial('Mythril');
+
+      prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', goldGuard);
+      prefab.addChildPrefab('Slot_Large_SwordType_Craft_54356', mythrilGuard);
+
+      const child = prefab.getChildPrefab('Guard', 54356);
+
+      expect(child).not.toBeUndefined();
+      expect(child?.name).toStrictEqual('Guard');
+      expect(child?.getMaterial()).toStrictEqual(PhysicalMaterialPartHash.Mythril);
+    });
+  });
+
+  describe('when providing the name of a non-existent child prefab', () => {
+    it('returns undefined', () => {
+      const prefab = new Prefab('Handle_Short');
+
+      prefab.addChildPrefab('Slot_Large_SwordType_Craft_6134', new Prefab('Guard'));
+      prefab.addChildPrefab('Slot_Large_SwordType_Craft_54356', new Prefab('Guard'));
+
+      const child = prefab.getChildPrefab('Pommel');
+
+      expect(child).toBeUndefined();
     });
   });
 });
