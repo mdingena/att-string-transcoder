@@ -1714,7 +1714,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Returns the `SaveString` to spawn this prefab in the game.
+   * Returns the `SaveString` to spawn this prefab in the game. You may pass a boolean to force
+   * returning a save string for prefabs that contain indeterminate component versions.
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1723,11 +1724,17 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *
    * const saveString = prefab.toSaveString();
    */
-  toSaveString(): SaveString {
+  toSaveString(excludeComponentVersions = false): SaveString {
     const componentVersions = this.getComponentVersions();
     const data = this.toBinary(componentVersions);
 
-    const shouldIncludeComponentVersions = ![...componentVersions.values()].includes(0);
+    const hasIndeterminateVersions = [...componentVersions.values()].includes(0);
+
+    if (hasIndeterminateVersions && !excludeComponentVersions) {
+      throw new Error(
+        'Prefab contains components with version `0`. Current in-game versions for those components are not available. The produced save string will not contain component versions and may not be spawnable in-game.\n\nYou may call `.toSaveString(true)` to force producing a save string with this limitation.\n'
+      );
+    }
 
     /* Pad bits with trailing zeroes to make it % 32. */
     const roundedUpDataLength = data.length + (32 - (data.length % 32 === 0 ? 32 : data.length % 32));
@@ -1745,16 +1752,10 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     /* Construct the versions string. */
     let componentVersionsString: string | undefined;
 
-    if (shouldIncludeComponentVersions && componentVersions.size > 0) {
+    if (!hasIndeterminateVersions && componentVersions.size > 0) {
       componentVersionsString = `${componentVersions.size},${[...componentVersions.entries()].map(
         ([componentHash, componentVersion]) => `${componentHash},${componentVersion}`
       )}`;
-    }
-
-    if (!shouldIncludeComponentVersions) {
-      process.stdout.write(
-        'Warning: Prefab contains components with version `0`. Current in-game versions for those components are not available. The produced save string will not contain component versions and may not be spawnable in-game.\n'
-      );
     }
 
     /* Return SaveString. */

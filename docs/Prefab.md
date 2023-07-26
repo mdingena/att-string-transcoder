@@ -61,7 +61,7 @@
   - [`setSpawnArea(populationDefinitionArg, props?)`](#setspawnareapopulationarg-props)
   - [`setVelocity(velocity)`](#setvelocityvelocity)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
-  - [`toSaveString()`](#tosavestring)
+  - [`toSaveString(force?)`](#tosavestringforce)
 
 ## Types
 
@@ -1192,10 +1192,11 @@ const binaryString = prefab.toBinary(componentVersions);
 
 ---
 
-### `toSaveString()`
+### `toSaveString(excludeComponentVersions?)`
 
-Returns the `SaveString` to spawn this prefab in the game.
+Returns the `SaveString` to spawn this prefab in the game. You may pass a boolean to force returning a save string for prefabs that contain indeterminate component versions.
 
+- `excludeComponentVersions` (optional, default `false`) `<boolean>` Set to true to force a save string without component versions.
 - Returns: [`<SaveString>`](./SaveString.md)
 
 ```ts

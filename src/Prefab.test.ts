@@ -2151,29 +2151,49 @@ describe('Prefab.toSaveString()', () => {
   });
 
   describe('when the prefab contains components with indeterminate versions', () => {
-    it('prints a warning and returns a save string without component versions', () => {
-      const spy = vi.spyOn(process.stdout, 'write');
-      spy.mockImplementationOnce(() => true);
+    describe('when not excluding component versions', () => {
+      it('throws an error', () => {
+        const prefab = new Prefab('Torch', {
+          components: {
+            Unknown: [
+              new UnsupportedComponent({
+                hash: 1337,
+                name: 'Unknown_1337',
+                rawData: '11110111001100010000' as BinaryString,
+                version: 0
+              })
+            ]
+          }
+        });
 
-      const prefab = new Prefab('Torch', {
-        components: {
-          Unknown: [
-            new UnsupportedComponent({
-              hash: 1337,
-              name: 'Unknown_1337',
-              rawData: '11110111001100010000' as BinaryString,
-              version: 0
-            })
-          ]
-        }
+        const expectedToThrow = () => prefab.toSaveString();
+        const expectedError = new Error(
+          'Prefab contains components with version `0`. Current in-game versions for those components are not available. The produced save string will not contain component versions and may not be spawnable in-game.\n\nYou may call `.toSaveString(true)` to force producing a save string with this limitation.\n'
+        );
+
+        expect(expectedToThrow).toThrowError(expectedError);
       });
+    });
 
-      const saveString = prefab.toSaveString();
+    describe('when excluding component versions', () => {
+      it('returns a save string without component versions', () => {
+        const prefab = new Prefab('Torch', {
+          components: {
+            Unknown: [
+              new UnsupportedComponent({
+                hash: 1337,
+                name: 'Unknown_1337',
+                rawData: '11110111001100010000' as BinaryString,
+                version: 0
+              })
+            ]
+          }
+        });
 
-      expect(spy).toHaveBeenCalledWith(
-        'Warning: Prefab contains components with version `0`. Current in-game versions for those components are not available. The produced save string will not contain component versions and may not be spawnable in-game.\n'
-      );
-      expect(saveString).toStrictEqual('56698,56,56698,0,0,0,0,0,0,1065353216,1065353216,1337,20,4147183616,0,0,');
+        const saveString = prefab.toSaveString(true);
+
+        expect(saveString).toStrictEqual('56698,56,56698,0,0,0,0,0,0,1065353216,1065353216,1337,20,4147183616,0,0,');
+      });
     });
   });
 });
