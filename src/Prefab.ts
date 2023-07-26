@@ -1727,6 +1727,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     const componentVersions = this.getComponentVersions();
     const data = this.toBinary(componentVersions);
 
+    const shouldIncludeComponentVersions = ![...componentVersions.values()].includes(0);
+
     /* Pad bits with trailing zeroes to make it % 32. */
     const roundedUpDataLength = data.length + (32 - (data.length % 32 === 0 ? 32 : data.length % 32));
     const paddedData = data.padEnd(roundedUpDataLength, '0');
@@ -1743,10 +1745,16 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     /* Construct the versions string. */
     let componentVersionsString: string | undefined;
 
-    if (componentVersions.size > 0) {
+    if (shouldIncludeComponentVersions && componentVersions.size > 0) {
       componentVersionsString = `${componentVersions.size},${[...componentVersions.entries()].map(
         ([componentHash, componentVersion]) => `${componentHash},${componentVersion}`
       )}`;
+    }
+
+    if (!shouldIncludeComponentVersions) {
+      process.stdout.write(
+        'Warning: Prefab contains components with version `0`. Current in-game versions for those components are not available. The produced save string will not contain component versions and may not be spawnable in-game.\n'
+      );
     }
 
     /* Return SaveString. */
