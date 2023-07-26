@@ -25,20 +25,20 @@ export const latestSupportedComponentVersions = new Map([
   [43510150, 2], // TaxManager
   [70871065, 1], // SafePositionSetter
   [109805019, 0], // WoodcutTree (duplicate with 1098050191)
-  [159391088, 1],
-  [200292695, 3],
+  [159391088, 1], // ModifiableAdditionalStaticContent
+  [200292695, 3], // LogicFloatChangeOnBool
   [205333986, 1], // Cookable
   [237360636, 2], // RopeGrab
   [259381630, 1], // Ecosystem
   [272188517, 1], // PhysicalMaterialPart
   [276353327, 1], // WoodcutPointCollection
   [277505782, 2], // Trigger
-  [309083880, 1],
+  [309083880, 1], // AreaOfInfluenceReceiver
   [320224849, 1], // WheelGrab
   [391977879, 2], // Mould
   [392234266, 3],
   [392344172, 1], // LogicFloatThresholdReceiver
-  [403040752, 2],
+  [403040752, 2], // PlayerDetect
   [414036426, 0], // KeyItem
   [496827038, 1],
   [566175523, 1], // LinearPartCloner
@@ -53,7 +53,7 @@ export const latestSupportedComponentVersions = new Map([
   [766675725, 1], // GenericCraftingStation
   [775321715, 2],
   [788405183, 1], // LevelStatModifier
-  [830106687, 1],
+  [830106687, 1], // RespawnOnDestroy
   [875684520, 1], // ForestGenerator
   [902024186, 1], // Smelter
   [910018632, 2], // GameTimeManager
@@ -81,7 +81,7 @@ export const latestSupportedComponentVersions = new Map([
   [1454441398, 2], // Pickup
   [1454955908, 1], // SerializedFullEmptyStatTrigger
   [1499506132, 1], // StewManager
-  [1509838052, 1],
+  [1509838052, 1], // FireLogic
   [1556697998, 0], // MultiHandPickup
   [1558189723, 1],
   [1571096900, 0], // MouldRestrictor
@@ -99,16 +99,16 @@ export const latestSupportedComponentVersions = new Map([
   [1823429789, 1], // GhostSnapSlotCollection
   [1871432223, 1], // DurabilityModule
   [1874870249, 2], // MovePickup
-  [1908922854, 1],
+  [1908922854, 1], // AdditionalStaticContent
   [1923918202, 3], // PageInstance
   [1931537627, 1], // BasicPopulationFolder
-  [1934129787, 1],
+  [1934129787, 1], // LogicReset
   [1946741389, 0], // PlayerLandmark
   [1962842866, 1], // DirectionalBoundsSurface
   [1964978567, 1], // LogicSumIntReceiver
   [2026743731, 1], // LogicVector3Sender
   [2042199192, 0], // TreeDecay
-  [2069630919, 1],
+  [2069630919, 1], // MRK_ActivationLever
   [2081565440, 2],
   [2120963769, 1], // LogicFloatSender
   [2126500253, 1], // HealthBasedDigable
@@ -117,7 +117,7 @@ export const latestSupportedComponentVersions = new Map([
   [2190886200, 1], // SkillShrine
   [2213531414, 0], // TwoStepLever
   [2241532968, 0], // PaperPageInstance
-  [2253011220, 1],
+  [2253011220, 1], // LogicIntToBool
   [2262399392, 2], // LeaderboardManager
   [2272630171, 1], // ForgedPointCollection
   [2290978823, 1], // NetworkRigidbody
@@ -131,7 +131,7 @@ export const latestSupportedComponentVersions = new Map([
   [2498617949, 1], // RotatePickup
   [2563434699, 1], // LogicIntThresholdReceiver
   [2563567105, 2], // StatManager
-  [2576456808, 1],
+  [2576456808, 1], // CurveOutput
   [2590537994, 2], // Landmark
   [2592242915, 2], // PickupDock
   [2610542999, 1], // LogicIntRangeReceiver
@@ -150,7 +150,7 @@ export const latestSupportedComponentVersions = new Map([
   [2833060406, 1],
   [2880587164, 1], // LogicIntSender
   [2882590463, 1], // CookingPot
-  [2912807649, 3],
+  [2912807649, 3], // PlayerUnlockStation
   [2951515968, 1], // PlayerInteractionRestrictor
   [2971871217, 1],
   [2975913730, 1], // StaticGenerationParent
@@ -168,7 +168,7 @@ export const latestSupportedComponentVersions = new Map([
   [3171294583, 1],
   [3188272159, 1], // LogicFloatReceiver
   [3202828999, 1],
-  [3230087383, 1],
+  [3230087383, 1], // OneTimeUpgradeuinteraction
   [3236280681, 3], // ChisellingDeck
   [3245685963, 1], // LogicFloatReset
   [3257374625, 1], // Leaderboard
@@ -204,7 +204,7 @@ export const latestSupportedComponentVersions = new Map([
   [4081488368, 1], // WipeManager
   [4095875831, 1], // LandmarkDiscoverZone
   [4109360768, 2], // HeatSourceBase
-  [4134534481, 1],
+  [4134534481, 1], // Enchantable
   [4144776006, 3], // TimeManager
   [4163873252, 0], // GlobalCommunalStorageValuesFile
   [4179293747, 1], // LiquidContainer
