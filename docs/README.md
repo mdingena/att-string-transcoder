@@ -11,6 +11,7 @@
   - [`BinaryReader`](./BinaryReader.md)
   - [`BinaryWriter`](./BinaryWriter.md)
   - [`Component`](./Component.md)
+  - [`DoorComponent`](./DoorComponent.md)
   - [`DurabilityModuleComponent`](./DurabilityModuleComponent.md)
   - [`Entity`](./Entity.md)
   - [`FireComponent`](./FireComponent.md)

@@ -25,7 +25,7 @@ export type DoorComponentProps = DoorComponentPropsV1;
  */
 export class DoorComponent extends Component {
   /**
-   * Reveals the open state of the prefab this component is attached to.
+   * Reveals the open state of this component's prefab.
    *
    * @since v1
    *
