@@ -24,7 +24,7 @@ export const latestSupportedComponentVersions = new Map([
   [34507654, 1], // CylindricalBoundsSurface
   [43510150, 2], // TaxManager
   [70871065, 1], // SafePositionSetter
-  [109805019, 0], // WoodcutTree
+  [109805019, 0], // WoodcutTree (duplicate with 1098050191)
   [159391088, 1],
   [200292695, 3],
   [205333986, 1], // Cookable
@@ -64,7 +64,7 @@ export const latestSupportedComponentVersions = new Map([
   [1063725326, 1], // WayPointPath
   [1081247904, 1], // LogicIntReceiver
   [1085701614, 1], // TimeBasedStagedPrefab
-  [1098050191, 3],
+  [1098050191, 3], // WoodcutTree
   [1176706580, 2], // PlaceItemNoDockPuzzleLogic
   [1198377566, 1],
   [1211178616, 1], // PlayerInteractionManager
