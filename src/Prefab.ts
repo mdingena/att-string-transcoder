@@ -1008,7 +1008,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * prefab.inspect();
    */
   inspect(): Prefab<PrefabName<TPrefabName>> {
-    console.log(inspect(this, false, null));
+    process.stdout.write(`${inspect(this, false, null)}\n`);
 
     return this;
   }
@@ -1025,7 +1025,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   print(): Prefab<PrefabName<TPrefabName>> {
     const saveString = this.toSaveString();
-    console.log(saveString);
+    process.stdout.write(`${saveString}\n`);
 
     return this;
   }

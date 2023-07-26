@@ -922,9 +922,9 @@ describe('Prefab.getVelocity()', () => {
 });
 
 describe('Prefab.inspect()', () => {
-  it('prints the internal data structure of the prefab to the console', () => {
-    const spy = vi.spyOn(console, 'log');
-    spy.mockImplementationOnce(() => void 0);
+  it('prints the internal data structure of the prefab to the stdout', () => {
+    const spy = vi.spyOn(process.stdout, 'write');
+    spy.mockImplementationOnce(() => true);
 
     const prefab = new Prefab('Handle_Short');
     prefab.inspect();
@@ -938,19 +938,19 @@ describe('Prefab.inspect()', () => {
   components: { Unknown: [] },
   entities: {},
   children: []
-}`);
+}\n`);
   });
 });
 
 describe('Prefab.print()', () => {
-  it('prints the SaveString of the prefab to the console', () => {
-    const spy = vi.spyOn(console, 'log');
-    spy.mockImplementationOnce(() => void 0);
+  it('prints the SaveString of the prefab to the stdout', () => {
+    const spy = vi.spyOn(process.stdout, 'write');
+    spy.mockImplementationOnce(() => true);
 
     const prefab = new Prefab('Handle_Short');
     prefab.print();
 
-    expect(spy).toHaveBeenCalledWith('42230,48,42230,0,0,0,0,0,0,1065353216,1065353216,0,0,0,');
+    expect(spy).toHaveBeenCalledWith('42230,48,42230,0,0,0,0,0,0,1065353216,1065353216,0,0,0,\n');
   });
 });
 
