@@ -1,4 +1,5 @@
 import { BasicDecayComponent } from '../components/BasicDecayComponent.js';
+import { DoorComponent } from '../components/DoorComponent.js';
 import { DurabilityModuleComponent } from '../components/DurabilityModuleComponent.js';
 import { FireComponent } from '../components/FireComponent.js';
 import { FuseComponent } from '../components/FuseComponent.js';
@@ -16,6 +17,7 @@ import { WoodcutTreeComponent } from '../components/WoodcutTreeComponent.js';
 
 export type SupportedComponent =
   | typeof BasicDecayComponent
+  | typeof DoorComponent
   | typeof DurabilityModuleComponent
   | typeof FireComponent
   | typeof FuseComponent

@@ -1,6 +1,7 @@
 import type { SupportedComponent } from './types/SupportedComponent.js';
 
 import { BasicDecayComponent } from './components/BasicDecayComponent.js';
+import { DoorComponent } from './components/DoorComponent.js';
 import { DurabilityModuleComponent } from './components/DurabilityModuleComponent.js';
 import { FireComponent } from './components/FireComponent.js';
 import { FuseComponent } from './components/FuseComponent.js';
@@ -18,6 +19,7 @@ import { WoodcutTreeComponent } from './components/WoodcutTreeComponent.js';
 
 export const supportedComponents: Record<string, SupportedComponent> = {
   BasicDecay: BasicDecayComponent,
+  Door: DoorComponent,
   DurabilityModule: DurabilityModuleComponent,
   Fire: FireComponent,
   Fuse: FuseComponent,
