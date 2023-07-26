@@ -25,6 +25,7 @@
   - [`PopulationSpawnAreaComponent`](./PopulationSpawnAreaComponent.md)
   - [`Prefab`](./Prefab.md)
   - [`SentGiftComponent`](./SentGiftComponent.md)
+  - [`SlidingDoorComponent`](./SlidingDoorComponent.md)
   - [`SpawnAreaComponent`](./SpawnAreaComponent.md)
   - [`StatManagerComponent`](./StatManagerComponent.md)
   - [`UnsupportedComponent`](./UnsupportedComponent.md)

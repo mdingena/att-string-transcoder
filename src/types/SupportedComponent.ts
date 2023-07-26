@@ -11,6 +11,7 @@ import { PickupComponent } from '../components/PickupComponent.js';
 import { PickupDockComponent } from '../components/PickupDockComponent.js';
 import { PopulationSpawnAreaComponent } from '../components/PopulationSpawnAreaComponent.js';
 import { SentGiftComponent } from '../components/SentGiftComponent.js';
+import { SlidingDoorComponent } from '../components/SlidingDoorComponent.js';
 import { SpawnAreaComponent } from '../components/SpawnAreaComponent.js';
 import { StatManagerComponent } from '../components/StatManagerComponent.js';
 import { WoodcutTreeComponent } from '../components/WoodcutTreeComponent.js';
@@ -29,6 +30,7 @@ export type SupportedComponent =
   | typeof PickupDockComponent
   | typeof PopulationSpawnAreaComponent
   | typeof SentGiftComponent
+  | typeof SlidingDoorComponent
   | typeof SpawnAreaComponent
   | typeof StatManagerComponent
   | typeof WoodcutTreeComponent;

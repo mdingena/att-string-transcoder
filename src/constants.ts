@@ -180,7 +180,7 @@ export const latestSupportedComponentVersions = new Map([
   [3457519710, 2], // Fire
   [3538443740, 1], // PositionProvider
   [3561515449, 1], // CaveLayerStreamer
-  [3583462804, 0], // SlidingDoor
+  [3583462804, 1], // SlidingDoor
   [3588929783, 1], // CaveTeleporter
   [3598052397, 0], // Chest
   [3608460219, 1], // SerializedTimedEvent

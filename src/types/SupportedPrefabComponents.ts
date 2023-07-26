@@ -11,6 +11,7 @@ import type { PickupComponent } from '../components/PickupComponent.js';
 import type { PickupDockComponent } from '../components/PickupDockComponent.js';
 import type { PopulationSpawnAreaComponent } from '../components/PopulationSpawnAreaComponent.js';
 import type { SentGiftComponent } from '../components/SentGiftComponent.js';
+import type { SlidingDoorComponent } from '../components/SlidingDoorComponent.js';
 import type { SpawnAreaComponent } from '../components/SpawnAreaComponent.js';
 import type { StatManagerComponent } from '../components/StatManagerComponent.js';
 import type { WoodcutTreeComponent } from '../components/WoodcutTreeComponent.js';
@@ -29,6 +30,7 @@ export type SupportedPrefabComponents = {
   PickupDock?: PickupDockComponent;
   PopulationSpawnArea?: PopulationSpawnAreaComponent;
   SentGift?: SentGiftComponent;
+  SlidingDoor?: SlidingDoorComponent;
   SpawnArea?: SpawnAreaComponent;
   StatManager?: StatManagerComponent;
   WoodcutTree?: WoodcutTreeComponent;

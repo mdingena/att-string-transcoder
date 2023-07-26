@@ -13,6 +13,7 @@ import { PickupComponent } from './components/PickupComponent.js';
 import { PickupDockComponent } from './components/PickupDockComponent.js';
 import { PopulationSpawnAreaComponent } from './components/PopulationSpawnAreaComponent.js';
 import { SentGiftComponent } from './components/SentGiftComponent.js';
+import { SlidingDoorComponent } from './components/SlidingDoorComponent.js';
 import { SpawnAreaComponent } from './components/SpawnAreaComponent.js';
 import { StatManagerComponent } from './components/StatManagerComponent.js';
 import { WoodcutTreeComponent } from './components/WoodcutTreeComponent.js';
@@ -31,6 +32,7 @@ export const supportedComponents: Record<string, SupportedComponent> = {
   PickupDock: PickupDockComponent,
   PopulationSpawnArea: PopulationSpawnAreaComponent,
   SentGift: SentGiftComponent,
+  SlidingDoor: SlidingDoorComponent,
   SpawnArea: SpawnAreaComponent,
   StatManager: StatManagerComponent,
   WoodcutTree: WoodcutTreeComponent
