@@ -20,6 +20,7 @@
   - [`LiquidContainerComponent`](./LiquidContainerComponent.md)
   - [`LogicBoolReceiverComponent`](./LogicBoolReceiverComponent.md)
   - [`LogicFloatReceiverComponent`](./LogicFloatReceiverComponent.md)
+  - [`LogicGateReceiverComponent`](./LogicGateReceiverComponent.md)
   - [`LogicIntReceiverComponent`](./LogicIntReceiverComponent.md)
   - [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md)
   - [`PhysicalMaterialPartComponent`](./PhysicalMaterialPartComponent.md)
