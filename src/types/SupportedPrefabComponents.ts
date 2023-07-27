@@ -6,6 +6,7 @@ import type { FuseComponent } from '../components/FuseComponent.js';
 import type { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.js';
 import type { LiquidContainerComponent } from '../components/LiquidContainerComponent.js';
 import type { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
+import type { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
 import type { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import type { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
 import type { PickupComponent } from '../components/PickupComponent.js';
@@ -26,6 +27,7 @@ export type SupportedPrefabComponents = {
   HeatSourceBase?: HeatSourceBaseComponent;
   LiquidContainer?: LiquidContainerComponent;
   LogicBoolReceiver?: LogicBoolReceiverComponent;
+  LogicFloatReceiver?: LogicFloatReceiverComponent;
   NetworkRigidbody?: NetworkRigidbodyComponent;
   PhysicalMaterialPart?: PhysicalMaterialPartComponent;
   Pickup?: PickupComponent;

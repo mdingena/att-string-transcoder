@@ -6,6 +6,7 @@ import { FuseComponent } from '../components/FuseComponent.js';
 import { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.js';
 import { LiquidContainerComponent } from '../components/LiquidContainerComponent.js';
 import { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
+import { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
 import { PickupComponent } from '../components/PickupComponent.js';
@@ -26,6 +27,7 @@ export type SupportedComponent =
   | typeof HeatSourceBaseComponent
   | typeof LiquidContainerComponent
   | typeof LogicBoolReceiverComponent
+  | typeof LogicFloatReceiverComponent
   | typeof NetworkRigidbodyComponent
   | typeof PhysicalMaterialPartComponent
   | typeof PickupComponent
