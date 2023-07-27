@@ -96,6 +96,16 @@ The identifiers of the `Logic*Sender` components that are connected to this `Log
 - Since: `v2`
 - `<Array<number>>`
 
+```ts
+import { LogicGateReceiverComponent } from 'att-string-transcoder';
+
+const componentVersion = 2;
+const component = new LogicGateReceiverComponent({ version: componentVersion });
+
+const senders = component.senders;
+// `senders` is `[]`
+```
+
 ---
 
 ### `operationType`
