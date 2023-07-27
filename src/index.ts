@@ -15,6 +15,7 @@ export type { LogicFloatReceiverComponentProps } from './components/LogicFloatRe
 export type { LogicFloatSenderComponentProps } from './components/LogicFloatSenderComponent.js';
 export type { LogicGateReceiverComponentProps } from './components/LogicGateReceiverComponent.js';
 export type { LogicIntReceiverComponentProps } from './components/LogicIntReceiverComponent.js';
+export type { LogicIntSenderComponentProps } from './components/LogicIntSenderComponent.js';
 export type { LogicVector3ReceiverComponentProps } from './components/LogicVector3ReceiverComponent.js';
 export type { NetworkRigidbodyComponentProps } from './components/NetworkRigidbodyComponent.js';
 export type { PhysicalMaterialPartComponentProps } from './components/PhysicalMaterialPartComponent.js';
@@ -75,6 +76,7 @@ export { LogicFloatReceiverComponent } from './components/LogicFloatReceiverComp
 export { LogicFloatSenderComponent } from './components/LogicFloatSenderComponent.js';
 export { LogicGateReceiverComponent } from './components/LogicGateReceiverComponent.js';
 export { LogicIntReceiverComponent } from './components/LogicIntReceiverComponent.js';
+export { LogicIntSenderComponent } from './components/LogicIntSenderComponent.js';
 export { LogicVector3ReceiverComponent } from './components/LogicVector3ReceiverComponent.js';
 export { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 export { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';

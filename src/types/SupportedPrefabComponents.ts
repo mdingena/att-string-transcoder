@@ -11,6 +11,7 @@ import type { LogicFloatReceiverComponent } from '../components/LogicFloatReceiv
 import type { LogicFloatSenderComponent } from '../components/LogicFloatSenderComponent.js';
 import type { LogicGateReceiverComponent } from '../components/LogicGateReceiverComponent.js';
 import type { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
+import type { LogicIntSenderComponent } from '../components/LogicIntSenderComponent.js';
 import type { LogicVector3ReceiverComponent } from '../components/LogicVector3ReceiverComponent.js';
 import type { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import type { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
@@ -37,6 +38,7 @@ export type SupportedPrefabComponents = {
   LogicFloatSender?: LogicFloatSenderComponent;
   LogicGateReceiver?: LogicGateReceiverComponent;
   LogicIntReceiver?: LogicIntReceiverComponent;
+  LogicIntSender?: LogicIntSenderComponent;
   LogicVector3Receiver?: LogicVector3ReceiverComponent;
   NetworkRigidbody?: NetworkRigidbodyComponent;
   PhysicalMaterialPart?: PhysicalMaterialPartComponent;

@@ -24,6 +24,7 @@
   - [`LogicFloatSenderComponent`](./LogicFloatSenderComponent.md)
   - [`LogicGateReceiverComponent`](./LogicGateReceiverComponent.md)
   - [`LogicIntReceiverComponent`](./LogicIntReceiverComponent.md)
+  - [`LogicIntSenderComponent`](./LogicIntSenderComponent.md)
   - [`LogicVector3ReceiverComponent`](./LogicVector3ReceiverComponent.md)
   - [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md)
   - [`PhysicalMaterialPartComponent`](./PhysicalMaterialPartComponent.md)

@@ -1,3 +1,5 @@
+import type { LogicIntSenderComponent } from '../components/LogicIntSenderComponent.js';
+
 import { BasicDecayComponent } from '../components/BasicDecayComponent.js';
 import { DoorComponent } from '../components/DoorComponent.js';
 import { DurabilityModuleComponent } from '../components/DurabilityModuleComponent.js';
@@ -37,6 +39,7 @@ export type SupportedComponent =
   | typeof LogicFloatSenderComponent
   | typeof LogicGateReceiverComponent
   | typeof LogicIntReceiverComponent
+  | typeof LogicIntSenderComponent
   | typeof LogicVector3ReceiverComponent
   | typeof NetworkRigidbodyComponent
   | typeof PhysicalMaterialPartComponent
