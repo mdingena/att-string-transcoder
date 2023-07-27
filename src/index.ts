@@ -37,9 +37,9 @@ export type { UnknownPrefabComponents } from './types/UnknownPrefabComponents.js
 export type { UnsupportedPrefabComponents } from './types/UnsupportedPrefabComponents.js';
 export type { Velocity } from './types/Velocity.js';
 
-/* Enums and enum-likes */
-export { ATTPrefabs } from './types/ATTPrefabs.js';
+/* Enums */
 export { ComponentHash } from './types/ComponentHash.js';
+export { LogicOperator } from './types/LogicOperator.js';
 export { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 export { PopulationDefinitionHash } from './types/PopulationDefinitionHash.js';
 export { PresetHash } from './types/PresetHash.js';
@@ -52,6 +52,7 @@ export { BinaryWriter } from './BinaryWriter.js';
 
 /* Prefabs */
 export { Prefab } from './Prefab.js';
+export { ATTPrefabs } from './types/ATTPrefabs.js';
 
 /* Components */
 export { BasicDecayComponent } from './components/BasicDecayComponent.js';
