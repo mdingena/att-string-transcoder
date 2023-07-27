@@ -21,6 +21,7 @@
   - [`LogicBoolReceiverComponent`](./LogicBoolReceiverComponent.md)
   - [`LogicBoolSenderComponent`](./LogicBoolSenderComponent.md)
   - [`LogicFloatReceiverComponent`](./LogicFloatReceiverComponent.md)
+  - [`LogicFloatSenderComponent`](./LogicFloatSenderComponent.md)
   - [`LogicGateReceiverComponent`](./LogicGateReceiverComponent.md)
   - [`LogicIntReceiverComponent`](./LogicIntReceiverComponent.md)
   - [`LogicVector3ReceiverComponent`](./LogicVector3ReceiverComponent.md)

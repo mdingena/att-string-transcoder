@@ -10,6 +10,7 @@ import { LiquidContainerComponent } from './components/LiquidContainerComponent.
 import { LogicBoolReceiverComponent } from './components/LogicBoolReceiverComponent.js';
 import { LogicBoolSenderComponent } from './components/LogicBoolSenderComponent.js';
 import { LogicFloatReceiverComponent } from './components/LogicFloatReceiverComponent.js';
+import { LogicFloatSenderComponent } from './components/LogicFloatSenderComponent.js';
 import { LogicGateReceiverComponent } from './components/LogicGateReceiverComponent.js';
 import { LogicIntReceiverComponent } from './components/LogicIntReceiverComponent.js';
 import { LogicVector3ReceiverComponent } from './components/LogicVector3ReceiverComponent.js';
@@ -35,6 +36,7 @@ export const supportedComponents: Record<string, SupportedComponent> = {
   LogicBoolReceiver: LogicBoolReceiverComponent,
   LogicBoolSender: LogicBoolSenderComponent,
   LogicFloatReceiver: LogicFloatReceiverComponent,
+  LogicFloatSender: LogicFloatSenderComponent,
   LogicGateReceiver: LogicGateReceiverComponent,
   LogicIntReceiver: LogicIntReceiverComponent,
   LogicVector3Receiver: LogicVector3ReceiverComponent,

@@ -12,6 +12,7 @@ export type { LiquidContainerComponentProps } from './components/LiquidContainer
 export type { LogicBoolReceiverComponentProps } from './components/LogicBoolReceiverComponent.js';
 export type { LogicBoolSenderComponentProps } from './components/LogicBoolSenderComponent.js';
 export type { LogicFloatReceiverComponentProps } from './components/LogicFloatReceiverComponent.js';
+export type { LogicFloatSenderComponentProps } from './components/LogicFloatSenderComponent.js';
 export type { LogicGateReceiverComponentProps } from './components/LogicGateReceiverComponent.js';
 export type { LogicIntReceiverComponentProps } from './components/LogicIntReceiverComponent.js';
 export type { LogicVector3ReceiverComponentProps } from './components/LogicVector3ReceiverComponent.js';
@@ -71,6 +72,7 @@ export { LiquidContainerComponent } from './components/LiquidContainerComponent.
 export { LogicBoolReceiverComponent } from './components/LogicBoolReceiverComponent.js';
 export { LogicBoolSenderComponent } from './components/LogicBoolSenderComponent.js';
 export { LogicFloatReceiverComponent } from './components/LogicFloatReceiverComponent.js';
+export { LogicFloatSenderComponent } from './components/LogicFloatSenderComponent.js';
 export { LogicGateReceiverComponent } from './components/LogicGateReceiverComponent.js';
 export { LogicIntReceiverComponent } from './components/LogicIntReceiverComponent.js';
 export { LogicVector3ReceiverComponent } from './components/LogicVector3ReceiverComponent.js';

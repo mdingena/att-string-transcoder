@@ -8,6 +8,7 @@ import { LiquidContainerComponent } from '../components/LiquidContainerComponent
 import { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
 import { LogicBoolSenderComponent } from '../components/LogicBoolSenderComponent.js';
 import { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
+import { LogicFloatSenderComponent } from '../components/LogicFloatSenderComponent.js';
 import { LogicGateReceiverComponent } from '../components/LogicGateReceiverComponent.js';
 import { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
 import { LogicVector3ReceiverComponent } from '../components/LogicVector3ReceiverComponent.js';
@@ -33,6 +34,7 @@ export type SupportedComponent =
   | typeof LogicBoolReceiverComponent
   | typeof LogicBoolSenderComponent
   | typeof LogicFloatReceiverComponent
+  | typeof LogicFloatSenderComponent
   | typeof LogicGateReceiverComponent
   | typeof LogicIntReceiverComponent
   | typeof LogicVector3ReceiverComponent

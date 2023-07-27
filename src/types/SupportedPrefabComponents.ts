@@ -8,6 +8,7 @@ import type { LiquidContainerComponent } from '../components/LiquidContainerComp
 import type { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
 import type { LogicBoolSenderComponent } from '../components/LogicBoolSenderComponent.js';
 import type { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
+import type { LogicFloatSenderComponent } from '../components/LogicFloatSenderComponent.js';
 import type { LogicGateReceiverComponent } from '../components/LogicGateReceiverComponent.js';
 import type { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
 import type { LogicVector3ReceiverComponent } from '../components/LogicVector3ReceiverComponent.js';
@@ -33,6 +34,7 @@ export type SupportedPrefabComponents = {
   LogicBoolReceiver?: LogicBoolReceiverComponent;
   LogicBoolSender?: LogicBoolSenderComponent;
   LogicFloatReceiver?: LogicFloatReceiverComponent;
+  LogicFloatSender?: LogicFloatSenderComponent;
   LogicGateReceiver?: LogicGateReceiverComponent;
   LogicIntReceiver?: LogicIntReceiverComponent;
   LogicVector3Receiver?: LogicVector3ReceiverComponent;
