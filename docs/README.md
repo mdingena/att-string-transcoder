@@ -26,6 +26,7 @@
   - [`LogicIntReceiverComponent`](./LogicIntReceiverComponent.md)
   - [`LogicIntSenderComponent`](./LogicIntSenderComponent.md)
   - [`LogicVector3ReceiverComponent`](./LogicVector3ReceiverComponent.md)
+  - [`LogicVector3SenderComponent`](./LogicVector3SenderComponent.md)
   - [`NetworkRigidbodyComponent`](./NetworkRigidbodyComponent.md)
   - [`PhysicalMaterialPartComponent`](./PhysicalMaterialPartComponent.md)
   - [`PickupComponent`](./PickupComponent.md)

@@ -17,6 +17,7 @@ export type { LogicGateReceiverComponentProps } from './components/LogicGateRece
 export type { LogicIntReceiverComponentProps } from './components/LogicIntReceiverComponent.js';
 export type { LogicIntSenderComponentProps } from './components/LogicIntSenderComponent.js';
 export type { LogicVector3ReceiverComponentProps } from './components/LogicVector3ReceiverComponent.js';
+export type { LogicVector3SenderComponentProps } from './components/LogicVector3SenderComponent.js';
 export type { NetworkRigidbodyComponentProps } from './components/NetworkRigidbodyComponent.js';
 export type { PhysicalMaterialPartComponentProps } from './components/PhysicalMaterialPartComponent.js';
 export type { PickupComponentProps } from './components/PickupComponent.js';
@@ -78,6 +79,7 @@ export { LogicGateReceiverComponent } from './components/LogicGateReceiverCompon
 export { LogicIntReceiverComponent } from './components/LogicIntReceiverComponent.js';
 export { LogicIntSenderComponent } from './components/LogicIntSenderComponent.js';
 export { LogicVector3ReceiverComponent } from './components/LogicVector3ReceiverComponent.js';
+export { LogicVector3SenderComponent } from './components/LogicVector3SenderComponent.js';
 export { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 export { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 export { PickupComponent } from './components/PickupComponent.js';

@@ -14,6 +14,7 @@ import { LogicFloatSenderComponent } from '../components/LogicFloatSenderCompone
 import { LogicGateReceiverComponent } from '../components/LogicGateReceiverComponent.js';
 import { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
 import { LogicVector3ReceiverComponent } from '../components/LogicVector3ReceiverComponent.js';
+import { LogicVector3SenderComponent } from '../components/LogicVector3SenderComponent.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
 import { PickupComponent } from '../components/PickupComponent.js';
@@ -41,6 +42,7 @@ export type SupportedComponent =
   | typeof LogicIntReceiverComponent
   | typeof LogicIntSenderComponent
   | typeof LogicVector3ReceiverComponent
+  | typeof LogicVector3SenderComponent
   | typeof NetworkRigidbodyComponent
   | typeof PhysicalMaterialPartComponent
   | typeof PickupComponent

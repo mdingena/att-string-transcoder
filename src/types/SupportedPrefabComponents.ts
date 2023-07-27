@@ -13,6 +13,7 @@ import type { LogicGateReceiverComponent } from '../components/LogicGateReceiver
 import type { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
 import type { LogicIntSenderComponent } from '../components/LogicIntSenderComponent.js';
 import type { LogicVector3ReceiverComponent } from '../components/LogicVector3ReceiverComponent.js';
+import type { LogicVector3SenderComponent } from '../components/LogicVector3SenderComponent.js';
 import type { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import type { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
 import type { PickupComponent } from '../components/PickupComponent.js';
@@ -40,6 +41,7 @@ export type SupportedPrefabComponents = {
   LogicIntReceiver?: LogicIntReceiverComponent;
   LogicIntSender?: LogicIntSenderComponent;
   LogicVector3Receiver?: LogicVector3ReceiverComponent;
+  LogicVector3Sender?: LogicVector3SenderComponent;
   NetworkRigidbody?: NetworkRigidbodyComponent;
   PhysicalMaterialPart?: PhysicalMaterialPartComponent;
   Pickup?: PickupComponent;
