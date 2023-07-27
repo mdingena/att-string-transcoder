@@ -6,6 +6,7 @@ import type { FuseComponent } from '../components/FuseComponent.js';
 import type { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.js';
 import type { LiquidContainerComponent } from '../components/LiquidContainerComponent.js';
 import type { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
+import type { LogicBoolSenderComponent } from '../components/LogicBoolSenderComponent.js';
 import type { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
 import type { LogicGateReceiverComponent } from '../components/LogicGateReceiverComponent.js';
 import type { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
@@ -30,6 +31,7 @@ export type SupportedPrefabComponents = {
   HeatSourceBase?: HeatSourceBaseComponent;
   LiquidContainer?: LiquidContainerComponent;
   LogicBoolReceiver?: LogicBoolReceiverComponent;
+  LogicBoolSender?: LogicBoolSenderComponent;
   LogicFloatReceiver?: LogicFloatReceiverComponent;
   LogicGateReceiver?: LogicGateReceiverComponent;
   LogicIntReceiver?: LogicIntReceiverComponent;

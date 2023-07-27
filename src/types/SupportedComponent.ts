@@ -6,6 +6,7 @@ import { FuseComponent } from '../components/FuseComponent.js';
 import { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.js';
 import { LiquidContainerComponent } from '../components/LiquidContainerComponent.js';
 import { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
+import { LogicBoolSenderComponent } from '../components/LogicBoolSenderComponent.js';
 import { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
 import { LogicGateReceiverComponent } from '../components/LogicGateReceiverComponent.js';
 import { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
@@ -30,6 +31,7 @@ export type SupportedComponent =
   | typeof HeatSourceBaseComponent
   | typeof LiquidContainerComponent
   | typeof LogicBoolReceiverComponent
+  | typeof LogicBoolSenderComponent
   | typeof LogicFloatReceiverComponent
   | typeof LogicGateReceiverComponent
   | typeof LogicIntReceiverComponent

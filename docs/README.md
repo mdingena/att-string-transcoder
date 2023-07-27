@@ -19,6 +19,7 @@
   - [`HeatSourceBaseComponent`](./HeatSourceBaseComponent.md)
   - [`LiquidContainerComponent`](./LiquidContainerComponent.md)
   - [`LogicBoolReceiverComponent`](./LogicBoolReceiverComponent.md)
+  - [`LogicBoolSenderComponent`](./LogicBoolSenderComponent.md)
   - [`LogicFloatReceiverComponent`](./LogicFloatReceiverComponent.md)
   - [`LogicGateReceiverComponent`](./LogicGateReceiverComponent.md)
   - [`LogicIntReceiverComponent`](./LogicIntReceiverComponent.md)

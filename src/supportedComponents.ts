@@ -8,6 +8,7 @@ import { FuseComponent } from './components/FuseComponent.js';
 import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
 import { LiquidContainerComponent } from './components/LiquidContainerComponent.js';
 import { LogicBoolReceiverComponent } from './components/LogicBoolReceiverComponent.js';
+import { LogicBoolSenderComponent } from './components/LogicBoolSenderComponent.js';
 import { LogicFloatReceiverComponent } from './components/LogicFloatReceiverComponent.js';
 import { LogicGateReceiverComponent } from './components/LogicGateReceiverComponent.js';
 import { LogicIntReceiverComponent } from './components/LogicIntReceiverComponent.js';
@@ -32,6 +33,7 @@ export const supportedComponents: Record<string, SupportedComponent> = {
   HeatSourceBase: HeatSourceBaseComponent,
   LiquidContainer: LiquidContainerComponent,
   LogicBoolReceiver: LogicBoolReceiverComponent,
+  LogicBoolSender: LogicBoolSenderComponent,
   LogicFloatReceiver: LogicFloatReceiverComponent,
   LogicGateReceiver: LogicGateReceiverComponent,
   LogicIntReceiver: LogicIntReceiverComponent,
