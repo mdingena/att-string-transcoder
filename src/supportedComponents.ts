@@ -11,6 +11,7 @@ import { LogicBoolReceiverComponent } from './components/LogicBoolReceiverCompon
 import { LogicFloatReceiverComponent } from './components/LogicFloatReceiverComponent.js';
 import { LogicGateReceiverComponent } from './components/LogicGateReceiverComponent.js';
 import { LogicIntReceiverComponent } from './components/LogicIntReceiverComponent.js';
+import { LogicVector3ReceiverComponent } from './components/LogicVector3ReceiverComponent.js';
 import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 import { PickupComponent } from './components/PickupComponent.js';
@@ -34,6 +35,7 @@ export const supportedComponents: Record<string, SupportedComponent> = {
   LogicFloatReceiver: LogicFloatReceiverComponent,
   LogicGateReceiver: LogicGateReceiverComponent,
   LogicIntReceiver: LogicIntReceiverComponent,
+  LogicVector3Receiver: LogicVector3ReceiverComponent,
   NetworkRigidbody: NetworkRigidbodyComponent,
   PhysicalMaterialPart: PhysicalMaterialPartComponent,
   Pickup: PickupComponent,
