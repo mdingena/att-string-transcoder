@@ -57,7 +57,7 @@ export class LogicFloatReceiverComponent extends Component {
 
     super({ hash, name, version });
 
-    this.sender = sender ?? 1;
+    this.sender = sender ?? 0;
   }
 
   static override fromBinary(reader: BinaryReader, version: number): LogicFloatReceiverComponent {
