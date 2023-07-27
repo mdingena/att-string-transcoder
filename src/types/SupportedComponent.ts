@@ -7,6 +7,7 @@ import { HeatSourceBaseComponent } from '../components/HeatSourceBaseComponent.j
 import { LiquidContainerComponent } from '../components/LiquidContainerComponent.js';
 import { LogicBoolReceiverComponent } from '../components/LogicBoolReceiverComponent.js';
 import { LogicFloatReceiverComponent } from '../components/LogicFloatReceiverComponent.js';
+import { LogicIntReceiverComponent } from '../components/LogicIntReceiverComponent.js';
 import { NetworkRigidbodyComponent } from '../components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from '../components/PhysicalMaterialPartComponent.js';
 import { PickupComponent } from '../components/PickupComponent.js';
@@ -28,6 +29,7 @@ export type SupportedComponent =
   | typeof LiquidContainerComponent
   | typeof LogicBoolReceiverComponent
   | typeof LogicFloatReceiverComponent
+  | typeof LogicIntReceiverComponent
   | typeof NetworkRigidbodyComponent
   | typeof PhysicalMaterialPartComponent
   | typeof PickupComponent
