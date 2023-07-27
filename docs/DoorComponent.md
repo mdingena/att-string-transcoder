@@ -43,7 +43,7 @@ type DoorComponentProps = DoorComponentPropsV1;
 
 ### `new DoorComponent(props)`
 
-Creates a versioned component without deserialising its data.
+Creates a versioned `Door` component.
 
 - `props` [`<ComponentProps & DoorComponentProps>`](#types) Configuration of the component to create.
 - Returns: `<DoorComponent>`

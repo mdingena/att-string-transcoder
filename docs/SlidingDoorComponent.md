@@ -43,7 +43,7 @@ type SlidingDoorComponentProps = SlidingDoorComponentPropsV1;
 
 ### `new SlidingDoorComponent(props)`
 
-Creates a versioned component without deserialising its data.
+Creates a versioned `SlidingDoor` component.
 
 - `props` [`<ComponentProps & SlidingDoorComponentProps>`](#types) Configuration of the component to create.
 - Returns: `<SlidingDoorComponent>`

@@ -43,7 +43,7 @@ type LogicBoolReceiverComponentProps = LogicBoolReceiverComponentPropsV1;
 
 ### `new LogicBoolReceiverComponent(props)`
 
-Creates a versioned component without deserialising its data.
+Creates a versioned `LogicBoolReceiver` component.
 
 - `props` [`<ComponentProps & LogicBoolReceiverComponentProps>`](#types) Configuration of the component to create.
 - Returns: `<LogicBoolReceiverComponent>`

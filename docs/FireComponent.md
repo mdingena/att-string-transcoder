@@ -43,7 +43,7 @@ type FireComponentProps = FireComponentPropsV1;
 
 ### `new FireComponent(props)`
 
-Creates a versioned component without deserialising its data.
+Creates a versioned `Fire` component.
 
 - `props` [`<ComponentProps & FireComponentProps>`](#types) Configuration of the component to create.
 - Returns: `<FireComponent>`
