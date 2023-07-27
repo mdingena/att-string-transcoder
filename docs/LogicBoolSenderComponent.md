@@ -154,7 +154,7 @@ const identifier = component.identifier;
 The output value of this `LogicBoolSender` that a `LogicBoolReceiver` reads as its input.
 
 - Since: `v2`
-- `<number>`
+- `<boolean>`
 
 ```ts
 import { LogicBoolSenderComponent } from 'att-string-transcoder';
