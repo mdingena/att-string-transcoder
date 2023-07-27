@@ -148,7 +148,7 @@ export class LogicIntSenderComponent extends Component {
     }
 
     /**
-     * @property {boolean} value
+     * @property {number} value
      * @since v1
      */
     if (props.version >= 1) {
@@ -186,7 +186,7 @@ export class LogicIntSenderComponent extends Component {
     }
 
     /**
-     * @property {boolean} value
+     * @property {number} value
      * @since v1
      */
     if (version >= 1) {
