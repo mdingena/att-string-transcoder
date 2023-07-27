@@ -97,7 +97,7 @@ const componentVersion = 1;
 const component = new LogicFloatReceiverComponent({ version: componentVersion });
 
 const sender = component.sender;
-// `sender` is `1`
+// `sender` is `0`
 ```
 
 ## Methods
