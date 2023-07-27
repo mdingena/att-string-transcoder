@@ -41,7 +41,7 @@ describe('new LogicBoolReceiverComponent()', () => {
 describe('LogicBoolReceiverComponent.fromBinary()', () => {
   let fastForwardedReader: BinaryReader;
 
-  const prefab = new Prefab('Grass_Clump', {
+  const prefab = new Prefab('MRK_Small_Lever', {
     components: {
       LogicBoolReceiver: new LogicBoolReceiverComponent({ version: componentVersion, ...componentProps })
     }

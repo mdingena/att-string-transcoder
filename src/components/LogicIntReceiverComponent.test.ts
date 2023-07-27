@@ -41,7 +41,7 @@ describe('new LogicIntReceiverComponent()', () => {
 describe('LogicIntReceiverComponent.fromBinary()', () => {
   let fastForwardedReader: BinaryReader;
 
-  const prefab = new Prefab('Grass_Clump', {
+  const prefab = new Prefab('MRK_Small_Lever', {
     components: {
       LogicIntReceiver: new LogicIntReceiverComponent({ version: componentVersion, ...componentProps })
     }
@@ -110,7 +110,7 @@ describe('LogicIntReceiverComponent.write()', () => {
     const data = writer.flush();
 
     const expectedData =
-      '110111111001100100010011100010010000000000000000000000000010000000000000000000000000010100111001';
+      '010000000111001010001000101000000000000000000000000000000010000000000000000000000000010100111001';
 
     expect(data).toStrictEqual(expectedData);
 
