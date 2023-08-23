@@ -20,7 +20,7 @@
   - [`addComponent(component)`](#addcomponentcomponent)
   - [`addEntity(entity)`](#addentityentity)
   - [`addGift(giftPrefab)`](#addgiftgiftprefab)
-  - [`clone()`](#clone)
+  - [`clone(options?)`](#cloneoptions)
   - [`getAngularVelocity()`](#getangularvelocity)
   - [`getChildPrefab(prefabName, parentHash?)`](#getchildprefabprefabname-parenthash)
   - [`getComponentVersions()`](#getcomponentversions)
@@ -61,7 +61,7 @@
   - [`setSpawnArea(populationDefinitionArg, props?)`](#setspawnareapopulationarg-props)
   - [`setVelocity(velocity)`](#setvelocityvelocity)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
-  - [`toSaveString(force?)`](#tosavestringforce)
+  - [`toSaveString(options?)`](#tosavestringoptions)
 
 ## Types
 
@@ -472,10 +472,11 @@ box.addGift(gift);
 
 ---
 
-### `clone()`
+### `clone(options?)`
 
 Returns a deep clone of the prefab.
 
+- `options` (optional, default `{}`) See [`toSaveString(options?)`](#tosavestringoptions).
 - Returns: `<Prefab>`
 
 ```ts
@@ -1192,11 +1193,13 @@ const binaryString = prefab.toBinary(componentVersions);
 
 ---
 
-### `toSaveString(excludeComponentVersions?)`
+### `toSaveString(options?)`
 
-Returns the `SaveString` to spawn this prefab in the game. You may pass a boolean to force returning a save string for prefabs that contain indeterminate component versions.
+Returns the `SaveString` to spawn this prefab in the game. You may pass additional options to change the output behaviour.
 
-- `excludeComponentVersions` (optional, default `false`) `<boolean>` Set to true to force a save string without component versions.
+- `options` (optional, default `{}`) `<ToSaveStringOptions>`
+- `options.excludeComponentVersions` (optional, default `false`) Set to true to force a save string without component versions.
+- `options.ignoreIndeterminateComponentVersions` (optional, default `false`) Same as `excludeComponentVersions` but only when encountering indeterminate component versions.
 - Returns: [`<SaveString>`](./SaveString.md)
 
 ```ts

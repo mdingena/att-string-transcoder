@@ -2175,10 +2175,11 @@ describe('Prefab.toSaveString()', () => {
       });
     });
 
-    describe('when excluding component versions', () => {
+    describe('when ignoring indeterminate component versions', () => {
       it('returns a save string without component versions', () => {
         const prefab = new Prefab('Torch', {
           components: {
+            NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
             Unknown: [
               new UnsupportedComponent({
                 hash: 1337,
@@ -2190,9 +2191,31 @@ describe('Prefab.toSaveString()', () => {
           }
         });
 
-        const saveString = prefab.toSaveString(true);
+        const saveString = prefab.toSaveString({
+          ignoreIndeterminateComponentVersions: true
+        });
 
-        expect(saveString).toStrictEqual('56698,56,56698,0,0,0,0,0,0,1065353216,1065353216,1337,20,4147183616,0,0,');
+        expect(saveString).toStrictEqual(
+          '56698,116,56698,0,0,0,0,0,0,1065353216,1065353216,2290978823,418,0,0,0,0,0,0,1065353216,0,0,0,0,0,0,334,1073741829,1036795904,0,0,'
+        );
+      });
+    });
+
+    describe('when excluding component versions', () => {
+      it('returns a save string without component versions', () => {
+        const prefab = new Prefab('Torch', {
+          components: {
+            NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 })
+          }
+        });
+
+        const saveString = prefab.toSaveString({
+          excludeComponentVersions: true
+        });
+
+        expect(saveString).toStrictEqual(
+          '56698,108,56698,0,0,0,0,0,0,1065353216,1065353216,2290978823,418,0,0,0,0,0,0,1065353216,0,0,0,0,0,0,0,0,0,'
+        );
       });
     });
   });

@@ -45,6 +45,11 @@ type PrefabHash<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefab
 
 type PrefabName<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefabName]['name'];
 
+type ToSaveStringOptions = {
+  excludeComponentVersions?: boolean | undefined;
+  ignoreIndeterminateComponentVersions?: boolean | undefined;
+};
+
 export type PrefabProps<TPrefabName extends ATTPrefabName> = {
   position?: Position | undefined;
   rotation?: Rotation | undefined;
@@ -548,8 +553,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * const cloneMaterial = clone.getMaterial();
    * // `cloneMaterial` is `56394` (Gold)
    */
-  clone(): Prefab<PrefabName<TPrefabName>> {
-    return Prefab.fromSaveString<PrefabName<TPrefabName>>(this.toSaveString());
+  clone(options: ToSaveStringOptions = {}): Prefab<PrefabName<TPrefabName>> {
+    return Prefab.fromSaveString<PrefabName<TPrefabName>>(this.toSaveString(options));
   }
 
   /**
@@ -1714,8 +1719,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   }
 
   /**
-   * Returns the `SaveString` to spawn this prefab in the game. You may pass a boolean to force
-   * returning a save string for prefabs that contain indeterminate component versions.
+   * Returns the `SaveString` to spawn this prefab in the game. You may pass additional options to
+   * change the output behaviour.
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1724,13 +1729,13 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *
    * const saveString = prefab.toSaveString();
    */
-  toSaveString(excludeComponentVersions = false): SaveString {
+  toSaveString(options: ToSaveStringOptions = {}): SaveString {
     const componentVersions = this.getComponentVersions();
     const data = this.toBinary(componentVersions);
 
     const hasIndeterminateVersions = [...componentVersions.values()].includes(0);
 
-    if (hasIndeterminateVersions && !excludeComponentVersions) {
+    if (hasIndeterminateVersions && !options.ignoreIndeterminateComponentVersions) {
       throw new Error(
         'Prefab contains components with version `0`. Current in-game versions for those components are not available. The produced save string will not contain component versions and may not be spawnable in-game.\n\nYou may call `.toSaveString(true)` to force producing a save string with this limitation.\n'
       );
@@ -1759,7 +1764,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     }
 
     /* Return SaveString. */
-    const strings = [binaryDataString, componentVersionsString].filter(Boolean);
+    const strings = [binaryDataString, !options.excludeComponentVersions && componentVersionsString].filter(Boolean);
     return `${strings.join(',|')},` as SaveString;
   }
 }
