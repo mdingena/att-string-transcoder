@@ -66,6 +66,7 @@ export { ATTPrefabs } from './types/ATTPrefabs.js';
 /* Components */
 export { BasicDecayComponent } from './components/BasicDecayComponent.js';
 export { Component } from './components/Component.js';
+export { DoorComponent } from './components/DoorComponent.js';
 export { DurabilityModuleComponent } from './components/DurabilityModuleComponent.js';
 export { FireComponent } from './components/FireComponent.js';
 export { FuseComponent } from './components/FuseComponent.js';
@@ -86,6 +87,7 @@ export { PickupComponent } from './components/PickupComponent.js';
 export { PickupDockComponent } from './components/PickupDockComponent.js';
 export { PopulationSpawnAreaComponent } from './components/PopulationSpawnAreaComponent.js';
 export { SentGiftComponent } from './components/SentGiftComponent.js';
+export { SlidingDoorComponent } from './components/SlidingDoorComponent.js';
 export { SpawnAreaComponent } from './components/SpawnAreaComponent.js';
 export { StatManagerComponent } from './components/StatManagerComponent.js';
 export { UnsupportedComponent } from './components/UnsupportedComponent.js';
