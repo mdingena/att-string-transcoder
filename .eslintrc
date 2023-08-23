@@ -1,0 +1,41 @@
+{
+  "root": true,
+  "env": { "node": true },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./scripts/tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "extensions": [".js"],
+        "extensionAlias": {
+          ".js": [".ts"]
+        },
+        "project": ["./tsconfig.json"]
+      }
+    }
+  },
+  "rules": {
+    "no-return-await": "off",
+    "@typescript-eslint/return-await": ["error", "always"],
+    "import/no-unresolved": "error",
+    "import/extensions": ["error", "never", { "js": "always" }],
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": false },
+        "groups": ["type", ["builtin", "external", "internal"], "parent", "sibling", "index", "object"],
+        "newlines-between": "always"
+      }
+    ]
+  }
+}

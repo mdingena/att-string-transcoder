@@ -1,16 +1,7 @@
 {
   "name": "att-string-transcoder",
-  "version": "2.4.3",
-  "description": "Trancode integer strings for A Township Tale.",
-  "main": "dist/index.js",
-  "scripts": {
-    "prepare": "npm run build",
-    "prebuild": "rimraf dist/",
-    "build": "tsc",
-    "compile": "tsc --noEmit",
-    "test": "jest",
-    "infodump": "ts-node scripts/parseSpawnInfodump.ts"
-  },
+  "version": "3.0.0",
+  "description": "Trancode save strings for A Township Tale.",
   "author": "Marc Dingena",
   "repository": {
     "type": "git",
@@ -27,23 +18,60 @@
     "transcoder"
   ],
   "license": "MIT",
+  "scripts": {
+    "prepare": "run-s prepare:*",
+    "prepare:husky": "husky install",
+    "prepare:build": "npm run build",
+    "lint": "eslint --fix \"src/**/*.{ts,js}\"",
+    "format": "prettier --write \"+(*.md|src/**/*.{js,ts,json,md})\"",
+    "compile": "tsc --noEmit",
+    "parse": "npm run parse --prefix scripts",
+    "prebuild": "rimraf dist/",
+    "build": "run-p build:*",
+    "build:cjs": "tsc -p tsconfig-cjs.json",
+    "build:esm": "tsc -p tsconfig-esm.json",
+    "postbuild:cjs": "node --loader ts-node/esm ./scripts/postbuild-cjs.ts",
+    "test": "vitest run"
+  },
+  "engines": {
+    "node": ">=20.4.0"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "module": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
     "bitwise": "^2.1.0",
     "ieee754": "^1.2.1"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.9.1",
-    "husky": "^4.3.8",
-    "jest": "^27.0.6",
-    "lint-staged": "^11.1.1",
-    "prettier": "^2.3.0",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.4",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.2",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "@vitest/coverage-v8": "^0.33.0",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.0",
+    "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.4.4"
-  },
-  "files": [
-    "dist/"
-  ]
+    "typescript": "^5.2.0-beta",
+    "vitest": "^0.33.0"
+  }
 }

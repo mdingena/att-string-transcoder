@@ -1,16 +1,26 @@
 {
   "compilerOptions": {
+    "allowJs": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "esModuleInterop": true,
+    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "declaration": true,
-    "declarationMap": false,
-    "sourceMap": false,
-    "outDir": "./dist",
+    "lib": ["ES2023"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "skipLibCheck": true,
+    "sourceMap": false,
     "strict": true,
-    "lib": ["es2017"],
-    "target": "es6"
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
   },
-  "include": ["./src/**/*", "./decodeString.js"]
+  "include": ["src/**/*", "vitest.config.ts"]
 }
