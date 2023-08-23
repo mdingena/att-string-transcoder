@@ -1,8 +1,4 @@
 {
-  "src/**/*.{js,ts}": [
-    "eslint --cache --fix"
-  ],
-  "+(*.md|src/**/*.{js,ts,json,md})": [
-    "prettier --write"
-  ]
+  "src/**/*.{js,ts}": ["eslint --cache --fix"],
+  "+(*.md|src/**/*.{js,ts,json,md})": ["prettier --write"]
 }
