@@ -54,5 +54,5 @@
 - Examples
   - [Alter a sword's material](./examples/Alter-a-swords-material.md)
   - [Flask of infinite teleportation](./examples/Flask-of-infinite-teleportation.md)
-  - [Integrate with a bot](./examples/Flask-of-infinite-teleportation.md)
-  - [Launch a wyrm spit](./examples/Flask-of-infinite-teleportation.md)
+  - [Integrate with a bot](./examples/Integrate-with-a-bot.md)
+  - [Launch a wyrm spit](./examples/Launch-a-wyrm-spit.md)
