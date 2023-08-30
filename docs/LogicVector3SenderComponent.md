@@ -35,7 +35,7 @@ type LogicVector3SenderComponentPropsV1 = {
   updatedValue?: number | undefined;
   changedExternally?: number | undefined;
   identifier?: number | undefined;
-  value?: vector3ean | undefined;
+  value?: Vector3 | undefined;
 };
 
 type LogicVector3SenderComponentProps = LogicVector3SenderComponentPropsV1;
