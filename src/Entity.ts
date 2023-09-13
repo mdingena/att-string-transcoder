@@ -9,6 +9,8 @@ import type { UnknownPrefabComponents } from './types/UnknownPrefabComponents.js
 import type { UnsupportedPrefabComponents } from './types/UnsupportedPrefabComponents.js';
 
 import { BinaryWriter } from './BinaryWriter.js';
+import { FALLBACK_PHYSICAL_MATERIAL_PART_VERSION } from './Prefab.js';
+import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
 import { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
@@ -265,6 +267,40 @@ export class Entity<TPrefabName extends ATTPrefabName> {
         }
       }
     }
+
+    return this;
+  }
+
+  /**
+   * Sets the entity's physical material. This can change both its appearance and other qualities such
+   * as durability, damage, heat retention and weight.
+   *
+   * @since v3.1.0
+   *
+   * @example
+   * import { Entity, PhysicalMaterialPartHash } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+   *
+   * entity.setMaterial(PhysicalMaterialPartHash.Mythril);
+   * // or
+   * entity.setMaterial('Mythril');
+   */
+  setMaterial(materialHash: PhysicalMaterialPartHash): this;
+  setMaterial(materialName: keyof typeof PhysicalMaterialPartHash): this;
+  setMaterial(materialArg: PhysicalMaterialPartHash | keyof typeof PhysicalMaterialPartHash): this {
+    if (typeof materialArg === 'undefined') {
+      throw new Error('You must pass a PhysicalMaterialPartHash to set as the material.');
+    }
+
+    const version = this.components.PhysicalMaterialPart?.version ?? FALLBACK_PHYSICAL_MATERIAL_PART_VERSION;
+    const materialHash = typeof materialArg === 'number' ? materialArg : PhysicalMaterialPartHash[materialArg];
+
+    this.components.PhysicalMaterialPart = new PhysicalMaterialPartComponent({
+      ...this.components.PhysicalMaterialPart,
+      version,
+      materialHash
+    });
 
     return this;
   }

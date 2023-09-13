@@ -16,6 +16,7 @@
   - [`getMaterial()`](#getmaterial)
   - [`removeAllComponents()`](#removeallcomponents)
   - [`removeComponent(componentArg)`](#removecomponentcomponentarg)
+  - [`setMaterial(materialArg)`](#setmaterialmaterialarg)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
   - [`write(writer, componentVersions)`](#writewriter-componentversions)
 
@@ -236,6 +237,25 @@ const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_
 entity.removeComponent(ComponentHash.NetworkRigidbody);
 // or
 entity.removeComponent('NetworkRigidbody');
+```
+
+---
+
+### `setMaterial(materialArg)`
+
+Sets the entity's physical material. This can change both its appearance and other qualities such as durability, damage, heat retention and weight.
+
+- `materialArg` [`<PhysicalMaterialPartHash | keyof typeof PhysicalMaterialPartHash>`](../src/types/PhysicalMaterialPartHash.ts) The physical material's hash or name to set on the entity.
+- Returns: `<this>`
+
+```ts
+import { Entity, PhysicalMaterialPartHash } from 'att-string-transcoder';
+
+const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+entity.setMaterial(PhysicalMaterialPartHash.Mythril);
+// or
+entity.setMaterial('Mythril');
 ```
 
 ---

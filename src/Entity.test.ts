@@ -359,6 +359,60 @@ describe('Entity.removeComponent()', () => {
   });
 });
 
+describe('Entity.setMaterial()', () => {
+  describe('when given invalid arguments', () => {
+    it('throws an error', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+      // @ts-expect-error Passing invalid arguments
+      const expectedToThrow = () => entity.setMaterial();
+      const expectedError = new Error('You must pass a PhysicalMaterialPartHash to set as the material.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when given a material hash', () => {
+    it('sets the given material', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+      entity.setMaterial(PhysicalMaterialPartHash.EvinonSteelAlloy);
+      const materialHash = entity.getMaterial();
+
+      expect(materialHash).toStrictEqual(31502);
+    });
+  });
+
+  describe('when given a material name', () => {
+    it('sets the given material', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+      entity.setMaterial('EvinonSteelAlloy');
+      const materialHash = entity.getMaterial();
+
+      expect(materialHash).toStrictEqual(31502);
+    });
+  });
+
+  describe('when the entity already has a PhysicalMaterialPart component', () => {
+    it('sets the given material', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({
+            version: 1,
+            materialHash: PhysicalMaterialPartHash.Gold
+          })
+        }
+      });
+
+      entity.setMaterial(PhysicalMaterialPartHash.EvinonSteelAlloy);
+      const materialHash = entity.getMaterial();
+
+      expect(materialHash).toStrictEqual(31502);
+    });
+  });
+});
+
 describe('Entity.toBinary()', () => {
   it('returns a BinaryString representation of the entity', () => {
     const prefabName = 'Torch';

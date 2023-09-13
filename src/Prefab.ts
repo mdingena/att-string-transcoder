@@ -72,7 +72,7 @@ const FALLBACK_LIQUID_CONTAINER_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.LiquidContainer) ??
   constants.latestLiquidContainerComponentVersion;
 
-const FALLBACK_PHYSICAL_MATERIAL_PART_VERSION =
+export const FALLBACK_PHYSICAL_MATERIAL_PART_VERSION =
   constants.latestSupportedComponentVersions.get(ComponentHash.PhysicalMaterialPart) ??
   constants.latestPhysicalMaterialPartComponentVersion;
 
