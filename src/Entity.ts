@@ -171,7 +171,7 @@ export class Entity<TPrefabName extends ATTPrefabName> {
    * @example
    * import { Entity } from 'att-string-transcoder';
    *
-   * const torchFireEntity = Entity.fromBinary<'Torch'>(myBinaryString);
+   * const torchFireEntity = Entity.fromBinary<'Torch'>(binaryReader, { key, hash });
    */
   static fromBinary<TPrefabName extends ATTPrefabName>(
     reader: BinaryReader,

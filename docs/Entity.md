@@ -96,7 +96,7 @@ Reads the binary string data and returns an instantiated entity.
 ```ts
 import { Entity } from 'att-string-transcoder';
 
-const torchFireEntity = Entity.fromBinary<'Torch'>(myBinaryString);
+const torchFireEntity = Entity.fromBinary<'Torch'>(binaryReader, { key, hash });
 ```
 
 ## Properties
