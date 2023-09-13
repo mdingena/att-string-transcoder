@@ -4,6 +4,7 @@ import { BinaryWriter } from './BinaryWriter.js';
 import { Entity } from './Entity.js';
 import { Prefab } from './Prefab.js';
 import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
+import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 import { ComponentHash } from './types/ComponentHash.js';
 
 describe('new Entity()', () => {
@@ -61,6 +62,25 @@ describe('new Entity()', () => {
       const expectedError = new Error('You must manually pass an entity hash when instantiating an "Unknown" Entity.');
 
       expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+});
+
+describe('Entity.addComponent()', () => {
+  let entity: Entity<'Standard_Side_Pouch_Attachment'>;
+
+  beforeEach(() => {
+    entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+  });
+
+  it('adds a component to the entity', () => {
+    const component = new PhysicalMaterialPartComponent({ version: 1, materialHash: 1337 });
+
+    entity.addComponent(component);
+
+    expect(entity.components).toStrictEqual({
+      PhysicalMaterialPart: component,
+      Unknown: []
     });
   });
 });

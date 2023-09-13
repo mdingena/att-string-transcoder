@@ -12,6 +12,7 @@
   - [`isAlive`](#isalive)
   - [`components`](#components)
 - [Methods](#methods)
+  - [`addComponent(component)`](#addcomponentcomponent)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
   - [`write(writer, componentVersions)`](#writewriter-componentversions)
 
@@ -165,6 +166,24 @@ const components = entity.components;
 ```
 
 ## Methods
+
+### `addComponent(component)`
+
+Adds a `Component` to the entity. Will override any existing component with that name.
+
+- `component` [`<Component>`](./Component.md) The component to set on the entity.
+- Returns: `<this>`
+
+```ts
+import { Entity, PhysicalMaterialPartComponent, PhysicalMaterialPartHash } from 'att-string-transcoder';
+
+const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+const component = new PhysicalMaterialPartComponent({ version: 1, materialHash: PhysicalMaterialPartHash.Iron });
+
+entity.addComponent(component);
+```
+
+---
 
 ### `toBinary(componentVersions)`
 

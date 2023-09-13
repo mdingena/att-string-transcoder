@@ -1,4 +1,5 @@
 import type { BinaryReader } from './BinaryReader.js';
+import type { Component } from './components/Component.js';
 import type { ATTPrefabName } from './types/ATTPrefabName.js';
 import type { BinaryString } from './types/BinaryString.js';
 import type { EntityKey } from './types/EntityKey.js';
@@ -124,6 +125,26 @@ export class Entity<TPrefabName extends ATTPrefabName> {
       ...components,
       Unknown: components?.Unknown ?? []
     };
+  }
+
+  /**
+   * Adds a `Component` to the entity. Will override any existing component with that name.
+   *
+   * @example
+   * import { Entity, PhysicalMaterialPartComponent, PhysicalMaterialPartHash } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+   * const component = new PhysicalMaterialPartComponent({ version: 1, materialHash: PhysicalMaterialPartHash.Iron });
+   *
+   * entity.addComponent(component);
+   */
+  addComponent(component: Component): this {
+    this.components = {
+      ...this.components,
+      [component.name]: component
+    };
+
+    return this;
   }
 
   /**
