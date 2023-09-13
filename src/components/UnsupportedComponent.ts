@@ -14,6 +14,7 @@ export type UnsupportedComponentProps = {
  * data shape is a raw binary data string so it may be re-encoded later.
  *
  * @see [Class: `UnsupportedComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/UnsupportedComponent.md)
+ * @since v3.0.0
  *
  * @example
  * import { UnsupportedComponent, type BinaryString } from 'att-string-transcoder';
@@ -48,6 +49,7 @@ export class UnsupportedComponent extends Component {
    * Creates a versioned component without deserialising its data.
    *
    * @see [Class: `UnsupportedComponent`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/UnsupportedComponent.md)
+   * @since v3.0.0
    *
    * @example
    * import { UnsupportedComponent, type BinaryString } from 'att-string-transcoder';

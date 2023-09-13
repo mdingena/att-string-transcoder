@@ -6,6 +6,7 @@ import { BinaryData, type BinaryDataOptions } from './BinaryData.js';
  * Handles the controlled consumption of binary data from ATT save strings.
  *
  * @see [Class: `BinaryReader`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryReader.md)
+ * @since v3.0.0
  *
  * @example
  * import { BinaryReader } from 'att-string-transcoder';
@@ -24,6 +25,7 @@ export class BinaryReader {
    * Creates a reader to extract information from `data` using various read methods.
    *
    * @see [Class: `BinaryReader`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryReader.md)
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
@@ -41,6 +43,8 @@ export class BinaryReader {
 
   /**
    * Reads the next `bitCount` bits from the binary string.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
@@ -63,6 +67,8 @@ export class BinaryReader {
   /**
    * Reads the next bit from the binary string and returns `true` for `"1"` and `false` for `"0"`.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
    *
@@ -81,6 +87,8 @@ export class BinaryReader {
 
   /**
    * Reads the next 8 bits from the binary string and returns the reconstructed string character.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
@@ -105,6 +113,8 @@ export class BinaryReader {
   /**
    * Reads the next 32 bits from the binary string and returns the reconstructed floating point number.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
    *
@@ -121,6 +131,8 @@ export class BinaryReader {
 
   /**
    * Reads the next 32 bits from the binary string and returns the reconstructed signed integer.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
@@ -139,6 +151,8 @@ export class BinaryReader {
   /**
    * Reads the next 16 bits from the binary string, then reads the number of bits as instructed and
    * returns the reconstructed string text.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
@@ -193,6 +207,8 @@ export class BinaryReader {
   /**
    * Reads the next 32 bits from the binary string and returns the reconstructed unsigned integer.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
    *
@@ -210,6 +226,8 @@ export class BinaryReader {
   /**
    * Reads the next 64 bits from the binary string and returns the reconstructed unsigned long integer.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';
    *
@@ -226,6 +244,8 @@ export class BinaryReader {
 
   /**
    * Reads the next 16 bits from the binary string and returns the reconstructed unsigned short integer.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader } from 'att-string-transcoder';

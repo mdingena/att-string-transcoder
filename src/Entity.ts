@@ -32,6 +32,7 @@ type EntityFromBinaryProps = {
  * structure inside the composition. This is primarily used in _A Township Tale_'s crafting system.
  *
  * @see [Class: `Entity`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Entity.md)
+ * @since v3.0.0
  *
  * @example
  * import { Entity } from 'att-string-transcoder';
@@ -43,6 +44,8 @@ type EntityFromBinaryProps = {
 export class Entity<TPrefabName extends ATTPrefabName> {
   /**
    * The hash of the entity.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Entity } from 'att-string-transcoder';
@@ -57,6 +60,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   /**
    * The name of the entity.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Entity } from 'att-string-transcoder';
    *
@@ -69,6 +74,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
 
   /**
    * The alive state of the entity.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Entity } from 'att-string-transcoder';
@@ -87,6 +94,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
    * respective names, unless its data contained an unrecognised hash. In that case, the component
    * will be stored in an array under the `Unknown` key.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Entity } from 'att-string-transcoder';
    *
@@ -101,6 +110,7 @@ export class Entity<TPrefabName extends ATTPrefabName> {
    * Creates a new `Entity` object configured with the passed in configuration.
    *
    * @see [Class: `Entity`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Entity.md)
+   * @since v3.0.0
    *
    * @example
    * import { Entity } from 'att-string-transcoder';
@@ -131,6 +141,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   /**
    * Adds a `Component` to the entity. Will override any existing component with that name.
    *
+   * @since v3.1.0
+   *
    * @example
    * import { Entity, PhysicalMaterialPartComponent, PhysicalMaterialPartHash } from 'att-string-transcoder';
    *
@@ -150,6 +162,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
 
   /**
    * Reads the binary string data and returns an instantiated entity.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Entity } from 'att-string-transcoder';
@@ -173,6 +187,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   /**
    * Removes all components on this entity.
    *
+   * @since v3.1.0
+   *
    * @example
    * import { Entity } from 'att-string-transcoder';
    *
@@ -188,6 +204,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
 
   /**
    * Removes the specified component from this entity.
+   *
+   * @since v3.1.0
    *
    * @example
    * import { ComponentHash, Entity } from 'att-string-transcoder';
@@ -236,6 +254,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   /**
    * Returns a `BinaryString` representation of the entity.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { ComponentHash, Entity } from 'att-string-transcoder';
    *
@@ -269,6 +289,8 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   /**
    * Writes a `BinaryString` representation of the entity to the given `BinaryWriter`, including the
    * entity hash and data length.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryWriter, ComponentHash, Entity } from 'att-string-transcoder';

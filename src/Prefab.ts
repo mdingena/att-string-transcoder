@@ -95,6 +95,7 @@ const FALLBACK_SPAWN_AREA_VERSION =
  * A JavaScript object representation of an _A Township Tale_ in-game prefab.
  *
  * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
+ * @since v3.0.0
  *
  * @example
  * import { Prefab } from 'att-string-transcoder';
@@ -109,6 +110,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * The name of the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -121,6 +124,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * The hash of the prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -139,6 +144,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * property directly. This is because some prefabs also use a `NetworkRigidbodyComponent` to
    * control their position. You can safely set the position of a prefab using the
    * `setPosition(position)` method.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -160,6 +167,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * control their rotation. You can safely set the rotation of a prefab using the
    * `setRotation(rotation)` method.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -177,6 +186,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *
    * Contains the scale of the prefab. You can also set the scale of a prefab using the
    * `setScale(scale)` method.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -198,6 +209,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * will be stored in an array under the `Unknown` key.
    *
    * 💡 It might be easier to add components using the `addComponent(component)` method.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -245,6 +258,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * entity key (which is name, underscore, and hash).
    *
    * 💡 It might be easier to add entities using the `addEntity(entity)` method.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -295,6 +310,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * 💡 It might be easier to add child prefabs using the `addChildPrefab(parentKey, childPrefab)`
    * method.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -332,6 +349,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * provide additional properties in the second argument.
    *
    * @see [Class: `Prefab`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/Prefab.md)
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -396,6 +414,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * If you do not specify a `parentKey`, you may pass `null` to create a "floating" child. It will
    * be part of this prefab's hierarchy but will most likely behave unexpectedly in the game.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -443,6 +463,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Adds a `Component` to the prefab. Will override any existing component with that name.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { NetworkRigidbodyComponent, Prefab } from 'att-string-transcoder';
    *
@@ -462,6 +484,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Adds an `Entity` to the prefab. Will override any existing entity with that key.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Entity, Prefab } from 'att-string-transcoder';
@@ -483,6 +507,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Adds a `Prefab` gift to this prefab's `SentGift` component. You may call this method more than
    * once to add additional gifts.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -536,6 +562,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Returns a deep clone of the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -556,6 +584,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Creates a `Prefab` from reading the prefab's binary data stored in a `SaveString`.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryReader, ComponentHash, Prefab, type BinaryString } from 'att-string-transcoder';
@@ -635,6 +665,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Creates a `Prefab` from reading a `SaveString`.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -709,6 +741,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets the spin (vector) on the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -724,6 +758,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Finds the first child prefab matching the given name. If there are multiple child prefabs with
    * the same name, you can use the second argument to provide a parent hash to match against.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -754,6 +790,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets a map of component hashes and the versions used on this prefab. Will throw an error if the
    * prefab uses mixed versions of a particular component.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -816,6 +854,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets the gift sender's name, which is labeled on the gift.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -829,6 +869,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the prefab's physical integrity.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -845,6 +887,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Gets the {@link https://docs.unity3d.com/ScriptReference/Rigidbody-isKinematic.html kinematic}
    * state of the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -858,6 +902,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the prefab's physical material.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { PhysicalMaterialPartHash, Prefab } from 'att-string-transcoder';
@@ -873,6 +919,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the burning state of the prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -891,6 +939,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Gets the position of the prefab. If the prefab is a child of another prefab, then this position
    * is local to that parent. Otherwise, this position is in world space.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -907,6 +957,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Gets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation
    * is local to that parent. Otherwise, this rotation is in world space.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -921,6 +973,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the scale of the prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -937,6 +991,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Gets the {@link https://docs.unity3d.com/Manual/RigidbodiesOverview.html sleeping}
    * state of the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -951,6 +1007,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets the number of servings on a liquid container prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -964,6 +1022,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Gets the name of the spawn area population, if there is one. Returns `undefined` otherwise.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -987,6 +1047,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Gets the direction (vector) on the prefab. Units are in metres per second.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1001,6 +1063,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Prints this prefab's data structure to the console.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1017,6 +1081,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Prints this prefab's `SaveString` to the console.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1035,6 +1101,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes all child `Prefab` from this prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1050,6 +1118,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes all components on this prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1067,6 +1137,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes all entities on this prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1082,6 +1154,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes all gift `Prefab` from this prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1102,6 +1176,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified child `Prefab` from this prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1128,6 +1204,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified component from this prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { ComponentHash, Prefab } from 'att-string-transcoder';
@@ -1176,6 +1254,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the specified entity from this prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1195,6 +1275,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Removes the specified gift `Prefab` from this prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1227,6 +1309,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Removes the spawn area components from the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1245,6 +1329,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Sets a spin (vector) on the prefab, causing the physics engine to apply a force to it when
    * spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not
    * work on kinematic prefabs. Does not work on static prefabs.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1270,6 +1356,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the gift sender's name, which is labeled on the gift.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1299,6 +1387,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the prefab's integrity. This can change both its appearance and other qualities such as
    * durability and the amount of materials recovered from recycling.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1330,6 +1420,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * By default, a `new Prefab()` is not kinematic, but some prefabs require to be kinematic to work
    * properly. You can optionally pass a boolean, for example `prefab.setKinematic(false)`.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1354,6 +1446,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the prefab's physical material. This can change both its appearance and other qualities such
    * as durability, damage, heat retention and weight.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { PhysicalMaterialPartHash, Prefab } from 'att-string-transcoder';
@@ -1387,6 +1481,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the prefab on fire, if it is capable of catching fire.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1429,6 +1525,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Sets the position of the prefab. If the prefab is a child of another prefab, then this position
    * is local to that parent. Otherwise, this position is in world space.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1457,6 +1555,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * Sets the rotation of the prefab. If the prefab is a child of another prefab, then this rotation
    * is local to that parent. Otherwise, this rotation is in world space.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1484,6 +1584,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Sets the scale of the prefab.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1506,6 +1608,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * By default, a `new Prefab()` is not sleeping. A sleeping prefab does not have its physics
    * simulated until it receives a collision or force, such as touching it. You can optionally pass
    * a boolean, for example `prefab.setServerSleeping(false)`.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1530,6 +1634,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets the number of servings on a liquid container prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';
@@ -1559,6 +1665,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Sets a spawn area on the prefab with the given population and any additional configuration.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { PopulationDefinitionHash, Prefab } from 'att-string-transcoder';
@@ -1618,6 +1726,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * spawning. Units are in metres per second. Only works reliably on the parent prefab. Does not work
    * on kinematic prefabs. Does not work on static prefabs.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { Prefab } from 'att-string-transcoder';
    *
@@ -1642,6 +1752,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
   /**
    * Returns a `BinaryString` representation of the prefab.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { ComponentHash, Prefab } from 'att-string-transcoder';
@@ -1708,6 +1820,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   /**
    * Returns the `SaveString` to spawn this prefab in the game. You may pass additional options to
    * change the output behaviour.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { Prefab } from 'att-string-transcoder';

@@ -6,6 +6,7 @@ import { BinaryData } from './BinaryData.js';
  * Handles the controlled storing of binary data for ATT save strings.
  *
  * @see [Class: `BinaryWriter`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryWriter.md)
+ * @since v3.0.0
  *
  * @example
  * import { BinaryWriter } from 'att-string-transcoder';
@@ -24,6 +25,7 @@ export class BinaryWriter {
    * Creates a writer to store information using various write methods.
    *
    * @see [Class: `BinaryWriter`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryWriter.md)
+   * @since v3.0.0
    *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
@@ -36,6 +38,8 @@ export class BinaryWriter {
 
   /**
    * Returns the stored binary string and resets the BinaryWriter's internal memory.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
@@ -59,6 +63,8 @@ export class BinaryWriter {
   /**
    * Writes raw binary data into BinaryWriter's internal memory.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
    *
@@ -77,6 +83,8 @@ export class BinaryWriter {
   /**
    * Writes a boolean into BinaryWriter's internal memory.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
    *
@@ -90,6 +98,8 @@ export class BinaryWriter {
 
   /**
    * Writes a character into BinaryWriter's internal memory.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
@@ -105,6 +115,8 @@ export class BinaryWriter {
   /**
    * Writes a floating point number into BinaryWriter's internal memory.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
    *
@@ -119,6 +131,8 @@ export class BinaryWriter {
   /**
    * Writes a signed integer into BinaryWriter's internal memory.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
    *
@@ -132,6 +146,8 @@ export class BinaryWriter {
 
   /**
    * Writes a string into BinaryWriter's internal memory.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
@@ -184,6 +200,8 @@ export class BinaryWriter {
   /**
    * Writes an unsigned integer into BinaryWriter's internal memory.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
    *
@@ -198,6 +216,8 @@ export class BinaryWriter {
   /**
    * Writes an unsigned long integer into BinaryWriter's internal memory.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';
    *
@@ -211,6 +231,8 @@ export class BinaryWriter {
 
   /**
    * Writes an unsigned short integer into BinaryWriter's internal memory.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryWriter } from 'att-string-transcoder';

@@ -26,6 +26,7 @@ const SIGNED_INTEGER_OFFSET = 2147483648;
  * Deals with data types as understood by _A Township Tale_ game servers.
  *
  * @see [Class: `BinaryData`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryData.md)
+ * @since v3.0.0
  *
  * @example
  * import { BinaryData } from 'att-string-transcoder';
@@ -59,6 +60,7 @@ export class BinaryData {
    * types. You may optionally provide additional options in the second argument.
    *
    * @see [Class: `BinaryData`](https://github.com/mdingena/att-string-transcoder/tree/main/docs/BinaryData.md)
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -79,6 +81,8 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given boolean.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -92,6 +96,8 @@ export class BinaryData {
 
   /**
    * Creates a BinaryData instance from the given character.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -108,6 +114,8 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given floating point number.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -122,6 +130,8 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given number.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -135,6 +145,8 @@ export class BinaryData {
 
   /**
    * Creates a BinaryData instance from the given signed integer.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -158,6 +170,8 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given unsigned integer.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -171,6 +185,8 @@ export class BinaryData {
 
   /**
    * Creates a BinaryData instance from the given comma-separated array of unsigned integers.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -188,6 +204,8 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given unsigned long integer.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -203,6 +221,8 @@ export class BinaryData {
   /**
    * Creates a BinaryData instance from the given unsigned short integer.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -216,6 +236,8 @@ export class BinaryData {
 
   /**
    * Confirms whether `data` is a string of binary data, i.e. a string of zeroes and ones.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -239,6 +261,8 @@ export class BinaryData {
    * This is also a type assertion function, so if the passed `string` is asserted as a
    * `BinaryString`, it will be considered as such after calling this function.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -260,6 +284,8 @@ export class BinaryData {
 
   /**
    * Converts a JavaScript floating point number into an IEEE754 integer.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -287,6 +313,8 @@ export class BinaryData {
   /**
    * Returns the binary data as a `BinaryString`.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -301,6 +329,8 @@ export class BinaryData {
 
   /**
    * Returns the boolean represenation of the binary data.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -319,6 +349,8 @@ export class BinaryData {
   /**
    * Returns the character represenation of the binary data.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -335,6 +367,8 @@ export class BinaryData {
 
   /**
    * Returns the floating point number represenation of the binary data.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -355,6 +389,8 @@ export class BinaryData {
   /**
    * Returns the numeric represenation of the binary data.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -369,6 +405,8 @@ export class BinaryData {
 
   /**
    * Returns the signed integer representation of the binary data.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -390,6 +428,8 @@ export class BinaryData {
   /**
    * Returns the unsigned integer representation of the binary data.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -406,6 +446,8 @@ export class BinaryData {
 
   /**
    * Returns the binary data as a comma-separated array of unsigned integers.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
@@ -426,6 +468,8 @@ export class BinaryData {
   /**
    * Returns the unsigned long integer representation of the binary data.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -443,6 +487,8 @@ export class BinaryData {
   /**
    * Returns the unsigned short integer representation of the binary data.
    *
+   * @since v3.0.0
+   *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
    *
@@ -459,6 +505,8 @@ export class BinaryData {
 
   /**
    * Converts an IEEE754 integer into a JavaScript floating point number.
+   *
+   * @since v3.0.0
    *
    * @example
    * import { BinaryData } from 'att-string-transcoder';
