@@ -1,10 +1,14 @@
+import type { BinaryString } from './types/BinaryString.js';
+
 import { BinaryData } from './BinaryData.js';
 import { BinaryReader } from './BinaryReader.js';
 import { BinaryWriter } from './BinaryWriter.js';
 import { Entity } from './Entity.js';
 import { Prefab } from './Prefab.js';
 import { HeatSourceBaseComponent } from './components/HeatSourceBaseComponent.js';
+import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponent.js';
 import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
+import { UnsupportedComponent } from './components/UnsupportedComponent.js';
 import { ComponentHash } from './types/ComponentHash.js';
 
 describe('new Entity()', () => {
@@ -165,6 +169,136 @@ describe('Entity.fromBinary()', () => {
           isLit: true,
           progress: 0.6899999976158142
         }),
+        Unknown: []
+      });
+    });
+  });
+});
+
+describe('Entity.removeComponent()', () => {
+  describe('when given invalid arguments', () => {
+    it('throws an error', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 })
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      const expectedToThrow = () => entity.removeComponent();
+      const expectedError = new Error('You must pass a component hash or name to remove from this entity.');
+
+      expect(expectedToThrow).toThrowError(expectedError);
+    });
+  });
+
+  describe('when given a valid component hash', () => {
+    it('removes all matching components from the entity', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 })
+        }
+      });
+
+      entity.removeComponent(2290978823);
+
+      expect(entity.components).toStrictEqual({
+        PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given a valid component name', () => {
+    it('removes all matching components from the entity', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 })
+        }
+      });
+
+      entity.removeComponent('NetworkRigidbody');
+
+      expect(entity.components).toStrictEqual({
+        PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given an invalid component hash', () => {
+    it('removes zero components from the entity', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 })
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      entity.removeComponent(0);
+
+      expect(entity.components).toStrictEqual({
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given an unknown component hash', () => {
+    it('removes all matching components from the entity', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+          // @ts-expect-error Creating unknown component
+          TestComponent: new UnsupportedComponent({
+            hash: 1337,
+            name: 'TestComponent',
+            rawData: '1111011100110001000' as BinaryString,
+            version: 1
+          })
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      entity.removeComponent(1337);
+
+      expect(entity.components).toStrictEqual({
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+        Unknown: []
+      });
+    });
+  });
+
+  describe('when given an unknown component name', () => {
+    it('removes all matching components from the entity', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+          Unknown: [
+            new UnsupportedComponent({
+              hash: 1337,
+              name: 'TestComponent',
+              rawData: '1111011100110001000' as BinaryString,
+              version: 1
+            })
+          ]
+        }
+      });
+
+      // @ts-expect-error Passing invalid arguments
+      entity.removeComponent('TestComponent');
+
+      expect(entity.components).toStrictEqual({
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
         Unknown: []
       });
     });

@@ -10,6 +10,7 @@ import type { UnsupportedPrefabComponents } from './types/UnsupportedPrefabCompo
 
 import { BinaryWriter } from './BinaryWriter.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
+import { ComponentHash } from './types/ComponentHash.js';
 import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
 
@@ -167,6 +168,53 @@ export class Entity<TPrefabName extends ATTPrefabName> {
       isAlive,
       components
     });
+  }
+
+  /**
+   * Removes the specified component from this entity.
+   *
+   * @example
+   * import { ComponentHash, Entity } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+   *
+   * entity.removeComponent(ComponentHash.NetworkRigidbody);
+   * // or
+   * entity.removeComponent('NetworkRigidbody');
+   */
+  removeComponent(componentHash: ComponentHash): this;
+  removeComponent(componentName: keyof Omit<PrefabComponents, 'Unknown'>): this;
+  removeComponent(componentArg: ComponentHash | keyof Omit<PrefabComponents, 'Unknown'>): this {
+    if (typeof componentArg === 'undefined') {
+      throw new Error('You must pass a component hash or name to remove from this entity.');
+    }
+
+    const componentName =
+      typeof componentArg === 'string'
+        ? componentArg
+        : (ComponentHash[componentArg] as keyof typeof ComponentHash | undefined);
+
+    if (typeof componentName === 'undefined') {
+      for (const component of Object.values(this.components)) {
+        if (Array.isArray(component)) {
+          this.components.Unknown = component.filter(unknownComponent => unknownComponent.hash !== componentArg);
+        } else if (component.hash === componentArg) {
+          delete this.components[component.name as keyof Omit<PrefabComponents, 'Unknown'>];
+        }
+      }
+    } else {
+      if (componentName in this.components) {
+        delete this.components[componentName];
+      } else {
+        const unknownComponentIndex = this.components.Unknown.findIndex(component => component.name === componentArg);
+
+        if (unknownComponentIndex > -1) {
+          this.components.Unknown = this.components.Unknown.toSpliced(unknownComponentIndex, 1);
+        }
+      }
+    }
+
+    return this;
   }
 
   /**

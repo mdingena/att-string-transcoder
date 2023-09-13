@@ -13,6 +13,7 @@
   - [`components`](#components)
 - [Methods](#methods)
   - [`addComponent(component)`](#addcomponentcomponent)
+  - [`removeComponent(componentArg)`](#removecomponentcomponentarg)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
   - [`write(writer, componentVersions)`](#writewriter-componentversions)
 
@@ -181,6 +182,25 @@ const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_
 const component = new PhysicalMaterialPartComponent({ version: 1, materialHash: PhysicalMaterialPartHash.Iron });
 
 entity.addComponent(component);
+```
+
+---
+
+### `removeComponent(componentArg)`
+
+Removes the specified component from this entity.
+
+- `componentArg` `<`[`ComponentHash`](../src/types/ComponentHash.ts)` | keyof Omit<`[`PrefabComponents`](../src/types/PrefabComponents.ts)`, 'Unknown'>>` The component's hash or name to remove from this entity.
+- Returns: `<this>`
+
+```ts
+import { ComponentHash, Entity } from 'att-string-transcoder';
+
+const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+entity.removeComponent(ComponentHash.NetworkRigidbody);
+// or
+entity.removeComponent('NetworkRigidbody');
 ```
 
 ---
