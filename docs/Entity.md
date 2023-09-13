@@ -13,6 +13,7 @@
   - [`components`](#components)
 - [Methods](#methods)
   - [`addComponent(component)`](#addcomponentcomponent)
+  - [`removeAllComponents()`](#removeallcomponents)
   - [`removeComponent(componentArg)`](#removecomponentcomponentarg)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
   - [`write(writer, componentVersions)`](#writewriter-componentversions)
@@ -182,6 +183,22 @@ const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_
 const component = new PhysicalMaterialPartComponent({ version: 1, materialHash: PhysicalMaterialPartHash.Iron });
 
 entity.addComponent(component);
+```
+
+---
+
+### `removeAllComponents()`
+
+Removes all components on this entity.
+
+- Returns: `<this>`
+
+```ts
+import { Entity } from 'att-string-transcoder';
+
+const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+entity.removeAllComponents();
 ```
 
 ---

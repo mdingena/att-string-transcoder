@@ -171,6 +171,22 @@ export class Entity<TPrefabName extends ATTPrefabName> {
   }
 
   /**
+   * Removes all components on this entity.
+   *
+   * @example
+   * import { Entity } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+   *
+   * entity.removeAllComponents();
+   */
+  removeAllComponents(): this {
+    this.components = { Unknown: [] };
+
+    return this;
+  }
+
+  /**
    * Removes the specified component from this entity.
    *
    * @example

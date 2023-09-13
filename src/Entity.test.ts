@@ -175,6 +175,29 @@ describe('Entity.fromBinary()', () => {
   });
 });
 
+describe('Entity.removeAllComponents()', () => {
+  it('removes all components from the entity', () => {
+    const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+      components: {
+        NetworkRigidbody: new NetworkRigidbodyComponent({ version: 1 }),
+        PhysicalMaterialPart: new PhysicalMaterialPartComponent({ version: 1 }),
+        Unknown: [
+          new UnsupportedComponent({
+            hash: 1337,
+            name: 'Unknown',
+            rawData: '1111011100110001000' as BinaryString,
+            version: 1
+          })
+        ]
+      }
+    });
+
+    entity.removeAllComponents();
+
+    expect(entity.components).toStrictEqual({ Unknown: [] });
+  });
+});
+
 describe('Entity.removeComponent()', () => {
   describe('when given invalid arguments', () => {
     it('throws an error', () => {
