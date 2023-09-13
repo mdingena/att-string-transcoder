@@ -10,6 +10,7 @@ import { NetworkRigidbodyComponent } from './components/NetworkRigidbodyComponen
 import { PhysicalMaterialPartComponent } from './components/PhysicalMaterialPartComponent.js';
 import { UnsupportedComponent } from './components/UnsupportedComponent.js';
 import { ComponentHash } from './types/ComponentHash.js';
+import { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 
 describe('new Entity()', () => {
   describe('when given the required props', () => {
@@ -171,6 +172,36 @@ describe('Entity.fromBinary()', () => {
         }),
         Unknown: []
       });
+    });
+  });
+});
+
+describe('Entity.getMaterial()', () => {
+  describe('when the entity has no PhysicalMaterialPart component', () => {
+    it('returns materialHash of zero', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+      delete entity.components.PhysicalMaterialPart;
+
+      const materialHash = entity.getMaterial();
+
+      expect(materialHash).toStrictEqual(0);
+    });
+  });
+
+  describe('when the prefab has a PhysicalMaterialPart component with materialHash', () => {
+    it('returns the stored isKinematic', () => {
+      const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968', {
+        components: {
+          PhysicalMaterialPart: new PhysicalMaterialPartComponent({
+            version: 1,
+            materialHash: PhysicalMaterialPartHash.EvinonSteelAlloy
+          })
+        }
+      });
+
+      const materialHash = entity.getMaterial();
+
+      expect(materialHash).toStrictEqual(31502);
     });
   });
 });

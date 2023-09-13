@@ -11,6 +11,7 @@ import type { UnsupportedPrefabComponents } from './types/UnsupportedPrefabCompo
 import { BinaryWriter } from './BinaryWriter.js';
 import { ATTPrefabs } from './types/ATTPrefabs.js';
 import { ComponentHash } from './types/ComponentHash.js';
+import { PhysicalMaterialPartHash } from './types/PhysicalMaterialPartHash.js';
 import { readComponents } from './utils/readComponents.js';
 import { writeComponents } from './utils/writeComponents.js';
 
@@ -182,6 +183,23 @@ export class Entity<TPrefabName extends ATTPrefabName> {
       isAlive,
       components
     });
+  }
+
+  /**
+   * Gets the entity's physical material.
+   *
+   * @since v3.1.0
+   *
+   * @example
+   * import { Entity, PhysicalMaterialPartHash } from 'att-string-transcoder';
+   *
+   * const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+   *
+   * const materialHash = entity.getMaterial();
+   * const materialName = PhysicalMaterialPartHash[materialHash];
+   */
+  getMaterial(): PhysicalMaterialPartHash {
+    return this.components.PhysicalMaterialPart?.materialHash ?? 0;
   }
 
   /**

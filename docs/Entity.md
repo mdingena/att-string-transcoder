@@ -13,6 +13,7 @@
   - [`components`](#components)
 - [Methods](#methods)
   - [`addComponent(component)`](#addcomponentcomponent)
+  - [`getMaterial()`](#getmaterial)
   - [`removeAllComponents()`](#removeallcomponents)
   - [`removeComponent(componentArg)`](#removecomponentcomponentarg)
   - [`toBinary(componentVersions)`](#tobinarycomponentversions)
@@ -183,6 +184,23 @@ const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_
 const component = new PhysicalMaterialPartComponent({ version: 1, materialHash: PhysicalMaterialPartHash.Iron });
 
 entity.addComponent(component);
+```
+
+---
+
+### `getMaterial()`
+
+Gets the entity's physical material.
+
+- Returns: [`<PhysicalMaterialPartHash>`](../src/types/PhysicalMaterialPartHash.ts)
+
+```ts
+import { Entity, PhysicalMaterialPartHash } from 'att-string-transcoder';
+
+const entity = new Entity<'Standard_Side_Pouch_Attachment'>('standard_sidePouch_backPin_L1_7968');
+
+const materialHash = entity.getMaterial();
+const materialName = PhysicalMaterialPartHash[materialHash];
 ```
 
 ---
