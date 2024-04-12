@@ -1,7 +1,7 @@
 /* Types */
 export type { BinaryDataOptions, UnpackFloatOptions } from './BinaryData.js';
 export type { EntityProps } from './Entity.js';
-export type { PrefabProps } from './Prefab.js';
+export type { PrefabProps, ToSaveStringOptions } from './Prefab.js';
 export type { BasicDecayComponentProps } from './components/BasicDecayComponent.js';
 export type { ComponentProps } from './components/Component.js';
 export type { DurabilityModuleComponentProps } from './components/DurabilityModuleComponent.js';

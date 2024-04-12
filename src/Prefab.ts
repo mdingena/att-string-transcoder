@@ -45,7 +45,7 @@ type PrefabHash<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefab
 
 type PrefabName<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefabName]['name'];
 
-type ToSaveStringOptions = {
+export type ToSaveStringOptions = {
   excludeComponentVersions?: boolean | undefined;
   ignoreIndeterminateComponentVersions?: boolean | undefined;
 };
