@@ -45,7 +45,7 @@ type PrefabHash<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefab
 
 type PrefabName<TPrefabName extends ATTPrefabName> = (typeof ATTPrefabs)[TPrefabName]['name'];
 
-type ToSaveStringOptions = {
+export type ToSaveStringOptions = {
   excludeComponentVersions?: boolean | undefined;
   ignoreIndeterminateComponentVersions?: boolean | undefined;
 };
@@ -295,7 +295,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * //   },
    * // }`
    */
-  entities: PrefabEntities<PrefabName<TPrefabName>>;
+  entities: PrefabEntities<TPrefabName>;
 
   /**
    * An array of the stored child prefabs.
@@ -396,7 +396,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    */
   constructor(
     prefabName: TPrefabName,
-    { position, rotation, scale, components, entities, children }: PrefabProps<PrefabName<TPrefabName>> = {}
+    { position, rotation, scale, components, entities, children }: PrefabProps<TPrefabName> = {}
   ) {
     this.hash = ATTPrefabs[prefabName].hash;
     this.name = prefabName;
@@ -404,7 +404,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     this.rotation = rotation ?? { x: 0, y: 0, z: 0, w: 1 };
     this.scale = scale ?? 1;
     this.components = { ...components, Unknown: components?.Unknown ?? [] } as PrefabComponents;
-    this.entities = { ...entities } as PrefabEntities<PrefabName<TPrefabName>>;
+    this.entities = { ...entities } as PrefabEntities<TPrefabName>;
     this.children = children ?? [];
   }
 
@@ -424,7 +424,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    *
    * parent.addChildPrefab('Slot_Large_SwordType_Craft_54356', child);
    */
-  addChildPrefab(parentKey: Exclude<EntityKey<PrefabName<TPrefabName>>, 'Unknown'> | null, childPrefab: Prefab): this {
+  addChildPrefab(parentKey: Exclude<EntityKey<TPrefabName>, 'Unknown'> | null, childPrefab: Prefab): this {
     if (typeof parentKey === 'undefined' || typeof childPrefab === 'undefined') {
       throw new Error(
         'You must pass a parent prefab entity hash (or null) and a child prefab to add as a child to this prefab.'
@@ -578,8 +578,8 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
    * const cloneMaterial = clone.getMaterial();
    * // `cloneMaterial` is `56394` (Gold)
    */
-  clone(options: ToSaveStringOptions = {}): Prefab<PrefabName<TPrefabName>> {
-    return Prefab.fromSaveString<PrefabName<TPrefabName>>(this.toSaveString(options));
+  clone(options: ToSaveStringOptions = {}): Prefab<TPrefabName> {
+    return Prefab.fromSaveString<TPrefabName>(this.toSaveString(options));
   }
 
   /**
@@ -606,7 +606,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   static fromBinary<TPrefabName extends ATTPrefabName = ATTPrefabName>(
     reader: BinaryReader,
     componentVersions?: Map<number, number>
-  ): Prefab<PrefabName<TPrefabName>> {
+  ): Prefab<TPrefabName> {
     const versions = componentVersions ?? constants.latestSupportedComponentVersions;
 
     /**
@@ -618,9 +618,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
 
     if (typeof name === 'undefined') throw new Error(`Cannot find ATT Prefab with hash ${hash}.`);
 
-    // const prefab = ATTPrefabs[name];
-
-    return new Prefab<PrefabName<TPrefabName>>(name as TPrefabName, {
+    return new Prefab<TPrefabName>(name as TPrefabName, {
       /**
        * @property {Position} position
        */
@@ -677,7 +675,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   static fromSaveString<TPrefabName extends ATTPrefabName = ATTPrefabName>(
     saveString: string,
     options?: BinaryDataOptions
-  ): Prefab<PrefabName<TPrefabName>> {
+  ): Prefab<TPrefabName> {
     if (!BinaryData.isSaveString(saveString)) {
       throw new Error('SaveString is malformed.');
     }
@@ -777,14 +775,14 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
   getChildPrefab<TChildPrefabName extends ATTPrefabName>(
     prefabName: TChildPrefabName,
     parentHash?: number
-  ): Prefab<typeof prefabName> | undefined {
+  ): Prefab<TChildPrefabName> | undefined {
     const child = this.children.find(child =>
       child.prefab.name === prefabName && typeof parentHash === 'undefined' ? true : child.parentHash === parentHash
     );
 
     if (typeof child === 'undefined') return undefined;
 
-    return child.prefab as Prefab<typeof prefabName>;
+    return child.prefab as Prefab<TChildPrefabName>;
   }
 
   /**

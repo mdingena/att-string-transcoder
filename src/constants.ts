@@ -196,7 +196,7 @@ export const latestSupportedComponentVersions = new Map([
   [3764204299, 0], // BookPageInstance
   [3801256786, 3], // BasicDecay
   [3810525047, 0], // LogicValueSender`1
-  [3820454400, 4], // RepairBox
+  [3820454400, 5], // RepairBox
   [3884278372, 0], // MovingLandmark
   [3901697682, 1], // ButtonCounter
   [3920618075, 1], // ColoredExplosive
