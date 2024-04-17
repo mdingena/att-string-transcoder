@@ -17,6 +17,7 @@ describe('writeEntities()', () => {
         hash: 30100,
         isAlive: true
       }),
+      /* @ts-expect-error Add in an unknown entity. */
       Unknown_23002: new Entity(secondEntityKey, {
         hash: secondEntityHash,
         isAlive: false

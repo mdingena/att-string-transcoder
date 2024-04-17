@@ -97,7 +97,7 @@ describe('Entity.fromBinary()', () => {
   const entityName = 'Fire';
   const prefab = new Prefab(prefabName, {
     entities: {
-      Fire: new Entity<typeof prefabName>(`${entityName}_${entityHash}`, {
+      Fire_30100: new Entity<typeof prefabName>(`${entityName}_${entityHash}`, {
         hash: entityHash,
         isAlive: false,
         components: {

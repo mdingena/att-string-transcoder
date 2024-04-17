@@ -19,6 +19,7 @@ describe('readEntities()', () => {
           hash: firstEntityHash,
           isAlive: true
         }),
+        /* @ts-expect-error Add in an unknown entity. */
         Unknown_23002: new Entity(secondEntityName, {
           hash: secondEntityHash,
           isAlive: false
@@ -63,9 +64,13 @@ describe('readEntities()', () => {
       expect(entities['Slot_Multi_6136']?.name).toStrictEqual(firstEntityName);
       expect(entities['Slot_Multi_6136']?.isAlive).toBe(true);
 
+      /* @ts-expect-error Access unknown entity. */
       expect(entities['Unknown_23002']).toBeInstanceOf(Entity);
+      /* @ts-expect-error Access unknown entity. */
       expect(entities['Unknown_23002']?.hash).toStrictEqual(secondEntityHash);
+      /* @ts-expect-error Access unknown entity. */
       expect(entities['Unknown_23002']?.name).toStrictEqual(secondEntityName);
+      /* @ts-expect-error Access unknown entity. */
       expect(entities['Unknown_23002']?.isAlive).toBe(false);
     });
   });

@@ -825,7 +825,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     }
 
     /* Get component versions from prefab entities. */
-    for (const entity of Object.values(this.entities)) {
+    for (const entity of Object.values(this.entities) as Entity<TPrefabName>[]) {
       for (const component of Object.values(entity.components)) {
         if (Array.isArray(component)) {
           for (const unknownComponent of component) {
@@ -1266,7 +1266,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
       throw new Error('You must pass an entity name to remove from this prefab.');
     }
 
-    delete this.entities[entityKey as string];
+    delete this.entities[entityKey];
 
     return this;
   }
@@ -1501,7 +1501,7 @@ export class Prefab<TPrefabName extends ATTPrefabName = ATTPrefabName> {
     if (typeof validFireEntity !== 'undefined') {
       const currentFireEntity = Object.values(this.entities).find(entity => entity.name === validFireEntity.name);
       const version = currentFireEntity?.components.HeatSourceBase?.version ?? FALLBACK_HEAT_SOURCE_BASE_VERSION;
-      const key = `${validFireEntity.name}_${validFireEntity.hash}`;
+      const key = `${validFireEntity.name}_${validFireEntity.hash}` as EntityKey<TPrefabName>;
 
       this.entities[key] = new Entity<TPrefabName>(key as keyof (typeof ATTPrefabs)[TPrefabName]['embedded'], {
         hash: validFireEntity.hash,

@@ -1,5 +1,6 @@
 import type { BinaryReader } from '../BinaryReader.js';
 import type { ATTPrefabName } from '../types/ATTPrefabName.js';
+import type { EntityKey } from '../types/EntityKey.js';
 import type { PrefabEntities } from '../types/PrefabEntities.js';
 
 import { Entity } from '../Entity.js';
@@ -24,12 +25,12 @@ import { ATTPrefabs } from '../types/ATTPrefabs.js';
  *
  * const component = readEntities(reader, prefabName, componentVersions);
  */
-export function readEntities(
+export function readEntities<TPrefabName extends ATTPrefabName>(
   reader: BinaryReader,
-  prefabName: ATTPrefabName,
+  prefabName: TPrefabName,
   componentVersions?: Map<number, number>
-): PrefabEntities<typeof prefabName> {
-  const entities: Record<string, Entity<typeof prefabName>> = {};
+): PrefabEntities<TPrefabName> {
+  const entities: PrefabEntities<TPrefabName> = {};
 
   const isLooping = true;
 
@@ -48,11 +49,11 @@ export function readEntities(
     }>(ATTPrefabs[prefabName].embedded).find(attPrefabEntity => attPrefabEntity.hash === hash);
 
     const name = entity?.name ?? 'Unknown';
-    const key = `${name}_${hash}`;
+    const key = `${name}_${hash}` as EntityKey<TPrefabName>;
 
     entities[key] = Entity.fromBinary<typeof prefabName>(reader, {
       hash,
-      key: name === 'Unknown' ? name : key,
+      key: name === 'Unknown' ? name : (key as string),
       componentVersions
     });
   }

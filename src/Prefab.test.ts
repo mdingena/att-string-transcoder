@@ -1009,6 +1009,7 @@ describe('Prefab.removeAllEntities()', () => {
             ]
           }
         }),
+        /* @ts-expect-error Add in an unknown entity. */
         Unknown_1337: new Entity('Unknown', { hash: 1337 })
       }
     });
